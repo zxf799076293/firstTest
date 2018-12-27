@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_linearlayout_bg">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/addfield_rules_ll">
+        <include
+            layout="@layout/linhui_business_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/title_bar_linelayout_height"
+            android:background="@color/top_title_line_color"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/maintab_width"
+        android:id="@+id/addfield_rules_next_btn"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title_bar_title_center_txt_size"
+        android:text="@string/addfield_price_next_btn_str"
+        android:background="@color/checked_tv_color"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/addfield_rules_ll"
+        android:layout_above="@+id/addfield_rules_next_btn">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:focusable="true"
+            android:id="@+id/addfield_ruled_ll"
+            android:focusableInTouchMode="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/title_bar_layout_width_height"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/top_title_center_txt_color"
+                    android:textSize="@dimen/title_bar_title_txt_size"
+                    android:text="禁摆品类：" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contraband_layout"
+                    android:layout_marginBottom="@dimen/app_backbtn_marginleft">
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:id="@+id/contraband_list_layout">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/txt_padding_line"
+                        android:layout_marginTop="@dimen/field_info_marginleft"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                        android:background="@color/new_viewbg">
+                    </View>
+                    <EditText
+                        android:id="@+id/txt_contraband"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/title_bar_back_marginLeft"
+                        android:paddingBottom="@dimen/title_bar_back_marginLeft"
+                        android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                        android:hint="@string/txt_contraband_prompt"
+                        android:textColorHint="@color/divider_list"
+                        android:maxLength="100"
+                        android:textColor="@color/color_release_second"
+                        android:textSize="15sp"
+                        android:background="@color/fieldlist_item_layout_bg"
+                        android:paddingLeft="@dimen/txt_padding"
+                        android:paddingRight="@dimen/txt_padding"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:layout_margin="@dimen/app_backbtn_marginleft"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/txt_padding_left"
+                    android:background="@color/new_viewbg">
+                </View>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/title_bar_layout_width_height"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/top_title_center_txt_color"
+                    android:textSize="@dimen/title_bar_title_txt_size"
+                    android:text="@string/txt_property_requirementtxt" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/property_requirement_layout"
+                    android:layout_marginBottom="@dimen/app_backbtn_marginleft">
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:id="@+id/property_requirement_list_layout">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/txt_padding_line"
+                        android:layout_marginTop="@dimen/field_info_marginleft"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                        android:background="@color/new_viewbg">
+                    </View>
+                    <EditText
+                        android:id="@+id/editproperty_requirement"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/title_bar_back_marginLeft"
+                        android:paddingBottom="@dimen/title_bar_back_marginLeft"
+                        android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                        android:hint="@string/txt_property_requirementhinttxt"
+                        android:textColorHint="@color/divider_list"
+                        android:maxLength="250"
+                        android:textColor="@color/color_release_second"
+                        android:textSize="15sp"
+                        android:background="@color/fieldlist_item_layout_bg"
+                        android:paddingLeft="@dimen/txt_padding"
+                        android:paddingRight="@dimen/txt_padding"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:layout_margin="@dimen/app_backbtn_marginleft"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

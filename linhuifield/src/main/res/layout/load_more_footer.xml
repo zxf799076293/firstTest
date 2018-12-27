@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/load_more_footer"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_centerInParent="true"
+        android:id="@+id/load_more_loading_layout">
+        <ProgressBar
+            android:id="@+id/load_more_progressBar"
+            android:layout_width="@dimen/diogle_view_btn_height"
+            android:layout_height="@dimen/diogle_view_btn_height"
+            android:padding="3dp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/no_more_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/diogle_view_btn_height"
+            android:gravity="center"
+            android:text="正在加载"
+            android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+            android:textSize="@dimen/btnregister_txt_size"
+            android:visibility="visible" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/diogle_view_btn_height"
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:id="@+id/load_more_loaded_layout">
+        <TextView
+            android:id="@+id/loaded_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/diogle_view_btn_height"
+            android:gravity="center"
+            android:text="@string/field_size_toast"
+            android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+            android:textSize="@dimen/btnregister_txt_size"
+            android:visibility="visible" />
+    </LinearLayout>
+</RelativeLayout>

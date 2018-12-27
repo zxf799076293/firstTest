@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/txt_padding_line"
+        android:background="@color/app_samelinearlayout_bg">
+    </View>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/addshoppingcard_width"
+        android:id="@+id/field_order_rl"
+        android:background="@color/fieldlist_item_layout_bg">
+        <ImageView
+            android:layout_width="@dimen/myself_order_layout_width"
+            android:layout_height="@dimen/myself_order_layout_width"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+            android:id="@+id/field_order_resource_img"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/field_info_marginleft"
+            android:layout_marginLeft="@dimen/txt_padding"
+            android:layout_marginBottom="@dimen/txt_padding"
+            android:paddingLeft="@dimen/tab_item_img_margintop"
+            android:paddingRight="@dimen/tab_item_img_margintop"
+            android:layout_alignLeft="@+id/field_order_resource_img"
+            android:layout_alignBottom="@+id/field_order_resource_img"
+            android:text="小区"
+            android:background="@drawable/activity_fieldinfo_new_fieldtype_bg"
+            android:gravity="center"
+            android:id="@+id/searchlist_txt_fieldtitle"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tab_txt_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/addshoppingcard_width"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/txt_margin"
+            android:layout_marginRight="@dimen/app_backbtn_marginleft"
+            android:paddingTop="@dimen/txt_padding"
+            android:paddingBottom="@dimen/txt_padding"
+            android:layout_toRightOf="@+id/field_order_resource_img"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/field_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_title_center_txt_color"
+                    android:textSize="@dimen/txt_title_size_info"
+                    android:text="@string/field_order_item_resourcesname"
+                    />
+
+                <TextView
+                    android:id="@+id/order_title_value"
+                    android:layout_width="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/fieldinfo_no_parameter_message"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/tab_item_margintop"
+                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                    android:textSize="@dimen/txt_title_size_info"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_title_center_txt_color"
+                    android:textSize="@dimen/txt_title_size_info"
+                    android:text="@string/txt_order_time" />
+
+                <TextView
+                    android:id="@+id/field_time_value"
+                    android:layout_width="wrap_content"
+                    android:text="@string/fieldinfo_no_parameter_message"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/tab_item_margintop"
+                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                    android:textSize="@dimen/txt_title_size_info"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_title_center_txt_color"
+                    android:textSize="@dimen/txt_title_size_info"
+                    android:text="@string/order_listitem_capacity_sizetxt" />
+
+                <TextView
+                    android:id="@+id/fieldorder_size"
+                    android:layout_width="wrap_content"
+                    android:text="@string/fieldinfo_no_parameter_message"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/tab_item_margintop"
+                    android:singleLine="true"
+                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                    android:textSize="@dimen/txt_title_size_info"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/maintab_width_margintop"
+                    android:textColor="@color/top_title_center_txt_color"
+                    android:textSize="@dimen/txt_title_size_info"
+                    android:text="价       格：" />
+
+                <TextView
+                    android:id="@+id/fieldorder_price_new"
+                    android:layout_width="wrap_content"
+                    android:text="@string/fieldinfo_no_parameter_message"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/tab_item_margintop"
+                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                    android:textSize="@dimen/txt_title_size_info"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/field_order_business_info_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/order_type_layoutwidth">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_title_center_txt_color"
+                    android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                    android:text="商家名称：" />
+
+                <TextView
+                    android:id="@+id/company_name"
+                    android:layout_width="wrap_content"
+                    android:text="@string/fieldinfo_no_parameter_message"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                    android:layout_marginRight="@dimen/maintab_paddingtop"
+                    android:singleLine="true"
+                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                    android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                    />
+            </LinearLayout>
+            <ImageButton
+                android:layout_width="@dimen/fieldinfo_xuanchuan_width"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/order_business_companyinfo"
+                android:src="@drawable/ic_switch_gray"
+                android:background="@null"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/txt_padding_line"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                android:background="@color/new_viewbg"
+                android:layout_alignParentTop="true">
+            </View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/txt_padding_left"
+                android:paddingBottom="@dimen/txt_padding_left"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/title_bar_back_marginLeft"
+                    android:layout_marginRight="@dimen/title_bar_back_marginLeft">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/top_title_center_txt_color"
+                        android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                        android:text="@string/order_listitem_businesses_leave_message" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text=""
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/order_leave_message_text"
+                        android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                        android:layout_marginRight="@dimen/tab_item_img_margintop"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/txt_title_size_nor"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/order_type_layoutwidth">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/txt_padding_line"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                android:background="@color/new_viewbg"
+                android:layout_alignParentTop="true">
+            </View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_toLeftOf="@+id/order_business_mobile"
+                android:gravity="center_vertical">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.4"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/top_title_center_txt_color"
+                        android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                        android:text="联  系  人：" />
+
+                    <TextView
+                        android:id="@+id/order_connect_value"
+                        android:layout_width="wrap_content"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                        android:layout_marginRight="@dimen/tab_item_img_margintop"
+                        android:singleLine="true"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/txt_title_size_nor"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/order_mobile_layout">
+                    <TextView
+                        android:id="@+id/order_mobile_value"
+                        android:layout_width="wrap_content"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:layout_marginRight="@dimen/maintab_img_width_height"
+                        android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                        />
+                    <View
+                        android:layout_width="@dimen/txt_padding_line"
+                        android:layout_height="match_parent"
+                        android:id="@+id/order_business_mobile_view"
+                        android:layout_marginTop="@dimen/title_bar_back_marginLeft"
+                        android:layout_marginBottom="@dimen/title_bar_back_marginLeft"
+                        android:background="@color/new_viewbg">
+                    </View>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:layout_width="@dimen/small_title_height"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:id="@+id/order_business_mobile"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_iphone"
+                android:background="@null"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/choosespecifications_pricetxtwidth"
+        android:id="@+id/userinfo_layout_margin"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:layout_marginLeft="@dimen/field_info_marginleft"
+            android:layout_marginRight="@dimen/field_info_marginleft"
+            android:background="@color/app_samelinearlayout_bg">
+        </View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/small_title_height"
+            android:background="@color/white"
+            android:visibility="visible"
+            android:gravity="center_vertical|right"
+            android:layout_marginLeft="@dimen/field_info_marginleft"
+            android:layout_marginRight="@dimen/field_info_marginleft"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btnrefuse"
+                android:layout_width="@dimen/regiter_btnlayout_width"
+                android:layout_height="@dimen/TableRow_img_width_height"
+                android:background="@drawable/orderlist_cancelorder_btnbg"
+                android:text="@string/btn_refuse"
+                android:gravity="center"
+                android:textColor="@color/top_title_center_txt_color"
+                android:textSize="@dimen/txt_title_size_nor" />
+
+            <TextView
+                android:id="@+id/btnagree"
+                android:layout_width="@dimen/regiter_btnlayout_width"
+                android:layout_height="@dimen/TableRow_img_width_height"
+                android:background="@drawable/choosespecifications_pricetxtselect"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/image_margin"
+                android:layout_gravity="center_vertical|left"
+                android:text="@string/btn_agree"
+                android:textColor="@color/titlebar_righttxt_color"
+                android:textSize="@dimen/txt_title_size_nor" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/txt_padding_line"
+        android:background="@color/app_samelinearlayout_bg">
+    </View>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/regiter_linelayout_height"
+        android:id="@+id/bottom_view"
+        android:background="@color/app_linearlayout_bg">
+    </View>
+</LinearLayout>

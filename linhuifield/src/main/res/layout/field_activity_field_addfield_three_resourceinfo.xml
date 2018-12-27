@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        layout="@layout/linhui_business_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_bar_linelayout_height"
+        android:background="#99adadad"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:focusableInTouchMode="true">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_photptext"
+                android:background="@color/white"
+                android:paddingTop="@dimen/title_bar_back_marginLeft"
+                android:paddingBottom="@dimen/title_bar_back_marginLeft"
+                android:paddingLeft="@dimen/txt_padding_left"
+                android:textColor="@color/title_bar_txtcolor"
+                android:text="@string/txt_field_pics"
+                />
+            <com.linhuiba.linhuifield.fieldview.FieldMyGridView
+                android:id="@+id/field_recycler"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/title_bar_back_marginLeft"
+                android:numColumns="3"
+                android:scrollbars="none"
+                android:verticalSpacing="@dimen/txt_padding_left"
+                android:horizontalSpacing="@dimen/txt_padding_left"
+                android:columnWidth="@dimen/field_list_item_img_height"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/app_backbtn_marginleft"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

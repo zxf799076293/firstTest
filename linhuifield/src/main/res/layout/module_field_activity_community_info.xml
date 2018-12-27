@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/addfield_fieldinfo_ll">
+        <include
+            layout="@layout/linhui_business_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:layout_alignParentTop="true"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/app_linearlayout_bg"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/addfield_community_btn_ll">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:background="@color/new_viewbg">
+        </View>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/maintab_width"
+            android:id="@+id/addfield_community_btn"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/txt_padding_left"
+            android:textSize="@dimen/title_bar_title_center_txt_size"
+            android:text="@string/module_addfield_community_next_step"
+            android:background="@drawable/loginbtn_bg"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:id="@+id/fragmentaddfield_all_layout"
+        android:layout_below="@+id/addfield_fieldinfo_ll"
+        android:layout_above="@+id/addfield_community_btn_ll">
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="true"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/app_linearlayout_bg"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/fieldinfo_refund_difference_price_height"
+                    android:id="@+id/addfield_community_banner_ll">
+                    <com.youth.banner.Banner
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:indicator_height="@dimen/searchlist_item_txt_margintop"
+                        app:indicator_width="@dimen/searchlist_item_txt_margintop"
+                        app:indicator_drawable_selected="@drawable/fragment_home_banner_round_selected_bg"
+                        app:indicator_drawable_unselected="@drawable/fragment_home_banner_round_unselected"
+                        android:id="@+id/addfield_community_banner">
+                    </com.youth.banner.Banner>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        android:id="@+id/addfield_community_default_pic_ll"
+                        android:background="@drawable/image_tupianshangchuan_three_six">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_xiangji_three_six"
+                            android:textColor="@color/white"
+                            android:drawablePadding="@dimen/txt_margin"
+                            android:textSize="@dimen/search_lisritem_pricetxt_size"
+                            android:text="@string/module_addfield_community_upload_picture"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/txt_padding_left"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/field_info_receipt_size"
+                            android:text="@string/module_addfield_community_upload_picture_hint"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/addfield_community_no_pic_ll"
+                        android:visibility="gone"
+                        android:background="@drawable/image_paishezhong_three_six_one">
+                    </LinearLayout>
+
+                </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/addfield_communityinfo_edit_ll">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/field_list_item_img_height"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingRight="@dimen/app_backbtn_marginleft">
+                    <TextView
+                        style="@style/AddfieldTvStyle"
+                        android:drawableRight="@null"
+                        android:singleLine="true"
+                        android:textSize="@dimen/search_lisritem_pricetxt_size"
+                        android:text="ss"
+                        android:id="@+id/addfield_communityinfo_choose_name_tv"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/register_codebtn_txt_size"
+                        android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                        android:text="2233"
+                        android:id="@+id/addfield_communityinfo_choose_address_tv"/>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/addfield_community_phy_rv"
+                        android:layout_marginTop="@dimen/txt_padding_left">
+                    </android.support.v7.widget.RecyclerView>
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/txt_padding_left"
+                    android:id="@+id/addfield_community_info_show_ll"
+                    android:paddingBottom="@dimen/app_backbtn_marginleft">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/paddingleft">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                style="@style/AddfieldPhyLeftTvStyle"
+                                android:layout_width="wrap_content"
+                                android:text="@string/txt_field_type" />
+
+                            <TextView
+                                android:id="@+id/addfield_community_type_tv"
+                                style="@style/AddfieldPhyRightTvStyle"
+                                android:singleLine="true"
+                                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                android:text="" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                style="@style/AddfieldPhyLeftTvStyle"
+                                android:layout_width="wrap_content"
+                                android:text="@string/module_addfield_community_info_area" />
+
+                            <TextView
+                                android:id="@+id/addfield_community_area_tv"
+                                style="@style/AddfieldPhyRightTvStyle"
+                                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                android:text=""
+                                android:singleLine="true"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/tab_item_margintop">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                style="@style/AddfieldPhyLeftTvStyle"
+                                android:layout_width="wrap_content"
+                                android:text="@string/module_addfield_community_info_trading_area" />
+
+                            <TextView
+                                android:id="@+id/addfield_community_trading_area_tv"
+                                style="@style/AddfieldPhyRightTvStyle"
+                                android:singleLine="true"
+                                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                android:text="" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                style="@style/AddfieldPhyLeftTvStyle"
+                                android:layout_width="wrap_content"
+                                android:text="@string/module_addfield_community_show_build_year" />
+
+                            <TextView
+                                android:id="@+id/addfield_community_build_tv"
+                                style="@style/AddfieldPhyRightTvStyle"
+                                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                android:text=""
+                                android:singleLine="true"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tab_item_margintop"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/AddfieldPhyLeftTvStyle"
+                            android:layout_width="wrap_content"
+                            android:text="@string/module_addfield_community_show_develope" />
+
+                        <TextView
+                            android:id="@+id/addfield_community_develop_tv"
+                            style="@style/AddfieldPhyRightTvStyle"
+                            android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                            android:text=""
+                            android:singleLine="true"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingRight="@dimen/app_backbtn_marginleft"
+                        android:id="@+id/addfield_community_show_attributes_ll">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/addfield_communityinfo_new_ll">
+                <LinearLayout
+                    style="@style/AddfieldLlStyle"
+                    android:orientation="vertical">
+                    <LinearLayout style="@style/AddfieldLlStyle"
+                        android:id="@+id/addfield_community_city_ll">
+                        <TextView
+                            style="@style/AddfieldTvStyle"
+                            android:text="@string/module_addfield_city" />
+                        <TextView
+                            style="@style/AddfieldEditStyle"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:paddingRight="0dp"
+                            android:id="@+id/addfield_community_city_tv"
+                            android:hint="@string/module_addfield_community_city_hint" />
+                        <ImageView
+                            style="@style/AddfieldImgvStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/AddfieldLlStyle"
+                    android:orientation="vertical">
+                    <View style="@style/AddfieldViewStyle">
+                    </View>
+                    <LinearLayout style="@style/AddfieldLlStyle"
+                        android:id="@+id/addfield_community_districts_ll">
+                        <TextView
+                            style="@style/AddfieldTvStyle"
+                            android:text="@string/module_addfield_choose_res_district" />
+                        <TextView
+                            style="@style/AddfieldEditStyle"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:paddingRight="0dp"
+                            android:id="@+id/addfield_community_districts_tv"
+                            android:hint="@string/txt_field_area_hint" />
+                        <ImageView
+                            style="@style/AddfieldImgvStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/AddfieldLlStyle"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        style="@style/AddfieldViewStyle">
+                    </View>
+                    <LinearLayout style="@style/AddfieldLlStyle">
+                        <TextView
+                            style="@style/AddfieldTvStyle"
+                            android:text="@string/module_addfield_community_address" />
+                        <EditText
+                            style="@style/AddfieldEditStyle"
+                            android:id="@+id/addfield_community_address_et"
+                            android:layout_marginRight="@dimen/user_info_photo_text_top"
+                            android:hint="@string/txt_field_address_hint" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/AddfieldLlStyle"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        style="@style/AddfieldViewStyle">
+                    </View>
+                    <LinearLayout style="@style/AddfieldLlStyle">
+                        <TextView
+                            style="@style/AddfieldTvStyle"
+                            android:text="@string/addfield_info_fieldname_text" />
+                        <EditText
+                            style="@style/AddfieldEditStyle"
+                            android:layout_marginRight="@dimen/user_info_photo_text_top"
+                            android:id="@+id/addfield_community_name_et"
+                            android:hint="@string/module_addfield_community_name_hint" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/AddfieldLlStyle"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        style="@style/AddfieldViewStyle">
+                    </View>
+                    <LinearLayout style="@style/AddfieldLlStyle"
+                        android:id="@+id/addfield_community_build_year_ll">
+                        <TextView
+                            style="@style/AddfieldTvStyle"
+                            android:text="@string/module_addfield_community_build_year" />
+                        <TextView
+                            style="@style/AddfieldEditStyle"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:id="@+id/addfield_community_build_year_tv"
+                            android:paddingRight="0dp"
+                            android:hint="@string/module_addfield_community_build_year_hint" />
+                        <ImageView
+                            style="@style/AddfieldImgvStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/AddfieldLlStyle"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        style="@style/AddfieldViewStyle">
+                    </View>
+                    <LinearLayout style="@style/AddfieldLlStyle">
+                        <TextView
+                            style="@style/AddfieldTvStyle"
+                            android:text="@string/module_addfield_community_area"
+                            android:drawableRight="@null"/>
+                        <EditText
+                            style="@style/AddfieldEditStyle"
+                            android:layout_marginRight="@dimen/user_info_photo_text_top"
+                            android:id="@+id/addfield_community_area_et"
+                            android:hint="@string/module_addfield_community_area_hint"
+                            android:maxLength="14"
+                            android:numeric="decimal"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/AddfieldLlStyle"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        style="@style/AddfieldViewStyle">
+                    </View>
+                    <LinearLayout style="@style/AddfieldLlStyle"
+                        android:id="@+id/addfield_community_category_ll">
+                        <TextView
+                            style="@style/AddfieldTvStyle"
+                            android:text="@string/resourcesscreening_resourcefieldtype" />
+                        <TextView
+                            style="@style/AddfieldEditStyle"
+                            android:layout_width="0dp"
+                            android:id="@+id/addfield_community_category_tv"
+                            android:layout_weight="1"
+                            android:paddingRight="0dp"
+                            android:hint="@string/addfield_chooscofieldtype_hinttxt" />
+                        <ImageView
+                            style="@style/AddfieldImgvStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <View
+                            style="@style/AddfieldViewStyle">
+                        </View>
+                        <LinearLayout style="@style/AddfieldLlStyle"
+                            android:visibility="gone"
+                            android:id="@+id/addfield_community_developer_ll">
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:drawableRight="@null"
+                                android:text="@string/module_addfield_community_develope" />
+                            <TextView
+                                style="@style/AddfieldEditStyle"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:id="@+id/addfield_community_developer_tv"
+                                android:paddingRight="0dp"
+                                android:hint="@string/module_addfield_community_develope_hint" />
+                            <ImageView
+                                style="@style/AddfieldImgvStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <View
+                            style="@style/AddfieldViewStyle">
+                        </View>
+                        <LinearLayout style="@style/AddfieldLlStyle">
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:drawableRight="@null"
+                                android:text="@string/module_addfield_community_lowest_price" />
+                            <EditText
+                                style="@style/AddfieldEditStyle"
+                                android:layout_marginRight="@dimen/user_info_photo_text_top"
+                                android:id="@+id/addfield_community_lowest_price_et"
+                                android:hint="@string/module_addfield_community_lowest_price_hint"
+                                android:numeric="decimal"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <View
+                            style="@style/AddfieldViewStyle">
+                        </View>
+                        <LinearLayout style="@style/AddfieldLlStyle"
+                            android:id="@+id/addfield_community_description_ll">
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/txt_field_desp" />
+                            <TextView
+                                style="@style/AddfieldEditStyle"
+                                android:layout_width="0dp"
+                                android:id="@+id/addfield_community_description_tv"
+                                android:layout_weight="1"
+                                android:singleLine="true"
+                                android:paddingRight="0dp"
+                                android:hint="@string/txt_description_hint_prompt" />
+                            <ImageView
+                                style="@style/AddfieldImgvStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/addfield_community_dynamic_category">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:id="@+id/addfield_community_dynamic_category_optional_all_ll">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/module_addfield_choose_res_option_ll_height"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/addfield_community_dynamic_category_optional_click_ll">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                            android:textColor="@color/register_edit_color"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:text="@string/module_addfield_community_info_perfect"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                        android:id="@+id/addfield_community_dynamic_category_optional_click_imgv"
+                        android:background="@drawable/ic_open_gary_button_check"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        android:id="@+id/addfield_community_dynamic_category_optional_ll">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>

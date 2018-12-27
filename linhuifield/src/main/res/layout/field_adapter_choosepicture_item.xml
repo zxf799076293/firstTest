@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/field_list_item_img_height"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center">
+    <ImageView
+        android:layout_width="@dimen/field_list_item_img_height"
+        android:layout_height="@dimen/field_list_item_img_height"
+        android:id="@+id/choosepicture_img"
+        android:src="@drawable/ic_jiazai_small"
+        android:gravity="center" />
+    </RelativeLayout>
+</LinearLayout>

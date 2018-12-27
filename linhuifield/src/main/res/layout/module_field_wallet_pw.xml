@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fieldinfo_all_dialog_layout"
+        android:background="#98000000">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:visibility="visible"
+            android:gravity="center"
+            android:id="@+id/wallet_remind_alllayout">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingLeft="@dimen/fieldinfo_fieldtitle_height"
+                android:paddingRight="@dimen/fieldinfo_fieldtitle_height">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/home_area_drop_width"
+                        android:paddingTop="@dimen/diogle_view_btn_height"
+                        android:background="@drawable/activity_confirmorder_success_layout_bg"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/wallet_remind_layout">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.26"
+                            android:gravity="center"
+                            android:layout_marginLeft="@dimen/advertising_add_height"
+                            android:layout_marginRight="@dimen/advertising_add_height"
+                            android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                            android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                            android:text="@string/fieldinfo_wallet_open_remind_text"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/txt_padding_line"
+                            android:layout_marginLeft="@dimen/invoiceinfoentry_marginleft"
+                            android:layout_marginRight="@dimen/invoiceinfoentry_marginleft"
+                            android:background="@color/new_viewbg"></View>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/wallet_open_cancel_btn_text"
+                                android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                                android:textSize="@dimen/txt_title_size_nor"
+                                android:id="@+id/wallet_open_cancel"/>
+                            <TextView
+                                android:layout_width="@dimen/txt_padding_line"
+                                android:layout_height="match_parent"
+                                android:background="@color/new_viewbg"
+                                android:layout_marginTop="@dimen/tab_item_margintop"
+                                android:layout_marginBottom="@dimen/tab_item_margintop"
+                                android:text=""/>
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textColor="@color/default_bluebg"
+                                android:textSize="@dimen/txt_title_size_nor"
+                                android:text="@string/wallet_open_determine_btn_text"
+                                android:id="@+id/wallet_open_determine"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <ImageButton
+                        android:layout_width="@dimen/fieldinfo_error_recovery_image_height"
+                        android:layout_height="@dimen/fieldinfo_error_recovery_image_height"
+                        android:layout_marginBottom="-42dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/ic_popup_logo_two_four_one"
+                        android:layout_above="@+id/wallet_remind_layout"
+                        android:background="@drawable/activity_fieldinfo_error_correction_logo_bg"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

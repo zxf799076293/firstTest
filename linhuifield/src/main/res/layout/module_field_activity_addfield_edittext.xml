@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        layout="@layout/linhui_business_title_bar">
+    </include>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/txt_padding_line"
+        android:background="@color/new_viewbg">
+    </View>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/diogle_view_btn_width"
+            android:gravity="left"
+            android:paddingTop="@dimen/app_backbtn_marginleft"
+            android:paddingBottom="@dimen/app_backbtn_marginleft"
+            style="@style/AddfieldEditStyle"
+            android:id="@+id/addfield_text_et"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:lineSpacingMultiplier="1.5"
+            android:layout_margin="@dimen/app_backbtn_marginleft"
+            android:layout_below="@+id/addfield_text_et"
+            android:id="@+id/addfield_text_tv"
+            android:textColor="@color/addfield_add_picture_tv_bg"
+            android:textSize="@dimen/register_codebtn_txt_size"
+            android:text="1/500"/>
+
+    </RelativeLayout>
+</LinearLayout>

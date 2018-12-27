@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorapp_gb"
+    android:orientation="vertical"
+    android:id="@+id/fieldlist_alllayout"
+    android:weightSum="1">
+    <include
+        layout="@layout/linhui_business_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_linearlayout_bg"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/addfield_main_all_layout"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_no_network_two_five"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/btnregister_txt_size"
+            android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+            android:text="@string/addfield_main_network_request_failure_text"
+            android:layout_marginTop="@dimen/home_area_drop_height"/>
+        <TextView
+            android:layout_width="@dimen/field_list_item_img_width"
+            android:layout_height="@dimen/title_bar_layout_width_height"
+            android:id="@+id/addfield_main_network_refresh_text"
+            android:layout_marginTop="@dimen/field_list_item_label_samll"
+            android:gravity="center"
+            android:textColor="@color/top_title_center_txt_color"
+            android:textSize="@dimen/btnregister_txt_size"
+            android:background="@drawable/activity_searchfieldaarea_delete_history_bg"
+            android:text="@string/addfield_main_network_request_refresh_text"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/choosespecifications_pricetxtheight"
+        android:id="@+id/fieldlist_remind_layout"
+        android:layout_marginBottom="@dimen/txt_padding_left"
+        android:visibility="gone"
+        android:background="@color/default_warn_ll_bg">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+            android:drawableLeft="@drawable/ic_prompt"
+            android:drawablePadding="@dimen/txt_padding_left"
+            android:visibility="visible"
+            android:layout_centerVertical="true"
+            android:textColor="@color/checked_tv_color"
+            android:textSize="@dimen/txt_title_size_info"
+            android:text="@string/fieldlist_remind_register_company_account_str"
+            android:drawableRight="@drawable/ic_chakan"
+
+            android:id="@+id/fieldlist_deficiency_one_textview"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:id="@+id/fieldlist_deficiency_mobile_textview"
+            android:layout_marginLeft="@dimen/txt_padding"
+            android:visibility="visible"
+            android:layout_toRightOf="@+id/fieldlist_deficiency_one_textview"
+            android:layout_centerVertical="true"
+            android:textColor="@color/checked_tv_color"
+            android:textSize="@dimen/txt_title_size_info"
+            android:text=""/>
+
+        <ImageButton
+            android:layout_width="@dimen/btn_normal_height"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_close_blue_three"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:visibility="gone"
+            android:id="@+id/fieldlist_perfect_remind_close" />
+    </RelativeLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/field_list_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/order_type_layoutwidth"
+        android:background="@color/white"
+        app:tabMode="fixed"
+        app:tabIndicatorColor="@color/default_bluebg"
+        app:tabSelectedTextColor="@color/default_bluebg"
+        app:tabTextColor="@color/top_title_center_txt_color"
+        app:tabTextAppearance="@style/app_linearlayoutrightedit_style"
+        app:tabIndicatorHeight="@dimen/tab_item_margintop"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/txt_padding_line"
+        android:background="@color/new_viewbg">
+    </View>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/friend_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorapp_gb"
+        android:fadingEdge="none" >
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>

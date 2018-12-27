@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 连框颜色值 -->
+    <item>
+        <shape>
+            <solid android:color="@color/fieldinfo_specifications_support_bg_color" />
+
+            <corners
+                android:bottomLeftRadius="2dp"
+                android:bottomRightRadius="2dp"
+                android:topLeftRadius="2dp"
+                android:topRightRadius="2dp" />
+        </shape>
+    </item>
+    <!-- 主体背景颜色值 -->
+    <item
+        android:bottom="@dimen/app_rim_line_height"
+        android:left="@dimen/app_rim_line_height"
+        android:right="@dimen/app_rim_line_height"
+        android:top="@dimen/app_rim_line_height">
+        <shape>
+            <solid android:color="@color/white" />
+
+            <corners
+                android:bottomLeftRadius="2dp"
+                android:bottomRightRadius="2dp"
+                android:topLeftRadius="2dp"
+                android:topRightRadius="2dp" />
+        </shape>
+    </item>
+</layer-list>

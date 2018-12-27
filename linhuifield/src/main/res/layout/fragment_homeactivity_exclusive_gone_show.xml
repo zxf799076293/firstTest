@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_activity_exclusive_show_height"
+        android:gravity="center_horizontal"
+        android:id="@+id/fragment_home_exclusive_show_all_layout"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:background="@drawable/fragment_home_exclusive_show_bg"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@drawable/ic_chahua_two_four">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.54"
+                android:orientation="vertical"
+                android:id="@+id/fragment_home_exclusive_show_title_layout"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="@dimen/txt_title_size_nor"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:id="@+id/fragment_home_exclusive_show_title"
+                        android:text="@string/leftimg_text"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:textSize="@dimen/text_title_size_next"
+                        android:textColor="@color/title_bar_txtcolor"
+                        android:id="@+id/fragment_home_exclusive_show_describe"
+                        android:text="@string/leftimg_text"
+                        android:paddingBottom="@dimen/app_backbtn_marginleft"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/fragment_home_exclusive_show_btn"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:textSize="@dimen/txt_title_size_small"
+                        android:textColor="@color/default_bluebg"
+                        android:text=""/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="bottom|center_horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_home_exclusive_show_imageview"
+                android:src="@drawable/ic_close_two_four"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <View
+            style="@style/AddfieldViewStyle">
+        </View>
+        <LinearLayout
+            style="@style/AddfieldLlStyle"
+            android:orientation="horizontal">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addfield_community_dynamic_cb"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                style="@style/AgreementCheckBox"
+                android:textSize="@dimen/title_bar_title_txt_size"
+                android:textColor="@color/headline_tv_color"
+                android:checked="false"/>
+            <TextView
+                style="@style/AddfieldTvStyle"
+                android:drawableRight="@null"
+                android:id="@+id/addfield_community_dynamic_tv"
+                android:text="属性值"/>
+            <EditText
+                style="@style/AddfieldEditStyle"
+                android:id="@+id/addfield_community_dynamic_et"
+                android:hint="@string/module_addfield_community_info_input_hint"
+                android:singleLine="true"
+                android:maxLength="1000"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

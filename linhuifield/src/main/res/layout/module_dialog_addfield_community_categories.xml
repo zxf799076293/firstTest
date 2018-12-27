@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#98000000">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="@dimen/fieldinfo_toleft_addshopcard"
+                    android:layout_height="@dimen/title_bar_layout_width_height"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                    android:text="@string/cancel"
+                    android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                    android:textColor="@color/top_title_center_txt_color" />
+
+                <TextView
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="@dimen/fieldinfo_toleft_addshopcard"
+                    android:layout_height="@dimen/title_bar_layout_width_height"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right|center_vertical"
+                    android:paddingRight="@dimen/app_backbtn_marginleft"
+                    android:text="@string/confirm"
+                    android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                    android:textColor="@color/default_bluebg" />
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+                <com.linhuiba.linhuifield.fieldview.kankan.wheel.widget.WheelView
+                    android:id="@+id/categories1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                </com.linhuiba.linhuifield.fieldview.kankan.wheel.widget.WheelView>
+
+                <com.linhuiba.linhuifield.fieldview.kankan.wheel.widget.WheelView
+                    android:id="@+id/categories2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                </com.linhuiba.linhuifield.fieldview.kankan.wheel.widget.WheelView>
+
+                <com.linhuiba.linhuifield.fieldview.kankan.wheel.widget.WheelView
+                    android:id="@+id/categories3"
+                    android:visibility="visible"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                </com.linhuiba.linhuifield.fieldview.kankan.wheel.widget.WheelView>
+                <com.linhuiba.linhuifield.fieldview.kankan.wheel.widget.WheelView
+                    android:id="@+id/categories4"
+                    android:visibility="visible"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                </com.linhuiba.linhuifield.fieldview.kankan.wheel.widget.WheelView>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

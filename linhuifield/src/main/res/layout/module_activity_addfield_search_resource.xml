@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/guide_carousel_rl">
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/addfield_search_resource_vp">
+        </android.support.v4.view.ViewPager>
+        <TextView
+            android:layout_width="@dimen/addfield_agency_ll_height"
+            android:layout_height="@dimen/advertising_add_height"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/app_backbtn_marginleft"
+            android:layout_marginTop="@dimen/field_list_item_label"
+            android:textSize="@dimen/register_codebtn_txt_size"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/module_addfield_search_resource_jump_over"
+            android:background="@drawable/activity_fieldinfo_res_type_white_ll_bg"
+            android:id="@+id/addfield_search_res_jump_tv"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:id="@+id/addfield_search_res_start_page_point_ll"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/btn_margin_width">
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/guide_imgv_click_rl">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:id="@+id/guidu_click_imgv"/>
+    </RelativeLayout>
+
+</LinearLayout>

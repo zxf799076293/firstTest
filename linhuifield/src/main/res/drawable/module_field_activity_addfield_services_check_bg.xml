@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true"
+        android:drawable="@drawable/fragment_shopcard_adv_occupancy_rate_tv_bg" /><!--选中时效果-->
+    <item android:state_checked="false"
+        android:drawable="@drawable/activity_fieldinfo_show_all_resource_info_bg" /><!--未选中时效果-->
+</selector>

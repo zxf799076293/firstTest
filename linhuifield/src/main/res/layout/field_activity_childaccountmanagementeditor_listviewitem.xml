@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/advertising_price_marginleft"
+        android:paddingRight="@dimen/app_backbtn_marginleft"
+        android:paddingLeft="@dimen/app_backbtn_marginleft"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:id="@+id/field_addfield_account_ll">
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/fieldnametextview"
+            android:visibility="visible"
+            android:checked="false"
+            android:padding="@dimen/orderlist_item_linearlayout_marginleft"
+            android:text=""
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@drawable/field_activity_childaccounteditor_checktext_bg"
+            style="@style/MyInvoiceCheckBox"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:background="@color/new_viewbg"
+            android:id="@+id/item_bottom_view">
+        </View>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CircleTextProgressbar">
+        <attr name="in_circle_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="StickerView">
+        <attr name="showIcons" format="boolean" />
+        <attr name="showBorder" format="boolean" />
+        <attr name="bringToFrontCurrentSticker" format="boolean" />
+        <attr name="borderColor" format="color"/>
+        <attr name="borderAlpha" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="OvalImageView">
+        <attr name="show_leftup" format="boolean" />
+        <attr name="show_rightup" format="boolean" />
+        <attr name="show_leftdown" format="boolean" />
+        <attr name="show_rightdown" format="boolean" />
+        <attr name="round" format="integer"/>
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape  xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- android:radius 弧形的半径 -->
+    <corners
+        android:topLeftRadius="22dp"
+        android:topRightRadius="22dp"
+        android:bottomLeftRadius="22dp"
+        android:bottomRightRadius="22dp" />
+    <!-- 填充的颜色 -->
+    <solid android:color="@color/module_home_community_show_all_tv_color" />
+</shape >

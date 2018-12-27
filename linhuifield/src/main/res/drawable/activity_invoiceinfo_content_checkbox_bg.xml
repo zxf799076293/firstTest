@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true"
+        android:drawable="@drawable/ic_selection_box_press_three" /><!--选中时效果-->
+    <item android:state_checked="false"
+        android:drawable="@drawable/ic_selection_box_nor_three" /><!--未选中时效果-->
+</selector>

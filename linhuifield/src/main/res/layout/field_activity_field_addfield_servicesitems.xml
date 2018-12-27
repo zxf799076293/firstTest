@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_linearlayout_bg">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/addfield_services_ll">
+        <include
+            layout="@layout/linhui_business_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/title_bar_linelayout_height"
+            android:background="@color/top_title_line_color"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:background="@color/app_linearlayout_bg"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/addfield_services_next_btn_ll">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:background="@color/new_viewbg">
+        </View>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/maintab_width"
+            android:id="@+id/addfield_services_next_btn"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/txt_padding_left"
+            android:textSize="@dimen/title_bar_title_center_txt_size"
+            android:text="@string/addfield_contacts_next_btn_str"
+            android:background="@drawable/loginbtn_bg"/>
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addfield_services_ll"
+        android:layout_above="@+id/addfield_services_next_btn_ll"
+        android:background="@color/app_linearlayout_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/module_addfield_choose_res_option_ll_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:drawablePadding="@dimen/tab_item_img_margintop"
+                        android:drawableRight="@drawable/ic_biian_three_six"
+                        android:text="@string/addfield_fieldrules_reservation_one_hinttext"
+                        android:textColor="@color/top_title_center_txt_color"
+                        android:textSize="@dimen/title_bar_title_txt_size" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                        android:gravity="center_vertical|right"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/home_area_drop_marginleft"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/fieldrules_reserve_down"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/down_img_pressed" />
+
+                            <EditText
+                                android:id="@+id/fieldrules_reserve_days"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:background="@drawable/advertsingbox"
+                                android:gravity="center"
+                                android:numeric="integer"
+                                android:textColor="@color/top_title_center_txt_color"
+                                android:textSize="@dimen/login_leftright_txt_size" />
+
+                            <TextView
+                                android:id="@+id/fieldrules_reserve_add"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/add_img_presseed" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/module_addfield_choose_res_option_ll_height"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/txt_padding_line"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                    android:background="@color/new_viewbg"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:id="@+id/addfield_services_negotiate_rescheduled_ll"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:drawablePadding="@dimen/tab_item_img_margintop"
+                        android:drawableRight="@drawable/ic_biian_three_six"
+                        android:text="@string/module_addfield_services_negotiate_rescheduled"
+                        android:textColor="@color/top_title_center_txt_color"
+                        android:textSize="@dimen/title_bar_title_txt_size" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|right"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:layout_marginRight="@dimen/txt_padding"
+                            android:hint="@string/addfield_optional_info_choose_textview_hinttext"
+                            android:text=""
+                            android:id="@+id/addfield_services_negotiate_rescheduled_tv"
+                            android:textColor="@color/headline_tv_color"
+                            android:textColorHint="@color/addfield_add_picture_tv_bg"
+                            android:textSize="@dimen/title_bar_title_txt_size" />
+
+                        <ImageView
+                            style="@style/AddfieldImgvStyle"
+                            android:src="@drawable/icon_more_gary" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/addfield_services_negotiate_rescheduled_day_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/module_addfield_choose_res_option_ll_height"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/txt_padding_line"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                    android:background="@color/new_viewbg"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:drawablePadding="@dimen/tab_item_img_margintop"
+                        android:drawableRight="@drawable/ic_biian_three_six"
+                        android:text="@string/module_addfield_services_negotiate_rescheduled_day"
+                        android:textColor="@color/top_title_center_txt_color"
+                        android:textSize="@dimen/title_bar_title_txt_size" />
+
+                    <EditText
+                        android:id="@+id/addfield_services_negotiate_rescheduled_day_tv"
+                        style="@style/AddfieldEditStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/module_addfield_services_change_date_day_hint"
+                        android:gravity="right|center_vertical"
+                        android:maxLength="2"
+                        android:numeric="integer" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/fieldrules_activity_reserve_day_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/txt_padding_line"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                    android:background="@color/new_viewbg"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/module_addfield_choose_res_option_ll_height"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:drawablePadding="@dimen/tab_item_img_margintop"
+                        android:drawableRight="@drawable/ic_biian_three_six"
+                        android:text="@string/addfield_fieldrules_activity_reservation_one_hinttext"
+                        android:textColor="@color/top_title_center_txt_color"
+                        android:textSize="@dimen/title_bar_title_txt_size" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                        android:gravity="center_vertical|right"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/home_area_drop_marginleft"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/fieldrules_activity_reserve_down"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/down_img" />
+
+                            <EditText
+                                android:id="@+id/fieldrules_reserve_activity_days"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:background="@drawable/advertsingbox"
+                                android:gravity="center"
+                                android:numeric="integer"
+                                android:textColor="@color/top_title_center_txt_color"
+                                android:textSize="@dimen/login_leftright_txt_size" />
+
+                            <TextView
+                                android:id="@+id/fieldrules_activity_reserve_add"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/add_img_presseed" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/module_addfield_choose_res_option_ll_height"
+                android:background="@color/white">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/txt_padding_line"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                    android:background="@color/new_viewbg"></View>
+
+                <TextView
+                    style="@style/app_linearlayoutrighttxt_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="@dimen/tab_item_img_margintop"
+                    android:drawableRight="@drawable/ic_biian_three_six"
+                    android:text="@string/module_addfield_services_provide_invoice" />
+
+                <Switch
+                    android:id="@+id/ToggleButton_ticket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="24dp"
+                    android:switchMinWidth="20dp"
+                    android:textOff="  "
+                    android:textOn="  "
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/invoice_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/module_addfield_choose_res_option_ll_height"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/txt_padding_line"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                    android:background="@color/new_viewbg">
+                </View>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/text_tariff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/tab_item_img_margintop"
+                        android:drawableRight="@drawable/ic_biian_three_six"
+                        android:paddingLeft="15dp"
+                        android:text="@string/addfield_services_item_ticket_tet"
+                        android:textColor="@color/top_title_center_txt_color"
+                        android:textSize="@dimen/login_leftright_txt_size"
+                        android:visibility="visible" />
+
+                    <EditText
+                        android:id="@+id/edit_point"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/txt_padding_left"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请输入税点"
+                        android:maxLength="6"
+                        android:numeric="signed"
+                        android:paddingRight="@dimen/app_backbtn_marginleft"
+                        android:singleLine="true"
+                        android:textColor="@color/color_release_second"
+                        android:textColorHint="@color/divider_list"
+                        android:textSize="15sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/point_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                        android:text="%"
+                        android:textColor="@color/top_title_center_txt_color"
+                        android:textSize="@dimen/login_leftright_txt_size"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/txt_padding_left"
+                android:paddingTop="@dimen/paddingleft">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:textColor="@color/headline_tv_color"
+                    android:textSize="@dimen/btnregister_txt_size"
+                    android:text="@string/module_addfield_services_item"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/myself_order_img_width"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/app_backbtn_marginleft">
+                    <CheckBox
+                        android:id="@+id/ToggleButton_electricity"
+                        style="@style/AddfieldServiceCheckBoxStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/review_power_text"
+                        android:gravity="center"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"/>
+                    <CheckBox
+                        android:id="@+id/ToggleButton_chair"
+                        style="@style/AddfieldServiceCheckBoxStyle"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/review_chairs_text"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"/>
+                    <CheckBox
+                        android:id="@+id/ToggleButton_materials"
+                        style="@style/AddfieldServiceCheckBoxStyle"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/review_goodshelp_text"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"/>
+                    <CheckBox
+                        android:id="@+id/ToggleButton_Propaganda"
+                        style="@style/AddfieldServiceCheckBoxStyle"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/module_addfield_services_item_leaflet"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/myself_order_img_width"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                    android:layout_marginBottom="@dimen/field_list_item_label_samll">
+                    <CheckBox
+                        android:id="@+id/ToggleButton_tent"
+                        style="@style/AddfieldServiceCheckBoxStyle"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/addfield_three_addfield_has_tent_pointtxt"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="invisible"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="invisible"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="invisible"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/addfield_service_phy_ll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/txt_padding_line"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                        android:background="@color/new_viewbg">
+                    </View>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/title_bar_layout_width_height"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/module_addfield_services_contraband"
+                        android:textColor="@color/top_title_center_txt_color"
+                        android:textSize="@dimen/title_bar_title_txt_size" />
+
+                    <RelativeLayout
+                        android:id="@+id/contraband_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/app_backbtn_marginleft">
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/contraband_list_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/txt_padding_line"
+                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                            android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                            android:layout_marginTop="@dimen/field_info_marginleft"
+                            android:background="@color/new_viewbg"></View>
+
+                        <EditText
+                            android:id="@+id/txt_contraband"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/app_backbtn_marginleft"
+                            android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                            android:background="@color/fieldlist_item_layout_bg"
+                            android:hint="@string/txt_contraband_prompt"
+                            android:maxLength="100"
+                            android:paddingBottom="@dimen/title_bar_back_marginLeft"
+                            android:paddingLeft="@dimen/txt_padding"
+                            android:paddingRight="@dimen/txt_padding"
+                            android:paddingTop="@dimen/title_bar_back_marginLeft"
+                            android:textColor="@color/color_release_second"
+                            android:textColorHint="@color/divider_list"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/txt_padding_line"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                        android:background="@color/new_viewbg">
+                    </View>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/title_bar_layout_width_height"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/module_addfield_services_property_requirement"
+                        android:textColor="@color/top_title_center_txt_color"
+                        android:textSize="@dimen/title_bar_title_txt_size" />
+
+                    <RelativeLayout
+                        android:id="@+id/property_requirement_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/app_backbtn_marginleft">
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/property_requirement_list_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/txt_padding_line"
+                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                            android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                            android:layout_marginTop="@dimen/field_info_marginleft"
+                            android:background="@color/new_viewbg"></View>
+
+                        <EditText
+                            android:id="@+id/editproperty_requirement"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/app_backbtn_marginleft"
+                            android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                            android:background="@color/fieldlist_item_layout_bg"
+                            android:hint="@string/txt_property_requirementhinttxt"
+                            android:maxLength="250"
+                            android:paddingBottom="@dimen/title_bar_back_marginLeft"
+                            android:paddingLeft="@dimen/txt_padding"
+                            android:paddingRight="@dimen/txt_padding"
+                            android:paddingTop="@dimen/title_bar_back_marginLeft"
+                            android:textColor="@color/color_release_second"
+                            android:textColorHint="@color/divider_list"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

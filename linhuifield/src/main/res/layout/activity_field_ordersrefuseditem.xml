@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="@dimen/TableRow_img_marginleft"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/TableRow_img_marginleft"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/user_info_account_width"
+            android:id="@+id/orderrefused_layout"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <CheckBox
+                android:layout_width="@dimen/advertising_addshop_img_height"
+                android:layout_height="@dimen/advertising_addshop_img_height"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:layout_centerVertical="true"
+                android:id="@+id/orderrefused_checkbox"
+                android:visibility="visible"
+                android:checked="true"
+                style="@style/MyorderCheckBox"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/app_linearlayoutrighttxt_style"
+                android:layout_marginLeft="0dp"
+                android:id="@+id/orderrefused_textview"
+                android:text="档期已满"/>
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/title_bar_linelayout_height"
+            android:background="@color/new_viewbg"/>
+
+    </LinearLayout>
+</LinearLayout>

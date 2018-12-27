@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="107dp"
+        android:layout_height="40dp"
+        android:id="@+id/screen_tv_all_rl">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true">
+            <LinearLayout
+                android:layout_width="79dp"
+                android:layout_height="@dimen/order_field_advertising_type_width"
+                android:gravity="center"
+                android:id="@+id/resourcesscreening_gridviewitem_searchlayout">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/tab_item_margintop"
+                    android:paddingRight="@dimen/tab_item_margintop"
+                    android:gravity="center"
+                    android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                    android:textColor="@color/headline_tv_color"
+                    android:background="@drawable/activity_searchlist_item_edittext_bg"
+                    android:id="@+id/resourcesscreening_gridviewitem_fieldsize_txt"
+                    android:text="" />
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_idelete_three_one"
+            android:id="@+id/screen_imgv"
+            android:visibility="gone"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,227 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/default_bluebg</item>
+        <item name="colorPrimaryDark">@color/default_bluebg</item>
+        <item name="colorAccent">@color/register_edit_color</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <!--<item name="windowActionBar">false</item>-->
+        <!--<item name="windowNoTitle">true</item>-->
+    </style>
+    <style name="AppTheme.NoTitle_FullScreen">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="main_bar_text_style">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="MyInvoiceCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+
+        <item name="android:button">@drawable/applyforinvoice_listitem_checkedbg</item>
+        <item name="android:textColor">@drawable/applyforinvoice_listitem_checkedtxtbg</item>
+        <item name="android:background">@null</item>
+    </style>
+    <style name="MyorderCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/orderconfirm_listitem_checkedbg</item>
+        <item name="android:textColor">@drawable/applyforinvoice_listitem_checkedtxtbg</item>
+        <item name="android:background">@null</item>
+    </style>
+    <style name="AgreementCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/field_orderrefused_checkedbg</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="appbottombtn_style">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_title_size_next</item>
+        <item name="android:layout_marginLeft">@dimen/field_info_height</item>
+        <item name="android:layout_marginRight">@dimen/field_info_height</item>
+        <item name="android:background">@drawable/loginbtn_bg</item>
+    </style>
+    <style name="app_linearlayoutrighttxt_style">
+        <item name="android:textColor">@color/top_title_center_txt_color</item>
+        <item name="android:textSize">@dimen/txt_title_size_small</item>
+        <item name="android:layout_marginLeft">@dimen/app_backbtn_marginleft</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    <style name="app_linearlayoutrightedit_style">
+        <item name="android:textColor">@color/headline_tv_color</item>
+        <item name="android:textSize">@dimen/txt_title_size_nor</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/app_backbtn_marginleft</item>
+        <item name="android:paddingRight">@dimen/app_backbtn_marginleft</item>
+        <item name="android:textColorHint">@color/hinttext_color</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="Theme" parent="android:Theme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+    <style name="CustomDialog">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">@dimen/txt_title_size_small</item>
+    </style>
+    <style name="ShareDialogStyle" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/share_dialog_enter_anim</item>
+        <item name="@android:windowExitAnimation">@anim/share_dialog_exit_anim</item>
+    </style>
+    <style name="DefaultLeftStyle">
+        <item name="android:textColor">@color/headline_tv_color</item>
+        <item name="android:textSize">@dimen/txt_title_size_small</item>
+    </style>
+    <style name="DefaultRighttStyle">
+        <item name="android:textColor">@color/register_edit_color</item>
+        <item name="android:textSize">@dimen/txt_title_size_info</item>
+    </style>
+    <style name="DefaultCheckTextStyle">
+        <item name="android:textColor">@color/register_edit_color</item>
+        <item name="android:textSize">@dimen/txt_title_size_small</item>
+    </style>
+    <style name="FieldinfoSpecificationCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/activity_fieldinfo_specification_checkbox_bg</item>
+        <item name="android:background">@null</item>
+    </style>
+    <style name="myTransparent">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+    <style name="addfieldEnquiryCheckStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@drawable/activity_searchlist_screening_check_textview_bg</item>
+        <item name="android:background">@drawable/activity_searchlist_item_edittext_bg</item>
+    </style>
+    <style name="DefaultEditStyle">
+        <item name="android:textColor">@color/headline_tv_color</item>
+        <item name="android:textSize">@dimen/txt_title_size_nor</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/app_backbtn_marginleft</item>
+        <item name="android:paddingRight">@dimen/app_backbtn_marginleft</item>
+        <item name="android:textColorHint">@color/hinttext_color</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="AccountRadiosStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@null</item>
+        <item name="android:textSize">@dimen/txt_title_size_nor</item>
+        <item name="android:textColor">@drawable/field_activity_other_account_radio_tv_color</item>
+        <item name="android:background">@drawable/field_activity_other_account_radio_bg</item>
+    </style>
+    <style name="AddfieldServiceCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@null</item>
+        <item name="android:textSize">@dimen/txt_title_size_info</item>
+        <item name="android:textColor">@drawable/field_activity_childaccounteditor_checktext_bg</item>
+        <item name="android:background">@drawable/module_field_activity_addfield_services_check_bg</item>
+    </style>
+    <style name="AddfieldLlStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/module_addfield_choose_res_option_ll_height</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="AddfieldTvStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/txt_title_size_nor</item>
+        <item name="android:textColor">@color/headline_tv_color</item>
+        <item name="android:layout_marginLeft">@dimen/app_backbtn_marginleft</item>
+        <item name="android:drawableRight">@drawable/ic_biian_three_six</item>
+        <item name="android:drawablePadding">@dimen/tab_item_img_margintop</item>
+    </style>
+    <style name="AddfieldEditStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/headline_tv_color</item>
+        <item name="android:textSize">@dimen/txt_title_size_nor</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:paddingLeft">@dimen/app_backbtn_marginleft</item>
+        <item name="android:paddingRight">@dimen/txt_padding_left</item>
+        <item name="android:textColorHint">@color/hinttext_color</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="AddfieldImgvStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/icon_more_gary</item>
+        <item name="android:layout_marginRight">@dimen/txt_margin</item>
+    </style>
+    <style name="AddfieldViewStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/txt_padding_line</item>
+        <item name="android:background">@color/new_viewbg</item>
+        <item name="android:layout_marginRight">@dimen/app_backbtn_marginleft</item>
+        <item name="android:layout_marginLeft">@dimen/app_backbtn_marginleft</item>
+    </style>
+    <style name="DefaultLongViewStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/txt_padding_line</item>
+        <item name="android:background">@color/new_viewbg</item>
+    </style>
+    <style name="AddfieldPhyLeftTvStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:layout_width">@dimen/addshoppingcard_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/login_leftright_txt_size</item>
+        <item name="android:textColor">@color/register_edit_color</item>
+        <item name="android:layout_marginLeft">@dimen/app_backbtn_marginleft</item>
+    </style>
+    <style name="AddfieldPhyRightTvStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/login_leftright_txt_size</item>
+        <item name="android:textColor">@color/headline_tv_color</item>
+        <item name="android:layout_marginRight">@dimen/app_backbtn_marginleft</item>
+    </style>
+    <style name="CommunityLeftTvStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:layout_width">@dimen/searchlist_item_evaluation_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/txt_title_size_info</item>
+        <item name="android:textColor">@color/register_edit_color</item>
+        <item name="android:layout_marginLeft">@dimen/app_backbtn_marginleft</item>
+    </style>
+    <style name="CommunityRightTvStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:textSize">@dimen/txt_title_size_info</item>
+        <item name="android:textColor">@color/headline_tv_color</item>
+        <item name="android:layout_marginRight">@dimen/app_backbtn_marginleft</item>
+    </style>
+    <style name="FieldInfoLLStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/tab_item_margintop</item>
+        <item name="android:gravity">top</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="Theme.GuideTheme" parent="Theme.AppCompat.NoActionBar.FullScreen">
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <style name="Theme.AppCompat.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    <style name="MyCouponsCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/module_coupons_checkbox_bg</item>
+        <item name="android:textColor">@drawable/applyforinvoice_listitem_checkedtxtbg</item>
+        <item name="android:background">@null</item>
+    </style>
+    <style name="OrderProtocolCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/module_order_protocol_cb_bg</item>
+        <item name="android:textColor">@drawable/applyforinvoice_listitem_checkedtxtbg</item>
+        <item name="android:background">@null</item>
+    </style>
+</resources>

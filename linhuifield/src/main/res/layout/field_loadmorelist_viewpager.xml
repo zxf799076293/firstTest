@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:background="@color/colorapp_gb">
+
+
+    <RelativeLayout
+        android:id="@+id/lay_no_order"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/field_list_other_nodata"
+            android:id="@+id/textView2"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="fill_horizontal|center_vertical" />
+    </RelativeLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/field_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorapp_gb">
+
+        <com.linhuiba.linhuifield.fieldview.FieldLoadMoreListView
+            android:id="@+id/field_order_list"
+            android:layout_width="match_parent"
+            android:divider="@null"
+            android:layout_height="match_parent"
+            android:background="@color/app_linearlayout_bg"
+            />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

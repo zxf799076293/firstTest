@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/app_linearlayout_bg"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:background="@color/app_linearlayout_bg"
+        android:id="@+id/order_refusedtoplayout"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/linhui_business_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/title_bar_linelayout_height"
+            android:background="@color/top_title_line_color"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="@dimen/title_height"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/order_refusedbottomlayout">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/title_bar_linelayout_height"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textSize="@dimen/user_info_photo_txt_size"
+            android:textColor="@color/white"
+            android:background="@drawable/button_pressedbg"
+            android:id="@+id/refuse_cancelbtn"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_pressedbg"
+            android:text="@string/confirm"
+            android:textSize="@dimen/user_info_photo_txt_size"
+            android:textColor="@color/white"
+            android:id="@+id/refuse_agreebtn"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:background="@color/app_linearlayout_bg"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/order_refusedtoplayout"
+        android:layout_above="@+id/order_refusedbottomlayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:background="@color/app_linearlayout_bg"
+            android:text="@string/order_refuse_ordertxt"
+            android:gravity="center_vertical"
+            style="@style/app_linearlayoutrighttxt_style"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:background="@color/app_samelinearlayout_bg">
+        </View>
+        <com.linhuiba.linhuifield.fieldview.FieldMyGridView android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fieldview_refused_mygridview"
+            android:numColumns="1"
+            android:scrollbars="none"
+            android:gravity="center"
+            android:columnWidth="@dimen/searchlist_item_evaluation_width"
+            android:visibility="visible">
+
+        </com.linhuiba.linhuifield.fieldview.FieldMyGridView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/addshoppingcard_width"
+            android:background="@color/white"
+            style="@style/app_linearlayoutrightedit_style"
+            android:layout_marginLeft="@dimen/field_info_height"
+            android:layout_marginRight="@dimen/field_info_height"
+            android:layout_marginTop="@dimen/txt_margin"
+            android:paddingTop="@dimen/searchlist_item_txt_margintop"
+            android:visibility="gone"
+            android:gravity="top"
+            android:maxLength="25"
+            android:id="@+id/refused_edittext"/>
+    </LinearLayout>
+
+</RelativeLayout>

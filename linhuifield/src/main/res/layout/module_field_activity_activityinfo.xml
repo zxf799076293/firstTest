@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/addfield_activityinfo_ll">
+        <include
+            layout="@layout/linhui_business_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:layout_alignParentTop="true"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/app_linearlayout_bg"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/addfield_activityinfo_btn_ll">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:background="@color/new_viewbg">
+        </View>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/maintab_width"
+            android:id="@+id/addfield_activityinfo_btn"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/txt_padding_left"
+            android:textSize="@dimen/title_bar_title_center_txt_size"
+            android:text="@string/addfield_rules_next_btn_str"
+            android:background="@drawable/loginbtn_bg"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_below="@+id/addfield_activityinfo_ll"
+        android:layout_above="@+id/addfield_activityinfo_btn_ll">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="true"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/app_linearlayout_bg"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/fieldinfo_refund_difference_price_height"
+                    android:id="@+id/addfield_activityinfo_banner_ll">
+                    <com.youth.banner.Banner
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:indicator_height="@dimen/searchlist_item_txt_margintop"
+                        app:indicator_width="@dimen/searchlist_item_txt_margintop"
+                        app:indicator_drawable_selected="@drawable/fragment_home_banner_round_selected_bg"
+                        app:indicator_drawable_unselected="@drawable/fragment_home_banner_round_unselected"
+                        android:id="@+id/addfield_activityinfo_banner">
+                    </com.youth.banner.Banner>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        android:id="@+id/addfield_activityinfo_default_pic_ll"
+                        android:background="@drawable/image_tupianshangchuan_three_six">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_xiangji_three_six"
+                            android:textColor="@color/white"
+                            android:drawablePadding="@dimen/txt_margin"
+                            android:textSize="@dimen/search_lisritem_pricetxt_size"
+                            android:text="@string/module_addfield_community_upload_picture"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/txt_padding_left"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/field_info_receipt_size"
+                            android:text="@string/module_addfield_community_upload_picture_hint"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:id="@+id/addfield_activityinfo_no_pic_ll"
+                        android:visibility="gone"
+                        android:background="@drawable/image_paishezhong_three_six_one">
+                    </LinearLayout>
+                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/add_activity_layout"
+                    style="@style/AddfieldLlStyle"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:orientation="vertical">
+                        <View style="@style/AddfieldViewStyle"></View>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/module_addfield_phy_res_activity_name" />
+
+                            <EditText
+                                android:id="@+id/activity_title"
+                                style="@style/AddfieldEditStyle"
+                                android:hint="@string/module_addfield_phy_res_activity_name_hint"
+                                android:imeOptions="actionNext"
+                                android:maxLength="25"
+                                android:paddingRight="@dimen/myself_order_img_width"
+                                android:singleLine="true"
+                                android:textColorHint="@color/divider_list" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:orientation="vertical">
+                        <View style="@style/AddfieldViewStyle">
+                        </View>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/module_addfield_actitity_data" />
+
+                            <TextView
+                                android:id="@+id/txt_activity_timebegin"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:gravity="center"
+                                android:hint="@string/mTxt_addfield_actitity_begindate"
+                                android:paddingLeft="13dp"
+                                android:textColor="@color/headline_tv_color"
+                                android:textColorHint="@color/divider_list"
+                                android:textSize="@dimen/register_codebtn_txt_size" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="——"
+                                android:textColor="@color/headline_tv_color" />
+
+                            <TextView
+                                android:id="@+id/txt_activity_timefinish"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:gravity="center"
+                                android:hint="@string/mTxt_addfield_actitity_finishdate"
+                                android:textColor="@color/headline_tv_color"
+                                android:textColorHint="@color/divider_list"
+                                android:textSize="@dimen/register_codebtn_txt_size" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:orientation="vertical">
+
+                        <View style="@style/AddfieldViewStyle"></View>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:id="@+id/addfield_activity_type_ll">
+
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/addfield_activity_type_tv_str" />
+                            <TextView
+                                style="@style/AddfieldEditStyle"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:paddingRight="0dp"
+                                android:id="@+id/addfield_activity_type_tv"
+                                android:hint="@string/addfield_activity_type_hint_str" />
+                            <ImageView
+                                style="@style/AddfieldImgvStyle"
+                                android:layout_gravity="center_vertical"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:orientation="vertical">
+                        <View style="@style/AddfieldViewStyle">
+                        </View>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:id="@+id/activityinfo_description_ll">
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/module_addfield_activity_info_description"
+                                android:drawableRight="@null"/>
+                            <TextView
+                                android:id="@+id/activityinfo_description_et"
+                                style="@style/AddfieldEditStyle"
+                                android:hint="@string/module_addfield_activity_info_description_hint"
+                                android:paddingRight="@dimen/myself_order_img_width"
+                                android:singleLine="true"
+                                android:textColorHint="@color/divider_list" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>
