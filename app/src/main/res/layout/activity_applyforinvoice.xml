@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_linearlayout_bg">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:id="@+id/applyforinvoice_select_layout">
+            <include
+                layout="@layout/linhui_business_title_bar">
+            </include>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/txt_padding_line"
+                android:background="@color/app_samelinearlayout_bg">
+            </View>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/choosespecifications_pricetxtheight"
+                android:id="@+id/applyforinvoice_remind_ll"
+                android:layout_marginBottom="@dimen/txt_padding_left"
+                android:visibility="visible"
+                android:background="@color/default_warn_ll_bg">
+                <com.linhuiba.business.view.MarqueTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/applyforinvoice_remind_imgBtn"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:drawableLeft="@drawable/ic_prompt"
+                    android:drawablePadding="@dimen/txt_padding_left"
+                    android:visibility="visible"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/checked_tv_color"
+                    android:textSize="@dimen/register_codebtn_txt_size"
+                    android:text="@string/applyforinvoice_invoice_choose_remind"
+                    android:id="@+id/applyforinvoice_remind_tv"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"/>
+                <ImageButton
+                    android:layout_width="@dimen/btn_normal_height"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_close_blue_three"
+                    android:layout_alignParentRight="true"
+                    android:background="@null"
+                    android:id="@+id/applyforinvoice_remind_imgBtn" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_bar_layout_width_height"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/applyforinvoice_tablayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/title_height"
+                    android:background="@color/white"
+                    app:tabMode="fixed"
+                    app:tabIndicatorColor="@color/default_bluebg"
+                    app:tabSelectedTextColor="@color/default_bluebg"
+                    app:tabTextColor="@color/orderconfirm_success_bottom_btntextcolor"
+                    app:tabTextAppearance="@style/TabLayoutTextStyle"
+                    app:tabIndicatorHeight="@dimen/tab_item_margintop"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/txt_padding_line"
+                    android:background="@color/app_samelinearlayout_bg"
+                    android:layout_marginTop="-1dp">
+                </View>
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/applyforinvoice_select_layout"
+            android:layout_above="@+id/clecked_invoicenum_relativelayout">
+            <android.support.v4.view.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:fadingEdge="none"
+                android:id="@+id/applyforinvoice_viewpage">
+
+            </android.support.v4.view.ViewPager>
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/home_Popular_marginleft"
+            android:id="@+id/clecked_invoicenum_relativelayout"
+            android:visibility="gone"
+            android:background="@color/white"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/item_field_layout_height">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:background="@color/white"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    android:id="@+id/apply_invoice_chooseall_layout">
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:paddingLeft="@dimen/txt_margin"
+                        android:textColor="@color/top_title_center_txt_color"
+                        android:textSize="@dimen/login_leftright_txt_size"
+                        android:checked="false"
+                        android:clickable="false"
+                        android:id="@+id/apply_invoice_chooseall_checkbox"
+                        android:text="@string/commoditypay_checkall_text"
+                        style="@style/ApplyForInvoiceCChehooseResckboxStyle"
+                        android:layout_centerVertical="true"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/invoice_next_btn"
+                    android:layout_toStartOf="@+id/invoice_next_btn"
+                    android:layout_weight="2.45"
+                    android:gravity="center_vertical|right"
+                    android:orientation="horizontal"
+                    android:paddingRight="@dimen/home_gridview_textone_marginleft">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="@string/applyforinvoice_summation_hinttext"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/txt_title_size_info" />
+
+                    <TextView
+                        android:id="@+id/applyforinvoicesize_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="0"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/txt_title_size_info" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="@string/applyforinvoice_summation_text"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/txt_title_size_info" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="@string/commoditypay_total_text"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/txt_title_size_info" />
+
+                    <TextView
+                        android:id="@+id/applyforinvoice_total_fee_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="￥0"
+                        android:textColor="@color/price_tv_color"
+                        android:textSize="@dimen/register_codebtn_txt_size" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <Button
+                android:layout_width="@dimen/item_field_layout_height"
+                android:layout_height="match_parent"
+                android:id="@+id/invoice_next_btn"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textSize="@dimen/btnregister_txt_size"
+                android:textColor="@color/white"
+                android:background="@color/checkbox_managecontact_txtcolor"
+                android:text="@string/applyforinvoice_tablayout_one_tv_str" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

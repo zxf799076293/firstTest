@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:textSize="@dimen/user_info_photo_txt_size"
+        android:textColor="@color/title_bar_txtcolor"
+        android:background="#80ffffff"
+        android:id="@+id/resourcesscrdgridviewitem_fieldtype_txt"
+        android:paddingBottom="@dimen/home_area_drop_marginleft"
+        android:paddingTop="@dimen/paddingleft"
+        android:paddingLeft="@dimen/home_area_drop_marginleft"
+        android:text="3×3"
+        />
+
+    <LinearLayout
+        android:layout_width="79dp"
+        android:layout_height="@dimen/user_info_account_width"
+        android:gravity="center"
+        android:id="@+id/resourcesscreening_gridviewitem_searchlayout"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/user_info_photo_txt_size"
+            android:textColor="@color/default_bluebg"
+            android:background="@drawable/choosespecifications_pricetxtselect"
+            android:id="@+id/resourcesscreening_gridviewitem_fieldsize_txt"
+            android:text="3×3"
+            />
+
+    </LinearLayout>
+</LinearLayout>

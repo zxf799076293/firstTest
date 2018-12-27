@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/field_info_marginleft"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/txt_padding_left"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_release_first"
+                android:textSize="@dimen/txt_title_size_nor"
+                android:text="用  户 名："
+                android:layout_marginLeft="3dp"
+                />
+
+            <TextView
+                android:id="@+id/txt_username"
+                android:layout_width="wrap_content"
+                android:text="的方式公司"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:textColor="@color/color_release_second"
+                android:textSize="@dimen/txt_title_size_nor"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/txt_padding_left"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_release_first"
+                android:id="@+id/txtcompany"
+                android:textSize="@dimen/txt_title_size_nor"
+                android:text="公  司 名："
+                android:layout_marginLeft="3dp"
+                />
+
+            <TextView
+                android:id="@+id/company"
+                android:layout_width="wrap_content"
+                android:text="的方式公司"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:textColor="@color/color_release_second"
+                android:textSize="@dimen/txt_title_size_nor"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/txt_padding_left"
+            android:id="@+id/linearlayout_cp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_release_first"
+                android:textSize="@dimen/txt_title_size_nor"
+                android:layout_marginLeft="2dp"
+                android:text="产       品：" />
+
+            <TextView
+                android:id="@+id/product"
+                android:layout_width="wrap_content"
+                android:text="的方式公司"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:textColor="@color/color_release_second"
+                android:textSize="@dimen/txt_title_size_nor"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/txt_padding_left"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_release_first"
+                android:textSize="@dimen/txt_title_size_nor"
+                android:text="联  系 人："
+                android:layout_marginLeft="3dp"
+                />
+
+            <TextView
+                android:id="@+id/txt_people"
+                android:layout_width="wrap_content"
+                android:text="的方式公司"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:textColor="@color/color_release_second"
+                android:textSize="@dimen/txt_title_size_nor"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/txt_padding_left"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_release_first"
+                android:textSize="@dimen/txt_title_size_nor"
+                android:text="电话号码：" />
+
+            <TextView
+                android:id="@+id/mobile"
+                android:layout_width="wrap_content"
+                android:text="的方式公司"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:textColor="@color/color_release_second"
+                android:textSize="@dimen/txt_title_size_nor"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main"
+        android:id="@+id/linearlayout_agree"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/txt_padding_left"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnagree"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_normal"
+            android:gravity="center"
+            android:text="@string/btn_agree"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_title_size" />
+
+        <Button
+            android:id="@+id/btnrefuse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_refuse"
+            android:text="@string/btn_refuse"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_title_size" />
+    </LinearLayout>
+
+</RelativeLayout>

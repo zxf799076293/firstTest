@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_linearlayout_bg">
+    <include
+        layout="@layout/linhui_business_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_bar_linelayout_height"
+        android:background="@color/top_title_line_color"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:id="@+id/filelistview">
+
+    </ListView>
+</LinearLayout>

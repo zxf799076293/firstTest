@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_linearlayout_bg">
+    <include
+        layout="@layout/linhui_business_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_bar_linelayout_height"
+        android:background="@color/top_title_line_color"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_layout_width_height"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/app_backbtn_marginleft"
+        android:paddingRight="@dimen/app_backbtn_marginleft"
+        android:id="@+id/reset_payment_password_layout">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:textSize="@dimen/txt_title_size_small"
+                android:textColor="@color/top_title_center_txt_color"
+                android:text="@string/wallet_reset_payment_password_text" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_into_three"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_layout_width_height"
+        android:layout_marginTop="@dimen/regiter_linelayout_height"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/app_backbtn_marginleft"
+        android:id="@+id/fingerprint_payment_layout">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:textSize="@dimen/txt_title_size_small"
+                android:textColor="@color/top_title_center_txt_color"
+                android:text="@string/wallet_fingerprint_payment_text" />
+        </LinearLayout>
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:switchMinWidth="20dp"
+            android:textOn="  "
+            android:textOff="  "
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track"
+            android:layout_centerVertical="true"
+            android:id="@+id/ToggleButton_wallet_fingerprint_payment"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/app_backbtn_marginleft"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        layout="@layout/linhui_business_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_bar_linelayout_height"
+        android:background="@color/top_title_line_color"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/maoinfo_baidumapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.baidu.mapapi.map.MapView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/activity_map_layout_shadow"
+            android:id="@+id/fieldinfo_mapinfo_layout">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                android:id="@+id/fieldinfomap_resourcename"
+                style="@style/app_linearlayoutrighttxt_style"
+                android:text=""/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:textColor="@color/register_edit_color"
+                android:id="@+id/fieldinfomap_resourceaddress"
+                android:textSize="@dimen/register_codebtn_txt_size"
+                android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                android:text=""/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/home_Popular_marginleft"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/txt_padding_line"
+                android:background="@color/new_viewbg"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:layout_marginRight="@dimen/app_backbtn_marginleft">
+            </View>
+            <TextView
+                android:layout_width="@dimen/add_lab_width"
+                android:layout_height="@dimen/order_field_advertising_type_width"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/txt_margin"
+                android:background="@drawable/activity_searchlist_item_edittext_bg"
+                android:textColor="@color/top_title_center_txt_color"
+                android:textSize="@dimen/register_codebtn_txt_size"
+                android:text="@string/fieldinfo_navigation_text"
+                android:id="@+id/fieldinfomap_navigation_btn"/>
+        </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

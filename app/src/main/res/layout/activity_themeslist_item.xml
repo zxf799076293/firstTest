@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:id="@+id/themeslist_item_imagelayout"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/themeslist_item_image" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:background="@color/transparent"
+            android:id="@+id/themeslist_item_title_layout">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/small_title_height"
+                android:layout_marginRight="@dimen/small_title_height"
+                android:textSize="@dimen/themeslist_item_title_textsize"
+                android:id="@+id/themeslist_item_title_text"
+                android:text=""/>
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/order_field_advertising_type_width"
+        android:paddingRight="@dimen/order_field_advertising_type_width"
+        android:paddingTop="@dimen/home_area_drop_marginleft"
+        android:paddingBottom="@dimen/title_bar_back_marginLeft"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+        android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+        android:id="@+id/themeslist_item_title_content_text"
+        android:text=""/>
+</LinearLayout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_linearlayout_bg">
+    <include
+        layout="@layout/linhui_business_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_bar_linelayout_height"
+        android:background="@color/top_title_line_color"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/txt_padding_line"
+        android:layout_marginTop="@dimen/regiter_linelayout_height"
+        android:background="@color/app_samelinearlayout_bg">
+    </View>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:orientation="horizontal"
+            android:background="@color/white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/user_info_photo_txt_size"
+                android:textColor="@color/title_bar_txtcolor"
+                android:text="@string/myselfinfo_contactname"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:layout_gravity="center_vertical"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/paddingleft"
+                android:background="@color/white"
+                android:hint="@string/fieldinfo_diolog_contactname"
+                android:textColorHint="@color/field_chair_textcolor"
+                android:textColor="@color/register_edit_color"
+                android:singleLine="true"
+                android:id="@+id/managecontactname"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:background="@color/app_samelinearlayout_bg">
+        </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:orientation="horizontal"
+            android:background="@color/white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/user_info_photo_txt_size"
+                android:textColor="@color/title_bar_txtcolor"
+                android:text="@string/invoiceinfo_mobile_txt"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:layout_gravity="center_vertical"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/paddingleft"
+                android:background="@color/white"
+                android:hint="@string/fieldinfo_diolog_contactmobile"
+                android:textColorHint="@color/field_chair_textcolor"
+                android:textColor="@color/register_edit_color"
+                android:singleLine="true"
+                android:id="@+id/managecontactmobile"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:background="@color/app_samelinearlayout_bg">
+        </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/app_backbtn_marginleft"
+            android:orientation="horizontal">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/managecontact_editorcheckbox"
+                android:paddingLeft="@dimen/field_info_height"
+                android:checked="true"
+                android:text="@string/managecontact_checkboxtxt"
+                style="@style/MyInvoiceCheckBox"
+                android:visibility="gone" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/check_no_state"
+                android:drawableLeft="@drawable/ic_order_select"
+                android:text="@string/managecontact_checkboxtxt"
+                android:drawablePadding="@dimen/field_info_height"
+                android:visibility="visible"
+                android:textColor="@color/checkbox_managecontact_txtcolor"
+                android:textSize="@dimen/txt_title_size_nor"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:background="@color/app_samelinearlayout_bg">
+        </View>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_login_height"
+        android:layout_marginTop="@dimen/home_gridview_texttwo_marginleft"
+        style="@style/appbottombtn_style"
+        android:id="@+id/managecontact_btn"
+        android:text="@string/mTxt_save_fieldinfo" />
+</LinearLayout>

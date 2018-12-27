@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="@dimen/searchlist_item_evaluation_width"
+        android:layout_height="@dimen/fieldinfo_bt_marfinleft"
+        android:id="@+id/gridviewitem_searchlayout"
+        android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/txt_title_size_info"
+            android:textColor="@color/default_bluebg"
+            android:background="@drawable/choosespecifications_pricetxtselect"
+            android:id="@+id/gridviewitem_fieldsize_txt"
+            android:text="3×3"
+            android:maxLines="2"
+            android:ellipsize="end"
+            />
+
+    </LinearLayout>
+</LinearLayout>

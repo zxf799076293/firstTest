@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tab_gb">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fieldinfo_toleft_addshopcard"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/TableRow_text_marginleft"
+        android:paddingRight="@dimen/TableRow_text_marginleft"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/tab_gb"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/tab_gb"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/text_title_next_padding"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="@dimen/evaluation_marginleft"
+                    android:singleLine="true"
+                    android:background="@color/tab_gb"
+                    android:textColor="@color/title_bar_txtcolor"
+                    android:textSize="@dimen/register_codebtn_txt_size"
+                    android:id="@+id/invoiceinfo_itemname"
+                    android:text="@string/fieldinfo_no_parameter_message"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/text_title_next_padding"
+                    android:gravity="right|center_vertical"
+                    android:singleLine="true"
+                    android:background="@color/tab_gb"
+                    android:textColor="@color/default_redbg"
+                    android:textSize="@dimen/register_codebtn_txt_size"
+                    android:id="@+id/invoiceinfo_itemprice"
+                    android:text="@string/fieldinfo_no_parameter_message"
+                    android:paddingRight="@dimen/evaluation_marginleft"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/tab_gb"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingBottom="@dimen/text_title_next_padding"
+                    android:paddingLeft="@dimen/evaluation_marginleft"
+                    android:gravity="left|center_vertical"
+                    android:singleLine="true"
+                    android:background="@color/tab_gb"
+                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                    android:textSize="@dimen/register_codebtn_txt_size"
+                    android:id="@+id/invoiceinfo_itemstart"
+                    android:text="@string/fieldinfo_no_parameter_message"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:paddingBottom="@dimen/text_title_next_padding"
+                    android:singleLine="true"
+                    android:background="@color/tab_gb"
+                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                    android:textSize="@dimen/register_codebtn_txt_size"
+                    android:id="@+id/invoiceinfo_itemsize"
+                    android:paddingRight="@dimen/evaluation_marginleft"
+                    android:text="@string/fieldinfo_no_parameter_message"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

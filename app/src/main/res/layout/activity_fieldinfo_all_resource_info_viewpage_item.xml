@@ -1,0 +1,1072 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:id="@+id/all_res_info_viewpage_item_scrollview">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:id="@+id/fieldinfo_all_resource_ll">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:layout_marginRight="@dimen/app_backbtn_marginleft">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="摆摊时间："
+                            android:id="@+id/txt_stall_time_text"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:id="@+id/txt_stall_time"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color"
+                            android:text="@string/fieldinfo_no_parameter_message"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:visibility="visible"
+                        android:id="@+id/txt_do_location_layout">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fieldinfo_location_other_text"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:id="@+id/txt_do_location_textview"
+                            android:textColor="@color/register_edit_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:paddingRight="@dimen/app_backbtn_marginleft"
+                            android:id="@+id/txt_doLocation_text"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color"
+                            android:text="@string/fieldinfo_no_parameter_message"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/table2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/txt_number_of_people_layout">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="人  流  量："
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color"
+                            android:singleLine="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:id="@+id/txt_number_of_people"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color"
+                            android:text="@string/fieldinfo_no_parameter_message"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/txt_number_of_people_peak_time_layout">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fieldinfo_number_of_people_peak_time_text"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color"
+                            android:singleLine="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:paddingLeft="@dimen/txt_padding_left"
+                            android:id="@+id/txt_number_of_people_peak_time"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color"
+                            android:text="@string/fieldinfo_no_parameter_message"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/txt_number_of_people_facade_layout">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fieldinfo_number_of_people_facade_text"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color"
+                            android:singleLine="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="@dimen/txt_padding_left"
+                            android:singleLine="true"
+                            android:id="@+id/txt_number_of_people_facade"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color"
+                            android:text="@string/fieldinfo_no_parameter_message"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/total_area_layout">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_field_size_txt"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:id="@+id/txt_total_area"
+                            android:text="@string/fieldinfo_no_parameter_message"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:id="@+id/txt_description_tablerow">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="场地描述："
+                            android:id="@+id/txt_description_text"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:id="@+id/txt_description"
+                            android:text="@string/fieldinfo_no_parameter_message"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:lineSpacingExtra="@dimen/tab_item_img_margintop"
+                            android:textColor="@color/headline_tv_color" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/txt_property_requirement_layout">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_property_requirementtxt"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:id="@+id/txt_property_requirement"
+                            android:text="@string/fieldinfo_no_parameter_message"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/txt_contraband_tablerow">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="禁摆品类："
+                            android:id="@+id/txt_contraband_text"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:id="@+id/txt_contraband"
+                            android:text="@string/fieldinfo_no_parameter_message"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/txt_sales_volume_layout">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_editsales_volumetxt"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="15dp"
+                            android:text="@string/fieldinfo_no_parameter_message"
+                            android:id="@+id/txt_sales_volume"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/txt_park_layout">
+
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="车       位： "
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color"
+                            android:id="@+id/textView5" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="15dp"
+                            android:id="@+id/txt_park"
+                            android:text="@string/fieldinfo_no_parameter_message"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/participation">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_editparticipationtxt"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="15dp"
+                            android:id="@+id/txt_participation"
+                            android:text="@string/fieldinfo_no_parameter_message"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/gender_ratio">
+
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_editgender_ratiotxt"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="15dp"
+                            android:id="@+id/txt_gender_ratio"
+                            android:text="@string/fieldinfo_no_parameter_message"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/age_group">
+
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_editage_grouptxt"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="15dp"
+                            android:id="@+id/txt_age_group"
+                            android:text="@string/fieldinfo_no_parameter_message"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/txt_padding"
+                        android:layout_marginBottom="@dimen/txt_padding"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/txt_consumption_level_ll">
+
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_consumption_leveltxt"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/register_edit_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="15dp"
+                            android:id="@+id/txt_consumption_level"
+                            android:text="@string/fieldinfo_no_parameter_message"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/headline_tv_color" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_linhuievaluation_lauout"
+                    android:paddingBottom="@dimen/field_info_marginleft"
+                    android:orientation="vertical"
+                    android:background="@color/fieldinfo_linhuiceping_bg">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/title_bar_linelayout_height"
+                        android:visibility="visible"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                        android:id="@+id/txt_linhuievaluation_view"
+                        android:background="@color/field_view_bg">
+                    </View>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/field_info_marginleft"
+                        android:orientation="horizontal"
+                        android:background="@color/fieldinfo_linhuiceping_bg">
+                        <TextView
+                            android:layout_width="@dimen/regiter_btnlayout_width"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/default_bluebg"
+                            android:text="@string/fieldinfo_linhi_appraisal"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="@dimen/tab_item_margintop"
+                            android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                            android:id="@+id/txt_linhuievaluation"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:textColor="@color/default_bluebg"
+                            android:text="">
+                        </TextView>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/fieldinfo_all_res_community_info_ll"
+                android:visibility="visible">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:id="@+id/community_name_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/fieldinfo_community_name_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="15dp"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/community_name_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/community_address_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_field_address"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingRight="15dp"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/community_address_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/community_type_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fieldinfo_community_type_text"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingRight="15dp"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/community_type_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/community_grade_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fieldinfo_community_grade_text"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingRight="15dp"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/community_grade_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/community_business_district_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fieldinfo_community_business_district_text"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingRight="15dp"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/community_business_district_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/community_area_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fieldinfo_community_buildignarea_text"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingRight="15dp"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/community_area_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fieldinfo_community_buildyear_ll"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color"
+                        android:text="@string/fieldinfo_community_buildyear_text"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/fieldinfo_community_buildyear_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:orientation="horizontal"
+                    android:id="@+id/fieldinfo_community_occupancy_rate_ll"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color"
+                        android:text="@string/fieldinfo_community_occupancy_rate_text"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:layout_marginRight="@dimen/tab_item_img_margintop"
+                        android:id="@+id/fieldinfo_community_occupancy_rate_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fieldinfo_community_number_of_enterprises_ll"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fieldinfo_number_of_enterprises_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/fieldinfo_community_number_of_enterprises_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fieldinfo_community_rent_ll"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color"
+                        android:text="@string/fieldinfo_community_rent_text"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                        android:layout_marginRight="@dimen/tab_item_img_margintop"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/fieldinfo_community_rent_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fieldinfo_community_number_of_households_ll"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:id="@+id/fieldinfo_community_number_of_households_textview"
+                        android:textColor="@color/register_edit_color"
+                        android:text="@string/fieldinfo_community_number_of_households_text"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                        android:layout_marginRight="@dimen/tab_item_img_margintop"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/fieldinfo_community_number_of_households_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fieldinfo_community_house_price_ll"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color"
+                        android:text="@string/fieldinfo_community_house_price_text"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/tab_item_img_margintop"
+                        android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/fieldinfo_community_house_price_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fieldinfo_community_property_costs_ll"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color"
+                        android:text="@string/fieldinfo_community_property_costs_text"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/fieldinfo_community_property_costs_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/txt_facilities_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_editfacilitiestxt"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/txt_facilities"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/txt_restaurant_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_editrestauranttxt"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/txt_restaurant"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/community_total_number_of_people_layout"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                    android:paddingRight="@dimen/app_backbtn_marginleft">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fieldinfo_community_total_number_of_people_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:id="@+id/community_total_number_of_people_text"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/txt_enterprises_type_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/txt_editenterprises_type_txt"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/txt_enterprises_type"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/txt_supermarket_type_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/txt_supermarket_type_txt"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/txt_supermarket_type"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/txt_shopping_mall_type_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/txt_shopping_mall_type_txt"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/txt_shopping_mall_type"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    android:id="@+id/number_of_commercial_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/fieldinfo_number_of_commercial_tenant_str"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/number_of_commercial_textview"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    android:id="@+id/housing_attribute_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/fieldinfo_housing_attribute_str"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/housing_attribute_textview"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_padding"
+                    android:layout_marginBottom="@dimen/txt_padding"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    android:id="@+id/averagea_ticket_price_layout">
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/fieldinfo_averagea_ticket_price_str"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/register_edit_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/averagea_ticket_price_textivew"
+                        android:text="@string/fieldinfo_no_parameter_message"
+                        android:textSize="@dimen/title_bar_title_txt_size"
+                        android:textColor="@color/headline_tv_color" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

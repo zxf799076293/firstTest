@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:id="@+id/tvName"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/order_type_layoutwidth"
+          android:layout_marginBottom="@dimen/txt_padding_left"
+          android:background="@drawable/activity_baidumap_resourcemap_search_listsize_layout_bg"
+          android:gravity="center"
+          android:textColor="@color/headline_tv_color"
+          android:textSize="@dimen/login_leftright_txt_size"
+          tools:text="@string/module_searchcity_hot_city_str"
+    android:layout_marginRight="@dimen/txt_padding_left" />

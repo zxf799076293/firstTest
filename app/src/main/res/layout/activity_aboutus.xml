@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/aboutus_all_layout">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:id="@+id/about_title_layout">
+        <include
+            layout="@layout/linhui_business_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/title_bar_linelayout_height"
+            android:id="@+id/about_line_view"
+            android:background="@color/top_title_line_color"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/advertising_tffs_width"
+        android:orientation="vertical"
+        android:id="@+id/about_facilitator_ll"
+        android:visibility="gone"
+        android:background="@drawable/fragment_home_navbar_bg">
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.github.lzyzsd.jsbridge.BridgeWebView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/about_WebView">
+        </com.github.lzyzsd.jsbridge.BridgeWebView>
+        <ImageButton
+            android:layout_width="@dimen/order_title_height"
+            android:layout_height="@dimen/order_title_height"
+            android:layout_marginTop="@dimen/TableRow_img_width_height"
+            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+            android:id="@+id/about_notices_back_imgbtn"
+            android:src="@drawable/ic_back_two_four"
+            android:visibility="gone"
+            android:background="@null"/>
+    </RelativeLayout>
+</LinearLayout>

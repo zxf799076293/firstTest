@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#98000000">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white">
+            <TextView
+                android:id="@+id/btn_confirm"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:paddingRight="@dimen/app_backbtn_marginleft"
+                android:layout_width="@dimen/fieldinfo_toleft_addshopcard"
+                android:layout_height="@dimen/user_info_account_width"
+                android:gravity="right|center_vertical"
+                android:layout_gravity="right"
+                android:text="确定"
+                android:textSize="@dimen/login_leftright_txt_size"
+                android:background="@color/white"
+                android:textColor="@color/top_title_center_txt_color" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_province"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                </kankan.wheel.widget.WheelView>
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                </kankan.wheel.widget.WheelView>
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_district"
+                    android:visibility="visible"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                </kankan.wheel.widget.WheelView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

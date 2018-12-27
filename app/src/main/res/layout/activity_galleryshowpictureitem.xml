@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:background="#000000"
+        android:id="@+id/showpicture_hiderelativelayout"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            >
+            <com.linhuiba.business.fieldview.Field_NewGalleryView
+                android:id="@+id/addfield_gallery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:visibility="visible"
+                android:spacing="1dp">
+            </com.linhuiba.business.fieldview.Field_NewGalleryView>
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:layout_alignParentTop="true"
+            android:id="@+id/gallerytitle"
+            android:background="#903e2f2f">
+            <TextView
+                android:layout_width="@dimen/order_title_height"
+                android:layout_height="match_parent"
+                android:id="@+id/showpicture_back"
+                android:drawableLeft="@drawable/addfieldthree_backimg"
+                android:paddingLeft="@dimen/userinfo_layout_margin"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/showpicture_back"
+                android:id="@+id/showpicture_sizetxt"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txt_title_size_info"
+                android:layout_centerVertical="true"
+                android:text=""/>
+            <ImageButton
+                android:layout_width="@dimen/field_info_width"
+                android:layout_height="match_parent"
+                android:id="@+id/showpicture_deletebtn"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:visibility="gone"
+                android:src="@drawable/delete_img"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

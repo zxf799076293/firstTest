@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/vertical_view_group_width"
+    android:orientation="vertical"
+    android:id="@+id/all_calendarlayout"
+    android:gravity="center">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/order_title_height">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:gravity="center">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/advertising_margintop"
+                            android:orientation="vertical">
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_centerInParent="true"
+                                    android:id="@+id/choosepecifications_tvtext_layout">
+                                        <TextView
+                                            android:id="@+id/choosepecifications_tvtext"
+                                            android:layout_width="@dimen/tab_item_img_height"
+                                            android:layout_height="@dimen/tab_item_img_height"
+                                            android:layout_centerInParent="true"
+                                            android:gravity="center"
+                                            android:layout_centerHorizontal="true"
+                                            android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                                            android:textColor="@color/title_bar_txtcolor"
+                                            android:textStyle="bold"
+                                            android:text="" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/tab_item_img_height"
+                                    android:orientation="vertical"
+                                    android:id="@+id/choosepecifications_tvtext_item_right_layout"
+                                    android:layout_toRightOf="@+id/choosepecifications_tvtext_layout"
+                                    android:layout_centerInParent="true"
+                                    android:background="@color/white">
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/tab_item_img_height"
+                                    android:orientation="vertical"
+                                    android:id="@+id/choosepecifications_tvtext_item_left_layout"
+                                    android:layout_toLeftOf="@+id/choosepecifications_tvtext_layout"
+                                    android:layout_centerInParent="true"
+                                    android:background="@color/white">
+
+                                </LinearLayout>
+                                <ImageView
+                                    android:layout_width="@dimen/title_bar_back_marginBottom"
+                                    android:layout_height="@dimen/title_bar_back_marginBottom"
+                                    android:src="@drawable/ic_helpcenter"
+                                    android:id="@+id/choosepecifications_weather_img"
+                                    android:layout_toRightOf="@+id/choosepecifications_tvtext_layout" />
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center">
+                                <TextView
+                                    android:id="@+id/choosepecifications_price_tvtext"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/tab_item_img_margintop"
+                                    android:gravity="center_horizontal|top"
+                                    android:textColor="@color/register_edit_color"
+                                    android:singleLine="true"
+                                    android:textSize="@dimen/fieldinfo_certification_textsize"
+                                    android:text="" />
+
+                        </LinearLayout>
+                </LinearLayout>
+        </RelativeLayout>
+</LinearLayout>

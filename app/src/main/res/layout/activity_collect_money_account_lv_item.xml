@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_linearlayout_bg">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/childaccount_item_height"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+        android:paddingLeft="@dimen/app_backbtn_marginleft"
+        android:paddingRight="@dimen/app_backbtn_marginleft"
+        android:background="@drawable/activity_baidumap_resourcemap_search_listsize_layout_bg">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/tab_item_img_height">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headline_tv_color"
+                android:textSize="@dimen/text_title_size_next"
+                android:textStyle="bold"
+                android:text="账号类型:       "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headline_tv_color"
+                android:textSize="@dimen/text_title_size_next"
+                android:textStyle="bold"
+                android:text="账号类型"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/tab_item_img_margintop">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/register_edit_color"
+                android:textSize="@dimen/login_leftright_txt_size"
+                android:text="收款账号:       "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/register_edit_color"
+                android:textSize="@dimen/login_leftright_txt_size"
+                android:text="收款账号"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:layout_marginTop="@dimen/app_backbtn_marginleft"
+            android:background="@color/new_viewbg">
+        </View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/txt_padding"
+                android:checked="false"
+                android:textSize="@dimen/login_leftright_txt_size"
+                android:textColor="@color/register_edit_color"
+                android:text="@string/collect_money_account_set_default_str"
+                style="@style/InvoiceInfoContentCheckboxStyle" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical|right">
+                <Button
+                    android:layout_width="@dimen/TableLayout_width"
+                    android:layout_height="@dimen/advertising_tffs_width"
+                    android:layout_marginRight="@dimen/field_list_item_label_samll"
+                    android:drawableLeft="@drawable/invoideinfo_editoraddress_drawablebg"
+                    android:drawablePadding="@dimen/txt_padding"
+                    android:textColor="@drawable/invoidinfo_deleteaddress_txtbg"
+                    android:textSize="@dimen/txt_title_size_info"
+                    android:text="@string/invoiceinfo_editor_address_txt"
+                    android:id="@+id/managecontact_editor"
+                    android:background="@null"
+                    />
+                <Button
+                    android:layout_width="@dimen/TableLayout_width"
+                    android:layout_height="@dimen/advertising_tffs_width"
+                    android:id="@+id/managecontact_deletetxt"
+                    android:textColor="@drawable/invoidinfo_deleteaddress_txtbg"
+                    android:textSize="@dimen/txt_title_size_info"
+                    android:drawableLeft="@drawable/invoideinfo_deleteaddress_drawablebg"
+                    android:drawablePadding="@dimen/txt_padding"
+                    android:text="@string/invoiceinfo_delete_address_txt"
+                    android:background="@null" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

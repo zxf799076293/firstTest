@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/edittext_height"
+        android:background="@color/white">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/area_choose_img"
+            android:id="@+id/search_sort_item_img"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/invoiceinfoentry_marginleft"
+            android:layout_alignParentRight="true"
+            />
+        <TextView
+            android:id="@+id/search_sort_item_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="left"
+            android:layout_toLeftOf="@+id/area_choose_img"
+            android:layout_marginRight="@dimen/app_backbtn_marginleft"
+            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+            android:text=""
+            android:singleLine="true"
+            android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+            android:textSize="@dimen/login_leftright_txt_size"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:background="@color/new_viewbg"
+            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+            android:layout_marginRight="@dimen/app_backbtn_marginleft"
+            android:layout_alignParentBottom="true">
+        </View>
+    </RelativeLayout>
+</LinearLayout>

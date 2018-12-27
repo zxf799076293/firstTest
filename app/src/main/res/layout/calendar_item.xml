@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/home_Popular_marginleft"
+    android:background="@color/calendar_bg" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_Popular_marginleft">
+        <TextView
+            android:id="@+id/tvtext"
+            android:layout_width="@dimen/TableRow_img_width_height"
+            android:layout_height="@dimen/TableRow_img_width_height"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/TableRow_text_marginleft"
+            android:textSize="@dimen/txt_title_size_nor"
+            android:textColor="@color/title_bar_txtcolor"
+            android:text=""
+            android:gravity="center" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/imagebutton_linearlayout"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tvtext"
+            android:layout_marginTop="@dimen/TableRow_text_marginleft"
+            android:visibility="visible">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               >
+                <ImageButton
+                    android:layout_width="@dimen/txt_padding"
+                    android:layout_height="@dimen/txt_padding"
+                    android:background="@drawable/textview_bg"
+                    android:visibility="gone"
+                    android:id="@+id/fieldicon"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/advertising_margintop"
+                >
+                <ImageButton
+                    android:layout_width="@dimen/txt_padding"
+                    android:layout_height="@dimen/txt_padding"
+                    android:background="@drawable/textview_bg"
+                    android:id="@+id/activityicon"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/advertising_margintop"
+              >
+                <ImageButton
+                    android:layout_width="@dimen/txt_padding"
+                    android:layout_height="@dimen/txt_padding"
+                    android:background="@drawable/textview_bg"
+                    android:id="@+id/advertisingicon"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

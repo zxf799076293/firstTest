@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="fill_parent">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#55000000">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bottom_hint_layout"
+                    android:background="@color/white"
+                    android:visibility="visible">
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/title_bar_linelayout_height"
+                        android:id="@+id/search_list_view"
+                        android:background="@color/app_samelinearlayout_bg"
+                        android:layout_marginLeft="@dimen/paddingleft"
+                        />
+                    <TextView
+                        android:layout_marginLeft="@dimen/home_line_height"
+                        android:id="@+id/lsearch_ist_text_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:text="价格区间 （元）"
+                        android:textColor="@color/home_serach_typetxt"
+                        android:textSize="@dimen/register_codebtn_txt_size"/>
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lsearch_ist_text_area"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:id="@+id/lsearch_ist_price_layout">
+                        <EditText
+                            android:layout_width="@dimen/searchlist_item_button_edit_width"
+                            android:layout_height="@dimen/regiter_btnlayout_height"
+                            android:layout_marginLeft="@dimen/home_Popular_marginleft"
+                            android:id="@+id/searchlist_bottomedit_firstprice"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:numeric="integer"
+                            android:maxLength="7"
+                            android:text=""
+                            android:textSize="@dimen/login_leftright_txt_size"
+                            android:textColor="@color/home_advertising_text_color"
+                            android:background="@color/home_searchbg"
+                            />
+                        <View
+                            android:layout_width="@dimen/searchlist_item_txtont_marginright"
+                            android:layout_height="@dimen/title_bar_linelayout_height"
+                            android:layout_toRightOf="@+id/searchlist_bottomedit_firstprice"
+                            android:layout_marginLeft="@dimen/TableRow_text_marginleft"
+                            android:id="@+id/search_price_view"
+                            android:background="@color/app_samelinearlayout_bg"
+                            android:layout_centerVertical="true"/>
+                        <EditText
+                            android:layout_width="@dimen/searchlist_item_button_edit_width"
+                            android:layout_height="@dimen/regiter_btnlayout_height"
+                            android:layout_toRightOf="@+id/search_price_view"
+                            android:layout_marginLeft="@dimen/TableRow_text_marginleft"
+                            android:id="@+id/searchlist_bottomedit_endprice"
+                            android:textSize="@dimen/login_leftright_txt_size"
+                            android:textColor="@color/home_advertising_text_color"
+                            android:background="@color/home_searchbg"
+                            android:gravity="center"
+                            android:numeric="integer"
+                            android:singleLine="true"
+                            android:maxLength="7"
+                            android:text=""
+                            />
+                    </RelativeLayout>
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/maintab_width"
+                        android:id="@+id/searchlist_item_bottom_btn"
+                        android:layout_below="@+id/lsearch_ist_price_layout"
+                        android:background="@color/register_codetxt_color"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/btnregister_txt_size"
+                        android:text="@string/confirm"
+                        android:layout_marginTop="@dimen/home_gridview_texttwo_marginleft"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

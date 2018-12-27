@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_layout_width_height"
+        android:orientation="horizontal"
+        android:background="@color/wheelview_textview_bg">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/fieldinfo_pricelist_grid_item_name_text"
+            android:paddingLeft="@dimen/app_backbtn_marginleft"
+            android:gravity="center_vertical|left"
+            android:singleLine="true"
+            android:textColor="@color/top_title_center_txt_color"
+            android:textSize="@dimen/register_codebtn_txt_size"
+            android:text="@string/fieldinfo_no_parameter_message"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/fieldinfo_pricelist_grid_item_price_text"
+                android:layout_marginRight="@dimen/fieldinfo_map_price_text_margintop"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/default_redbg"
+                android:textSize="@dimen/register_codebtn_txt_size"
+                android:text="1234567890"/>
+            <TextView
+                android:layout_width="@dimen/btn_margin_width"
+                android:layout_height="@dimen/btn_margin_width"
+                android:background="@drawable/loginbtn_bg"
+                android:visibility="visible"
+                android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="订"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                android:id="@+id/fieldinfo_pricelist_grid_item_btn_text"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/txt_padding_line"
+        android:background="@color/new_viewbg"
+        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+        android:id="@+id/fieldinfo_pricelist_grid_item_view">
+    </View>
+</LinearLayout>

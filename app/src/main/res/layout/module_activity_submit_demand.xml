@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:id="@+id/submit_demand_all_ll">
+        <include
+            layout="@layout/linhui_business_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:layout_alignParentTop="true"/>
+        <View
+            style="@style/DefaultLongViewStyle">
+        </View>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/login_leftright_txt_size"
+            android:textColor="@color/fieldinfo_reward_tv_color"
+            android:text="@string/module_submit_demand_reind"
+            android:padding="@dimen/app_backbtn_marginleft"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_left"
+            android:background="@color/app_linearlayout_bg">
+        </View>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/app_linearlayout_bg"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/submit_demand_btn_ll">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/txt_padding_line"
+            android:background="@color/new_viewbg">
+        </View>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/maintab_width"
+            android:id="@+id/submit_demand_btn"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/txt_padding_left"
+            android:textSize="@dimen/title_bar_title_center_txt_size"
+            android:text="@string/fieldinfo_diogle_btn_text"
+            android:background="@drawable/loginbtn_bg"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_below="@+id/submit_demand_all_ll"
+        android:layout_above="@+id/submit_demand_btn_ll">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="true"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/app_linearlayout_bg"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/add_activity_layout"
+                    style="@style/AddfieldLlStyle"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/applyforrelease_productname_txt" />
+                            <EditText
+                                android:id="@+id/submit_demand_product_name_et"
+                                style="@style/AddfieldEditStyle"
+                                android:hint="@string/module_submit_demand_product_name_hint"
+                                android:imeOptions="actionNext"
+                                android:paddingRight="@dimen/myself_order_img_width"
+                                android:singleLine="true"
+                                android:textColorHint="@color/divider_list" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:orientation="vertical">
+                        <View style="@style/AddfieldViewStyle">
+                        </View>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/myselfinfo_company_demand_area_text" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5" />
+
+                            <EditText
+                                style="@style/AddfieldEditStyle"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:hint="@string/module_submit_demand_min_area_hint"
+                                android:imeOptions="actionNext"
+                                android:paddingRight="@dimen/app_backbtn_marginleft"
+                                android:singleLine="true"
+                                android:maxLength="20"
+                                android:gravity="center_vertical|right"
+                                android:numeric="decimal"
+                                android:textColorHint="@color/divider_list"
+                                android:id="@+id/submit_demand_min_area_et"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="一"
+                                android:textColor="@color/headline_tv_color" />
+
+                            <EditText
+                                style="@style/AddfieldEditStyle"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:id="@+id/submit_demand_max_area_et"
+                                android:hint="@string/module_submit_demand_max_area_hint"
+                                android:imeOptions="actionNext"
+                                android:paddingRight="@dimen/app_backbtn_marginleft"
+                                android:singleLine="true"
+                                android:maxLength="20"
+                                android:gravity="center_vertical"
+                                android:numeric="decimal"
+                                android:textColorHint="@color/divider_list" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:orientation="vertical">
+                        <View style="@style/AddfieldViewStyle">
+                        </View>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/module_submit_demand_budget" />
+                            <EditText
+                                style="@style/AddfieldEditStyle"
+                                android:layout_weight="1"
+                                android:hint="@string/module_submit_demand_budget_hint"
+                                android:imeOptions="actionNext"
+                                android:paddingRight="0dp"
+                                android:singleLine="true"
+                                android:maxLength="20"
+                                android:numeric="decimal"
+                                android:id="@+id/submit_demand_price_et"
+                                android:textColorHint="@color/divider_list" />
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/module_submit_demand_budget_price_unit"
+                                android:drawableRight="@null"
+                                android:layout_marginLeft="@dimen/tab_item_margintop"
+                                android:layout_marginRight="@dimen/app_backbtn_marginleft"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:orientation="vertical">
+                        <View style="@style/AddfieldViewStyle">
+                        </View>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/module_submit_demand_time" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.2" />
+                            <TextView
+                                android:id="@+id/submit_demand_start_et"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:paddingRight="@dimen/app_backbtn_marginleft"
+                                android:gravity="center_vertical|right"
+                                android:layout_marginRight="@dimen/maintab_width_margintop"
+                                android:hint="@string/module_submit_demand_start_time_hint"
+                                android:textColor="@color/headline_tv_color"
+                                android:textColorHint="@color/divider_list"
+                                android:textSize="@dimen/fieldinfo_diogle_time_textsize" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="一"
+                                android:textColor="@color/headline_tv_color" />
+
+                            <TextView
+                                android:id="@+id/submit_demand_end_et"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:paddingRight="@dimen/app_backbtn_marginleft"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:paddingLeft="@dimen/app_backbtn_marginleft"
+                                android:gravity="center_vertical"
+                                android:hint="@string/module_submit_demand_deadline_hint"
+                                android:textColor="@color/headline_tv_color"
+                                android:textColorHint="@color/divider_list"
+                                android:textSize="@dimen/fieldinfo_diogle_time_textsize" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:orientation="vertical">
+
+                        <View style="@style/AddfieldViewStyle"></View>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:id="@+id/addfield_activity_type_ll">
+
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/applyforrelease_contect_txt" />
+                            <EditText
+                                style="@style/AddfieldEditStyle"
+                                android:hint="@string/applyforrelease_contect_hinttxt"
+                                android:id="@+id/submit_demand_name_et"
+                                android:imeOptions="actionNext"
+                                android:paddingRight="@dimen/myself_order_img_width"
+                                android:singleLine="true"
+                                android:textColorHint="@color/divider_list" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/AddfieldLlStyle"
+                        android:orientation="vertical">
+                        <View style="@style/AddfieldViewStyle">
+                        </View>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:id="@+id/activityinfo_description_ll">
+                            <TextView
+                                style="@style/AddfieldTvStyle"
+                                android:text="@string/myselfinfo_phonenum_txt" />
+                            <EditText
+                                style="@style/AddfieldEditStyle"
+                                android:hint="@string/module_submit_demand_mobile_hint"
+                                android:imeOptions="actionDone"
+                                android:maxLength="14"
+                                android:id="@+id/submit_demand_mobile_et"
+                                android:inputType="phone"
+                                android:paddingRight="@dimen/myself_order_img_width"
+                                android:singleLine="true"
+                                android:textColorHint="@color/divider_list" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

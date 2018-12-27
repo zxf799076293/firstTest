@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:background="@drawable/loadmorelistview_bg"
+    android:descendantFocusability="blocksDescendants">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/item_field_layout_height"
+      >
+        <ImageView
+            android:layout_width="@dimen/field_list_item_img_height"
+            android:layout_height="@dimen/field_list_item_img_height"
+            android:id="@+id/imageView"
+            android:layout_marginLeft="@dimen/field_info_txt_marginleft"
+            android:layout_marginTop="@dimen/field_info_txt_marginleft"
+            android:layout_marginBottom="@dimen/field_info_txt_marginleft"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/field_title_value"
+            android:textSize="@dimen/btn_title_size"
+            android:layout_marginTop="@dimen/field_list_item_label_samll"
+            android:layout_marginLeft="@dimen/field_list_item_label_samll"
+            android:textColor="@color/color_release_second"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_marginRight="@dimen/add_lab_width"
+            android:textIsSelectable="false"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="rrrr"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginLeft="@dimen/field_list_item_label_samll"
+            android:layout_marginTop="@dimen/field_info_width"
+            android:layout_toRightOf="@+id/imageView"
+            android:id="@+id/field_price_value"
+            android:textSize="@dimen/txt_title_size_info"
+            android:layout_marginRight="@dimen/add_lab_width"
+            android:textColor="@color/default_redbg"
+            android:text=""
+         />
+
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/field_address_value"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_marginLeft="@dimen/field_list_item_label_samll"
+            android:singleLine="true"
+            android:textSize="@dimen/txt_title_size_info"
+            android:layout_marginTop="@dimen/user_info_linearlayout_height"
+            android:textColor="@color/color_release_first"
+            android:layout_marginRight="@dimen/add_lab_width"
+            android:text=""
+            />
+
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/field_mobile_value"
+            android:layout_marginLeft="@dimen/field_list_item_label_samll"
+            android:layout_toRightOf="@+id/imageView"
+            android:textSize="@dimen/txt_title_size_info"
+            android:textColor="@color/color_release_first"
+            android:layout_marginRight="@dimen/add_lab_width"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/txt_padding_left"
+            android:text=""
+            android:visibility="gone"
+            />
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/image_margin"
+            android:id="@+id/field_shelves"
+            android:visibility="gone"
+            android:text="@string/field_subtract"
+            android:textColor="@color/default_bluebg"
+            android:gravity="center"
+            android:background="@drawable/choosespecifications_pricetxtselect"
+            android:layout_marginRight="@dimen/field_info_txt_marginleft"
+            android:focusable="false"/>
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="28dp"
+            android:id="@+id/field_added"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/image_margin"
+            android:text="@string/field_add"
+            android:textColor="@color/default_bluebg"
+            android:background="@drawable/choosespecifications_pricetxtselect"
+            android:layout_marginRight="@dimen/field_info_txt_marginleft"
+            android:focusable="false"/>
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="28dp"
+            android:id="@+id/field_editorbtn"
+            android:gravity="center"
+            android:visibility="visible"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/invoiceinfo_editor_address_txt"
+            android:textColor="@color/default_bluebg"
+            android:background="@drawable/choosespecifications_pricetxtselect"
+            android:layout_marginRight="@dimen/field_info_txt_marginleft"
+            android:layout_marginTop="@dimen/image_margin"
+            android:focusable="false"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

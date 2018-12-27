@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="64dp" >
+
+    <ImageView
+        android:id="@+id/notification_large_icon"
+        android:layout_width="@dimen/order_type_layoutwidth"
+        android:layout_height="@dimen/order_type_layoutwidth"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/title_bar_back_marginLeft"
+        android:scaleType="fitXY"
+        android:src="@drawable/sharelogo" />
+
+    <TextView
+        android:id="@+id/notification_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/field_list_item_label_samll"
+        android:layout_marginTop="@dimen/advertising_margintop"
+        android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+        android:textColor="@color/top_title_center_txt_color"
+        android:layout_toRightOf="@+id/notification_large_icon"
+        android:text="Title" />
+
+    <TextView
+        android:id="@+id/notification_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/notification_title"
+        android:textSize="@dimen/field_info_receipt_size"
+        android:layout_marginLeft="@dimen/field_list_item_label_samll"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:layout_marginTop="@dimen/home_activity_iten_viewwidth"
+        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+        android:layout_toRightOf="@+id/notification_large_icon"
+        android:layout_marginBottom="@dimen/tab_item_margintop"
+        android:text="" />
+    <ImageView
+        android:id="@+id/notification_small_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/sharelogo" />
+
+</RelativeLayout>

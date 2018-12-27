@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_linearlayout_bg">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fieldinfo_fieldtitle_height"
+        android:paddingLeft="@dimen/myself_order_img_width"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/invoice_info_item_content_tv"
+                android:textColor="@color/app_big_headline_tv_color"
+                android:textSize="@dimen/login_leftright_txt_size"
+                android:text="@string/orderconfirm_dedicated_invoive_text"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="@color/register_edit_color"
+                android:textSize="@dimen/txt_title_size_info"
+                android:text=""
+                android:id="@+id/invoice_info_item_tax_point_tv"/>
+
+        </LinearLayout>
+        <CheckBox
+            android:layout_width="@dimen/home_line_height"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/myself_order_img_width"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="false"
+            android:id="@+id/invoice_info_item_checkbox"
+            android:gravity="center"
+            android:checked="false"
+            style="@style/InvoiceInfoContentCheckboxStyle"/>
+    </RelativeLayout>
+
+</LinearLayout>

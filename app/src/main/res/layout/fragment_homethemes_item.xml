@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingLeft="@dimen/app_backbtn_marginleft"
+    android:paddingRight="@dimen/app_backbtn_marginleft"
+    android:paddingTop="@dimen/txt_padding"
+    android:paddingBottom="@dimen/txt_padding">
+    <RelativeLayout
+        android:layout_width="@dimen/diogle_view_btn_height"
+        android:layout_height="@dimen/diogle_view_btn_height"
+        android:background="@color/white"
+        android:id="@+id/home_themes_item_img_ll">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/home_themes_item_img"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:id="@+id/home_themes_item_tv_ll"
+            android:background="@color/home_item_layoutbg">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/home_area_drop_marginleft"
+                android:paddingRight="@dimen/home_area_drop_marginleft"
+                android:id="@+id/home_themes_item_tv"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:text=""
+                android:textSize="@dimen/login_leftright_txt_size"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

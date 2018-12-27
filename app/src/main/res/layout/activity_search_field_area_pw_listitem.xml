@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="@dimen/user_info_linearlayout_height"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@color/transparent"
+        android:id="@+id/search_field_area_layout">
+        <TextView
+            android:id="@+id/list_text_area"
+            android:layout_width="@dimen/user_info_linearlayout_height"
+            android:layout_height="@dimen/order_title_height"
+            android:gravity="center"
+            android:text=""
+            android:singleLine="true"
+            android:textColor="@color/headline_tv_color"
+            android:textSize="@dimen/fieldinfo_diogle_time_textsize"/>
+        <TextView
+            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+            android:id="@+id/map_search_list_tv"
+            android:layout_width="@dimen/user_info_linearlayout_height"
+            android:layout_height="@dimen/fieldinfo_bt_marfinleft"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:text=""
+            android:singleLine="true"
+            android:textColor="@color/headline_tv_color"
+            android:textSize="@dimen/fieldinfo_diogle_time_textsize"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:id="@+id/list_view"
+            android:background="@color/new_viewbg"
+            android:layout_marginLeft="@dimen/txt_padding_left"
+            android:layout_marginRight="@dimen/txt_padding_left" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:id="@+id/list_view_last"
+            android:background="@color/new_viewbg" />
+    </LinearLayout>
+</LinearLayout>

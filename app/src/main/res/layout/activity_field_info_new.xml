@@ -1,0 +1,2256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/all_relative_layout"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/account_title_bar_height"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:id="@+id/fieldinfo_bottom_ll"
+            android:visibility="gone">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/txt_padding_line"
+                android:background="@color/new_viewbg">
+            </View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/groupbooking_confirm_order_btn_bg"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/title_bar_title_txt_size"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/fieldinfo_no_sell_res_reserve_tv"
+                    android:text="@string/module_fieldinfo_no_sell_res_reserve"/>
+                <LinearLayout
+                    android:layout_width="@dimen/order_title_height"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:id="@+id/module_fieldinfo_focuson_ll">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/module_fieldinfo_focuson_imav"
+                        android:background="@drawable/popup_ic_collection"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/fieldinfo_chair_textsize"
+                        android:text="@string/module_fieldinfo_focuson"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="@dimen/searchlist_item_evaluation_width"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:id="@+id/fieldinfo_service_tv">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_customer_service_thr_nine"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/fieldinfo_chair_textsize"
+                        android:text="@string/module_fieldinfo_service"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/field_list_item_label"
+                    android:layout_weight="1"
+                    android:id="@+id/fieldinfo_mobile_tv"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/register_codebtn_txt_size"
+                    android:textStyle="bold"
+                    android:text="@string/module_fieldinfo_call_phone"
+                    android:background="@drawable/module_community_info_service_bg" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/field_list_item_label"
+                    android:layout_weight="1"
+                    android:id="@+id/fieldinfo_counselor_tv"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/register_codebtn_txt_size"
+                    android:textStyle="bold"
+                    android:text="@string/module_fieldinfo_counselor"
+                    android:background="@drawable/module_community_info_phone_bg"
+                    android:layout_marginLeft="@dimen/txt_padding_left"
+                    android:layout_marginRight="@dimen/app_backbtn_marginleft"/>
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/fieldinfo_bottom_ll"
+            android:visibility="visible"
+            android:id="@+id/fieldinfo_view_visibility">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:descendantFocusability="blocksDescendants"
+                >
+                <com.linhuiba.linhuifield.fieldview.Field_MyScrollview
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true"
+                    android:scrollbars="none"
+                    android:id="@+id/scrollview"
+                    android:background="@color/white">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/fieldinfo_scroll_ll"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:id="@+id/fieldinfo_banner_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/white"
+                                    android:orientation="vertical">
+
+                                    <com.youth.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
+                                        android:id="@+id/fieldinfo_banner"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/map_title_all_height"
+                                        android:background="@drawable/ic_no_pic_big"
+                                        app:indicator_drawable_selected="@drawable/fragment_home_banner_round_selected_bg"
+                                        app:indicator_drawable_unselected="@drawable/fragment_home_banner_round_unselected"
+                                        app:indicator_height="@dimen/searchlist_item_txt_margintop"
+                                        app:indicator_width="@dimen/searchlist_item_txt_margintop"></com.youth.banner.Banner>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_alignBottom="@+id/fieldinfo_banner_ll"
+                                    android:layout_alignRight="@+id/fieldinfo_banner_ll"
+                                    android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                                    android:layout_marginRight="@dimen/title_bar_back_marginLeft"
+                                    android:paddingLeft="@dimen/txt_margin"
+                                    android:paddingRight="@dimen/txt_margin"
+                                    android:background="@drawable/module_fieldinfo_look_pic_size_bg">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:text="1"
+                                        android:id="@+id/fieldinfo_banner_num_tv"
+                                        android:textSize="@dimen/fieldinfo_diogle_time_textsize"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="/1"
+                                        android:textColor="@color/white"
+                                        android:id="@+id/fieldinfo_banner_size_tv"
+                                        android:textSize="@dimen/field_info_receipt_size"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignBottom="@+id/fieldinfo_banner_ll"
+                                    android:layout_alignLeft="@+id/fieldinfo_banner_ll"
+                                    android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                                    android:layout_marginLeft="@dimen/title_bar_back_marginLeft"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/txt_fieldtitle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="@dimen/field_info_marginleft"
+                                        android:background="@drawable/activity_searchlist_item_fieldtype_tv_bg"
+                                        android:gravity="center"
+                                        android:paddingLeft="@dimen/tab_item_img_margintop"
+                                        android:paddingRight="@dimen/tab_item_img_margintop"
+                                        android:text="小区"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/tab_txt_size" />
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:id="@+id/activityinfo_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                android:background="@color/module_fieldinfo_activity_time_color"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/app_backbtn_marginleft"
+                                android:visibility="gone">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_xianshi_thr_nine" />
+                                <TextView
+                                    android:id="@+id/activityinfo_start_date_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/txt_margin"
+                                    android:layout_gravity="center_vertical"
+                                    android:text="@string/fieldinfo_no_parameter_message"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/login_leftright_txt_size" />
+
+                                <TextView
+                                    android:id="@+id/activityinfo_date_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                                    android:text="@string/fieldinfo_activity_time_middle_text"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/login_leftright_txt_size" />
+
+                                <TextView
+                                    android:id="@+id/activityinfo_end_date_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                                    android:text="@string/fieldinfo_no_parameter_message"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/login_leftright_txt_size" />
+
+                            </LinearLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                                android:layout_marginTop="@dimen/title_bar_back_marginLeft">
+
+                                <TextView
+                                    android:id="@+id/txt_field_description"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                    android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                    android:ellipsize="end"
+                                    android:maxLines="2"
+                                    android:text=""
+                                    android:textColor="@color/headline_tv_color"
+                                    android:textSize="@dimen/txt_title_size"
+                                    android:textStyle="bold">
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/fieldinfo_phy_size_tv"
+                                    android:layout_width="@dimen/findresource_btnmargintop"
+                                    android:layout_height="@dimen/tab_item_img_height"
+                                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                    android:layout_marginTop="@dimen/advertising_margintop"
+                                    android:background="@drawable/module_fieldinfo_phy_size_bg"
+                                    android:gravity="center"
+                                    android:text="@string/module_fieldinfo_phy_size"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/register_codebtn_txt_size"
+                                    android:visibility="visible" />
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:id="@+id/fieldinfo_age_label_ll"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/app_backbtn_marginleft"
+                                android:visibility="gone">
+
+                                <TextView
+                                    android:id="@+id/fieldinfo_level_tv0"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/myself_margintop"
+                                    android:layout_marginRight="@dimen/txt_padding_left"
+                                    android:background="@drawable/module_community_info_label_bg"
+                                    android:ellipsize="end"
+                                    android:gravity="center"
+                                    android:maxEms="7"
+                                    android:maxLines="1"
+                                    android:padding="@dimen/tab_item_margintop"
+                                    android:text="青年人居多"
+                                    android:textColor="@color/fieldinfo_reward_tv_color"
+                                    android:textSize="@dimen/fieldinfo_chair_textsize"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/fieldinfo_level_tv1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/myself_margintop"
+                                    android:layout_marginRight="@dimen/txt_padding_left"
+                                    android:background="@drawable/module_community_info_label_bg"
+                                    android:ellipsize="end"
+                                    android:gravity="center"
+                                    android:maxEms="7"
+                                    android:maxLines="1"
+                                    android:padding="@dimen/tab_item_margintop"
+                                    android:text=""
+                                    android:textColor="@color/fieldinfo_reward_tv_color"
+                                    android:textSize="@dimen/fieldinfo_chair_textsize"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/fieldinfo_level_tv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/myself_margintop"
+                                    android:layout_marginRight="@dimen/txt_padding_left"
+                                    android:background="@drawable/module_community_info_label_bg"
+                                    android:ellipsize="end"
+                                    android:gravity="center"
+                                    android:maxEms="7"
+                                    android:maxLines="1"
+                                    android:padding="@dimen/tab_item_margintop"
+                                    android:text=""
+                                    android:textColor="@color/fieldinfo_reward_tv_color"
+                                    android:textSize="@dimen/fieldinfo_chair_textsize"
+                                    android:visibility="gone" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/txt_padding_line"
+                                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                android:background="@color/new_viewbg">
+                            </View>
+
+                            <LinearLayout
+                                android:id="@+id/fieldinfo_address_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/fieldinfo_xuanchuan_width"
+                                android:background="@drawable/image_ditu_three_two"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical"
+                                    android:paddingLeft="@dimen/app_backbtn_marginleft">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:id="@+id/fieldinfo_distance_location_ll"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal"
+                                            android:visibility="gone">
+
+                                            <TextView
+                                                android:id="@+id/fieldinfo_distance_location_tv"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginRight="@dimen/searchlist_item_txt_margintop"
+                                                android:drawableLeft="@drawable/ic_dizhi_three_six_one"
+                                                android:drawablePadding="@dimen/tab_item_img_margintop"
+                                                android:textColor="@color/headline_tv_color"
+                                                android:textSize="@dimen/txt_title_size_info" />
+
+                                            <View
+                                                android:layout_width="@dimen/txt_padding_line"
+                                                android:layout_height="@dimen/txt_padding_left"
+                                                android:layout_marginRight="@dimen/searchlist_item_txt_margintop"
+                                                android:background="@color/register_hinttext_color"></View>
+                                        </LinearLayout>
+
+                                        <TextView
+                                            android:id="@+id/txt_address"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:text=""
+                                            android:textColor="@color/headline_tv_color"
+                                            android:textSize="@dimen/txt_title_size_info" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/txt_padding"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:id="@+id/fieldinfo_location_indoor_tv"
+                                            android:layout_width="@dimen/btn_margin_width"
+                                            android:layout_height="@dimen/field_info_marginleft"
+                                            android:layout_marginRight="@dimen/txt_padding"
+                                            android:background="@drawable/activity_resource_map_nearby_tv_bg"
+                                            android:gravity="center"
+                                            android:textColor="@color/fieldinfo_specifications_property_bg_color"
+                                            android:textSize="@dimen/tab_txt_size"
+                                            android:visibility="gone" />
+
+                                        <TextView
+                                            android:id="@+id/fieldinfo_location_specific_tv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:textColor="@color/register_edit_color"
+                                            android:textSize="@dimen/txt_title_size_info" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:paddingRight="@dimen/tab_item_img_margintop">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/fieldinfo_location_tv_str"
+                                        android:textColor="@color/default_bluebg"
+                                        android:textSize="@dimen/fieldinfo_diogle_time_textsize" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/ic_more_blue_three_two" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="@dimen/txt_padding_left"
+                                android:background="@color/app_linearlayout_bg" />
+
+                            <LinearLayout
+                                android:id="@+id/fieldinfo_pricelist_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/title_height"
+                                    android:background="@color/white"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                        android:src="@drawable/ic_ruler" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/layout_margin_width"
+                                        android:gravity="center"
+                                        android:singleLine="true"
+                                        android:text="@string/fieldinfo_specification_list_title_str"
+                                        android:textColor="@color/headline_tv_color"
+                                        android:textSize="@dimen/user_info_photo_txt_size"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/txt_padding_line"
+                                    android:background="@color/new_viewbg"></View>
+
+                                <LinearLayout
+                                    android:id="@+id/fieldinfo_choose_size_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/account_title_bar_height"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:paddingLeft="@dimen/tab_item_img_margintop">
+
+                                    <CheckBox
+                                        android:id="@+id/fieldinfo_have_deposit_cb"
+                                        style="@style/FieldinfoCheckboxStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                        android:layout_marginLeft="@dimen/txt_margin"
+                                        android:checked="false"
+                                        android:gravity="center"
+                                        android:paddingLeft="@dimen/txt_margin"
+                                        android:paddingRight="@dimen/txt_margin"
+                                        android:text="@string/fieldinfo_have_deposit_str"
+                                        android:textSize="@dimen/field_info_receipt_size" />
+
+                                    <CheckBox
+                                        android:id="@+id/fieldinfo_shortcut_deposit_cb"
+                                        style="@style/FieldinfoCheckboxStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                        android:layout_marginLeft="@dimen/txt_margin"
+                                        android:checked="false"
+                                        android:gravity="center"
+                                        android:paddingLeft="@dimen/txt_margin"
+                                        android:paddingRight="@dimen/txt_margin"
+                                        android:text="@string/fieldinfo_no_deposit_str"
+                                        android:textSize="@dimen/field_info_receipt_size" />
+
+                                    <CheckBox
+                                        android:id="@+id/fieldinfo_shortcut_leasetermtype_cb"
+                                        style="@style/FieldinfoCheckboxStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                        android:layout_marginLeft="@dimen/txt_margin"
+                                        android:checked="false"
+                                        android:gravity="center"
+                                        android:paddingLeft="@dimen/txt_margin"
+                                        android:paddingRight="@dimen/txt_margin"
+                                        android:textSize="@dimen/field_info_receipt_size" />
+
+                                    <CheckBox
+                                        android:id="@+id/fieldinfo_shortcut_size_cb"
+                                        style="@style/FieldinfoCheckboxStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                        android:layout_marginLeft="@dimen/txt_margin"
+                                        android:checked="false"
+                                        android:gravity="center"
+                                        android:paddingLeft="@dimen/txt_margin"
+                                        android:paddingRight="@dimen/txt_margin"
+                                        android:textSize="@dimen/field_info_receipt_size" />
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical|right"
+                                        android:paddingRight="@dimen/app_backbtn_marginleft">
+
+                                        <TextView
+                                            android:id="@+id/fieldinfo_screen_checkbox"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                            android:layout_marginLeft="@dimen/txt_padding_left"
+                                            android:background="@drawable/module_activity_fieldinfo_screen_check_bg"
+                                            android:drawablePadding="@dimen/advertising_margintop"
+                                            android:drawableRight="@drawable/ic_open_gary_button_normal_three"
+                                            android:gravity="center"
+                                            android:paddingLeft="@dimen/txt_margin"
+                                            android:paddingRight="@dimen/txt_margin"
+                                            android:text="@string/screening_txt"
+                                            android:textColor="@color/headline_tv_color"
+                                            android:textSize="@dimen/field_info_receipt_size" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/fieldinfo_screening_condition_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:orientation="vertical"
+                                    android:paddingBottom="@dimen/field_info_marginleft"
+                                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                                    android:paddingRight="@dimen/app_backbtn_marginleft"
+                                    android:visibility="gone">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:id="@+id/fieldinfo_screening_price_tv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/field_list_item_padding"
+                                            android:gravity="center_vertical"
+                                            android:background="@drawable/activity_search_price_btn_bg"
+                                            android:drawablePadding="@dimen/tab_item_margintop"
+                                            android:drawableRight="@drawable/ic_close_thr_nine"
+                                            android:paddingBottom="@dimen/advertising_margintop"
+                                            android:paddingLeft="@dimen/txt_margin"
+                                            android:paddingRight="@dimen/txt_margin"
+                                            android:paddingTop="@dimen/advertising_margintop"
+                                            android:text=""
+                                            android:textColor="@color/default_bluebg"
+                                            android:textSize="@dimen/register_codebtn_txt_size"
+                                            android:visibility="gone" />
+
+                                        <TextView
+                                            android:id="@+id/fieldinfo_screening_area_tv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                            android:layout_marginTop="@dimen/field_list_item_padding"
+                                            android:background="@drawable/activity_search_price_btn_bg"
+                                            android:drawablePadding="@dimen/tab_item_margintop"
+                                            android:drawableRight="@drawable/ic_close_thr_nine"
+                                            android:paddingBottom="@dimen/advertising_margintop"
+                                            android:paddingLeft="@dimen/txt_margin"
+                                            android:paddingRight="@dimen/txt_margin"
+                                            android:paddingTop="@dimen/advertising_margintop"
+                                            android:textColor="@color/default_bluebg"
+                                            android:textSize="@dimen/register_codebtn_txt_size"
+                                            android:visibility="gone" />
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/fieldinfo_screening_person_tv"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                                        android:background="@drawable/activity_search_price_btn_bg"
+                                        android:drawablePadding="@dimen/tab_item_margintop"
+                                        android:drawableRight="@drawable/ic_close_thr_nine"
+                                        android:paddingBottom="@dimen/advertising_margintop"
+                                        android:paddingLeft="@dimen/txt_margin"
+                                        android:paddingRight="@dimen/txt_margin"
+                                        android:paddingTop="@dimen/advertising_margintop"
+                                        android:textColor="@color/default_bluebg"
+                                        android:textSize="@dimen/register_codebtn_txt_size"
+                                        android:visibility="gone" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/fieldinfo_no_screen_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/app_linearlayout_bg"
+                                    android:orientation="vertical"
+                                    android:paddingTop="@dimen/field_list_item_label_samll"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                        android:text="@string/fieldinfo_no_screen_data_str"
+                                        android:textColor="@color/headline_tv_color"
+                                        android:textSize="@dimen/register_codebtn_txt_size" />
+
+                                    <com.linhuiba.business.view.MyGridview
+                                        android:id="@+id/fieldinfo_no_screen_gv"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/app_linearlayout_bg"
+                                        android:columnWidth="@dimen/searchlist_item_evaluation_width"
+                                        android:gravity="center"
+                                        android:horizontalSpacing="@dimen/txt_padding_left"
+                                        android:numColumns="3"
+                                        android:paddingBottom="@dimen/txt_padding_left"
+                                        android:paddingLeft="@dimen/field_info_txt_marginleft"
+                                        android:paddingRight="@dimen/field_info_txt_marginleft"
+                                        android:paddingTop="@dimen/regiter_linelayout_height"
+                                        android:scrollbars="none"
+                                        android:verticalSpacing="@dimen/regiter_linelayout_height"
+                                        android:visibility="visible"></com.linhuiba.business.view.MyGridview>
+
+                                </LinearLayout>
+
+                                <com.linhuiba.business.view.MyListView
+                                    android:id="@+id/fieldinfo_enquiry_lv"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:divider="@null"
+                                    android:scrollbars="none"></com.linhuiba.business.view.MyListView>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/txt_padding_line"
+                                    android:background="@color/new_viewbg"></View>
+
+                                <com.linhuiba.business.view.MyLoadMoreExpandablelistView
+                                    android:id="@+id/fieldinfo_size_lv"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/app_linearlayout_bg"
+                                    android:divider="@null"
+                                    android:scrollbars="none"></com.linhuiba.business.view.MyLoadMoreExpandablelistView>
+
+                                <TextView
+                                    android:id="@+id/fieldinfo_size_no_tv"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/app_linearlayout_bg"
+                                    android:gravity="center_vertical"
+                                    android:paddingBottom="@dimen/txt_padding_left"
+                                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                                    android:paddingTop="@dimen/txt_padding_left"
+                                    android:text="@string/fieldinfo_no_screen_data_str"
+                                    android:textColor="@color/headline_tv_color"
+                                    android:textSize="@dimen/register_codebtn_txt_size"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/fieldinfo_receive_coupons_ll"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/txt_padding_line"
+                                    android:background="@color/app_linearlayout_bg" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:paddingBottom="@dimen/app_backbtn_marginleft"
+                                    android:paddingTop="@dimen/app_backbtn_marginleft">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/txt_padding_left"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:gravity="bottom"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/module_fieldinfo_receive_coupons"
+                                                android:textColor="@color/headline_tv_color"
+                                                android:textSize="@dimen/txt_title_size_info" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                                                android:text="@string/order_listitem_price_unit_text"
+                                                android:textColor="@color/price_tv_color"
+                                                android:textSize="@dimen/txt_title_size_info" />
+
+                                            <TextView
+                                                android:id="@+id/fieldinfo_receive_coupons_tv"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text=""
+                                                android:textColor="@color/price_tv_color"
+                                                android:textSize="@dimen/txt_title_size_info" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="@dimen/myself_red_prompt_width"
+                                            android:layout_marginLeft="@dimen/txt_margin"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/fieldinfo_coupons_tv1"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:background="@drawable/ic_three_sevenic_youhuibiaoqian"
+                                                android:gravity="center"
+                                                android:paddingLeft="@dimen/text_title_next_padding"
+                                                android:paddingRight="@dimen/text_title_next_padding"
+                                                android:text=""
+                                                android:textColor="@color/price_tv_color"
+                                                android:textSize="@dimen/tab_txt_size"
+                                                android:visibility="gone" />
+
+                                            <TextView
+                                                android:id="@+id/fieldinfo_coupons_tv2"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                                                android:background="@drawable/ic_three_sevenic_youhuibiaoqian"
+                                                android:gravity="center"
+                                                android:paddingLeft="@dimen/text_title_next_padding"
+                                                android:paddingRight="@dimen/text_title_next_padding"
+                                                android:text=""
+                                                android:textColor="@color/price_tv_color"
+                                                android:textSize="@dimen/tab_txt_size"
+                                                android:visibility="gone" />
+
+                                            <TextView
+                                                android:id="@+id/fieldinfo_coupons_tv3"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/tab_item_img_margintop"
+                                                android:background="@drawable/ic_three_sevenic_youhuibiaoqian"
+                                                android:gravity="center"
+                                                android:paddingLeft="@dimen/text_title_next_padding"
+                                                android:paddingRight="@dimen/text_title_next_padding"
+                                                android:text=""
+                                                android:textColor="@color/module_fieldinfo_coupons_color"
+                                                android:textSize="@dimen/fieldinfo_chair_textsize"
+                                                android:visibility="gone" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/module_fieldinfo_receive"
+                                            android:textColor="@color/default_bluebg"
+                                            android:textSize="@dimen/fieldinfo_diogle_time_textsize" />
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginRight="@dimen/tab_item_img_margintop"
+                                            android:src="@drawable/ic_more_blue_three_two" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <View
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/txt_padding_left"
+                                    android:background="@color/app_linearlayout_bg" />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/field_info_marginleft"
+                                    android:layout_marginTop="@dimen/field_info_marginleft"
+                                    android:src="@drawable/ic_booking_process_three_six_one" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/txt_padding_left"
+                                    android:background="@color/app_linearlayout_bg" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/fieldinfo_information_classify_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/fieldinfo_toleft_addshopcard"
+                                android:background="@color/white"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                    android:gravity="center"
+                                    android:text="@string/module_fieldinfo_phy_info_title"
+                                    android:textColor="@color/headline_tv_color"
+                                    android:textSize="@dimen/user_info_photo_txt_size"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/txt_padding_line"
+                                android:background="@color/new_viewbg"></View>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/order_pay_width"
+                                android:layout_marginTop="@dimen/txt_margin"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.3"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical"
+                                    android:paddingLeft="@dimen/app_backbtn_marginleft">
+
+                                    <TextView
+                                        android:id="@+id/fieldinfo_number_of_people_tv"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:singleLine="true"
+                                        android:text="@string/fieldinfo_no_parameter_message"
+                                        android:textColor="@color/headline_tv_color"
+                                        android:textSize="@dimen/text_title_size_next"
+                                        android:visibility="visible" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/maintab_width_margintop"
+                                        android:text="@string/search_fieldlist_number_of_people"
+                                        android:textColor="@color/register_edit_color"
+                                        android:textSize="@dimen/txt_title_size_info" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical"
+                                    android:paddingLeft="@dimen/app_backbtn_marginleft">
+
+                                    <TextView
+                                        android:id="@+id/txt_transaction_success"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:singleLine="true"
+                                        android:text="@string/fieldinfo_no_parameter_message"
+                                        android:textColor="@color/headline_tv_color"
+                                        android:textSize="@dimen/text_title_size_next"
+                                        android:visibility="visible" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/maintab_width_margintop"
+                                        android:text="@string/fieldinfo_order_count_text"
+                                        android:textColor="@color/register_edit_color"
+                                        android:textSize="@dimen/txt_title_size_info" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2.3"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical"
+                                    android:paddingLeft="@dimen/app_backbtn_marginleft">
+
+                                    <TextView
+                                        android:id="@+id/fieldinfo_industry_tv"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:singleLine="true"
+                                        android:text="@string/fieldinfo_no_parameter_message"
+                                        android:textColor="@color/headline_tv_color"
+                                        android:textSize="@dimen/txt_title_size_small"
+                                        android:visibility="visible" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/maintab_width_margintop"
+                                        android:text="@string/fieldinfo_industry_tv_str"
+                                        android:textColor="@color/register_edit_color"
+                                        android:textSize="@dimen/txt_title_size_info" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/txt_padding_line"
+                                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                android:background="@color/new_viewbg"></View>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingBottom="@dimen/txt_padding">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="visible">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/txt_padding_left"
+                                            android:orientation="horizontal">
+
+                                            <LinearLayout
+                                                style="@style/FieldInfoLLStyle"
+                                                android:layout_width="0dp"
+                                                android:layout_weight="1">
+
+                                                <TextView
+                                                    style="@style/CommunityLeftTvStyle"
+                                                    android:text="@string/module_fieldinfo_phy_info_area" />
+
+                                                <TextView
+                                                    android:id="@+id/txt_total_area"
+                                                    style="@style/CommunityRightTvStyle"
+                                                    android:text="@string/fieldinfo_no_parameter_message" />
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                style="@style/FieldInfoLLStyle"
+                                                android:layout_width="0dp"
+                                                android:layout_weight="1">
+
+                                                <TextView
+                                                    style="@style/CommunityLeftTvStyle"
+                                                    android:text="摆摊时间：" />
+
+                                                <TextView
+                                                    android:id="@+id/txt_stall_time"
+                                                    style="@style/CommunityRightTvStyle"
+                                                    android:text="@string/fieldinfo_no_parameter_message" />
+                                            </LinearLayout>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <LinearLayout
+                                                style="@style/FieldInfoLLStyle"
+                                                android:layout_width="0dp"
+                                                android:layout_weight="1">
+
+                                                <TextView
+                                                    style="@style/CommunityLeftTvStyle"
+                                                    android:text="@string/fieldinfo_number_of_people_peak_time_tv_str" />
+
+                                                <TextView
+                                                    android:id="@+id/txt_number_of_people_peak_time"
+                                                    style="@style/CommunityRightTvStyle"
+                                                    android:text="@string/fieldinfo_no_parameter_message" />
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                style="@style/FieldInfoLLStyle"
+                                                android:layout_width="0dp"
+                                                android:layout_weight="1">
+
+                                                <TextView
+                                                    style="@style/CommunityLeftTvStyle"
+                                                    android:text="@string/fieldinfo_number_of_people_facade_text" />
+
+                                                <TextView
+                                                    android:id="@+id/txt_number_of_people_facade"
+                                                    style="@style/CommunityRightTvStyle"
+                                                    android:text="@string/fieldinfo_no_parameter_message" />
+                                            </LinearLayout>
+                                        </LinearLayout>
+
+                                        <LinearLayout style="@style/FieldInfoLLStyle">
+
+                                            <TextView
+                                                style="@style/CommunityLeftTvStyle"
+                                                android:text="@string/fieldinfo_do_location_tv_str" />
+
+                                            <TextView
+                                                android:id="@+id/fieldinfo_dolocation_tv"
+                                                style="@style/CommunityRightTvStyle"
+                                                android:text="@string/fieldinfo_no_parameter_message" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/resource_communityinfo_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="visible">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            style="@style/FieldInfoLLStyle"
+                                            android:layout_width="0dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                style="@style/CommunityLeftTvStyle"
+                                                android:layout_width="wrap_content"
+                                                android:text="@string/txt_editparticipationtxt" />
+
+                                            <TextView
+                                                android:id="@+id/txt_participation"
+                                                style="@style/CommunityRightTvStyle"
+                                                android:text="@string/fieldinfo_no_parameter_message" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            style="@style/FieldInfoLLStyle"
+                                            android:layout_width="0dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                style="@style/CommunityLeftTvStyle"
+                                                android:text="@string/txt_consumption_leveltxt" />
+
+                                            <TextView
+                                                android:id="@+id/txt_consumption_level"
+                                                style="@style/CommunityRightTvStyle"
+                                                android:text="@string/fieldinfo_no_parameter_message" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/gender_ratio"
+                                        style="@style/FieldInfoLLStyle">
+
+                                        <TextView
+                                            style="@style/CommunityLeftTvStyle"
+                                            android:text="@string/txt_editgender_ratiotxt" />
+
+                                        <TextView
+                                            android:id="@+id/txt_gender_ratio"
+                                            style="@style/CommunityRightTvStyle"
+                                            android:text="@string/fieldinfo_no_parameter_message" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/txt_description_tablerow"
+                                        style="@style/FieldInfoLLStyle">
+
+                                        <TextView
+                                            style="@style/CommunityLeftTvStyle"
+                                            android:text="@string/module_fieldinfo_desp" />
+
+                                        <TextView
+                                            android:id="@+id/txt_description"
+                                            style="@style/CommunityRightTvStyle"
+                                            android:text="@string/fieldinfo_no_parameter_message" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/txt_property_requirement_layout"
+                                        style="@style/FieldInfoLLStyle"
+                                        android:visibility="gone">
+
+                                        <TextView
+                                            style="@style/CommunityLeftTvStyle"
+                                            android:text="@string/txt_property_requirementtxt" />
+
+                                        <TextView
+                                            android:id="@+id/txt_property_requirement"
+                                            style="@style/CommunityRightTvStyle"
+                                            android:text="@string/fieldinfo_no_parameter_message" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/contraband_ll"
+                                        style="@style/FieldInfoLLStyle"
+                                        android:visibility="visible">
+
+                                        <TextView
+                                            style="@style/CommunityLeftTvStyle"
+                                            android:text="@string/module_fieldinfo_contraband" />
+
+                                        <TextView
+                                            android:id="@+id/txt_contraband"
+                                            style="@style/CommunityRightTvStyle"
+                                            android:text="@string/fieldinfo_no_parameter_message" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/fieldinfo_sales_volume_ll"
+                                        style="@style/FieldInfoLLStyle"
+                                        android:visibility="visible">
+
+                                        <TextView
+                                            style="@style/CommunityLeftTvStyle"
+                                            android:text="@string/txt_editsales_volumetxt" />
+
+                                        <TextView
+                                            android:id="@+id/fieldinfo_sales_volume_tv"
+                                            style="@style/CommunityRightTvStyle"
+                                            android:text="@string/fieldinfo_no_parameter_message" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/fieldinfo_activity_description_ll"
+                                        style="@style/FieldInfoLLStyle"
+                                        android:visibility="gone">
+
+                                        <TextView
+                                            style="@style/CommunityLeftTvStyle"
+                                            android:text="@string/module_fieldinfo_activity_description" />
+
+                                        <TextView
+                                            android:id="@+id/fieldinfo_activity_description_tv"
+                                            style="@style/CommunityRightTvStyle"
+                                            android:text="@string/fieldinfo_no_parameter_message" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="@dimen/txt_padding_left"
+                                            android:layout_marginTop="@dimen/txt_padding_left"
+                                            android:background="@color/white"
+                                            android:orientation="horizontal"
+                                            android:paddingLeft="@dimen/app_backbtn_marginleft">
+
+                                            <LinearLayout
+                                                android:id="@+id/fieldinfo_error_recovery_layout"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center"
+                                                android:orientation="horizontal">
+
+                                                <LinearLayout
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center"
+                                                    android:orientation="horizontal">
+
+                                                    <ImageView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:scaleType="fitXY"
+                                                        android:src="@drawable/ic_reward_two_four_one" />
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_marginLeft="@dimen/TableRow_text_marginleft"
+                                                        android:text="@string/fieldinfo_error_recovery_text"
+                                                        android:textColor="@color/fieldinfo_reward_tv_color"
+                                                        android:textSize="@dimen/txt_title_size_nor" />
+                                                </LinearLayout>
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:id="@+id/fieldinfo_change_explain_ll"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/field_info_marginleft"
+                                                android:gravity="center"
+                                                android:orientation="horizontal">
+
+                                                <LinearLayout
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center"
+                                                    android:orientation="horizontal">
+
+                                                    <ImageView
+                                                        android:layout_width="@dimen/searchlist_item_txtont_marginright"
+                                                        android:layout_height="@dimen/searchlist_item_txtont_marginright"
+                                                        android:scaleType="fitXY"
+                                                        android:src="@drawable/ic_tuiding_information" />
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_marginLeft="@dimen/TableRow_text_marginleft"
+                                                        android:text="@string/module_fieldinfo_change_explain"
+                                                        android:textColor="@color/fieldinfo_reward_tv_color"
+                                                        android:textSize="@dimen/txt_title_size_nor" />
+                                                </LinearLayout>
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/fieldinfo_show_all_ll"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/title_height"
+                                android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                android:background="@drawable/activity_fieldinfo_show_all_resource_info_bg"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/fieldinfo_show_all_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawablePadding="@dimen/txt_padding"
+                                    android:drawableRight="@drawable/ic_close_green"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/fieldinfo_show_small_resource_info_str"
+                                    android:textColor="@color/fieldinfo_reward_tv_color"
+                                    android:textSize="@dimen/fieldinfo_diogle_time_textsize" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:orientation="vertical"
+                                android:id="@+id/fieldinfo_pic_word_info_ll"
+                                android:visibility="gone">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/app_backbtn_marginleft"
+                                    android:text="@string/module_fieldinfo_pic_word_info"
+                                    android:textColor="@color/headline_tv_color"
+                                    android:textSize="@dimen/title_bar_title_center_txt_size"
+                                    android:textStyle="bold" />
+                                <View style="@style/DefaultLongViewStyle"></View>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <com.github.lzyzsd.jsbridge.BridgeWebView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/fieldinfo_pic_word_info_webview">
+                                    </com.github.lzyzsd.jsbridge.BridgeWebView>
+
+                                </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/evaluation_linearlayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <View
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/title_bar_linelayout_height"
+                                    android:background="@color/app_samelinearlayout_bg" />
+
+                                <View
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/title_bar_back_marginLeft"
+                                    android:background="@color/app_linearlayout_bg" />
+
+                                <View
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/title_bar_linelayout_height"
+                                    android:background="@color/app_samelinearlayout_bg" />
+
+                                <RelativeLayout
+                                    android:id="@+id/evaluation_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/findresource_btnmargintop">
+
+                                    <TextView
+                                        android:id="@+id/evaluation_txt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                        android:text="评价"
+                                        android:textColor="@color/app_big_headline_tv_color"
+                                        android:textSize="@dimen/title_bar_title_center_txt_size"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/review_number_txt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toRightOf="@+id/evaluation_txt"
+                                        android:text=""
+                                        android:textColor="@color/app_big_headline_tv_color"
+                                        android:textSize="@dimen/title_bar_title_center_txt_size" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                        android:src="@drawable/ic_into_three" />
+
+                                </RelativeLayout>
+
+                                <View
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/title_bar_linelayout_height"
+                                    android:background="@color/app_samelinearlayout_bg" />
+
+                                <com.linhuiba.business.view.MyListView
+                                    android:id="@+id/review_listview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:divider="@null"
+                                    android:scrollbars="none">
+                                </com.linhuiba.business.view.MyListView>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/txt_padding_left"
+                                android:background="@color/app_linearlayout_bg">
+                            </View>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/app_backbtn_marginleft"
+                                    android:text="@string/fieldinfo_fieldinfo_particular_str"
+                                    android:textColor="@color/headline_tv_color"
+                                    android:textSize="@dimen/title_bar_title_center_txt_size"
+                                    android:textStyle="bold" />
+
+                                <View style="@style/DefaultLongViewStyle"></View>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:paddingTop="@dimen/txt_padding_left">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/tab_item_margintop"
+                                            android:layout_weight="1"
+                                            android:gravity="top"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                style="@style/CommunityLeftTvStyle"
+                                                android:text="@string/txt_field_type" />
+
+                                            <TextView
+                                                android:id="@+id/community_info_type_tv"
+                                                style="@style/CommunityRightTvStyle"
+                                                android:text="" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/tab_item_margintop"
+                                            android:layout_weight="1"
+                                            android:gravity="top"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                style="@style/CommunityLeftTvStyle"
+                                                android:text="@string/fieldinfo_community_buildignarea_text" />
+
+                                            <TextView
+                                                android:id="@+id/community_info_area_tv"
+                                                style="@style/CommunityRightTvStyle"
+                                                android:text="" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:id="@+id/community_info_tradingarea_ll"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/tab_item_margintop"
+                                            android:layout_weight="1"
+                                            android:gravity="top"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                style="@style/CommunityLeftTvStyle"
+                                                android:text="@string/module_community_info_business_district" />
+
+                                            <TextView
+                                                android:id="@+id/community_info_tradingarea_tv"
+                                                style="@style/CommunityRightTvStyle"
+                                                android:text="" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/community_info_year_ll"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/tab_item_margintop"
+                                            android:layout_weight="1"
+                                            android:gravity="top"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                style="@style/CommunityLeftTvStyle"
+                                                android:text="@string/module_community_info_year" />
+
+                                            <TextView
+                                                android:id="@+id/community_info_year_tv"
+                                                style="@style/CommunityRightTvStyle"
+                                                android:text="" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/community_info_other_info_ll"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="visible">
+
+                                        <LinearLayout
+                                            android:id="@+id/community_info_attributes_ll"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/community_info_desp_ll"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/tab_item_margintop"
+                                            android:gravity="top"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                style="@style/CommunityLeftTvStyle"
+                                                android:text="@string/module_community_info_desp" />
+
+                                            <TextView
+                                                android:id="@+id/community_info_desp_tv"
+                                                style="@style/CommunityRightTvStyle"
+                                                android:text="" />
+                                        </LinearLayout>
+
+                                        <View
+                                            style="@style/AddfieldViewStyle"
+                                            android:layout_marginBottom="@dimen/txt_padding_left"
+                                            android:layout_marginTop="@dimen/app_backbtn_marginleft"></View>
+
+                                        <LinearLayout
+                                            android:id="@+id/community_info_other_attribute_ll"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/community_info_show_all_ll"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/title_height"
+                                        android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                        android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                                        android:background="@drawable/activity_fieldinfo_show_all_resource_info_bg"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/community_info_show_all_tv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawablePadding="@dimen/txt_padding"
+                                            android:drawableRight="@drawable/ic_close_green"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/fieldinfo_show_small_resource_info_str"
+                                            android:textColor="@color/fieldinfo_reward_tv_color"
+                                            android:textSize="@dimen/fieldinfo_diogle_time_textsize" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:orientation="vertical"
+                                android:visibility="gone"
+                                android:id="@+id/fieldinfo_counselor_ll">
+                                <View
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/txt_padding_left"
+                                    android:background="@color/app_linearlayout_bg" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="@dimen/paddingleft"
+                                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                        android:layout_marginTop="@dimen/paddingleft"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/module_fieldinfo_counselor"
+                                        android:textColor="@color/headline_tv_color"
+                                        android:textSize="@dimen/title_bar_title_center_txt_size"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                                <View
+                                    style="@style/DefaultLongViewStyle">
+                                </View>
+                                <include layout="@layout/module_activity_fieldinfo_include_counselor">
+                                </include>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingBottom="@dimen/paddingleft"
+                                android:id="@+id/fieldinfo_communityinfo_ll">
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/txt_padding_left"
+                                    android:background="@color/app_linearlayout_bg">
+                                </View>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/fieldinfo_map_price_text_margintop"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                                    android:paddingRight="@dimen/app_backbtn_marginleft">
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:singleLine="true"
+                                        android:text="@string/module_fieldinfo_counselor"
+                                        android:textColor="@color/headline_tv_color"
+                                        android:textSize="@dimen/title_bar_title_txt_size"
+                                        android:textStyle="bold"
+                                        android:id="@+id/fieldinfo_community_name_tv"/>
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:id="@+id/fieldinfo_goto_communityinfo_ll"
+                                        android:visibility="visible">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/txt_title_size_info"
+                                            android:textColor="@color/register_edit_color"
+                                            android:text="@string/txt_field_detail"/>
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/advertising_margintop"
+                                            android:src="@drawable/ic_more_three_six_one"/>
+                                    </LinearLayout>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal">
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                                android:textColor="@color/headline_tv_color"
+                                                android:textSize="@dimen/login_leftright_txt_size"
+                                                android:text="@string/module_fieldinfo_community_price"/>
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:textColor="@color/price_tv_color"
+                                                android:textSize="@dimen/login_leftright_txt_size"
+                                                android:text="@string/module_fieldinfo_community_price"
+                                                android:id="@+id/fieldinfo_community_price_tv"/>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal"
+                                            android:layout_marginTop="@dimen/tab_item_margintop"
+                                            android:visibility="gone"
+                                            android:id="@+id/fieldinfo_community_business_ll">
+                                            <TextView
+                                                style="@style/CommunityLeftTvStyle"
+                                                android:text="@string/module_fieldinfo_community_business" />
+                                            <TextView
+                                                android:id="@+id/fieldinfo_community_business_tv"
+                                                style="@style/CommunityRightTvStyle"
+                                                android:text="" />
+                                        </LinearLayout>
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal"
+                                            android:layout_marginTop="@dimen/tab_item_margintop"
+                                            android:visibility="gone"
+                                            android:id="@+id/fieldinfo_community_build_year_ll">
+                                            <TextView
+                                                style="@style/CommunityLeftTvStyle"
+                                                android:text="@string/module_community_info_year" />
+                                            <TextView
+                                                android:id="@+id/fieldinfo_community_build_year_tv"
+                                                style="@style/CommunityRightTvStyle"
+                                                android:text="" />
+                                        </LinearLayout>
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal"
+                                            android:layout_marginTop="@dimen/tab_item_margintop"
+                                            android:visibility="gone"
+                                            android:id="@+id/fieldinfo_community_people_ll">
+                                            <TextView
+                                                style="@style/CommunityLeftTvStyle"
+                                                android:text="@string/module_fieldinfo_community_number_of_people" />
+                                            <TextView
+                                                android:id="@+id/fieldinfo_community_people_tv"
+                                                style="@style/CommunityRightTvStyle"
+                                                android:text="" />
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <com.linhuiba.linhuifield.fieldview.OvalImageView
+                                        android:layout_width="@dimen/addshoppingcard_width"
+                                        android:layout_height="@dimen/add_lab_width"
+                                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                        android:background="@drawable/ic_no_pic_big"
+                                        android:id="@+id/fieldinfo_community_imgv"
+                                        android:scaleType="centerCrop"
+                                        app:round="2"
+                                        app:show_leftup="true"
+                                        app:show_rightup="true"
+                                        app:show_leftdown="true"
+                                        app:show_rightdown="true" />
+                                </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/txt_padding_line"
+                                android:id="@+id/fieldinfo_recommend_ll"
+                                android:background="@color/white"
+                                android:orientation="vertical">
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/fieldinfo_other_res_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+                                <View
+                                    style="@style/AddfieldViewStyle" />
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/fieldinfo_other_res_tv"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="@dimen/paddingleft"
+                                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                        android:layout_marginTop="@dimen/paddingleft"
+                                        android:layout_weight="1"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/module_fieldinfo_other_physicals"
+                                        android:textColor="@color/headline_tv_color"
+                                        android:textSize="@dimen/title_bar_title_center_txt_size"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <View style="@style/DefaultLongViewStyle"></View>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:descendantFocusability="blocksDescendants"
+                                    android:paddingLeft="@dimen/home_area_drop_marginleft"
+                                    android:paddingRight="@dimen/home_area_drop_marginleft">
+
+                                    <android.support.v7.widget.RecyclerView
+                                        android:id="@+id/fieldinfo_other_res_gridlistview"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/myself_red_prompt_width">
+                                    </android.support.v7.widget.RecyclerView>
+                                </RelativeLayout>
+                                <LinearLayout
+                                    android:id="@+id/fieldinfo_other_res_show_all_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/title_height"
+                                    android:layout_marginBottom="@dimen/app_backbtn_marginleft"
+                                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                    android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                                    android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                                    android:background="@drawable/activity_fieldinfo_show_all_resource_info_bg"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/fieldinfo_other_res_show_all_tv"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawablePadding="@dimen/txt_padding"
+                                        android:drawableRight="@drawable/ic_into_green"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/fieldinfo_show_all_resource_info_str"
+                                        android:textColor="@color/fieldinfo_reward_tv_color"
+                                        android:textSize="@dimen/fieldinfo_diogle_time_textsize" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/fieldinfo_activity_list_ll"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/txt_padding_left"
+                                    android:background="@color/app_linearlayout_bg"></View>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal"
+                                        android:visibility="visible">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="@dimen/paddingleft"
+                                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                            android:layout_marginTop="@dimen/paddingleft"
+                                            android:layout_weight="1"
+                                            android:text="@string/module_fieldinfo_activity_title"
+                                            android:textColor="@color/headline_tv_color"
+                                            android:textSize="@dimen/title_bar_title_center_txt_size"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <View style="@style/DefaultLongViewStyle"></View>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="@dimen/home_area_drop_marginleft"
+                                    android:paddingRight="@dimen/home_area_drop_marginleft">
+
+                                    <android.support.v7.widget.RecyclerView
+                                        android:id="@+id/fieldinfo_activity_rv"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/myself_red_prompt_width"></android.support.v7.widget.RecyclerView>
+                                </RelativeLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/fieldinfo_recommend_typelayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/txt_padding_left"
+                                    android:background="@color/app_linearlayout_bg">
+                                </View>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal"
+                                        android:visibility="visible">
+
+                                        <TextView
+                                            android:id="@+id/fieldinfo_industry_gv_tv"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="@dimen/paddingleft"
+                                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                            android:layout_marginTop="@dimen/paddingleft"
+                                            android:layout_weight="1"
+                                            android:text="@string/home_recommend_title_text"
+                                            android:textColor="@color/headline_tv_color"
+                                            android:textSize="@dimen/title_bar_title_center_txt_size"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <View style="@style/DefaultLongViewStyle"></View>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="@dimen/home_area_drop_marginleft"
+                                    android:paddingRight="@dimen/home_area_drop_marginleft">
+
+                                    <android.support.v7.widget.RecyclerView
+                                        android:id="@+id/fieldinfo_recommend_gridlistview"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/myself_red_prompt_width"></android.support.v7.widget.RecyclerView>
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/fieldinfo_loadmore_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <ProgressBar
+                                        android:layout_width="@dimen/advertising_box_width"
+                                        android:layout_height="@dimen/advertising_box_width"
+                                        android:padding="@dimen/advertising_margintop"
+                                        android:visibility="visible" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="@dimen/advertising_box_width"
+                                        android:gravity="center"
+                                        android:text="@string/module_case_load"
+                                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                                        android:textSize="@dimen/register_codebtn_txt_size"
+                                        android:visibility="visible" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/fieldinfo_loadmore_nulldata_tv"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/user_info_account_width"
+                                    android:background="@color/app_linearlayout_bg"
+                                    android:gravity="center"
+                                    android:text="@string/order_loadmore_nulldata_toast"
+                                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                                    android:textSize="@dimen/login_leftright_txt_size"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </FrameLayout>
+
+                </com.linhuiba.linhuifield.fieldview.Field_MyScrollview>
+            </RelativeLayout>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fieldinfo_navbar_titile_ll"
+            android:background="@drawable/fragment_home_navbar_bg">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/white"
+                android:id="@+id/fieldinfo_navbar_titile">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/advertising_tffs_width"
+                    android:orientation="vertical"
+                    android:id="@+id/fieldinfo_status_bar_ll"
+                    android:background="@color/color_null">
+                </LinearLayout>
+                <include
+                    layout="@layout/linhui_business_title_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.1dp"
+                    android:id="@+id/fieldinfo_screen_view"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/diogle_view_btn_height"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:id="@+id/fieldinfo_second_level_ll">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/app_backbtn_marginleft"
+                            android:gravity="center"
+                            android:id="@+id/fieldinfo_second_level_specification_ll">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:id="@+id/fieldinfo_second_nav_img1"
+                                android:src="@drawable/icon_position" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/fieldinfo_second_nav_text1"
+                                style="@style/DefaultCheckTextStyle"
+                                android:text="@string/fieldinfo_second_level_res_specification_str"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/app_backbtn_marginleft"
+                            android:gravity="center"
+                            android:id="@+id/fieldinfo_second_level_community_ll">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:id="@+id/fieldinfo_second_nav_img2"
+                                android:src="@drawable/icon_position" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/DefaultCheckTextStyle"
+                                android:id="@+id/fieldinfo_second_nav_text2"
+                                android:text="@string/fieldinfo_second_level_res_info_str"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/app_backbtn_marginleft"
+                            android:id="@+id/fieldinfo_second_level_review_ll"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:id="@+id/fieldinfo_second_nav_img3"
+                                android:src="@drawable/icon_position" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/DefaultCheckTextStyle"
+                                android:id="@+id/fieldinfo_second_nav_text3"
+                                android:text="@string/fieldinfo_second_level_review_str"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:id="@+id/fieldinfo_second_level_res_info_ll">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_position"
+                                android:visibility="gone"
+                                android:id="@+id/fieldinfo_second_nav_img0"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/DefaultCheckTextStyle"
+                                android:id="@+id/fieldinfo_second_nav_text0"
+                                android:text="@string/search_comprehensive_type_txt"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/title_bar_linelayout_height"
+                        android:background="@color/new_viewbg"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_margin_width"
+            android:id="@+id/activity_overdue_btn"
+            android:gravity="center"
+            android:background="@color/orderconfirm_success_bottom_btntextcolor"
+            android:textSize="@dimen/txt_title_size_nor"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_above="@+id/fieldinfo_bottom_ll"
+            android:visibility="gone"
+            android:text="@string/search_fieldlist_activvity_overdue_text">
+        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_below="@+id/fieldinfo_navbar_titile_ll"
+            android:id="@+id/no_resources_layout"
+            android:gravity="center"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/no_resources_textview"
+                android:text="@string/fieldinfo_no_resources_two_text"
+                android:textSize="@dimen/confirmorder_success_textsize"
+                android:textColor="@color/title_bar_txtcolor"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/regiter_btnlayout_width"
+                android:src="@drawable/ic_no_resources"
+                />
+            <Button
+                android:layout_width="@dimen/fieldinfo_map_Bottom_height"
+                android:layout_height="@dimen/order_type_layoutwidth"
+                android:id="@+id/no_resources_btn"
+                android:layout_marginTop="@dimen/myself_order_layout_width"
+                android:text="@string/confirmorder_back_homepage"
+                android:textSize="@dimen/btn_title_size"
+                android:background="@drawable/loginbtn_bg"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+        <View
+            android:layout_width="@dimen/txt_padding_line"
+            android:layout_height="@dimen/txt_padding_line"
+            android:background="@color/transparent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/app_backbtn_marginleft"
+            android:layout_marginTop="@dimen/fieldinfo_toleft_addshopcard"
+            android:id="@+id/fieldinfo_popup_view">
+        </View>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:visibility="gone"
+            android:background="@color/color_null"
+            android:id="@+id/fieldinfo_no_data_ll">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/home_gridview_img_width"
+                android:background="@color/color_null"
+                android:clickable="true">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/user_info_linearlayout_height"
+                android:background="@color/color_null"
+                android:clickable="true"
+                android:id="@+id/fieldinfo_show_more_view_rl">
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

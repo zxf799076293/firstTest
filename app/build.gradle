@@ -1,0 +1,152 @@
+apply plugin: 'com.android.application'
+//growingio 添加插件
+apply plugin: 'com.growingio.android'
+android {
+    compileSdkVersion 23
+    buildToolsVersion '27.0.3'
+    signingConfigs {
+        release {
+            storeFile file("businessapk.jks")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+        config {
+            storeFile file("businessapk.jks")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+    defaultConfig {
+        applicationId "com.linhuiba.business"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 40
+        versionName "3.9Beta"
+        flavorDimensions "versionCode"//3.0添加配置
+        signingConfig signingConfigs.release
+        multiDexEnabled true
+        resConfigs "zh"//删除无用的语言资源
+        //so文件过滤
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a" ,"x86"
+        }
+        //3.0添加配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+        //growingio
+        resValue("string", "growingio_project_id", "af291ae5e800787d")
+        resValue("string", "growingio_url_scheme", "growing.b049e720ef8774c3")
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
+        release {
+            shrinkResources true // 是否去除无效的资源文件
+            minifyEnabled true// 是否混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            debuggable true
+//            signingConfig signingConfigs.release
+            manifestPlaceholders = [
+                    APP_NAME: "@string/app_name",
+                    APPLICATION_ID: "@string/application_id"
+            ]
+            // 自定义输出配置//3.0添加配置
+            applicationVariants.all { variant ->    //批量修改Apk名字
+                variant.outputs.all { output ->
+                    if (!variant.buildType.isDebuggable()) {
+                        //获取签名的名字 variant.signingConfig.name
+                        //要被替换的源字符串
+//                def sourceFile = "-${variant.flavorName}-${variant.buildType.name}"
+                        def sourceFile = ".apk"
+                        //替换的字符串
+//                def replaceFile = "_V${variant.versionName}_${variant.flavorName}_${variant.buildType.name}"
+                        def replaceFile = "linhuiba_${defaultConfig.versionCode}_${variant.productFlavors[0].name}.apk"
+                        outputFileName = output.outputFile.name.replace(sourceFile, replaceFile)
+                    }
+                }
+            }
+
+//            // 自定义输出配置
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        // 输出apk名称为wooyun_v1.0_wandoujia.apk
+//                        def fileName = "linhuiba_${defaultConfig.versionCode}_${variant.productFlavors[0].name}.apk"
+//                        output.outputFile = new File(outputFile.parent, fileName)
+//                    }
+//                }
+//            }
+        }
+        debug {
+            signingConfig signingConfigs.release
+//            minifyEnabled true// 是否混淆
+//            shrinkResources true // 是否去除无效的资源文件
+//            applicationIdSuffix ".debug"//debug模式包名加后缀可以共存 地图 微信功能无法使用
+            manifestPlaceholders = [
+                    APP_NAME: "@string/app_name_debug",
+                    APPLICATION_ID: "@string/application_id_debug"
+            ]
+        }
+    }
+    //3.0添加配置
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+    productFlavors {
+        linhuiba {}
+        yingyongbao {}
+        Ali {}
+        baidu {}
+        oppo {}
+        vivo {}
+        xiaomi {}
+        huawei {}
+        meizu {}
+        qh360 {}
+    }
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+    sourceSets { main {
+        assets.srcDirs = ['src/main/assets', 'src/main/assets/']
+//        jniLibs.srcDirs = ['libs']
+    } }
+    repositories {
+        // ...
+        maven { url "https://jitpack.io" }
+    }
+}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    compile 'com.jakewharton:butterknife:6.1.0'
+    compile 'org.apmem.tools:layouts:1.8@aar'
+    compile files('libs/happy-dns-0.2.7.jar')
+    compile 'com.daasuu:BubbleLayout:1.0.0'
+    compile files('libs/BaiduLBS_Android.jar')
+    compile project(':linhuifield')
+    compile project(':linhui_public')
+    compile 'com.github.lzyzsd:jsbridge:1.0.4'
+    //GrowingIo
+    compile 'com.growingio.android:vds-android-agent:2.1.0@aar'
+    compile 'com.github.promeg:tinypinyin:2.0.3'
+    // ~80KB拼音
+    implementation files('libs/mta-android-sdk-3.4.3.jar')
+    implementation files('libs/mid-sdk-3.73.jar')
+}
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/field_list_item_img_height"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:id="@+id/choosepicture_relativelayout"
+        android:gravity="center">
+    <ImageView
+        android:layout_width="@dimen/field_list_item_img_height"
+        android:layout_height="@dimen/field_list_item_img_height"
+        android:scaleType="fitXY"
+        android:id="@+id/choosepicture_img"
+        android:src="@drawable/ic_jiazai_small"
+        android:gravity="center" />
+    <LinearLayout
+        android:layout_width="@dimen/invoiceinfo_zlservicefee_width"
+        android:layout_height="@dimen/addshoppingcard_width"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/invoice_prove_ll">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/invoice_prove_imgv"
+            android:gravity="center"
+            android:visibility="gone"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/invoice_prove_url_imgv"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/childaccount_invitation_all_relative_layout"
+    android:background="@color/app_linearlayout_bg">
+    <include
+        layout="@layout/linhui_business_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_linelayout_height"
+        android:background="@color/top_title_line_color" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/title_bar_back_marginLeft"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/title_bar_title_txt_marginBottom"
+            style="@style/app_linearlayoutrighttxt_style"
+            android:textSize="@dimen/txt_title_size_small"
+            android:text="@string/childaccountinvitation_send_email"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/title_bar_title_txt_marginBottom">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fieldinfo_bt_marfinleft"
+                android:id="@+id/send_email_edittext"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/activity_childaccountinvitation_editbg"
+                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                android:layout_marginRight="@dimen/order_fieldorder_item_hight"
+                android:paddingLeft="@dimen/orderlist_item_linearlayout_marginleft"
+                android:textSize="@dimen/register_codebtn_txt_size"
+                android:textColor="@color/title_bar_txtcolor"
+                android:textColorHint="@color/field_chair_textcolor"
+                android:hint="@string/childaccountinvitation_emailhint"
+                />
+            <Button
+                android:layout_width="@dimen/add_lab_width"
+                android:layout_height="@dimen/fieldinfo_bt_marfinleft"
+                android:id="@+id/send_email_button"
+                android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/loginbtn_bg"
+                android:textColor="@color/white"
+                android:textSize="@dimen/btnregister_txt_size"
+                android:gravity="center"
+                android:text="@string/confirm"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/btn_login_height"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <View
+                android:layout_width="@dimen/addshoppingcard_width"
+                android:layout_height="@dimen/title_bar_linelayout_height"
+                android:background="@color/new_viewbg" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/home_gridview_texttwo_marginleft"
+                android:textSize="@dimen/btnregister_txt_size"
+                android:textColor="@color/register_edit_color"
+                android:text="@string/childaccountinvitation_and_text"/>
+            <View
+                android:layout_width="@dimen/addshoppingcard_width"
+                android:layout_height="@dimen/title_bar_linelayout_height"
+                android:layout_marginLeft="@dimen/home_gridview_texttwo_marginleft"
+                android:background="@color/new_viewbg" />
+
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_login_height"
+            android:id="@+id/share_email_button"
+            android:layout_marginTop="@dimen/btn_login_height"
+            android:layout_marginBottom="@dimen/home_gridview_texttwo_marginleft"
+            android:text="@string/childaccountinvitation_share_weixin_text"
+            style="@style/appbottombtn_style"/>
+    </LinearLayout>
+</LinearLayout>

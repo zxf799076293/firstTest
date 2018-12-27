@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_linearlayout_bg">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/advertising_tffs_width"
+        android:orientation="vertical"
+        android:id="@+id/selfsupportshop_statusbar_ll"
+        android:background="@color/default_bluebg">
+    </LinearLayout>
+    <include
+        layout="@layout/linhui_business_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </include>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/txt_padding_line"
+        android:background="@color/app_linearlayout_bg">
+    </View>
+    <include
+        android:id="@+id/no_data_view"
+        layout="@layout/app_no_data_layout">
+    </include>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/selfsupportshop_swipe">
+        <com.linhuiba.business.view.LoadMoreListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:divider="@null"
+            android:id="@+id/selfsupportshop_lv">
+        </com.linhuiba.business.view.LoadMoreListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

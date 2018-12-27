@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/track_all_layout"
+    android:background="@color/app_linearlayout_bg">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/app_linearlayout_bg">
+            <include
+                layout="@layout/linhui_business_title_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/title_bar_linelayout_height"
+                android:background="@color/top_title_line_color"/>
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/footprintView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:clickable="true" />
+        </LinearLayout>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/account_title_bar_width"
+            android:layout_alignParentBottom="true"
+            android:divider="@color/app_samelinearlayout_bg"
+            android:dividerHeight="@dimen/txt_padding_line"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/track_markerinfolistiew">
+
+        </ListView>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/home_community_recycler_view"
+            android:layout_marginLeft="@dimen/txt_margin"
+            android:layout_marginRight="@dimen/txt_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        android:id="@+id/home_community_no_data_ll">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_nochangdi_three_six_one"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+            android:textSize="@dimen/login_leftright_txt_size"
+            android:id="@+id/home_community_no_data_tv"
+            android:text="@string/module_home_no_community_data_msg"
+            android:layout_marginTop="@dimen/field_list_item_label_samll"/>
+    </LinearLayout>
+
+</LinearLayout>

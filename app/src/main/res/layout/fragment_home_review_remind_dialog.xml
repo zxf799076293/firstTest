@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fieldinfo_all_dialog_layout"
+        android:background="#98000000">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingLeft="@dimen/fieldinfo_fieldtitle_height"
+                android:paddingRight="@dimen/fieldinfo_fieldtitle_height">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/home_review_doalog_remind_height"
+                    android:visibility="visible"
+                    android:id="@+id/fieldinfo_refunt_price_detailed_layout">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/activity_confirmorder_success_layout_bg"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/refund_difference_price_layout">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/refunt_price_text"
+                            android:layout_marginTop="@dimen/add_lab_width"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/title_bar_txtcolor"
+                            android:textSize="@dimen/text_title_size_next"
+                            android:text="@string/home_review_remind_title_text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:id="@+id/home_dialog_review_content_text"
+                            android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                            android:layout_marginLeft="@dimen/invoiceinfoentry_marginleft"
+                            android:layout_marginRight="@dimen/invoiceinfoentry_marginleft"
+                            android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                            android:lineSpacingExtra="@dimen/TableRow_text_marginleft"
+                            android:textSize="@dimen/title_bar_title_txt_size"
+                            android:text="@string/fieldinfo_refunt_price_detailedtext"/>
+                        <TextView
+                            android:layout_width="@dimen/field_list_item_img_width"
+                            android:layout_height="@dimen/order_field_advertising_type_width"
+                            android:layout_marginTop="@dimen/home_area_drop_height"
+                            android:id="@+id/home_dialog_review_btn_text"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/login_leftright_txt_size"
+                            android:background="@drawable/loginbtn_bg"
+                            android:text="@string/home_review_remind_btn_text"
+                            android:gravity="center"/>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/TableRow_img_width_height"
+                            android:layout_marginBottom="@dimen/txt_padding_left"
+                            android:id="@+id/home_dialog_review_checkbox"
+                            android:checked="false"
+                            android:visibility="visible"
+                            android:textSize="@dimen/register_codebtn_txt_size"
+                            android:textColor="@color/register_edit_color"
+                            android:padding="@dimen/home_area_drop_marginleft"
+                            android:text="@string/home_review_remindcheckbox_text"
+                            style="@style/HomeReviewRemindCheckBox" />
+
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-60dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/ic_comment_two_six"
+                        android:layout_above="@+id/refund_difference_price_layout" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/field_info_width"
+            android:id="@+id/home_dialog_review_close_imagebtn"
+            android:background="@null"
+            android:visibility="visible"
+            android:src="@drawable/ic_close_two_four"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

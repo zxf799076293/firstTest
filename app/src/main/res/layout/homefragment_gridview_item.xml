@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/title_bar_linelayout_height"
+            android:background="@color/app_samelinearlayout_bg"
+            android:id="@+id/field_item_view"/>
+        <LinearLayout
+            android:layout_width="@dimen/no_review_listview_height"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:id="@+id/gridview_img_layout"
+            android:paddingTop="@dimen/userinfo_layout_margin"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/gridview_img"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/order_pay_width"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/searchlist_item_txt_margintop"
+                android:background="@color/white"
+                android:id="@+id/gridview_price_layout">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:id="@+id/fieldname_layout"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="@dimen/home_gridview_texttwo_marginleft"
+                        android:layout_height="wrap_content"
+                        android:text="独家"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:id="@+id/field_exclusive_txt"
+                        android:textColor="@color/white"
+                        android:background="#fa3c3c"
+                        android:visibility="gone"
+                        android:textSize="@dimen/fieldinfo_subsidy_textsize" />
+                    <TextView
+                        android:layout_width="@dimen/home_gridview_texttwo_marginleft"
+                        android:layout_height="wrap_content"
+                        android:text="补贴"
+                        android:layout_gravity="center_vertical"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:background="#f47a27"
+                        android:id="@+id/field_subsidy_txt_img"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        android:layout_marginLeft="@dimen/TableRow_text_marginleft"
+                        android:textSize="@dimen/fieldinfo_subsidy_textsize" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/search_item_margintop"
+                        android:singleLine="true"
+                        android:textSize="@dimen/fieldinfo_chair_textsize"
+                        android:textColor="@color/home_advertising_text_color"
+                        android:text=""
+                        android:id="@+id/txt_name"/>
+
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.2">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:singleLine="true"
+                        android:textSize="@dimen/fieldinfo_chair_textsize"
+                        android:textColor="@color/home_gridview_texttwo_color"
+                        android:text=""
+                        android:id="@+id/txt_price"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="clip_vertical"
+                        android:singleLine="true"
+                        android:textSize="@dimen/tab_txt_size"
+                        android:textColor="@color/field_chair_textcolor"
+                        android:text=""
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/txt_numberofpeople_textview"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/title_bar_linelayout_height"
+            android:background="@color/app_samelinearlayout_bg"/>
+    </LinearLayout>
+
+
+</LinearLayout>

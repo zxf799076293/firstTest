@@ -1,0 +1,151 @@
+<root>
+  <province name="上海市">
+    <city name="上海市">
+	<district name="黄浦区" zipcode="310101" />
+	<district name="卢湾区" zipcode="310103" />
+	<district name="徐汇区" zipcode="310104" />
+	<district name="长宁区" zipcode="310105" />
+	<district name="静安区" zipcode="310106" />
+	<district name="普陀区" zipcode="310107" />
+	<district name="闸北区" zipcode="310108" />
+	<district name="虹口区" zipcode="310109" />
+	<district name="杨浦区" zipcode="310110" />
+	<district name="闵行区" zipcode="310112" />
+	<district name="宝山区" zipcode="310113" />
+	<district name="嘉定区" zipcode="310114" />
+	<district name="浦东新区" zipcode="310115" />
+	<district name="金山区" zipcode="310116" />
+	<district name="松江区" zipcode="310117" />
+	<district name="青浦区" zipcode="310118" />
+	<district name="南汇区" zipcode="310119" />
+	<district name="奉贤区" zipcode="310120" />
+	<district name="崇明县" zipcode="310230" />
+    </city>
+  </province>
+
+  <province name="浙江省">
+    <city name="杭州市">
+	<district name="上城区" zipcode="330102" />
+	<district name="下城区" zipcode="330103" />
+	<district name="江干区" zipcode="330104" />
+	<district name="拱墅区" zipcode="330105" />
+	<district name="西湖区" zipcode="330106" />
+	<district name="滨江区" zipcode="330108" />
+	<district name="萧山区" zipcode="330109" />
+	<district name="余杭区" zipcode="330110" />
+	<district name="桐庐县" zipcode="330122" />
+	<district name="淳安县" zipcode="330127" />
+	<district name="建德市" zipcode="330182" />
+	<district name="富阳市" zipcode="330183" />
+	<district name="临安市" zipcode="330185" />
+    </city>
+    <city name="宁波市">
+	<district name="海曙区" zipcode="330203" />
+	<district name="江东区" zipcode="330204" />
+	<district name="江北区" zipcode="330205" />
+	<district name="北仑区" zipcode="330206" />
+	<district name="镇海区" zipcode="330211" />
+	<district name="鄞州区" zipcode="330212" />
+	<district name="象山县" zipcode="330225" />
+	<district name="宁海县" zipcode="330226" />
+	<district name="余姚市" zipcode="330281" />
+	<district name="慈溪市" zipcode="330282" />
+	<district name="奉化市" zipcode="330283" />
+    </city>
+    <city name="温州市">
+	<district name="鹿城区" zipcode="330302" />
+	<district name="龙湾区" zipcode="330303" />
+	<district name="瓯海区" zipcode="330304" />
+	<district name="洞头县" zipcode="330322" />
+	<district name="永嘉县" zipcode="330324" />
+	<district name="平阳县" zipcode="330326" />
+	<district name="苍南县" zipcode="330327" />
+	<district name="文成县" zipcode="330328" />
+	<district name="泰顺县" zipcode="330329" />
+	<district name="瑞安市" zipcode="330381" />
+	<district name="乐清市" zipcode="330382" />
+    </city>
+    <city name="嘉兴市">
+	<district name="南湖区" zipcode="330402" />
+	<district name="秀洲区" zipcode="330411" />
+	<district name="嘉善县" zipcode="330421" />
+	<district name="海盐县" zipcode="330424" />
+	<district name="海宁市" zipcode="330481" />
+	<district name="平湖市" zipcode="330482" />
+	<district name="桐乡市" zipcode="330483" />
+    </city>
+    <city name="湖州市">
+	<district name="吴兴区" zipcode="330502" />
+	<district name="南浔区" zipcode="330503" />
+	<district name="德清县" zipcode="330521" />
+	<district name="长兴县" zipcode="330522" />
+	<district name="安吉县" zipcode="330523" />
+    </city>
+    <city name="金华市">
+	<district name="婺城区" zipcode="330702" />
+	<district name="金东区" zipcode="330703" />
+	<district name="武义县" zipcode="330723" />
+	<district name="浦江县" zipcode="330726" />
+	<district name="磐安县" zipcode="330727" />
+	<district name="兰溪市" zipcode="330781" />
+	<district name="义乌市" zipcode="330782" />
+	<district name="东阳市" zipcode="330783" />
+	<district name="永康市" zipcode="330784" />
+    </city>
+    <city name="丽水市">
+	<district name="莲都区" zipcode="331102" />
+	<district name="青田县" zipcode="331121" />
+	<district name="缙云县" zipcode="331122" />
+	<district name="遂昌县" zipcode="331123" />
+	<district name="松阳县" zipcode="331124" />
+	<district name="云和县" zipcode="331125" />
+	<district name="庆元县" zipcode="331126" />
+	<district name="景宁畲族自治县" zipcode="331127" />
+	<district name="龙泉市" zipcode="331181" />
+    </city>
+    <city name="衢州市">
+	<district name="柯城区" zipcode="330802" />
+	<district name="衢江区" zipcode="330803" />
+	<district name="常山县" zipcode="330822" />
+	<district name="开化县" zipcode="330824" />
+	<district name="龙游县" zipcode="330825" />
+	<district name="江山市" zipcode="330881" />
+    </city>
+    <city name="绍兴市">
+	<district name="越城区" zipcode="330602" />
+	<district name="绍兴县" zipcode="330621" />
+	<district name="新昌县" zipcode="330624" />
+	<district name="诸暨市" zipcode="330681" />
+	<district name="上虞市" zipcode="330682" />
+	<district name="嵊州市" zipcode="330683" />
+    </city>
+    <city name="台州市">
+	<district name="椒江区" zipcode="331002" />
+	<district name="黄岩区" zipcode="331003" />
+	<district name="路桥区" zipcode="331004" />
+	<district name="玉环县" zipcode="331021" />
+	<district name="三门县" zipcode="331022" />
+	<district name="天台县" zipcode="331023" />
+	<district name="仙居县" zipcode="331024" />
+	<district name="温岭市" zipcode="331081" />
+	<district name="临海市" zipcode="331082" />
+    </city>
+
+    <city name="舟山市">
+	<district name="定海区" zipcode="330902" />
+	<district name="普陀区" zipcode="330903" />
+	<district name="岱山县" zipcode="330921" />
+	<district name="嵊泗县" zipcode="330922" />
+    </city>
+  </province>
+	<province name="广东省">
+		<city name="深圳市">
+			<district name="罗湖区" zipcode="440303" />
+			<district name="福田区" zipcode="440304" />
+			<district name="南山区" zipcode="440305" />
+			<district name="宝安区" zipcode="440306" />
+			<district name="龙岗区" zipcode="440307" />
+			<district name="盐田区" zipcode="440308" />
+		</city>
+	</province>
+</root>

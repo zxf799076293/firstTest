@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/TableRow_img_width_height"
+        android:paddingRight="@dimen/TableRow_img_width_height"
+        android:gravity="center"
+        android:background="#98000000"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wallet_fingerprintecognition_doalog_height"
+            android:id="@+id/wallet_all_dialog_layout"
+            android:background="@drawable/activity_confirmorder_success_layout_bg"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.9"
+                android:orientation="vertical"
+                android:background="@drawable/activity_confirmorder_success_layout_bg"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_fingerprint_two_four_one"/>
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/txt_title_size_small"
+                android:textColor="@color/top_title_center_txt_color"
+                android:id="@+id/wallet_dialog_title_textview"
+                android:text="@string/cancel"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/activity_confirmorder_success_layout_bg"
+                android:textSize="@dimen/text_title_size_next"
+                android:textColor="@color/top_title_center_txt_color"
+                android:gravity="center"
+                android:id="@+id/wallet_dialog_cancel_textview"
+                android:text="@string/cancel"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

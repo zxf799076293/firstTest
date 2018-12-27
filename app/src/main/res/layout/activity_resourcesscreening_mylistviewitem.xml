@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/field_info_height"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/user_info_photo_txt_size"
+            android:textColor="@color/title_bar_txtcolor"
+            android:id="@+id/screeninglist_typename"
+            android:text="人流量"
+            android:paddingBottom="@dimen/orderlist_item_linearlayout_marginleft"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="@dimen/commoditypay_hidelayout_edittext_marginleft"
+                android:layout_height="match_parent"
+                android:background="@drawable/screening_listitem_editbg"
+                android:textSize="@dimen/user_info_photo_txt_size"
+                android:textColor="@color/default_bluebg"
+                android:id="@+id/screening_firstedit"
+                android:gravity="center"
+                android:text="sss"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/searchlist_item_txt_margintop"
+                android:paddingRight="@dimen/searchlist_item_txt_margintop"
+                android:text="一"/>
+            <EditText
+                android:layout_width="@dimen/commoditypay_hidelayout_edittext_marginleft"
+                android:layout_height="match_parent"
+                android:background="@drawable/screening_listitem_editbg"
+                android:textSize="@dimen/user_info_photo_txt_size"
+                android:textColor="@color/default_bluebg"
+                android:id="@+id/screening_secondedit"
+                android:gravity="center"
+                android:text="sss"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

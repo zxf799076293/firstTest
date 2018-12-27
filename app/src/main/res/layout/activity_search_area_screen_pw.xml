@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:paddingBottom="@dimen/fieldinfo_refund_difference_price_height"
+        android:id="@+id/map_search_pw_rl">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/search_area_pw_ll"
+            android:layout_above="@+id/search_area_ll">
+            <ListView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:id="@+id/search_area_pw_first_lv"
+                android:divider="@null"
+                android:background="@color/white" />
+            <ListView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:id="@+id/search_area_pw_second_lv"
+                android:divider="@null"
+                android:background="@color/module_searchlist_area_screen_list_bg" />
+            <ListView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:id="@+id/search_area_pw_third_lv"
+                android:divider="@null"
+                android:background="@color/module_searchlist_area_screen_list_bg" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/order_pay_width"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:id="@+id/search_area_ll">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/app_line_view_one_height"
+                    android:background="@color/new_viewbg">
+                </View>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/order_type_layoutwidth"
+                    android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                    android:orientation="horizontal"
+                    android:background="@color/white">
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/search_area_reset_btn"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:textColor="@color/headline_tv_color"
+                        android:textSize="@dimen/txt_title_size_nor"
+                        android:text="@string/resourcesscreening_resetbtn_txt"
+                        android:background="@drawable/module_searchlist_screen_reset_bg"/>
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                        android:id="@+id/search_area_confirm_btn"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title_size_nor"
+                        android:text="@string/confirm"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:background="@drawable/loginbtn_bg"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

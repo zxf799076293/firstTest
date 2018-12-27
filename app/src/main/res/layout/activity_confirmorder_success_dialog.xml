@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#98000000">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:layout_marginRight="@dimen/home_Popular_marginleft"
+            android:layout_marginLeft="@dimen/home_Popular_marginleft"
+            android:background="@drawable/default_company_dialog_white_ll_bg"
+            android:orientation="vertical"
+            android:id="@+id/myself_companyinfo_perfect_layout">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/default_company_dialog_white_ll_bg"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/btn_margin_width"
+                android:paddingBottom="@dimen/tab_item_img_height">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/confirmorder_success_content_tv"
+                    android:paddingLeft="@dimen/myself_order_img_width"
+                    android:paddingRight="@dimen/myself_order_img_width"
+                    android:gravity="center"
+                    android:textSize="@dimen/login_leftright_txt_size"
+                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                    android:text="@string/pay_success_dialog_text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/activity_confirmorder_success_bottom_bg"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="@dimen/commoditypay_listitem_leftwidth"
+                    android:layout_height="@dimen/field_list_item_label"
+                    android:layout_marginBottom="@dimen/home_gridview_texttwo_marginleft"
+                    android:gravity="center"
+                    android:id="@+id/btn_perfect"
+                    android:background="@drawable/activity_order_confirm_perfect_company_btn_bg"
+                    android:textSize="@dimen/txt_title_size_nor"
+                    android:textColor="@color/white"
+                    android:text="@string/pay_success_dialog_right_prompt"></TextView>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

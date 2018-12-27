@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <include layout="@layout/linhui_business_title_bar">
+        </include>
+        <View
+            style="@style/DefaultLongViewStyle">
+        </View>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/fieldinfo_look_picture_tl"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/evaluation_marginleft"
+            android:layout_marginBottom="@dimen/evaluation_marginleft"
+            android:layout_height="@dimen/invoiceinfoentry_marginleft"
+            android:background="@color/white"
+            app:tabMode="scrollable"
+            app:tabIndicatorColor="@color/default_bluebg"
+            app:tabSelectedTextColor="@color/default_bluebg"
+            app:tabTextColor="@color/top_title_center_txt_color"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabIndicatorHeight="@dimen/tab_item_margintop"
+            app:tabGravity="fill" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/fieldinfo_look_picture_vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/app_linearlayout_bg"
+            android:paddingTop="@dimen/txt_padding_left"
+            android:paddingLeft="@dimen/txt_margin"
+            android:paddingRight="@dimen/txt_margin"
+            android:fadingEdge="none" >
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+</LinearLayout>
