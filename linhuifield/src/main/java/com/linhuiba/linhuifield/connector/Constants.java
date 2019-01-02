@@ -111,6 +111,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -139,23 +140,6 @@ public class Constants {
     public static final String AppSecret = "a64d40a2ff8f2626d342419a1126dc1d";
     public static Activity mactivity;
     private DisplayMetrics mDisplayMetrics;
-    public static final int OrderInfoInt = 1;
-    public static final int OrdersManageInt = 2;
-    public static final int InvoiceInfoInt = 3;
-    public static final int WalletsInt = 4;
-    public static final int PointsInfoInt = 5;
-    public static final int COMMENTS = 6;
-    public static final int DEMAND = 7;
-    public static final int ORDER_ITEM_INFO = 8;
-    private static final int DEMAND_INFO = 9;
-    private static final int ENQUIRY_ORDER_INFO = 10;
-    private static final int COUPON_INT = 11;
-    private static final int PROPERTY_FIELDS = 12;
-    private static final int PROPERTY_ACTIVITIES = 13;
-    private static final int HELP_WEB = 14;
-    private static final int CARTS = 15;
-    public static final int RELEASE_PERMISSIONS = 16;
-
     private static int wheelviewSelectInt1 = -1;
     private static int wheelviewSelectInt2 = -1;
     private static int wheelviewSelectInt3 = -1;
@@ -758,7 +742,7 @@ public class Constants {
         mViewPager.setCurrentItem(Position);
         textView.setText(String.valueOf(Position % imageList.size() + 1) + "/" + String.valueOf(imageList.size()));
     }
-    public static void show_preview_zoom(final List<ImageView> imageList, ViewPager mViewPager, final TextView textView,
+    public static void show_preview_zoom(final List<ImageView> imageList, final ViewPager mViewPager, final TextView textView,
                                          int Position) {
         mViewPager.setAdapter(new PagerAdapter() {
 
@@ -817,7 +801,8 @@ public class Constants {
     }
     public static void showFieldinfoPic(final List<ImageView> imageList, final ViewPager mViewPager,
                                         final int Position, final TextView numTV, final TextView phyTV, final TextView caseTV,
-                                        final int phyEnd, final Context context) {
+                                        final int phyEnd, final Context context,
+                                        final LinearLayout mShowPicstatementLL) {
         mViewPager.setAdapter(new PagerAdapter() {
 
             @Override
@@ -852,11 +837,15 @@ public class Constants {
             @Override
             public int getCount() {
                 return imageList.size();
+//                return Integer.MAX_VALUE;
             }
         });
-        mViewPager.setCurrentItem(Position);
+//        mViewPager.setCurrentItem(Position);
+        mViewPager.setCurrentItem(Position + 1 , false);
+//        mViewPager.setCurrentItem(Integer.MAX_VALUE / 2);
         numTV.setText(String.valueOf(Position % imageList.size() + 1));
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            int currentPosition;
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -864,22 +853,41 @@ public class Constants {
 
             @Override
             public void onPageSelected(int position) {
-                numTV.setText(String.valueOf(position % imageList.size() + 1));
-                if (position % imageList.size() + 1 > phyEnd) {
-                    caseTV.setTextColor(context.getResources().getColor(R.color.white));
-                    caseTV.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.activity_splash_screen_selected_text_bg));
-                    phyTV.setTextColor(context.getResources().getColor(R.color.headline_tv_color));
-                    phyTV.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.activity_fieldlist_activitys_overdue_subsidy_bg));
+                currentPosition = position;
+                if (currentPosition == 0 || currentPosition == imageList.size() - 1) {
+
                 } else {
-                    phyTV.setTextColor(context.getResources().getColor(R.color.white));
-                    phyTV.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.activity_splash_screen_selected_text_bg));
-                    caseTV.setTextColor(context.getResources().getColor(R.color.headline_tv_color));
-                    caseTV.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.activity_fieldlist_activitys_overdue_subsidy_bg));
+                    mShowPicstatementLL.setVisibility(View.GONE);
+                    numTV.setText(String.valueOf(position % imageList.size()));
+                    if (position % imageList.size() > phyEnd) {
+                        caseTV.setTextColor(context.getResources().getColor(R.color.white));
+                        caseTV.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.activity_splash_screen_selected_text_bg));
+                        phyTV.setTextColor(context.getResources().getColor(R.color.headline_tv_color));
+                        phyTV.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.activity_fieldlist_activitys_overdue_subsidy_bg));
+                    } else {
+                        phyTV.setTextColor(context.getResources().getColor(R.color.white));
+                        phyTV.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.activity_splash_screen_selected_text_bg));
+                        caseTV.setTextColor(context.getResources().getColor(R.color.headline_tv_color));
+                        caseTV.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.activity_fieldlist_activitys_overdue_subsidy_bg));
+                    }
                 }
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                // ViewPager.SCROLL_STATE_IDLE 标识的状态是当前页面完全展现，并且没有动画正在进行中，如果不
+                // 是此状态下执行 setCurrentItem 方法回在首位替换的时候会出现跳动！
+                if (state != ViewPager.SCROLL_STATE_IDLE) return;
+
+                // 当视图在第一个时，将页面号设置为图片的最后一张。
+                if (currentPosition == 0) {
+                    mViewPager.setCurrentItem(imageList.size() - 2, false);
+
+                } else if (currentPosition == imageList.size() - 1) {
+                    // 当视图在最后一个是,将页面号设置为图片的第一张。
+                    mViewPager.setCurrentItem(1, false);
+                }
 
             }
         });
@@ -887,7 +895,7 @@ public class Constants {
             @Override
             public void onMultiClick(View v) {
                 if (Integer.parseInt(numTV.getText().toString()) > phyEnd) {
-                    mViewPager.setCurrentItem(0);
+                    mViewPager.setCurrentItem(1);
                 }
             }
         });
@@ -897,7 +905,7 @@ public class Constants {
                 if (Integer.parseInt(numTV.getText().toString()) > phyEnd) {
 
                 } else {
-                    mViewPager.setCurrentItem(phyEnd +1);
+                    mViewPager.setCurrentItem(phyEnd + 1);
                 }
             }
         });
@@ -1007,204 +1015,6 @@ public class Constants {
             child.invalidate();
         }
     }
-
-    //推送列表url解析
-    public static int getpush_msg_type(String url_link) {
-        int banner_intetnt = -1;//1 列表；2 详情；3web
-        String url = url_link;
-        if (url != null && url.length() > 0) {
-            if (url.indexOf("/admin/orders/view/") != -1) {
-                banner_intetnt = OrderInfoInt;
-            } else if (url.indexOf("/admin/orders/manage?") != -1) {
-                banner_intetnt = OrdersManageInt;
-            } else if (url.indexOf("/admin/invoices/view/") != -1) {
-                banner_intetnt = InvoiceInfoInt;
-            } else if (url.indexOf("/admin/wallets/index") != -1) {
-                banner_intetnt = WalletsInt;
-            } else if (url.indexOf("/admin/points/index") != -1) {
-                banner_intetnt = PointsInfoInt;
-            } else if (url.indexOf("/admin/comments/edit") != -1) {
-                banner_intetnt = COMMENTS;
-            } else if (url.indexOf("/app_page/appeal/") != -1) {
-                banner_intetnt = DEMAND;
-            } else if (url.indexOf("/admin/orders/order-items/") != -1) {
-                banner_intetnt = ORDER_ITEM_INFO;
-            }else if (url.indexOf("admin/requirements/details") != -1) {
-                banner_intetnt = DEMAND_INFO;
-            } else if (url.indexOf("admin/enquiry/view") != -1) {
-                banner_intetnt = ENQUIRY_ORDER_INFO;
-            } else if (url.indexOf("admin/coupon/index") != -1) {
-                banner_intetnt = COUPON_INT;
-            } else if (url.indexOf("admin/fields/index") != -1) {
-                banner_intetnt = PROPERTY_FIELDS;
-            } else if (url.indexOf("admin/activities/index") != -1) {
-                banner_intetnt = PROPERTY_ACTIVITIES;
-            } else if (url.indexOf("company/help") != -1) {
-                banner_intetnt = HELP_WEB;
-            } else if (url.indexOf("cart/index") != -1) {
-                banner_intetnt = CARTS;
-            } else if (url.indexOf("admin/fields/edit") != -1) {
-                banner_intetnt = RELEASE_PERMISSIONS;
-            }
-        }
-        return banner_intetnt;
-    }
-    public static void pushUrlJumpActivity(String data,Context context) {
-        if (data != null && data.length() > 0) {
-            if (Constants.getpush_msg_type(data) == Constants.OrderInfoInt) {
-                String id = Constants.getpush_msg_id(data,"/");
-                if (id != null && id.length() > 0) {
-                    //2017/10/14 跳转到商家的订单详情（加载web）
-                    Intent orderInfoIntent = new Intent("com.business.aboutActivity");
-                    orderInfoIntent.putExtra("id", id);
-                    orderInfoIntent.putExtra("type", com.linhuiba.linhuifield.config.Config.BIG_ORDER_INFO_INT);
-                    context.startActivity(orderInfoIntent);
-                }
-            } else if (Constants.getpush_msg_type(data) == Constants.OrdersManageInt) {
-                String status = Constants.getnotices_urlstring(data,"status");
-                int OrderFragment_currIndex = -1;
-                if ( status!= null && status.length() > 0) {
-                    if(status.equals("paid")) {
-                        OrderFragment_currIndex = 0;
-                    } else if(status.equals("approved")) {
-                        OrderFragment_currIndex = 1;
-                    } else if(status.equals("finished")) {
-                        OrderFragment_currIndex = 2;
-                    } else if(status.equals("reviewed")) {
-                        OrderFragment_currIndex = 3;
-                    } else if(status.equals("canceled")) {
-                        OrderFragment_currIndex = 4;
-                    }
-                    Intent fieldorderlist = new Intent(context, com.linhuiba.linhuifield.fieldactivity.FieldMainTabActivity.class);
-                    fieldorderlist.putExtra("new_tmpintent", "fieldorder");
-                    fieldorderlist.putExtra("OrderFragment_currIndex", OrderFragment_currIndex);
-                    context.startActivity(fieldorderlist);
-                }
-            } else if (Constants.getpush_msg_type(data) == Constants.InvoiceInfoInt) {
-                String id = Constants.getpush_msg_id(data,"/");
-                if (id != null && id.length() > 0) {
-                    Intent invoiceinfo = new Intent("com.business.aboutActivity");
-                    invoiceinfo.putExtra("type", com.linhuiba.linhuifield.config.Config.INVOICE_INFO_WEB_INT);
-                    invoiceinfo.putExtra("id",id);
-                    context.startActivity(invoiceinfo);
-                }
-
-            } else if (Constants.getpush_msg_type(data) == Constants.WalletsInt) {
-                Intent walletapply_intent = new Intent("com.business.MyWalletActivity");
-                context.startActivity(walletapply_intent);
-            } else if (Constants.getpush_msg_type(data) == Constants.PointsInfoInt) {
-                Intent about_intrgral = new Intent("com.business.aboutActivity");
-                about_intrgral.putExtra("type", com.linhuiba.linhuifield.config.Config.POINT_INFO_WEB_INT);
-                context.startActivity(about_intrgral);
-            } else if (Constants.getpush_msg_type(data) == Constants.COMMENTS) {
-                String id = Constants.getpush_msg_id(data,"=");
-                if (id != null && id.length() > 0) {
-                    Intent publidhreview = new Intent("com.business.PublishReviewActivity");
-                    publidhreview.putExtra("orderid", id);
-                    context.startActivity(publidhreview);
-                }
-            } else if(Constants.getpush_msg_type(data) == Constants.DEMAND) {
-                Intent resources_web = new Intent("com.business.aboutActivity");
-                resources_web.putExtra("type", com.linhuiba.linhuifield.config.Config.DEMAND_INFO_INT);
-                resources_web.putExtra("web_url",data);
-                context.startActivity(resources_web);
-            } else if(Constants.getpush_msg_type(data) == Constants.ORDER_ITEM_INFO) {
-                String id = Constants.getpush_msg_id(data,"/");
-                if (id != null && id.length() > 0) {
-                    Intent orderinfo = new Intent("com.business.aboutActivity");
-                    orderinfo.putExtra("type",17);
-                    orderinfo.putExtra("id",id);
-                    context.startActivity(orderinfo);
-                }
-            } else if(Constants.getpush_msg_type(data) == Constants.DEMAND_INFO) {
-                String id = Constants.getpush_msg_id(data,"/");
-                if (id != null && id.length() > 0) {
-                    Intent orderinfo = new Intent("com.business.aboutActivity");
-                    orderinfo.putExtra("type", 27);
-                    orderinfo.putExtra("id",id);
-                    context.startActivity(orderinfo);
-                }
-            } else if(Constants.getpush_msg_type(data) == Constants.ENQUIRY_ORDER_INFO) {
-                String enquiryId = Constants.getpush_msg_id(data, "/");
-                if (enquiryId != null && enquiryId.length() > 0) {
-                    Intent enquiryIntent = new Intent("com.business.aboutActivity");
-                    enquiryIntent.putExtra("type", 33);
-                    enquiryIntent.putExtra("id", enquiryId);
-                    context.startActivity(enquiryIntent);
-                }
-            } else if (Constants.getpush_msg_type(data) == Constants.COUPON_INT) {
-                Intent enquiryIntent = new Intent("com.business.MyCouponsActivity");
-                context.startActivity(enquiryIntent);
-            } else if (Constants.getpush_msg_type(data) == Constants.PROPERTY_FIELDS) {
-                String status = Constants.getnotices_urlstring(data,"status");
-                Intent field_intent = new Intent(context,Field_FieldListActivity.class);
-                field_intent.putExtra("res_type_id",1);
-                if ( status!= null && status.length() > 0) {
-                    field_intent.putExtra("status",status);
-                }
-                context.startActivity(field_intent);
-            } else if (Constants.getpush_msg_type(data) == Constants.PROPERTY_ACTIVITIES) {
-                String status = Constants.getnotices_urlstring(data,"status");
-                Intent field_intent = new Intent(context,Field_FieldListActivity.class);
-                field_intent.putExtra("res_type_id",3);
-                if ( status!= null && status.length() > 0) {
-                    field_intent.putExtra("status",status);
-                }
-                context.startActivity(field_intent);
-            } else if (Constants.getpush_msg_type(data) == Constants.HELP_WEB) {
-                Intent help = new Intent("com.business.aboutActivity");
-                help.putExtra("type", 1);
-                context.startActivity(help);
-            } else if (Constants.getpush_msg_type(data) == Constants.CARTS) {
-                Intent cartsIntent = new Intent("com.business.MainTabActivity");
-                cartsIntent.putExtra("new_tmpintent", "goto_cartitems");
-                context.startActivity(cartsIntent);
-            } else {
-                if (Constants.getpush_msg_type(data) != RELEASE_PERMISSIONS) {
-                    Intent resources_web = new Intent("com.business.aboutActivity");
-                    resources_web.putExtra("type", com.linhuiba.linhuifield.config.Config.COMMON_WEB_INT);
-                    resources_web.putExtra("web_url",data);
-                    context.startActivity(resources_web);
-                }
-            }
-        }
-    }
-    //获取详情url 中的id
-    public static String getpush_msg_id(String url_link, String delimiter) {
-        String url = url_link;
-        String resource_id = "";
-        String[] d = url.split(delimiter);
-        resource_id = d[d.length - 1];
-        return resource_id;
-    }
-
-    ////解析url获取所需要的key字段
-    public static String getnotices_urlstring(String url, String urlstr) {
-        String url_division = "-";
-        String[] urlParts = url.split("\\?");
-        if (urlParts.length > 1) {
-            String query = urlParts[1];
-            for (String param : query.split("&")) {
-                String[] pair = param.split("=");
-                String key = "";
-                String value = "";
-                try {
-                    key = URLDecoder.decode(pair[0], "UTF-8");
-                    if (pair.length > 1) {
-                        value = URLDecoder.decode(pair[1], "UTF-8");
-                    }
-                    if (key.equals(urlstr)) {
-                        url_division = value;
-                        break;
-                    }
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return url_division;
-    }
-
     public static boolean IsCurrentActivity(Context context, String mActivityName) {
         boolean isCurrentActivity = false;
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);

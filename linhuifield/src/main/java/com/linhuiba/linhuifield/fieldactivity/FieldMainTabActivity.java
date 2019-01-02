@@ -102,11 +102,6 @@ public class FieldMainTabActivity extends FieldBaseMvpActivity implements TabHos
                 mTabHost.setVisibility(View.GONE);
             }
         }
-        if (LoginManager.getInstance().getUMmsg_start_app() != null && LoginManager.getInstance().getUMmsg_start_app().length() > 0) {
-            String data = LoginManager.getInstance().getUMmsg_start_app();
-            Constants.pushUrlJumpActivity(data,FieldMainTabActivity.this);
-            LoginManager.getInstance().setUMmsg_start_app("");
-        }
     }
     /**
      * 给Tab按钮设置图标和文字

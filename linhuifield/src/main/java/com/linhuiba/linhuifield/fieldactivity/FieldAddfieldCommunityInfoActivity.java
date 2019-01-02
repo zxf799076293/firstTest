@@ -860,9 +860,11 @@ public class FieldAddfieldCommunityInfoActivity extends FieldBaseMvpActivity
         super.onActivityResult(requestCode, resultCode, data);
     }
     private void showChooseDialog(final TextView textView, final ArrayList<Field_AddResourceCreateItemModel> list, final int type) {
-        if (list == null || list.size() == 0) {
-            BaseMessageUtils.showToast(getResources().getString(R.string.review_error_text));
-            return;
+        if (type != 4) {
+            if (list == null || list.size() == 0) {
+                BaseMessageUtils.showToast(getResources().getString(R.string.review_error_text));
+                return;
+            }
         }
         LayoutInflater factory = LayoutInflater.from(this);
         final View textEntryView = factory.inflate(R.layout.field_activity_field_addfield_optionalinfo_dialog, null);
