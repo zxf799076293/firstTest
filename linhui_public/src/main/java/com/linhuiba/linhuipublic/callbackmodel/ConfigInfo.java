@@ -7,7 +7,7 @@ public class ConfigInfo {
     private String Servicetime;
     private String ServicephoneNumber;
     private String fieldtype;
-    private String resource_sort;
+    private String physical_sort;
     private String avd_sort;
     private String activity_sort;
     private String citylist;
@@ -23,7 +23,7 @@ public class ConfigInfo {
     private String is_outdoor;
     private String activity_types;
     private String hot_citylist;
-    private String developer;
+    private String location_types;
     public String getServicetime() {
         return Servicetime;
     }
@@ -48,13 +48,12 @@ public class ConfigInfo {
         this.fieldtype = fieldtype;
     }
 
-
-    public String getResource_sort() {
-        return resource_sort;
+    public String getPhysical_sort() {
+        return physical_sort;
     }
 
-    public void setResource_sort(String resource_sort) {
-        this.resource_sort = resource_sort;
+    public void setPhysical_sort(String physical_sort) {
+        this.physical_sort = physical_sort;
     }
 
     public String getAvd_sort() {
@@ -177,11 +176,11 @@ public class ConfigInfo {
         this.hot_citylist = hot_citylist;
     }
 
-    public String getDeveloper() {
-        return developer;
+    public String getLocation_types() {
+        return location_types;
     }
 
-    public void setDeveloper(String developer) {
-        this.developer = developer;
+    public void setLocation_types(String location_types) {
+        this.location_types = location_types;
     }
 }

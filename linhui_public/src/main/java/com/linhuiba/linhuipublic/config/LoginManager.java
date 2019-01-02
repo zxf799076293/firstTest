@@ -34,7 +34,7 @@ public class LoginManager {
     public static String Servicetime = "09:00--18:00";
     public static String Banner = "[{\"link\":\"https://hz.linhuiba.com/fields/index?mode=imagelist&minimum_households=&maximum_households=&lowPrice=&highPrice=&minimum_peoples=&maximum_peoples=&minimum_property_costs=&maximum_property_costs=&minimum_build_year=&maximum_build_year=&minimum_house_price=&maximum_house_price=&minimum_area=&keywords=&field_type_id=12\",\"pic_url\":\"https://banner.linhuiba.com/Fm3oRadOzCVLcO79y_5NBHUeZHqj\"},{\"link\":\"http://mp.weixin.qq.com/s/_ezJpS6tT6nZlt-wR8w3RA\",\"pic_url\":\"https://banner.linhuiba.com/FnyHmnB-XM4zrdTkZkUbWbXPN7YW\"},{\"link\":\"https://bj.linhuiba.com/fields/index?is_mobile=1\",\"pic_url\":\"https://banner.linhuiba.com/FjpHIcljU7TFIkZBGVctI0QeXiNd\"},{\"link\":\"http://m.linhuiba.com/fields/view/11581\",\"pic_url\":\"https://banner.linhuiba.com/FnEfX0dI2aERjG9Ic83s7wmaqEnN\"},{\"link\":\"http://m.linhuiba.com/fields/view/4486\",\"pic_url\":\"https://banner.linhuiba.com/FnFLEt2wlVCmDdmyJdP9X3Z1IAa6\"},{\"link\":\"https://m.linhuiba.com/activities/index\",\"pic_url\":\"https://banner.linhuiba.com/FifasVl8Fp1zeN99SEMcddTccy-i\"},{\"link\":\"http://mp.weixin.qq.com/s/5MTrFdOeblwy_mCmuqppMg\",\"pic_url\":\"https://banner.linhuiba.com/Fo2YMHjVS1kJo74UfMCx3txm4SIA\"}]";
     public static String Citylist;
-    public static String Fieldsort = "[{\"default_sort\":1,\"display_name\":\"默认排序\",\"display_short_name\":\"默认\",\"order\":\"desc\",\"order_by\":\"weight_score\"},{\"default_sort\":0,\"display_name\":\"距离从近到远\",\"display_short_name\":\"距离\",\"order\":\"asc\",\"order_by\":\"distance\"},{\"default_sort\":0,\"display_name\":\"销量从高到低\",\"display_short_name\":\"销量\",\"order\":\"desc\",\"order_by\":\"order_quantity\"},{\"default_sort\":0,\"display_name\":\"建筑年份从近到远\",\"display_short_name\":\"建筑年份\",\"order\":\"desc\",\"order_by\":\"build_year\"},{\"default_sort\":0,\"display_name\":\"建筑年份从远到近\",\"display_short_name\":\"建筑年份\",\"order\":\"asc\",\"order_by\":\"build_year\"}]";
+    public static String Fieldsort = "[{\"default_sort\":1,\"display_name\":\"默认排序\",\"display_short_name\":\"默认\",\"order\":\"desc\",\"order_by\":\"weight_score\"},{\"default_sort\":0,\"display_name\":\"距离从近到远\",\"display_short_name\":\"距离\",\"order\":\"asc\",\"order_by\":\"distance\"},{\"default_sort\":0,\"display_name\":\"销量从高到低\",\"display_short_name\":\"销量\",\"order\":\"desc\",\"order_by\":\"order_quantity\"}]";
     public static String Avdsort = "[{\"default_sort\":1,\"display_name\":\"综合排序\",\"display_short_name\":\"综合\",\"order\":\"desc\",\"order_by\":\"default_sort\"},{\"default_sort\":0,\"display_name\":\"性价比(人流量/价格)优先\",\"display_short_name\":\"性价比\",\"order\":\"desc\",\"order_by\":\"cost_performance\"},{\"default_sort\":0,\"display_name\":\"人流量优先\",\"display_short_name\":\"人流量\",\"order\":\"desc\",\"order_by\":\"number_of_people\"},{\"default_sort\":0,\"display_name\":\"最新发布\",\"display_short_name\":\"最新\",\"order\":\"desc\",\"order_by\":\"created_at\"},{\"default_sort\":0,\"display_name\":\"最早发布\",\"display_short_name\":\"最早\",\"order\":\"asc\",\"order_by\":\"created_at\"},{\"default_sort\":0,\"display_name\":\"销量优先\",\"display_short_name\":\"销量\",\"order\":\"desc\",\"order_by\":\"number_of_order\"}]";
     public static String Activitysort = "[{\"default_sort\":0,\"display_name\":\"性价比(人流量/价格)优先\",\"display_short_name\":\"性价比\",\"order\":\"desc\",\"order_by\":\"cost_performance\"},{\"default_sort\":0,\"display_name\":\"人流量优先\",\"display_short_name\":\"人流量\",\"order\":\"desc\",\"order_by\":\"number_of_people\"},{\"default_sort\":1,\"display_name\":\"最新发布\",\"display_short_name\":\"最新\",\"order\":\"desc\",\"order_by\":\"activity_start_date\"},{\"default_sort\":0,\"display_name\":\"最早发布\",\"display_short_name\":\"最早\",\"order\":\"asc\",\"order_by\":\"activity_start_date\"},{\"default_sort\":0,\"display_name\":\"销量优先\",\"display_short_name\":\"销量\",\"order\":\"desc\",\"order_by\":\"number_of_order\"}]";
     public static String Fieldtype = "[{\"display_name\":\"住宅\",\"field_type_id\":1},{\"display_name\":\"写字楼\",\"field_type_id\":2},{\"display_name\":\"园区\",\"field_type_id\":14},{\"display_name\":\"商场\",\"field_type_id\":10},{\"display_name\":\"超市\",\"field_type_id\":3},{\"display_name\":\"影院\",\"field_type_id\":8},{\"display_name\":\"地铁\",\"field_type_id\":12},{\"display_name\":\"餐厅\",\"field_type_id\":5},{\"display_name\":\"学校\",\"field_type_id\":4},{\"display_name\":\"广场\",\"field_type_id\":6},{\"display_name\":\"大企业\",\"field_type_id\":11},{\"display_name\":\"交通枢纽\",\"field_type_id\":13},{\"display_name\":\"步行街\",\"field_type_id\":15},{\"display_name\":\"景区\",\"field_type_id\":17},{\"display_name\":\"众创空间\",\"field_type_id\":19},{\"display_name\":\"其他\",\"field_type_id\":9}]";
@@ -49,14 +49,15 @@ public class LoginManager {
     public static String is_outdoor = "[{\"display_name\":\"室外\",\"tag\":0},{\"display_name\":\"室内\",\"tag\":1}]";
     public static String activity_types = "[{\"code\":3,\"type\":\"峰会\"},{\"code\":2,\"type\":\"公益\"},{\"code\":1,\"type\":\"市集\"}]";
     public static String hotCotyList = "[{\"domain_name\":\"bj.lanhanba.net\",\"en_name\":\"beijingshi\",\"id\":1,\"name\":\"北京市\",\"province_id\":1,\"province_name\":\"北京市\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"sh.lanhanba.net\",\"en_name\":\"shanghaishi\",\"id\":75,\"name\":\"上海市\",\"province_id\":9,\"province_name\":\"上海市\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"nj.lanhanba.net\",\"en_name\":\"nanjingshi\",\"id\":77,\"name\":\"南京市\",\"province_id\":10,\"province_name\":\"江苏省\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"su.lanhanba.net\",\"en_name\":\"suzhoushi\",\"id\":81,\"name\":\"苏州市\",\"province_id\":10,\"province_name\":\"江苏省\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"hz.lanhanba.net\",\"en_name\":\"hangzhoushi\",\"id\":90,\"name\":\"杭州市\",\"province_id\":11,\"province_name\":\"浙江省\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"gz.lanhanba.net\",\"en_name\":\"guangzhoushi\",\"id\":200,\"name\":\"广州市\",\"province_id\":19,\"province_name\":\"广东省\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"sz.lanhanba.net\",\"en_name\":\"shenzhenshi\",\"id\":202,\"name\":\"深圳市\",\"province_id\":19,\"province_name\":\"广东省\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"cd.lanhanba.net\",\"en_name\":\"chengdushi\",\"id\":240,\"name\":\"成都市\",\"province_id\":23,\"province_name\":\"四川省\",\"service_phone\":[\"4001028028\"]}]";
-    public static String DEVELOPER = "[{\"display_name\":\"恒大地产\",\"id\":1,\"seq\":49},{\"display_name\":\"万科\",\"id\":2,\"seq\":62},{\"display_name\":\"保利\",\"id\":3,\"seq\":63},{\"display_name\":\"绿地\",\"id\":4,\"seq\":64},{\"display_name\":\"绿城\",\"id\":5,\"seq\":65},{\"display_name\":\"其他\",\"id\":6,\"seq\":66},{\"display_name\":\"万达电影\",\"id\":7,\"seq\":67},{\"display_name\":\"中影星美\",\"id\":8,\"seq\":68},{\"display_name\":\"联和院线\",\"id\":9,\"seq\":69},{\"display_name\":\"大地影院\",\"id\":10,\"seq\":70},{\"display_name\":\"中影南方\",\"id\":11,\"seq\":61},{\"display_name\":\"金逸影视\",\"id\":12,\"seq\":60},{\"display_name\":\"横店影视\",\"id\":13,\"seq\":59},{\"display_name\":\"中影数字\",\"id\":14,\"seq\":50},{\"display_name\":\"新影联\",\"id\":15,\"seq\":51},{\"display_name\":\"时代院线\",\"id\":16,\"seq\":52},{\"display_name\":\"比高\",\"id\":17,\"seq\":53},{\"display_name\":\"UME\",\"id\":18,\"seq\":54},{\"display_name\":\"太平洋院线\",\"id\":19,\"seq\":55},{\"display_name\":\"幸福蓝海OMNIJOI\",\"id\":20,\"seq\":56},{\"display_name\":\"奥斯卡院线OSCAR\",\"id\":21,\"seq\":57},{\"display_name\":\"保利影院\",\"id\":22,\"seq\":58},{\"display_name\":\"橙天嘉禾\",\"id\":23,\"seq\":71},{\"display_name\":\"中影北方THEATRES\",\"id\":24,\"seq\":72},{\"display_name\":\"博纳影业BONA\",\"id\":25,\"seq\":85},{\"display_name\":\"恒大影城\",\"id\":26,\"seq\":86},{\"display_name\":\"世纪环球\",\"id\":27,\"seq\":87},{\"display_name\":\"紫荆\",\"id\":28,\"seq\":88},{\"display_name\":\"耀莱成龙\",\"id\":29,\"seq\":89},{\"display_name\":\"沃尔玛\",\"id\":30,\"seq\":90},{\"display_name\":\"家乐福\",\"id\":31,\"seq\":91},{\"display_name\":\"苏宁易购\",\"id\":32,\"seq\":92},{\"display_name\":\"国美\",\"id\":33,\"seq\":93},{\"display_name\":\"华润万家\",\"id\":34,\"seq\":84},{\"display_name\":\"大润发\",\"id\":35,\"seq\":83},{\"display_name\":\"百联\",\"id\":36,\"seq\":82},{\"display_name\":\"永辉超市\",\"id\":37,\"seq\":73},{\"display_name\":\"物美\",\"id\":38,\"seq\":74},{\"display_name\":\"中百\",\"id\":39,\"seq\":75},{\"display_name\":\"天虹\",\"id\":40,\"seq\":76},{\"display_name\":\"麦德龙\",\"id\":41,\"seq\":77},{\"display_name\":\"步步高\",\"id\":42,\"seq\":78},{\"display_name\":\"华联超市\",\"id\":43,\"seq\":79},{\"display_name\":\"王府井百货\",\"id\":44,\"seq\":80},{\"display_name\":\"苏果\",\"id\":45,\"seq\":81},{\"display_name\":\"红旗连锁\",\"id\":46,\"seq\":94},{\"display_name\":\"大商\",\"id\":47,\"seq\":3},{\"display_name\":\"银座\",\"id\":48,\"seq\":16},{\"display_name\":\"人人乐\",\"id\":49,\"seq\":17},{\"display_name\":\"欧亚商都\",\"id\":51,\"seq\":18},{\"display_name\":\"重庆百货\",\"id\":52,\"seq\":19},{\"display_name\":\"茂业\",\"id\":53,\"seq\":20},{\"display_name\":\"农工商超市\",\"id\":54,\"seq\":21},{\"display_name\":\"五星电器\",\"id\":55,\"seq\":22},{\"display_name\":\"卜蜂莲花\",\"id\":56,\"seq\":23},{\"display_name\":\"春天百货\",\"id\":57,\"seq\":24},{\"display_name\":\"欧尚\",\"id\":58,\"seq\":15},{\"display_name\":\"西单商场\",\"id\":59,\"seq\":14},{\"display_name\":\"AEON永旺\",\"id\":60,\"seq\":13},{\"display_name\":\"塔吉特\",\"id\":61,\"seq\":5},{\"display_name\":\"华联\",\"id\":62,\"seq\":4},{\"display_name\":\"新华百货\",\"id\":63,\"seq\":6},{\"display_name\":\"新华都\",\"id\":64,\"seq\":7},{\"display_name\":\"合肥百货\",\"id\":65,\"seq\":8},{\"display_name\":\"COSTCO好市多\",\"id\":66,\"seq\":9},{\"display_name\":\"三江购物\",\"id\":67,\"seq\":10},{\"display_name\":\"Coop\",\"id\":68,\"seq\":11},{\"display_name\":\"\\t 家家悦\",\"id\":69,\"seq\":12},{\"display_name\":\"新一佳\",\"id\":70,\"seq\":25},{\"display_name\":\"碧桂园\",\"id\":71,\"seq\":26},{\"display_name\":\"融创\",\"id\":72,\"seq\":39},{\"display_name\":\"中海\",\"id\":73,\"seq\":40},{\"display_name\":\"龙湖\",\"id\":74,\"seq\":41},{\"display_name\":\"华润\",\"id\":75,\"seq\":42},{\"display_name\":\"华夏幸福\",\"id\":76,\"seq\":43},{\"display_name\":\"金地\",\"id\":77,\"seq\":44},{\"display_name\":\"万达\",\"id\":78,\"seq\":45},{\"display_name\":\"新城地产\",\"id\":79,\"seq\":46},{\"display_name\":\"招商蛇口 \",\"id\":80,\"seq\":47},{\"display_name\":\"世茂\",\"id\":81,\"seq\":38},{\"display_name\":\"\\t 富力\",\"id\":82,\"seq\":37},{\"display_name\":\"旭辉 \",\"id\":83,\"seq\":36},{\"display_name\":\"泰禾\",\"id\":84,\"seq\":27},{\"display_name\":\"首开\",\"id\":85,\"seq\":28},{\"display_name\":\"阳光城\",\"id\":86,\"seq\":29}]";
+    // FIXME: 2018/12/10 位置类型配置文件增加
+    public static String LOCATION_TYPES = "[{\"display_name\":\"出入口\",\"id\":1},{\"display_name\":\"扶梯口\",\"id\":2},{\"display_name\":\"电梯口\",\"id\":3},{\"display_name\":\"过道/走廊\",\"id\":4},{\"display_name\":\"中庭\",\"id\":5},{\"display_name\":\"连廊\",\"id\":6},{\"display_name\":\"大厅/大堂\",\"id\":7},{\"display_name\":\"外广场\",\"id\":8},{\"display_name\":\"下沉式广场\",\"id\":9},{\"display_name\":\"中心广场/花园\",\"id\":10},{\"display_name\":\"公告栏旁边\",\"id\":11},{\"display_name\":\"机器点位\",\"id\":12},{\"display_name\":\"停车位处\",\"id\":13},{\"display_name\":\"物业管理处\",\"id\":14},{\"display_name\":\"收银台旁边\",\"id\":15},{\"display_name\":\"服务中心旁边\",\"id\":16},{\"display_name\":\"售票大厅\",\"id\":17},{\"display_name\":\"其他\",\"id\":18},{\"display_name\":\"错错错册数\",\"id\":19},{\"display_name\":\"错错错123\",\"id\":21},{\"display_name\":\"错错错246\",\"id\":22},{\"display_name\":\"错错错3\",\"id\":23},{\"display_name\":\"错错错4\",\"id\":24},{\"display_name\":\"错错错12\",\"id\":25},{\"display_name\":\"错错错13\",\"id\":26},{\"display_name\":\"测试的\",\"id\":28},{\"display_name\":\"测试二测试的\",\"id\":29},{\"display_name\":\"过道\",\"id\":30}]";
     LoginManager() {}
     public static void init(Context appContext) {
         sp = new SecurePreferences(appContext);
         getInstance().context = appContext;
         Citylist = readAssetsFileString(context,"citylist").trim();
         String appversion = sp.getString("app2.0", "");
-        if (sp.getString("app2.0", "") ==null || sp.getString("app2.0", "").length() ==0 || !sp.getString("app2.0","").equals("3.6.1.1")) {
+        if (sp.getString("app2.0", "") ==null || sp.getString("app2.0", "").length() ==0 || !sp.getString("app2.0","").equals("3.9")) {
             sp.edit()
                     .putString(CommonValue.Servicetime, Servicetime)
                     .putString(CommonValue.ServicephoneNumber, ServicephoneNumber)
@@ -77,12 +78,13 @@ public class LoginManager {
                     .putString(CommonValue.IS_OUTDOOR,is_outdoor)
                     .putString(CommonValue.ACTIVITY_TYPES,activity_types)
                     .putString(CommonValue.HOT_CITYLIST,hotCotyList)
-                    .putString(CommonValue.DEVELOPER,DEVELOPER)
-                    .putString("app2.0", "3.6.1.1")
+                    .putString(CommonValue.LOCATION_TYPE_IDS,LOCATION_TYPES)
+                    .putString("app2.0", "3.9")
                     .putString("currentcitycode", "")
                     .putString("currentcity", "")
                     .putLong("Config_updatetime", 0)
                     .apply();
+            // FIXME: 2018/12/10 app2.0需要增加初始化配置
         }
     }
 
@@ -165,7 +167,7 @@ public class LoginManager {
                 .putString(CommonValue.Servicetime, config.getServicetime())
                 .putString(CommonValue.ServicephoneNumber, config.getServicephoneNumber())
                 .putString(CommonValue.Fieldtype, config.getFieldtype())
-                .putString(CommonValue.Fieldsort, config.getResource_sort())
+                .putString(CommonValue.Fieldsort, config.getPhysical_sort())
                 .putString(CommonValue.Avdsort, config.getAvd_sort())
                 .putString(CommonValue.Activitysort, config.getActivity_sort())
                 .putString(CommonValue.Citylist, config.getCitylist())
@@ -181,7 +183,7 @@ public class LoginManager {
                 .putString(CommonValue.IS_OUTDOOR,config.getIs_outdoor())
                 .putString(CommonValue.ACTIVITY_TYPES,config.getActivity_types())
                 .putString(CommonValue.HOT_CITYLIST,config.getHot_citylist())
-                .putString(CommonValue.DEVELOPER,config.getDeveloper())
+                .putString(CommonValue.LOCATION_TYPE_IDS,config.getLocation_types())
                 .apply();
     }
     public static AsyncTask readLoginAsync(final Runnable callback) {
@@ -248,7 +250,7 @@ public class LoginManager {
         getInstance().mConfigInfo.setServicephoneNumber(sp.getString(CommonValue.ServicephoneNumber, ""));
         //默认物业端
         getInstance().mConfigInfo.setFieldtype(sp.getString(CommonValue.Fieldtype, ""));
-        getInstance().mConfigInfo.setResource_sort(sp.getString(CommonValue.Fieldsort, ""));
+        getInstance().mConfigInfo.setPhysical_sort(sp.getString(CommonValue.Fieldsort, ""));
         getInstance().mConfigInfo.setAvd_sort(sp.getString(CommonValue.Avdsort, ""));
         getInstance().mConfigInfo.setActivity_sort(sp.getString(CommonValue.Activitysort, ""));
 
@@ -266,7 +268,7 @@ public class LoginManager {
         getInstance().mConfigInfo.setIs_outdoor(sp.getString(CommonValue.IS_OUTDOOR, ""));
         getInstance().mConfigInfo.setActivity_types(sp.getString(CommonValue.ACTIVITY_TYPES, ""));
         getInstance().mConfigInfo.setHot_citylist(sp.getString(CommonValue.HOT_CITYLIST, ""));
-        getInstance().mConfigInfo.setDeveloper(sp.getString(CommonValue.DEVELOPER, ""));
+        getInstance().mConfigInfo.setLocation_types(sp.getString(CommonValue.LOCATION_TYPE_IDS, ""));
     }
     public synchronized static void readLogin() {
         if (getInstance().mLoginInfo == null) {
@@ -675,10 +677,10 @@ public class LoginManager {
     }
     public static String getfieldsort() {
         if (getInstance().mConfigInfo != null) {
-            return getInstance().mConfigInfo.getResource_sort();
+            return getInstance().mConfigInfo.getPhysical_sort();
         } else {
             readConfig();
-            return getInstance().mConfigInfo.getResource_sort();
+            return getInstance().mConfigInfo.getPhysical_sort();
         }
     }
     public static String getAvd_sort() {
@@ -809,12 +811,12 @@ public class LoginManager {
             return getInstance().mConfigInfo.getHot_citylist();
         }
     }
-    public static String getDeveloper() {
+    public static String getLocation_type_ids() {
         if (getInstance().mConfigInfo != null) {
-            return getInstance().mConfigInfo.getDeveloper();
+            return getInstance().mConfigInfo.getLocation_types();
         }else {
             readConfig();
-            return getInstance().mConfigInfo.getDeveloper();
+            return getInstance().mConfigInfo.getLocation_types();
         }
     }
 
@@ -959,7 +961,7 @@ public class LoginManager {
                         .remove(CommonValue.IS_OUTDOOR)
                         .remove(CommonValue.ACTIVITY_TYPES)
                         .remove(CommonValue.HOT_CITYLIST)
-                        .remove(CommonValue.DEVELOPER)
+                        .remove(CommonValue.LOCATION_TYPE_IDS)
                         .apply();
                 return null;
             }
@@ -1256,5 +1258,12 @@ public class LoginManager {
     }
     public static int getPhyinfo_show_guide() {
         return sp.getInt("phyinfo_show_guide", 0);
+    }
+    public static void setCoupon_remind (String coupon_remind) {
+        sp.edit().putString("coupon_remind", coupon_remind)
+                .apply();
+    }
+    public static String getCoupon_remind() {
+        return sp.getString("coupon_remind", "");
     }
 }

@@ -54,7 +54,7 @@ public class CommonValue {
     public static final String IS_OUTDOOR = "is_outdoor";
     public static final String ACTIVITY_TYPES = "activity_types";
     public static final String HOT_CITYLIST = "hot_citylist";
-    public static final String DEVELOPER = "developer";
+    public static final String LOCATION_TYPE_IDS = "location_type_ids";
 
     public static final String ADMIN = "1";
     public static final String REALESTATE = "2";
