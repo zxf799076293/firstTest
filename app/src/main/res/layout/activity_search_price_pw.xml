@@ -14,6 +14,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/search_price_lv"
                 android:divider="@null"
+                android:visibility="visible"
                 android:background="@color/white" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,13 +62,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
+                        android:gravity="center_vertical"
                         android:id="@+id/screening_typeother_layout">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="@dimen/searchlist_item_txt_margintop"
                             android:paddingRight="@dimen/searchlist_item_txt_margintop"
-                            android:textColor="@color/register_edit_color"
+                            android:textColor="@color/new_viewbg"
                             android:textSize="@dimen/btn_title_size"
                             android:text="一"/>
                         <EditText
@@ -90,7 +92,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="match_parent"
+                    android:layout_height="@dimen/vertical_view_group_height"
                     android:paddingRight="@dimen/app_backbtn_marginleft"
                     android:gravity="right|center_vertical"
                     android:orientation="horizontal"

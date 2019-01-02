@@ -9,6 +9,7 @@ import com.linhuiba.business.model.ApiAdvResourcesModel;
 import com.linhuiba.business.model.ApiResourcesModel;
 import com.linhuiba.business.model.ResourceSearchItemModel;
 import com.linhuiba.business.model.SearchListAttributesModel;
+import com.linhuiba.business.model.SearchSellResModel;
 import com.linhuiba.business.mvpmodel.SearchResListMvpModel;
 import com.linhuiba.business.mvpview.SearchResListMvpView;
 import com.linhuiba.business.network.LinhuiAsyncHttpResponseHandler;
@@ -111,12 +112,12 @@ public class SearchResListMvpPresenter extends BasePresenter<SearchResListMvpVie
                     if (data != null) {
                         JSONObject jsonObject = JSONObject.parseObject(data.toString());
                         if (jsonObject.get("data") != null) {
-                            ArrayList<ResourceSearchItemModel> list = (ArrayList<ResourceSearchItemModel>) JSONArray.parseArray(jsonObject.get("data").toString(),
-                                    ResourceSearchItemModel.class);
+                            ArrayList<SearchSellResModel> list = (ArrayList<SearchSellResModel>) JSONArray.parseArray(jsonObject.get("data").toString(),
+                                    SearchSellResModel.class);
                             if (page > 1) {
-                                getView().onSearchResListMoreSuccess(list,response);
+                                getView().onSearchSellResListMoreSuccess(list,response);
                             } else {
-                                getView().onSearchResListSuccess(list,response);
+                                getView().onSearchSellResListSuccess(list,response);
                             }
                         } else {
                             getView().showToast(getView().getContext().getResources().getString(R.string.review_error_text));
@@ -166,17 +167,17 @@ public class SearchResListMvpPresenter extends BasePresenter<SearchResListMvpVie
         if (!isViewAttached()) {
             return;
         }
-        SearchResListMvpModel.getFastList(apiResourcesModel,new LinhuiAsyncHttpResponseHandler(ResourceSearchItemModel.class,true) {
+        SearchResListMvpModel.getFastList(apiResourcesModel,new LinhuiAsyncHttpResponseHandler(SearchSellResModel.class,true) {
             @Override
             public void onSuccess(int statusCode, Header[] headers, Response response, Object data) {
                 if (isViewAttached()) {
                     getView().hideLoading();
                     if (data != null) {
-                        ArrayList<ResourceSearchItemModel> list = (ArrayList<ResourceSearchItemModel>)data;
+                        ArrayList<SearchSellResModel> list = (ArrayList<SearchSellResModel>)data;
                         if (Integer.parseInt(apiResourcesModel.getPage()) > 1) {
-                            getView().onSearchResListMoreSuccess(list,response);
+                            getView().onSearchSellResListMoreSuccess(list,response);
                         } else {
-                            getView().onSearchResListSuccess(list,response);
+                            getView().onSearchSellResListSuccess(list,response);
                         }
                     } else {
                         getView().showToast(getView().getContext().getResources().getString(R.string.review_error_text));

@@ -95,6 +95,8 @@ public class LoginActivity extends BaseMvpActivity implements LoginMvpView {
     private UnionInfo mUserInfo;
     private IUiListener mUserInfoListener;
     private TimeCount mTime;
+    private boolean isAnalysis;//是否是解析地址跳转的
+    private String mAnalysisUrl = "";//是否是解析地址URL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +131,10 @@ public class LoginActivity extends BaseMvpActivity implements LoginMvpView {
                 Intent fastlogin_intent = new Intent(this,FastLoginActivity.class);
                 fastlogin_intent.putExtra("is_modity_pw",1);//修改密码跳转
                 startActivityForResult(fastlogin_intent, 1);
+            }
+            if (msgintent.getExtras().get("jump_url") != null) {
+                mAnalysisUrl = msgintent.getExtras().get("jump_url").toString();
+                isAnalysis = true;
             }
         }
         mLoginMvpPresenter = new LoginMvpPresenter();
@@ -343,6 +349,7 @@ public class LoginActivity extends BaseMvpActivity implements LoginMvpView {
                         startActivity(intent);
                         finish();
                     } else {
+                        jumpUrl();
                         finish();
                     }
                 }
@@ -354,6 +361,7 @@ public class LoginActivity extends BaseMvpActivity implements LoginMvpView {
                     startActivity(intent);
                     LoginActivity.this.finish();
                 } else {
+                    jumpUrl();
                     LoginActivity.this.finish();
                 }
                 break;
@@ -372,6 +380,7 @@ public class LoginActivity extends BaseMvpActivity implements LoginMvpView {
             Tencent.onActivityResultData(requestCode,resultCode,data,mIUiListener);
         } else if (requestCode == 2) {
             if (LoginManager.isLogin()) {
+                jumpUrl();
                 finish();
             }
         }
@@ -384,6 +393,10 @@ public class LoginActivity extends BaseMvpActivity implements LoginMvpView {
         Intent pushmessage = getIntent();
         if (pushmessage.getExtras() != null) {
             isPushMessageIntent = pushmessage.getBooleanExtra(PUSH_MSG_INTENT,false);
+        }
+        if (pushmessage.getExtras().get("jump_url") != null) {
+            mAnalysisUrl = pushmessage.getExtras().get("jump_url").toString();
+            isAnalysis = true;
         }
         mLoginAccountET.setText("");
         mLoginPwET.setText("");
@@ -417,6 +430,7 @@ public class LoginActivity extends BaseMvpActivity implements LoginMvpView {
                 intent.putExtra("mLinkInt",mLinkInt);
                 startActivity(intent);
             }
+            jumpUrl();
             LoginActivity.this.finish();
         }
         Constants constants = new Constants(LoginActivity.this);
@@ -444,6 +458,7 @@ public class LoginActivity extends BaseMvpActivity implements LoginMvpView {
                 startActivity(intent);
                 LoginActivity.this.finish();
             } else {
+                jumpUrl();
                 LoginActivity.this.finish();
             }
             Constants constants = new Constants(LoginActivity.this);
@@ -490,6 +505,7 @@ public class LoginActivity extends BaseMvpActivity implements LoginMvpView {
                 intent.putExtra("mLinkInt",mLinkInt);
                 startActivity(intent);
             }
+            jumpUrl();
             LoginActivity.this.finish();
         }
         Constants constants = new Constants(LoginActivity.this);
@@ -516,6 +532,7 @@ public class LoginActivity extends BaseMvpActivity implements LoginMvpView {
                 startActivity(intent);
                 LoginActivity.this.finish();
             } else {
+                jumpUrl();
                 LoginActivity.this.finish();
             }
             Constants constants = new Constants(LoginActivity.this);
@@ -666,6 +683,11 @@ public class LoginActivity extends BaseMvpActivity implements LoginMvpView {
             mLoginCodeBtn.setEnabled(false);
             mLoginCodeBtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.register_btn_unenable_bg));
             mLoginCodeBtn.setText(str+"("+(millisUntilFinished / 1000)+")");
+        }
+    }
+    private void jumpUrl() {
+        if (isAnalysis) {
+            Constants.pushUrlJumpActivity(mAnalysisUrl,LoginActivity.this,false);
         }
     }
 }

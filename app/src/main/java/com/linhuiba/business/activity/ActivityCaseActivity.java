@@ -224,9 +224,6 @@ public class ActivityCaseActivity extends BaseMvpActivity implements SwipeRefres
             if (intent.getExtras().get("city_ids") != null) {
                 mCityIds = (ArrayList<Integer>) intent.getExtras().get("city_ids");
             }
-            if (!mCityIds.contains(mCityId)) {
-                mCityIds.add(mCityId);
-            }
             if (intent.getExtras().get("industry_ids") != null) {
                 mIndustriesIds = (ArrayList<Integer>) intent.getExtras().get("industry_ids");
             }

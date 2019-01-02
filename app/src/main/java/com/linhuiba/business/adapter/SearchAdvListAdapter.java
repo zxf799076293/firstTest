@@ -17,7 +17,7 @@ import com.linhuiba.business.activity.SearchListActivity;
 import com.linhuiba.business.activity.SelfSupportShopActivity;
 import com.linhuiba.business.connector.Constants;
 import com.linhuiba.business.fragment.SelfSupportShopFragment;
-import com.linhuiba.business.model.ResourceSearchItemModel;
+import com.linhuiba.business.model.SearchSellResModel;
 import com.linhuiba.linhuipublic.config.Config;
 import com.squareup.picasso.Picasso;
 
@@ -27,12 +27,12 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/3/3.
  */
 public class SearchAdvListAdapter extends BaseAdapter {
-    private ArrayList<ResourceSearchItemModel> mFeildList;
+    private ArrayList<SearchSellResModel> mFeildList;
     private LayoutInflater mInflater = null;
     private Activity mactivity;
     private Context mContext;
     private boolean isSelfSupportShop;
-    public SearchAdvListAdapter(Context context, ArrayList<ResourceSearchItemModel> list, int type, Activity mactivity,boolean isSelfSupportShop) {
+    public SearchAdvListAdapter(Context context, ArrayList<SearchSellResModel> list, int type, Activity mactivity, boolean isSelfSupportShop) {
         if (context != null && mactivity != null) {
             this.mFeildList = list;
             this.mactivity = mactivity;
@@ -185,24 +185,22 @@ public class SearchAdvListAdapter extends BaseAdapter {
                         holder.mSearchListDistanceTV.setVisibility(View.GONE);
                         holder.mSearchListDistanceView.setVisibility(View.GONE);
                     }
+                    String address = "";
+                    if (mFeildList.get(position).getCity() != null &&
+                            mFeildList.get(position).getCity().length() > 0) {
+                        address = mFeildList.get(position).getCity();
+                    }
                     if (mFeildList.get(position).getDistrict() != null &&
                             mFeildList.get(position).getDistrict().length() > 0) {
+                        address = address + mFeildList.get(position).getDistrict();
+                    }
+                    if (mFeildList.get(position).getAddress() != null &&
+                            mFeildList.get(position).getAddress().length() > 0) {
+                        address = address + mFeildList.get(position).getAddress();
+                    }
+                    if (address.length() > 0) {
                         holder.mSearchListActivityAddressLL.setVisibility(View.VISIBLE);
-                        if (mFeildList.get(position).getAddress() != null &&
-                                mFeildList.get(position).getAddress().length() > 0) {
-                            holder.mSearchListActivityAddressTV.setText(mFeildList.get(position).getDistrict() +
-                                    mFeildList.get(position).getAddress());
-                        } else {
-                            holder.mSearchListActivityAddressTV.setText(mFeildList.get(position).getDistrict());
-                        }
-                    } else {
-                        if (mFeildList.get(position).getAddress() != null &&
-                                mFeildList.get(position).getAddress().length() > 0) {
-                            holder.mSearchListActivityAddressLL.setVisibility(View.VISIBLE);
-                            holder.mSearchListActivityAddressTV.setText(mFeildList.get(position).getAddress());
-                        } else {
-                            holder.mSearchListActivityAddressTV.setText("");
-                        }
+                        holder.mSearchListActivityAddressTV.setText(address);
                     }
                     if (mFeildList.get(position).getNumber_of_people() != null && mFeildList.get(position).getNumber_of_people().length() > 0) {
                         holder.mSearchListNumberOfPeopleTV.setText(mContext.getResources().getString(R.string.search_numberofpeople_first_str) +

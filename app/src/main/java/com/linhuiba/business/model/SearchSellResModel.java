@@ -1,15 +1,10 @@
 package com.linhuiba.business.model;
 
-import android.content.Intent;
-
 import com.linhuiba.linhuifield.fieldmodel.Field_AddResourceCreateItemModel;
 
 import java.util.ArrayList;
 
-/**
- * Created by Administrator on 2016/5/13.
- */
-public class ResourceSearchItemModel {
+public class SearchSellResModel {
     private int resource_id;
     private String resource_name;
     private String address;
@@ -58,7 +53,7 @@ public class ResourceSearchItemModel {
     private String company;
     private String office_location;
     private String mobile;
-    private Field_AddResourceCreateItemModel city = new Field_AddResourceCreateItemModel();
+    private String city;
     private ArrayList<Field_AddResourceCreateItemModel> many_service_items = new ArrayList<>();
     //新的字段
     private ArrayList<Field_AddResourceCreateItemModel> labels = new ArrayList<>();
@@ -96,7 +91,6 @@ public class ResourceSearchItemModel {
     private Field_AddResourceCreateItemModel physical_resource_first_img;
     private Integer indoor;
     private int selected;
-    private Integer top_resource_id;//点击跳转的详情id
     //详情页的展位下的活动
     private String custom_name;//活动名称
     private String selling_resource_img;//活动图片 （默认为 null）
@@ -108,6 +102,7 @@ public class ResourceSearchItemModel {
     public void setResource_id(int resource_id) {
         this.resource_id = resource_id;
     }
+
     public String getResource_name() {
         return resource_name;
     }
@@ -356,6 +351,270 @@ public class ResourceSearchItemModel {
         this.refer_min_price = refer_min_price;
     }
 
+    public Integer getRefer_max_price() {
+        return refer_max_price;
+    }
+
+    public void setRefer_max_price(Integer refer_max_price) {
+        this.refer_max_price = refer_max_price;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSort() {
+        return sort;
+    }
+
+    public void setSort(int sort) {
+        this.sort = sort;
+    }
+
+    public Integer getNumber_of_group_purchase_now() {
+        return number_of_group_purchase_now;
+    }
+
+    public void setNumber_of_group_purchase_now(Integer number_of_group_purchase_now) {
+        this.number_of_group_purchase_now = number_of_group_purchase_now;
+    }
+
+    public int getRes_type_id() {
+        return res_type_id;
+    }
+
+    public void setRes_type_id(int res_type_id) {
+        this.res_type_id = res_type_id;
+    }
+
+    public int getIs_hot() {
+        return is_hot;
+    }
+
+    public void setIs_hot(int is_hot) {
+        this.is_hot = is_hot;
+    }
+
+    public Double getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(Double deposit) {
+        this.deposit = deposit;
+    }
+
+    public String getSubsidy_str() {
+        return subsidy_str;
+    }
+
+    public void setSubsidy_str(String subsidy_str) {
+        this.subsidy_str = subsidy_str;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getOffice_location() {
+        return office_location;
+    }
+
+    public void setOffice_location(String office_location) {
+        this.office_location = office_location;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public ArrayList<Field_AddResourceCreateItemModel> getMany_service_items() {
+        return many_service_items;
+    }
+
+    public void setMany_service_items(ArrayList<Field_AddResourceCreateItemModel> many_service_items) {
+        this.many_service_items = many_service_items;
+    }
+
+    public ArrayList<Field_AddResourceCreateItemModel> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(ArrayList<Field_AddResourceCreateItemModel> labels) {
+        this.labels = labels;
+    }
+
+    public int getPhysical_resource_counts() {
+        return physical_resource_counts;
+    }
+
+    public void setPhysical_resource_counts(int physical_resource_counts) {
+        this.physical_resource_counts = physical_resource_counts;
+    }
+
+    public int getOrder_quantity() {
+        return order_quantity;
+    }
+
+    public void setOrder_quantity(int order_quantity) {
+        this.order_quantity = order_quantity;
+    }
+
+    public int getIs_subsidy() {
+        return is_subsidy;
+    }
+
+    public void setIs_subsidy(int is_subsidy) {
+        this.is_subsidy = is_subsidy;
+    }
+
+    public int getHas_coupons() {
+        return has_coupons;
+    }
+
+    public void setHas_coupons(int has_coupons) {
+        this.has_coupons = has_coupons;
+    }
+
+    public String getFloor_price() {
+        return floor_price;
+    }
+
+    public void setFloor_price(String floor_price) {
+        this.floor_price = floor_price;
+    }
+
+    public Field_AddResourceCreateItemModel getCommunity_img() {
+        return community_img;
+    }
+
+    public void setCommunity_img(Field_AddResourceCreateItemModel community_img) {
+        this.community_img = community_img;
+    }
+
+    public Integer getTop_physical_id() {
+        return top_physical_id;
+    }
+
+    public void setTop_physical_id(Integer top_physical_id) {
+        this.top_physical_id = top_physical_id;
+    }
+
+    public int getIs_fast_booking() {
+        return is_fast_booking;
+    }
+
+    public void setIs_fast_booking(int is_fast_booking) {
+        this.is_fast_booking = is_fast_booking;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getHas_selling() {
+        return has_selling;
+    }
+
+    public void setHas_selling(int has_selling) {
+        this.has_selling = has_selling;
+    }
+
+    public String getSubsidy_price() {
+        return subsidy_price;
+    }
+
+    public void setSubsidy_price(String subsidy_price) {
+        this.subsidy_price = subsidy_price;
+    }
+
+    public String getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(String community) {
+        this.community = community;
+    }
+
+    public boolean isIs_only_enquiry() {
+        return is_only_enquiry;
+    }
+
+    public void setIs_only_enquiry(boolean is_only_enquiry) {
+        this.is_only_enquiry = is_only_enquiry;
+    }
+
+    public String getTotal_area() {
+        return total_area;
+    }
+
+    public void setTotal_area(String total_area) {
+        this.total_area = total_area;
+    }
+
+    public Field_AddResourceCreateItemModel getLocation_type() {
+        return location_type;
+    }
+
+    public void setLocation_type(Field_AddResourceCreateItemModel location_type) {
+        this.location_type = location_type;
+    }
+
+    public int getNumber_of_order() {
+        return number_of_order;
+    }
+
+    public void setNumber_of_order(int number_of_order) {
+        this.number_of_order = number_of_order;
+    }
+
+    public String getMin_price() {
+        return min_price;
+    }
+
+    public void setMin_price(String min_price) {
+        this.min_price = min_price;
+    }
+
     public boolean isSign_up_end() {
         return sign_up_end;
     }
@@ -460,14 +719,6 @@ public class ResourceSearchItemModel {
         this.selected = selected;
     }
 
-    public Integer getTop_resource_id() {
-        return top_resource_id;
-    }
-
-    public void setTop_resource_id(Integer top_resource_id) {
-        this.top_resource_id = top_resource_id;
-    }
-
     public String getCustom_name() {
         return custom_name;
     }
@@ -482,269 +733,5 @@ public class ResourceSearchItemModel {
 
     public void setSelling_resource_img(String selling_resource_img) {
         this.selling_resource_img = selling_resource_img;
-    }
-
-    public Integer getRefer_max_price() {
-        return refer_max_price;
-    }
-
-    public void setRefer_max_price(Integer refer_max_price) {
-        this.refer_max_price = refer_max_price;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getSort() {
-        return sort;
-    }
-
-    public void setSort(int sort) {
-        this.sort = sort;
-    }
-
-    public Integer getNumber_of_group_purchase_now() {
-        return number_of_group_purchase_now;
-    }
-
-    public void setNumber_of_group_purchase_now(Integer number_of_group_purchase_now) {
-        this.number_of_group_purchase_now = number_of_group_purchase_now;
-    }
-
-    public int getRes_type_id() {
-        return res_type_id;
-    }
-
-    public void setRes_type_id(int res_type_id) {
-        this.res_type_id = res_type_id;
-    }
-
-    public int getIs_hot() {
-        return is_hot;
-    }
-
-    public void setIs_hot(int is_hot) {
-        this.is_hot = is_hot;
-    }
-
-    public Double getDeposit() {
-        return deposit;
-    }
-
-    public void setDeposit(Double deposit) {
-        this.deposit = deposit;
-    }
-
-    public String getSubsidy_str() {
-        return subsidy_str;
-    }
-
-    public void setSubsidy_str(String subsidy_str) {
-        this.subsidy_str = subsidy_str;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public String getOffice_location() {
-        return office_location;
-    }
-
-    public void setOffice_location(String office_location) {
-        this.office_location = office_location;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public Field_AddResourceCreateItemModel getCity() {
-        return city;
-    }
-
-    public void setCity(Field_AddResourceCreateItemModel city) {
-        this.city = city;
-    }
-
-    public ArrayList<Field_AddResourceCreateItemModel> getMany_service_items() {
-        return many_service_items;
-    }
-
-    public void setMany_service_items(ArrayList<Field_AddResourceCreateItemModel> many_service_items) {
-        this.many_service_items = many_service_items;
-    }
-
-    public ArrayList<Field_AddResourceCreateItemModel> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(ArrayList<Field_AddResourceCreateItemModel> labels) {
-        this.labels = labels;
-    }
-
-    public int getPhysical_resource_counts() {
-        return physical_resource_counts;
-    }
-
-    public void setPhysical_resource_counts(int physical_resource_counts) {
-        this.physical_resource_counts = physical_resource_counts;
-    }
-
-    public int getOrder_quantity() {
-        return order_quantity;
-    }
-
-    public void setOrder_quantity(int order_quantity) {
-        this.order_quantity = order_quantity;
-    }
-
-    public int getIs_subsidy() {
-        return is_subsidy;
-    }
-
-    public void setIs_subsidy(int is_subsidy) {
-        this.is_subsidy = is_subsidy;
-    }
-
-    public int getHas_coupons() {
-        return has_coupons;
-    }
-
-    public void setHas_coupons(int has_coupons) {
-        this.has_coupons = has_coupons;
-    }
-
-    public String getFloor_price() {
-        return floor_price;
-    }
-
-    public void setFloor_price(String floor_price) {
-        this.floor_price = floor_price;
-    }
-
-    public Field_AddResourceCreateItemModel getCommunity_img() {
-        return community_img;
-    }
-
-    public void setCommunity_img(Field_AddResourceCreateItemModel community_img) {
-        this.community_img = community_img;
-    }
-
-    public Integer getTop_physical_id() {
-        return top_physical_id;
-    }
-
-    public void setTop_physical_id(Integer top_physical_id) {
-        this.top_physical_id = top_physical_id;
-    }
-
-    public int getIs_fast_booking() {
-        return is_fast_booking;
-    }
-
-    public void setIs_fast_booking(int is_fast_booking) {
-        this.is_fast_booking = is_fast_booking;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getSubsidy_price() {
-        return subsidy_price;
-    }
-
-    public void setSubsidy_price(String subsidy_price) {
-        this.subsidy_price = subsidy_price;
-    }
-
-    public String getCommunity() {
-        return community;
-    }
-
-    public void setCommunity(String community) {
-        this.community = community;
-    }
-
-    public boolean isIs_only_enquiry() {
-        return is_only_enquiry;
-    }
-
-    public void setIs_only_enquiry(boolean is_only_enquiry) {
-        this.is_only_enquiry = is_only_enquiry;
-    }
-
-    public String getTotal_area() {
-        return total_area;
-    }
-
-    public void setTotal_area(String total_area) {
-        this.total_area = total_area;
-    }
-
-    public Field_AddResourceCreateItemModel getLocation_type() {
-        return location_type;
-    }
-
-    public void setLocation_type(Field_AddResourceCreateItemModel location_type) {
-        this.location_type = location_type;
-    }
-
-    public int getHas_selling() {
-        return has_selling;
-    }
-
-    public void setHas_selling(int has_selling) {
-        this.has_selling = has_selling;
-    }
-
-    public int getNumber_of_order() {
-        return number_of_order;
-    }
-
-    public void setNumber_of_order(int number_of_order) {
-        this.number_of_order = number_of_order;
-    }
-
-    public String getMin_price() {
-        return min_price;
-    }
-
-    public void setMin_price(String min_price) {
-        this.min_price = min_price;
     }
 }

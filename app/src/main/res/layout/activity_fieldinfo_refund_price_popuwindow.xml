@@ -92,7 +92,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="@string/wallet_open_cancel_btn_text"
+                                    android:text="@string/cancel"
                                     android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
                                     android:textSize="@dimen/txt_title_size_nor"
                                     android:id="@+id/app_defaylt_cancel_tv"/>
@@ -110,7 +110,7 @@
                                     android:gravity="center"
                                     android:textColor="@color/default_bluebg"
                                     android:textSize="@dimen/txt_title_size_nor"
-                                    android:text="@string/wallet_open_determine_btn_text"
+                                    android:text="@string/confirm"
                                     android:id="@+id/app_defaylt_confirm_tv"/>
                             </LinearLayout>
                         </LinearLayout>
@@ -122,14 +122,21 @@
                     android:background="@drawable/activity_confirmorder_success_layout_bg"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/field_list_item_label_samll"
-                    android:paddingTop="@dimen/field_list_item_label_samll"
+                    android:paddingTop="@dimen/paddingleft"
                     android:layout_marginLeft="@dimen/user_info_photo_text_top"
                     android:layout_marginRight="@dimen/user_info_photo_text_top"
                     android:visibility="gone"
                     android:id="@+id/app_defaylt_dialog_counselor_ll">
-                    <include
-                        layout="@layout/module_activity_fieldinfo_include_counselor">
-                    </include>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/field_list_item_label_samll"
+                        android:layout_marginLeft="@dimen/field_list_item_label_samll">
+                        <include
+                            layout="@layout/module_activity_fieldinfo_include_counselor">
+                        </include>
+                    </LinearLayout>
                     <View
                         style="@style/DefaultLongViewStyle">
                     </View>
@@ -141,6 +148,7 @@
                         android:layout_marginTop="@dimen/field_list_item_label_samll"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:background="@drawable/module_bg_fieldinfo_counselor_save_wx_qrcode"
                         android:id="@+id/app_defaylt_dialog_counselor_save_ll">
                         <ImageView
                             android:layout_width="@dimen/order_type_layoutwidth"
@@ -174,6 +182,7 @@
                         android:layout_marginLeft="@dimen/field_list_item_label_samll"
                         android:layout_marginRight="@dimen/field_list_item_label_samll"
                         android:layout_marginTop="@dimen/app_backbtn_marginleft"
+                        android:background="@drawable/module_bg_fieldinfo_counselor_save_wx_qrcode"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
                         android:id="@+id/app_defaylt_dialog_counselor_call_ll">

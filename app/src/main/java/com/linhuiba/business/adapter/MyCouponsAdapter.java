@@ -413,17 +413,13 @@ public class MyCouponsAdapter extends BaseQuickAdapter<MyCouponsModel, BaseViewH
                 couponCentreReceiveTVLL.setVisibility(View.VISIBLE);
                 // FIXME: 2018/12/11 判断是否领取
                 couponCentreReceiveTV.setText(mContext.getResources().getString(R.string.module_fieldinfo_pw_receive_coupons));
+                couponCentreReceiveTVLL.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.activity_splash_screen_selected_text_bg));
                 couponCentreReceiveTVLL.setOnClickListener(new OnMultiClickListener() {
                     @Override
                     public void onMultiClick(View v) {
                         // FIXME: 2018/12/11 立即领取
                         if (LoginManager.isLogin()) {
-                            if (item.getAccount_limit() != null &&
-                                    item.getUser_coupons_count() >= item.getAccount_limit()) {
-                                MessageUtils.showToast(mContext.getResources().getString(R.string.module_coupon_centre_received_no_have));
-                            } else {
-                                mCouponReceiveCentreActivity.mCouponsMvpPresenter.receiveCoupons(item.getId(),1);
-                            }
+                            mCouponReceiveCentreActivity.mCouponsMvpPresenter.receiveCoupons(item.getId(),1);
                         } else {
                             Intent intent = new Intent(mCouponReceiveCentreActivity, LoginActivity.class);
                             mCouponReceiveCentreActivity.startActivity(intent);
@@ -442,12 +438,7 @@ public class MyCouponsAdapter extends BaseQuickAdapter<MyCouponsModel, BaseViewH
                     @Override
                     public void onMultiClick(View v) {
                         if (LoginManager.isLogin()) {
-                            if (item.getAccount_limit() != null &&
-                                    item.getUser_coupons_count() >= item.getAccount_limit()) {
-                                MessageUtils.showToast(mContext.getResources().getString(R.string.module_coupon_centre_received_no_have));
-                            } else {
-                                mCouponReceiveCentreActivity.mCouponsMvpPresenter.receiveCoupons(item.getId(),1);
-                            }
+                            mCouponReceiveCentreActivity.mCouponsMvpPresenter.receiveCoupons(item.getId(),1);
                         } else {
                             Intent intent = new Intent(mCouponReceiveCentreActivity, LoginActivity.class);
                             mCouponReceiveCentreActivity.startActivity(intent);
@@ -514,12 +505,7 @@ public class MyCouponsAdapter extends BaseQuickAdapter<MyCouponsModel, BaseViewH
                         @Override
                         public void onMultiClick(View v) {
                             if (LoginManager.isLogin()) {
-                                if (item.getAccount_limit() != null &&
-                                        item.getUser_coupons_count() >= item.getAccount_limit()) {
-                                    MessageUtils.showToast(mContext.getResources().getString(R.string.module_coupon_centre_received_no_have));
-                                } else {
-                                    mCouponReceiveCentreActivity.mCouponsMvpPresenter.receiveCoupons(item.getId(),1);
-                                }
+                                mCouponReceiveCentreActivity.mCouponsMvpPresenter.receiveCoupons(item.getId(),1);
                             } else {
                                 Intent intent = new Intent(mCouponReceiveCentreActivity, LoginActivity.class);
                                 mCouponReceiveCentreActivity.startActivity(intent);
@@ -536,7 +522,6 @@ public class MyCouponsAdapter extends BaseQuickAdapter<MyCouponsModel, BaseViewH
                     @Override
                     public void onMultiClick(View v) {
 
-                        MessageUtils.showToast(mContext.getResources().getString(R.string.module_coupon_centre_receive_finished));
                     }
                 });
 
@@ -586,6 +571,10 @@ public class MyCouponsAdapter extends BaseQuickAdapter<MyCouponsModel, BaseViewH
                 str = mContext.getResources().getString(R.string.module_coupons_item_exchange_hint);
                 timeTV.setText(mContext.getResources().getString(R.string.module_coupons_item_exchange_hint)
                         + mContext.getResources().getString(R.string.module_coupons_item_time_hint));
+            } else {
+                if (type == 5) {
+                    str = mContext.getResources().getString(R.string.module_fieldinfo_receive);
+                }
             }
             if (item.getRelative_time() != null &&
                     item.getRelative_time().length() > 0) {

@@ -59,6 +59,7 @@
                 android:textSize="@dimen/register_codebtn_txt_size"
                 android:layout_marginTop="@dimen/btn_margin_width"
                 android:text="@string/module_fieldinfo_show_pic_statement"
+                android:visibility="visible"
                 android:drawableLeft="@drawable/ic_statement_six_nine"
                 android:drawablePadding="@dimen/advertising_margintop"/>
         </LinearLayout>

@@ -154,7 +154,8 @@
             android:layout_height="@dimen/order_pay_width"
             android:gravity="center_vertical"
             android:id="@+id/fieldinfo_other_res_selected_ll"
-            android:background="@drawable/module_bg_fieldinfo_other_phy_res">
+            android:background="@drawable/module_bg_fieldinfo_other_phy_res"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,26 +191,60 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginTop="@dimen/tab_item_img_margintop">
-                        <TextView
+                        android:id="@+id/searchlist_common_price_ll"
+                        android:gravity="bottom"
+                        android:layout_marginTop="@dimen/home_area_drop_marginleft"
+                        android:paddingRight="@dimen/txt_padding_left"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:id="@+id/fieldinfo_orher_res_demand_ll"
+                            android:layout_marginBottom="@dimen/advertising_margintop">
+                            <TextView
+                                android:layout_width="@dimen/advertising_relativielayout_height"
+                                android:layout_height="@dimen/field_list_item_label_samll"
+                                android:gravity="center"
+                                android:visibility="visible"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/tab_txt_size"
+                                android:text="@string/module_searchlist_demand"
+                                android:background="@drawable/module_searchlist_fragment_demand_bg"/>
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/price_tv_color"
-                            android:textSize="@dimen/login_leftright_txt_size"
-                            android:singleLine="true"
-                            android:paddingRight="@dimen/tab_item_margintop"
-                            android:text=""
-                            android:id="@+id/fieldinfo_orher_res_price_tv"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/register_edit_color"
-                            android:textSize="@dimen/fieldinfo_chair_textsize"
-                            android:singleLine="true"
-                            android:id="@+id/fieldinfo_orher_res_original_price_unit_tv"
-                            android:text="@string/fieldinfo_subsidy_fee_first_prompt" />
+                            android:orientation="horizontal"
+                            android:gravity="bottom"
+                            android:layout_marginTop="@dimen/tab_item_img_margintop">
+                            <ImageView android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/fieldinfo_orher_res_subsidy_imgv"
+                                android:visibility="gone"
+                                android:layout_marginBottom="@dimen/advertising_margintop"
+                                android:layout_marginRight="@dimen/txt_padding"
+                                android:src="@drawable/ic_subsidy_normal_three_copy"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/price_tv_color"
+                                android:textSize="@dimen/login_leftright_txt_size"
+                                android:singleLine="true"
+                                android:paddingRight="@dimen/tab_item_margintop"
+                                android:text=""
+                                android:id="@+id/fieldinfo_orher_res_price_tv"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/register_edit_color"
+                                android:textSize="@dimen/fieldinfo_chair_textsize"
+                                android:singleLine="true"
+                                android:id="@+id/fieldinfo_orher_res_original_price_unit_tv"
+                                android:text="@string/fieldinfo_subsidy_fee_first_prompt" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -230,7 +265,7 @@
         android:visibility="gone"
         android:background="@drawable/_three_six_oneic_zhanweishunxu"
         android:layout_marginTop="@dimen/txt_padding_left"
-        android:paddingTop="@dimen/tab_item_margintop"
+        android:paddingBottom="@dimen/advertising_margintop"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/fieldinfo_chair_textsize"

@@ -52,10 +52,9 @@ import com.linhuiba.business.connector.Constants;
 import com.linhuiba.business.connector.FieldApi;
 import com.linhuiba.business.connector.MyAsyncHttpClient;
 import com.linhuiba.business.model.ApiAdvResourcesModel;
-import com.linhuiba.business.model.ApiResourcesModel;
-import com.linhuiba.business.model.ResourceSearchItemModel;
 import com.linhuiba.business.model.SearchAreaPwModel;
 import com.linhuiba.business.model.SearchAreaSubwayPwModel;
+import com.linhuiba.business.model.SearchSellResModel;
 import com.linhuiba.business.mvpmodel.LoginMvpModel;
 import com.linhuiba.business.network.LinhuiAsyncHttpResponseHandler;
 import com.linhuiba.business.network.Request;
@@ -141,7 +140,7 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
     private SupportPopupWindow mSearchSortPw;
     private ArrayList<HashMap<String,String>> mSearchSortList = new ArrayList<>();
     private String getintentcity_code,search_reacode;
-    private ArrayList<ResourceSearchItemModel> mSearchInfoList = new ArrayList<ResourceSearchItemModel>();
+    private ArrayList<SearchSellResModel> mSearchInfoList = new ArrayList<SearchSellResModel>();
     private int fieldlistpagesize;
     public int good_type;
     private  String searchkeywords;
@@ -756,14 +755,14 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
         }
 
     }
-    private LinhuiAsyncHttpResponseHandler getPublicFieldListHandler = new LinhuiAsyncHttpResponseHandler(ResourceSearchItemModel.class,true) {
+    private LinhuiAsyncHttpResponseHandler getPublicFieldListHandler = new LinhuiAsyncHttpResponseHandler(SearchSellResModel.class,true) {
         @Override
         public void onSuccess(int statusCode, okhttp3.internal.http2.Header[] headers, Response response, Object data) {
             hideProgressDialog();
             isShare = false;
             mSearchSizeLL.setVisibility(View.GONE);
             SharedescriptionStr = String.valueOf(response.total);
-            mSearchInfoList= (ArrayList<ResourceSearchItemModel>)data;
+            mSearchInfoList= (ArrayList<SearchSellResModel>)data;
             if( mSearchInfoList == null ||  mSearchInfoList.isEmpty()) {
                 mlay_no_searchlist.setVisibility(View.VISIBLE);
                 if (SearchListswipList.isShown()) {
@@ -830,17 +829,17 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
 
         }
     };
-    private LinhuiAsyncHttpResponseHandler getMoreOrderListHandler = new LinhuiAsyncHttpResponseHandler(ResourceSearchItemModel.class,true) {
+    private LinhuiAsyncHttpResponseHandler getMoreOrderListHandler = new LinhuiAsyncHttpResponseHandler(SearchSellResModel.class,true) {
         @Override
         public void onSuccess(int statusCode,okhttp3.internal.http2.Header[] headers, Response response, Object data) {
-            ArrayList<ResourceSearchItemModel> tmp = (ArrayList<ResourceSearchItemModel>) data;
+            ArrayList<SearchSellResModel> tmp = (ArrayList<SearchSellResModel>) data;
             if( (tmp == null || tmp.isEmpty())){
                 fieldlistpagesize = fieldlistpagesize-1;
                 SearchListloadmoreList.onLoadComplete();
                 SearchListloadmoreList.set_loaded();
                 return;
             }
-            for( ResourceSearchItemModel order: tmp ){
+            for( SearchSellResModel order: tmp ){
                 mSearchInfoList.add(order);
             }
 

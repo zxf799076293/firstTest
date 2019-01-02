@@ -13,6 +13,7 @@ public class CaseListModel {
     private String title = "";//标题
     private String cover_pic_url = "";//封面图片地址
     private ArrayList<Field_AddResourceCreateItemModel> activity_case_url = new ArrayList();
+    private int source;
     public int getId() {
         return id;
     }
@@ -43,5 +44,13 @@ public class CaseListModel {
 
     public void setActivity_case_url(ArrayList<Field_AddResourceCreateItemModel> activity_case_url) {
         this.activity_case_url = activity_case_url;
+    }
+
+    public int getSource() {
+        return source;
+    }
+
+    public void setSource(int source) {
+        this.source = source;
     }
 }

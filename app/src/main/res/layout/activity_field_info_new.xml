@@ -1846,7 +1846,8 @@
                                         android:textStyle="bold" />
                                 </LinearLayout>
 
-                                <View style="@style/DefaultLongViewStyle"></View>
+                                <View style="@style/DefaultLongViewStyle">
+                                </View>
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -1881,7 +1882,7 @@
                                         android:drawablePadding="@dimen/txt_padding"
                                         android:drawableRight="@drawable/ic_into_green"
                                         android:gravity="center_vertical"
-                                        android:text="@string/fieldinfo_show_all_resource_info_str"
+                                        android:text="@string/module_fieldinfo_other_res_show"
                                         android:textColor="@color/fieldinfo_reward_tv_color"
                                         android:textSize="@dimen/fieldinfo_diogle_time_textsize" />
                                 </LinearLayout>

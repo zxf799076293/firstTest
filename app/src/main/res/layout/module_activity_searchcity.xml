@@ -76,7 +76,7 @@
         android:gravity="center_vertical"
         android:layout_marginRight="@dimen/login_btn_margintop"
         android:orientation="horizontal"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/search_city_unlimited_ll"
         android:background="@color/app_linearlayout_bg">
         <TextView

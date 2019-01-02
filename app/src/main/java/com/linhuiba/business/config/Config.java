@@ -33,8 +33,8 @@ public class Config {
     private static final String BASE_API_URL_PHP_DETESTZR = "http://gitlhbzxr.vaiwan.com:8081/api/";
 
     //api请求网络头url 和 web加载网络头url
-    public static final String BASE_API_URL_PHP = BuildConfig.DEBUG?BASE_API_URL_PHP_SE:BASE_API_URL_PHP_PE;
-    public static final String Domain_Name = BuildConfig.DEBUG?Domain_Name_SE:Domain_Name_PE;
+    public static final String BASE_API_URL_PHP = !BuildConfig.DEBUG?BASE_API_URL_PHP_SE:BASE_API_URL_PHP_PE;
+    public static final String Domain_Name = !BuildConfig.DEBUG?Domain_Name_SE:Domain_Name_PE;
     //加载页面
     public static final String INVITE_WEBVIEW_URL = Domain_Name+"/admin/profile/invite?&is_mobile=1&is_app=1&invite_code=";//邀请有奖url
     public static final String INVITE_SHARE_URL = Domain_Name+"/admin/profile/invited?&is_mobile=1&is_app=1&invite_code=";//邀请有奖分享链接
@@ -228,7 +228,7 @@ public class Config {
     public static final String WEBVIEW_URL_CSS = "<html> \n<head> \n <style type=\"text/css\"> \n body {font-size:60px;}\n </style> \n </head> \n <body> <script type='text/javascript'> window.onload = function(){\n var $img = document.getElementsByTagName('img');\n for(var p in  $img){\n  $img[p].style.width = '100%';\n $img[p].style.height ='auto'\n }\n } </script> </body> </html>";
     public static final String qiniu_domain = "https://img.linhuiba.com/";//资源发布token
     //邻汇吧下载地址
-    public static final String DOWNLOAD_LINHUIBA_URL = "http://www.linhuiba.com/app/linhuiba.apk";
+    public static final String DOWNLOAD_LINHUIBA_URL = "https://www.linhuiba.com/b";
     //服务商我要入住
     public static final String SERVICE_PROVIDER_SETTLED_URL = "https://hz.linhuiba.com/activities/activity-page";
     //图文详情url

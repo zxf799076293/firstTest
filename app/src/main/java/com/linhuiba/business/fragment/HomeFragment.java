@@ -77,6 +77,7 @@ import com.linhuiba.business.model.HomeHoverModel;
 import com.linhuiba.business.model.HomeMessageModel;
 import com.linhuiba.business.model.SearchCityModel;
 import com.linhuiba.business.model.SearchListAttributesModel;
+import com.linhuiba.business.model.SearchSellResModel;
 import com.linhuiba.business.mvpmodel.LoginMvpModel;
 import com.linhuiba.business.mvppresenter.HomeMvpPresenter;
 import com.linhuiba.business.mvppresenter.SearchResListMvpPresenter;
@@ -538,23 +539,20 @@ public class HomeFragment extends BaseMvpFragment implements MySwipeRefreshLayou
         checkUpdate();
         //通知接口
         mHomeMvpPresenter.getNotices();
-        //推送消息打开的app 跳转到消息界面
-
-        //上一次退出的是物业功能就直接跳到物业模块
-        if (LoginManager.isLogin()) {
-            if ((LoginManager.isRight_to_publish() || LoginManager.isIs_supplier()) &&
+        //推送消息打开的app 跳转到消息界面 还包含一个闪屏的
+        //2017/10/14 推送跳转app界面
+        if (LoginManager.getInstance().getUMmsg_start_app() != null && LoginManager.getInstance().getUMmsg_start_app().length() > 0) {
+            String data = LoginManager.getInstance().getUMmsg_start_app();
+            Constants.pushUrlJumpActivity(data,HomeFragment.this.getContext(),false);
+            LoginManager.getInstance().setUMmsg_start_app("");
+        } else {
+            //上一次退出的是物业功能就直接跳到物业模块
+            if (LoginManager.isLogin() && (LoginManager.isRight_to_publish() || LoginManager.isIs_supplier()) &&
                     (LoginManager.getInstance().getFieldexit() == -1 || LoginManager.getInstance().getFieldexit() == 1)) {
                 Intent fieldorderlist = new Intent(HomeFragment.this.getActivity(), com.linhuiba.linhuifield.fieldactivity.FieldMainTabActivity.class);
                 fieldorderlist.putExtra("new_tmpintent", "fieldlist");
                 startActivity(fieldorderlist);
                 LoginManager.getInstance().setFieldexit(1);
-            } else {
-                //2017/10/14 推送跳转app界面
-                if (LoginManager.getInstance().getUMmsg_start_app() != null && LoginManager.getInstance().getUMmsg_start_app().length() > 0) {
-                    String data = LoginManager.getInstance().getUMmsg_start_app();
-                    Constants.pushUrlJumpActivity(data,HomeFragment.this.getContext(),false);
-                    LoginManager.getInstance().setUMmsg_start_app("");
-                }
             }
         }
         mHomeCooperationCaseHLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -1055,6 +1053,16 @@ public class HomeFragment extends BaseMvpFragment implements MySwipeRefreshLayou
 
     @Override
     public void onAttributesFailure(boolean superresult, Throwable error) {
+
+    }
+
+    @Override
+    public void onSearchSellResListSuccess(ArrayList<SearchSellResModel> list, Response response) {
+
+    }
+
+    @Override
+    public void onSearchSellResListMoreSuccess(ArrayList<SearchSellResModel> list, Response response) {
 
     }
 

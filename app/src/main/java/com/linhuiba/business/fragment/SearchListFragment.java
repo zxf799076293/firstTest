@@ -65,6 +65,7 @@ import com.linhuiba.business.model.ResourceSearchItemModel;
 import com.linhuiba.business.model.SearchAreaPwModel;
 import com.linhuiba.business.model.SearchAreaSubwayPwModel;
 import com.linhuiba.business.model.SearchListAttributesModel;
+import com.linhuiba.business.model.SearchSellResModel;
 import com.linhuiba.business.mvpmodel.LoginMvpModel;
 import com.linhuiba.business.mvppresenter.SearchResListMvpPresenter;
 import com.linhuiba.business.mvpview.SearchResListMvpView;
@@ -220,7 +221,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
     private String mSearchAreaTvStr;
     private HashMap<String,Object> mSearchAddressBackMap = new HashMap<>();//搜索百度地址的信息
     private ArrayList<HashMap<String,String>> mSearchPriceList = new ArrayList<>();//搜索价格排序list
-    private boolean isCreate;//是否onCteate运行完
+    private boolean isOnResume;//是否onResume运行完
     private static final int LOACTION_REQUEST_INT = 10;//权限 requestcode
     private LocationClient mLocationClient = null;
     private double lat;//地图中心点纬度(不传则表示不限定区域）
@@ -389,17 +390,6 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                 chooseAreaType = 1;
             }
             showChooseAreaState();
-            isCreate = true;
-            //浏览记录
-            if (LoginManager.isLogin() &&
-                    !(SearchListFragment.this.getActivity() instanceof MainTabActivity)) {
-                try {
-                    String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl());
-                    LoginMvpModel.sendBrowseHistories("field_list",parameter,getintentcity_code);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
         return mMainContent;
@@ -421,7 +411,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
         }
         MobclickAgent.onPageStart(getResources().getString(R.string.search_activity_name_str));
         MobclickAgent.onResume(SearchListFragment.this.getActivity());
-        if (isCreate && getintentcity_code != null &&
+        if (getintentcity_code != null &&
                 !getintentcity_code.trim().equals(LoginManager.getInstance().getTrackcityid().trim())
                 && (homeintent == null || (homeintent != null && homeintent.getExtras() == null))) {
             getintentcity_code = LoginManager.getInstance().getTrackcityid();
@@ -436,18 +426,20 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
             msearch_area_type_textview.setTextColor(getResources().getColor(R.color.headline_tv_color));
             msearch_area_type_textview.setText(getResources().getString(R.string.invoiceinfo_area_txt));
             searchinitdata();
-        }
-        //浏览记录
-        if (LoginManager.isLogin() &&
-                mMainTabActivity != null && mMainTabActivity.isClickTab) {
-            try {
-                mMainTabActivity.isClickTab = false;
-                String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl());
-                LoginMvpModel.sendBrowseHistories("field_list",parameter,getintentcity_code);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+        } else {
+            //浏览记录
+            if (LoginManager.isLogin() &&
+                    mMainTabActivity != null && mMainTabActivity.isClickTab && isOnResume) {
+                try {
+                    mMainTabActivity.isClickTab = false;
+                    String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl());
+                    LoginMvpModel.sendBrowseHistories("field_list",parameter,getintentcity_code);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             }
         }
+        isOnResume = true;
     }
 
     @Override
@@ -2633,6 +2625,16 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
         setResScreeningAdapter();
     }
 
+    @Override
+    public void onSearchSellResListSuccess(ArrayList<SearchSellResModel> list, Response response) {
+
+    }
+
+    @Override
+    public void onSearchSellResListMoreSuccess(ArrayList<SearchSellResModel> list, Response response) {
+
+    }
+
     public class MyLocationListener implements BDLocationListener {
 
         @Override
@@ -2643,6 +2645,8 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                 lng = location.getLongitude();
                 apiResourcesModel.setLat(lat);
                 apiResourcesModel.setLng(lng);
+                Log.i("lat",String.valueOf(lat));
+                Log.i("lng",String.valueOf(lng));
                 searchinitdata();
             }
             mLocationClient.stop();

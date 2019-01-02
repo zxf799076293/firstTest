@@ -83,16 +83,16 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:orientation="horizontal">
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <TextView
+                    android:layout_width="@dimen/fieldinfo_toleft_addshopcard"
+                    android:layout_height="@dimen/order_type_layoutwidth"
                     android:layout_marginLeft="@dimen/txt_padding_left"
                     android:layout_marginRight="@dimen/app_backbtn_marginleft"
-                    android:background="@drawable/button_xunjia_nor_three_one"
+                    android:background="@drawable/activity_fieldinfo_specification_reserve_tv_bg"
                     android:textColor="@color/white"
                     android:gravity="center"
                     android:textSize="@dimen/title_bar_title_center_txt_size"
-                    android:text=""
+                    android:text="@string/fieldinfo_enquiry_str"
                     android:id="@+id/enquiry_btn"/>
             </LinearLayout>
 

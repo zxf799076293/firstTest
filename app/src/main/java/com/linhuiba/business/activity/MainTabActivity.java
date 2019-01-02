@@ -186,7 +186,7 @@ public class MainTabActivity extends BaseMvpActivity implements TabHost.OnTabCha
         }
         //2017/12/14 魔窗
         register(this);
-//        MLinkAPIFactory.createAPI(this).deferredRouter();
+//        MLinkAPIFactory.createAPI(this).deferredRouter();//来实现场景还原。
         mLinkData = getIntent().getData();
         if (mLinkData != null) {
             MLinkAPIFactory.createAPI(MainTabActivity.this).router(mLinkData);
@@ -200,6 +200,7 @@ public class MainTabActivity extends BaseMvpActivity implements TabHost.OnTabCha
                         }
                         @Override
                         public void onSuccess() {
+
                         }
                     });
         }
@@ -282,9 +283,9 @@ public class MainTabActivity extends BaseMvpActivity implements TabHost.OnTabCha
         public void onSuccess(int statusCode, okhttp3.internal.http2.Header[] headers, Response response, Object data) {
             if (data != null) {
                 com.alibaba.fastjson.JSONObject jsonobject = JSON.parseObject(data.toString());
-                if (jsonobject.get("count") != null &&
-                        jsonobject.get("count").toString().length() > 0 &&
-                        Integer.parseInt(jsonobject.get("count").toString()) == 1) {
+                if (jsonobject.get("message_noticed") != null &&
+                        jsonobject.get("message_noticed").toString().length() > 0 &&
+                        Integer.parseInt(jsonobject.get("message_noticed").toString()) == 1) {
                     MainBV[3].setBadgeText(" ");
                 } else {
                     MainBV[3].hide(false);

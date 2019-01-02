@@ -486,6 +486,16 @@ public class FieldApi {
                         "["+String.valueOf(i)+"]",String.valueOf(apiResourcesModel.getDynamic_id().get(i)));
             }
         }
+        //浏览记录
+        if (LoginManager.isLogin() && apiResourcesModel.getCity_ids() != null && apiResourcesModel.getCity_ids().size() > 0 &&
+                apiResourcesModel.getCity_ids().get(0) != null) {
+            try {
+                String parameter = "?"+ Request.urlEncode(paramsMap);
+                LoginMvpModel.sendBrowseHistories("field_list",parameter,String.valueOf(apiResourcesModel.getCity_ids().get(0)));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
         Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
                 "lists",
                 paramsMap,1));

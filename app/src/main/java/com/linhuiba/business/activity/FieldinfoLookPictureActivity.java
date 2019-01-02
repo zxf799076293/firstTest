@@ -32,6 +32,7 @@ import com.linhuiba.linhuifield.fieldview.ZoomImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -283,11 +284,20 @@ public class FieldinfoLookPictureActivity extends BaseMvpActivity {
                 Picasso.with(this).load(mPicList.get(i).toString()).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width_new, height_new).into(imageView);
                 mImageViewList.add(imageView);
             }
+            ZoomImageView imageView2 = new ZoomImageView(
+                    getApplicationContext());
+            Picasso.with(this).load(mPicList.get(mPicList.size() - 1).toString()).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width_new, height_new).into(imageView2);
+            mImageViewList.add(0,imageView2);
+            ZoomImageView imageView1 = new ZoomImageView(
+                    getApplicationContext());
+            Picasso.with(this).load(mPicList.get(0).toString()).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width_new, height_new).into(imageView1);
+            mImageViewList.add(imageView1);
             mIsRefreshZoomImageview = false;
         }
         if (mImageViewList != null && mImageViewList.size() > 0) {
             com.linhuiba.linhuifield.connector.Constants.showFieldinfoPic(mImageViewList,mzoom_viewpage,position,
-                    mShowPicNumTV,mShowPicPhyTV,mShowPicCaseTV,mPhyEndInt,FieldinfoLookPictureActivity.this);
+                    mShowPicNumTV,mShowPicPhyTV,mShowPicCaseTV,mPhyEndInt,FieldinfoLookPictureActivity.this,
+                    mShowPicstatementLL);
         }
     }
 

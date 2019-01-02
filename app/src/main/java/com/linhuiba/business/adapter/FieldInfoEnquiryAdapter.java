@@ -67,7 +67,7 @@ public class FieldInfoEnquiryAdapter extends BaseAdapter {
             holder.mEnquiryResourcesRL = (RelativeLayout)convertView.findViewById(R.id.fieldinfo_enquiry_resource_rl);
             holder.mSizeResourcesRL = (RelativeLayout)convertView.findViewById(R.id.fieldinfo_size_rl);
             holder.mFieldinfoEnquiryPriceTV = (TextView)convertView.findViewById(R.id.enquiry_price_tv);
-            holder.mFieldinfoEnquiryBtn = (ImageButton) convertView.findViewById(R.id.enquiry_btn);
+            holder.mFieldinfoEnquiryBtn = (TextView) convertView.findViewById(R.id.enquiry_btn);
 
             holder.mSpecoficationNotProvidServiceedLL = (LinearLayout) convertView.findViewById(R.id.specification_item_not_provided_service_ll);
             holder.mSpecoficationProvidServiceedLL = (LinearLayout) convertView.findViewById(R.id.specification_item_service_ll);
@@ -136,7 +136,7 @@ public class FieldInfoEnquiryAdapter extends BaseAdapter {
             }
         }
         if (serviceStr.trim().length() == 0) {
-            holder.mSpecoficationNotProvidServiceedLL.setVisibility(View.VISIBLE);
+            holder.mSpecoficationNotProvidServiceedLL.setVisibility(View.GONE);
             holder.mSpecoficationProvidServiceedLL.setVisibility(View.GONE);
         } else {
             holder.mSpecoficationNotProvidServiceedLL.setVisibility(View.GONE);
@@ -160,7 +160,7 @@ public class FieldInfoEnquiryAdapter extends BaseAdapter {
                 holder.mFieldinfoEnquiryBtn.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.button_xunjia_disabled_three_one));
             } else {
                 holder.mFieldinfoEnquiryBtn.setEnabled(true);
-                holder.mFieldinfoEnquiryBtn.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.fieldinfo_enquiry_item_btn_bg));
+                holder.mFieldinfoEnquiryBtn.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.activity_fieldinfo_specification_reserve_tv_bg));
             }
         }
         if (!mDataList.get(position).isExpired()) {
@@ -178,7 +178,7 @@ public class FieldInfoEnquiryAdapter extends BaseAdapter {
         public RelativeLayout mEnquiryResourcesRL;
         public RelativeLayout mSizeResourcesRL;
         public TextView mFieldinfoEnquiryPriceTV;
-        public ImageButton mFieldinfoEnquiryBtn;
+        public TextView mFieldinfoEnquiryBtn;
         public LinearLayout mSpecoficationNotProvidServiceedLL;
         public LinearLayout mSpecoficationProvidServiceedLL;
         public TextView mFieldinfoServiceTV;

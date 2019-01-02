@@ -177,6 +177,11 @@ public class FieldInfoPriceSizeAdapter extends BaseExpandableListAdapter {
                 holder.mFieldinfoCooperationTypeTV.setText(
                         context.getResources().getString(R.string.module_fieldinfo_size_item_is_agent));
                 holder.mFieldinfoCooperationTypeTV.setVisibility(View.VISIBLE);
+            } else if (groupList.get(groupPosition).getResource().get(0).getCooperation_type_id() != null &&
+                    groupList.get(groupPosition).getResource().get(0).getCooperation_type_id() == 14) {
+                holder.mFieldinfoCooperationTypeTV.setText(
+                        context.getResources().getString(R.string.module_fieldinfo_size_item_is_property));
+                holder.mFieldinfoCooperationTypeTV.setVisibility(View.VISIBLE);
             } else {
                 holder.mFieldinfoCooperationTypeTV.setVisibility(View.GONE);
             }
@@ -257,7 +262,7 @@ public class FieldInfoPriceSizeAdapter extends BaseExpandableListAdapter {
                 }
             }
             if (serviceStr.trim().length() == 0) {
-                holder.mSpecoficationNotProvidServiceedLL.setVisibility(View.VISIBLE);
+                holder.mSpecoficationNotProvidServiceedLL.setVisibility(View.GONE);
                 holder.mSpecoficationOneSizeServiceLL.setVisibility(View.GONE);
                 holder.mSpecoficationProvidServiceedLL.setVisibility(View.GONE);
             } else {
@@ -460,7 +465,7 @@ public class FieldInfoPriceSizeAdapter extends BaseExpandableListAdapter {
             }
         }
         if (serviceStr.trim().length() == 0) {
-            holder.mSpecoficationNotProvidServiceedLL.setVisibility(View.VISIBLE);
+            holder.mSpecoficationNotProvidServiceedLL.setVisibility(View.GONE);
             holder.mSpecoficationProvidServiceedLL.setVisibility(View.GONE);
             holder.mSpecoficationProvidServiceedLL.setVisibility(View.GONE);
         } else {
@@ -478,9 +483,12 @@ public class FieldInfoPriceSizeAdapter extends BaseExpandableListAdapter {
                 childList.get(groupPosition).get(childPosition).getCooperation_type_id() == 13) {
             holder.mSpecoficationCompanyNameImg.setVisibility(View.VISIBLE);
             holder.mSpecoficationCompanyNameImg.setImageResource(R.drawable.ic_third_agency_three);
-        } else {
+        } else if (childList.get(groupPosition).get(childPosition).getCooperation_type_id() != null &&
+                childList.get(groupPosition).get(childPosition).getCooperation_type_id() == 14) {
             holder.mSpecoficationCompanyNameImg.setVisibility(View.VISIBLE);
             holder.mSpecoficationCompanyNameImg.setImageResource(R.drawable.ic_property_manage_three);
+        } else {
+            holder.mSpecoficationCompanyNameImg.setVisibility(View.GONE);
         }
         // : 2017/10/23 认证的预定背景
 

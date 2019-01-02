@@ -44,6 +44,7 @@ import com.linhuiba.business.model.ApiAdvResourcesModel;
 import com.linhuiba.business.model.ApiResourcesModel;
 import com.linhuiba.business.model.ResourceSearchItemModel;
 import com.linhuiba.business.model.SearchListAttributesModel;
+import com.linhuiba.business.model.SearchSellResModel;
 import com.linhuiba.business.mvpmodel.LoginMvpModel;
 import com.linhuiba.business.mvppresenter.SearchResListMvpPresenter;
 import com.linhuiba.business.mvpview.SearchResListMvpView;
@@ -79,7 +80,7 @@ public class SelfSupportShopFragment extends BaseMvpFragment implements SwipeRef
     @InjectView(R.id.selfsupportshop_swipe)
     SwipeRefreshLayout mSelfSupportShopListSwipe;
     private View mMainContent;
-    private ArrayList<ResourceSearchItemModel> mHomeRecentActivityList;
+    private ArrayList<SearchSellResModel> mHomeRecentActivityList;
     private SearchListAdapter mAdapter;
     private SearchAdvListAdapter mSelfSupportAdapter;
     private int mPagePosition;
@@ -271,7 +272,7 @@ public class SelfSupportShopFragment extends BaseMvpFragment implements SwipeRef
     }
 
     @Override
-    public void onSearchResListSuccess(ArrayList<ResourceSearchItemModel> list, Response response) {
+    public void onSearchSellResListSuccess(ArrayList<SearchSellResModel> list, Response response) {
         if(mSelfSupportShopListSwipe.isShown()){
             mSelfSupportShopListSwipe.setRefreshing(false);
         }
@@ -338,6 +339,11 @@ public class SelfSupportShopFragment extends BaseMvpFragment implements SwipeRef
     }
 
     @Override
+    public void onSearchResListSuccess(ArrayList<ResourceSearchItemModel> list, Response response) {
+
+    }
+
+    @Override
     public void onSearchResListFailure(boolean superresult, Throwable error) {
         if(mSelfSupportShopListSwipe.isShown()){
             mSelfSupportShopListSwipe.setRefreshing(false);
@@ -348,14 +354,19 @@ public class SelfSupportShopFragment extends BaseMvpFragment implements SwipeRef
 
     @Override
     public void onSearchResListMoreSuccess(ArrayList<ResourceSearchItemModel> list, Response response) {
+
+    }
+
+    @Override
+    public void onSearchSellResListMoreSuccess(ArrayList<SearchSellResModel> list, Response response) {
         mSelfSupportShopListLV.onLoadComplete();
-        ArrayList<ResourceSearchItemModel> tmp = list;
+        ArrayList<SearchSellResModel> tmp = list;
         if( tmp == null ||  tmp.isEmpty()) {
             mPagePosition = mPagePosition - 1;
             mSelfSupportShopListLV.set_loaded();
             return;
         }
-        for( ResourceSearchItemModel listitem: tmp ){
+        for( SearchSellResModel listitem: tmp ){
             mHomeRecentActivityList.add(listitem);
         }
         if (mSelfSupportShopActivity.mResTypeId == 3) {

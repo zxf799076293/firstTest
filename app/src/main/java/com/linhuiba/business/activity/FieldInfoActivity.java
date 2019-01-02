@@ -593,8 +593,10 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
     public boolean isShareSubsidy;
     private boolean isShowAllOtherRes = false;//判断是否展开所有场地其他展位
     private final int CALL_PHONE_CODE = 110;
+    private final int CALL_SERVICE_PHONE_CODE = 111;
     private int mCityId;
     private int mCategoryId;
+    private boolean isRefreshSize;//刷新规格使用
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field_info_new);
@@ -1048,9 +1050,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
             case R.id.fieldinfo_mobile_tv:
                 if (resourceinfolist.getService_phone() != null &&
                         resourceinfolist.getService_phone().length() > 0) {
-                    Intent intent_mobile = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"
-                            + resourceinfolist.getService_phone().toString().trim()));
-                    startActivity(intent_mobile);
+                    showCounselorDialog(0,true,CALL_SERVICE_PHONE_CODE);
                 }
                 break;
             case R.id.fieldinfo_change_explain_ll:
@@ -1120,9 +1120,14 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 if (mCommunityId > 0) {
                     mApiResourcesModel.setMin_price(null);
                     mApiResourcesModel.setMax_price(null);
-                    mFieldinfoMvpPresenter.getOtherPhyRes(mCommunityId,1,100, Integer.parseInt(getfieldid),mApiResourcesModel);
                 }
-                updataSizeLv(true);
+                // FIXME: 2018/12/27 刷新规格请求接口
+                if (getfieldid != null && getfieldid.length() > 0) {
+                    //展位详情接口调用
+                    // FIXME: 2018/12/18 测试id
+                    isRefreshSize = true;
+                    mFieldinfoMvpPresenter.getResInfo(getfieldid,mApiResourcesModel);
+                }
                 mFieldinfoScreenPriceTV.setVisibility(View.GONE);
                 if (mFieldinfoScreenPersonTV.getVisibility() == View.GONE &&
                         mFieldinfoScreenAreaTV.getVisibility() == View.GONE) {
@@ -1133,7 +1138,6 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 if (mCommunityId > 0) {
                     mApiResourcesModel.setMax_area(null);
                     mApiResourcesModel.setMin_area(null);
-                    mFieldinfoMvpPresenter.getOtherPhyRes(mCommunityId,1,100, Integer.parseInt(getfieldid),mApiResourcesModel);
                 }
                 mFieldinfoScreenAreaTV.setVisibility(View.GONE);
                 if (mFieldinfoScreenPersonTV.getVisibility() == View.GONE &&
@@ -1145,7 +1149,6 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 if (mCommunityId > 0) {
                     mApiResourcesModel.setMin_person_flow(null);
                     mApiResourcesModel.setMax_person_flow(null);
-                    mFieldinfoMvpPresenter.getOtherPhyRes(mCommunityId,1,100, Integer.parseInt(getfieldid),mApiResourcesModel);
                 }
                 mFieldinfoScreenPersonTV.setVisibility(View.GONE);
                 if (mFieldinfoScreenPriceTV.getVisibility() == View.GONE &&
@@ -1169,7 +1172,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 if (isShowAllOtherRes) {
                     isShowAllOtherRes = false;
                     mFieldinfoOtherResShowAllTV.setCompoundDrawables(null, null, mShowAllDownDrawable, null);
-                    mFieldinfoOtherResShowAllTV.setText(getResources().getString(R.string.fieldinfo_show_all_resource_info_str));
+                    mFieldinfoOtherResShowAllTV.setText(getResources().getString(R.string.module_fieldinfo_other_res_show));
                     // FIXME: 2018/12/14 其他展位收起
                     mFieldInfoOtherDataListTemp.clear();
                     for (int i = 0; i < 3; i++) {
@@ -1179,7 +1182,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 } else {
                     mFieldinfoOtherResShowAllTV.setCompoundDrawables(null, null, mShowAllUpDrawable, null);
                     isShowAllOtherRes = true;
-                    mFieldinfoOtherResShowAllTV.setText(getResources().getString(R.string.fieldinfo_show_small_resource_info_str));
+                    mFieldinfoOtherResShowAllTV.setText(getResources().getString(R.string.module_fieldinfo_other_res_pack_up));
                     mFieldInfoOtherDataListTemp.clear();
                     mFieldInfoOtherDataListTemp.addAll(mFieldInfoOtherDataList);
                     mOtherPhyResAdapter.notifyDataSetChanged();
@@ -1187,21 +1190,18 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 break;
             case R.id.fieldinfo_counselor_call_tv:
                 // FIXME: 2018/12/14 联系顾问
-                AndPermission.with(FieldInfoActivity.this)
-                        .requestCode(CALL_PHONE_CODE)
-                        .permission(
-                                Manifest.permission.CALL_PHONE,
-                                Manifest.permission.READ_PHONE_STATE)
-                        .callback(listener)
-                        .start();
-
+                if (resourceinfolist.getService_representative() != null &&
+                        resourceinfolist.getService_representative().getTel() != null &&
+                        resourceinfolist.getService_representative().getTel().length() > 0) {
+                    showCounselorDialog(0,true,CALL_PHONE_CODE);
+                }
                 break;
             case R.id.fieldinfo_counselor_wx_tv:
                 // FIXME: 2018/12/14 加顾问微信
                 if (resourceinfolist.getService_representative() != null &&
                         resourceinfolist.getService_representative().getQrcode() != null &&
                         resourceinfolist.getService_representative().getQrcode().length() > 0) {
-                    showCounselorDialog(1);
+                    showCounselorDialog(1,false,0);
                 } else {
                     MessageUtils.showToast(getResources().getString(R.string.review_error_text));
                 }
@@ -1221,7 +1221,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 // FIXME: 2018/12/20 顾问
                 if (resourceinfolist.getService_representative() != null &&
                         resourceinfolist.getService_representative().getId() > 0) {
-                    showCounselorDialog(0);
+                    showCounselorDialog(0,false,0);
                 } else {
                     MessageUtils.showToast(getResources().getString(R.string.order_nodata_toast));
                 }
@@ -2021,11 +2021,20 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 Picasso.with(this).load(mPicList.get(i).toString()).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width_new, height_new).into(imageView);
                 mImageViewList.add(imageView);
             }
+            // FIXME: 2018/12/26 设置循环的数据
+            ZoomImageView imageView2 = new ZoomImageView(
+                    getApplicationContext());
+            Picasso.with(this).load(mPicList.get(mPicList.size() - 1).toString()).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width_new, height_new).into(imageView2);
+            mImageViewList.add(0,imageView2);
+            ZoomImageView imageView1 = new ZoomImageView(
+                    getApplicationContext());
+            Picasso.with(this).load(mPicList.get(0).toString()).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width_new, height_new).into(imageView1);
+            mImageViewList.add(imageView1);
             mIsRefreshZoomImageview = false;
         }
         if (mImageViewList != null && mImageViewList.size() > 0) {
             com.linhuiba.linhuifield.connector.Constants.showFieldinfoPic(mImageViewList,mzoom_viewpage,position,
-                    mShowPicNumTV,mShowPicPhyTV,mShowPicCaseTV,phyEndInt,FieldInfoActivity.this);
+                    mShowPicNumTV,mShowPicPhyTV,mShowPicCaseTV,phyEndInt,FieldInfoActivity.this,mShowPicstatementLL);
         }
     }
     private void showSecondLevelView(int checked) {
@@ -2092,6 +2101,17 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                         resourceinfolist.getService_representative().getTel().length() > 0) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
                             + resourceinfolist.getService_representative().getTel()));// FIXME: 2018/12/19 测试数据
+                    if (ActivityCompat.checkSelfPermission(FieldInfoActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    startActivity(intent);
+                }
+            } else if (requestCode == CALL_SERVICE_PHONE_CODE) {
+                // FIXME: 2018/12/19 顾问电话
+                if (resourceinfolist.getService_phone() != null &&
+                        resourceinfolist.getService_phone().length() > 0) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
+                            + resourceinfolist.getService_phone()));// FIXME: 2018/12/19 测试数据
                     if (ActivityCompat.checkSelfPermission(FieldInfoActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         return;
                     }
@@ -4028,6 +4048,108 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
     public void onFieldinfoResSuccess(PhyResInfoModel resInfo) {
         resourceinfolist = resInfo;
         if (resourceinfolist != null) {
+            //场地规格
+            mLeaseTermTypeMap = new HashMap<>();
+            mLeaseTermTypeStrList = new ArrayList<>();
+            mSizeStrList = new ArrayList<>();
+            mCustomDimensionStrList = new ArrayList<>();
+            mDepositStrList = new ArrayList<>();
+            if (resourceinfolist.getSize() != null && resourceinfolist.getSize().size() > 0) {
+                mDimensionsDataList = resourceinfolist.getSize();
+//                    mDimensionsDataScreenList = (ArrayList<FieldInfoSizeModel>) mDimensionsDataList.clone();
+                try {
+                    mDimensionsDataScreenList = (ArrayList<FieldInfoSizeModel>) com.linhuiba.linhuifield.connector.Constants.deepCopy(mDimensionsDataList);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                //2018/1/8 规格筛选
+                if (mDimensionsDataList.size() > 5) {
+                    mFieldinfoChooseSizeLL.setVisibility(View.VISIBLE);
+                } else {
+                    int size = 0;
+                    for (int i = 0; i < mDimensionsDataList.size(); i++) {
+                        if (mDimensionsDataList.get(i).getResource().size() > 1) {
+                            for (int j = 0; j < mDimensionsDataList.get(i).getResource().size(); j++) {
+                                size++;
+                            }
+                        } else {
+                            size++;
+                        }
+                    }
+                    if (size > 5) {
+                        mFieldinfoChooseSizeLL.setVisibility(View.VISIBLE);
+                    } else {
+                        mFieldinfoChooseSizeLL.setVisibility(View.GONE);
+                    }
+                }
+                for (int i = 0; i < mDimensionsDataList.size(); i++) {
+                    if (mDimensionsDataList.get(i).getDimension().getLease_term_type() != null &&
+                            mDimensionsDataList.get(i).getDimension().getLease_term_type().length() > 0 &&
+                            !mLeaseTermTypeStrList.contains(mDimensionsDataList.get(i).getDimension().getLease_term_type())) {
+                        if (mDimensionsDataList.get(i).getDimension().getLease_term_type().equals(
+                                getResources().getString(R.string.term_types_unit_txt))) {
+                            mLeaseTermTypeMap.put(mDimensionsDataList.get(i).getDimension().getLease_term_type(),
+                                    -1);
+                        } else {
+                            if (mDimensionsDataList.get(i).getResource().get(0).getSelling_resource_price().get(0) != null &&
+                                    mDimensionsDataList.get(i).getResource().get(0).getSelling_resource_price().get(0).getLease_term_type_id() != null) {
+                                mLeaseTermTypeMap.put(mDimensionsDataList.get(i).getDimension().getLease_term_type(),
+                                        mDimensionsDataList.get(i).getResource().get(0).getSelling_resource_price().get(0).getLease_term_type_id());
+                            }
+                        }
+                        mLeaseTermTypeStrList.add(mDimensionsDataList.get(i).getDimension().getLease_term_type());
+                        if (i == 0) {
+                            mFieldinfoLeaseTermTypeCB.setText(getResources().getString(R.string.fieldinfo_screen_lease_term_type_str_first) + " " +
+                                    mDimensionsDataList.get(i).getDimension().getLease_term_type() + " " +
+                                    getResources().getString(R.string.fieldinfo_screen_lease_term_type_str_second));
+                            mFieldinfoPwLeaseTermTypeCB.setText(getResources().getString(R.string.fieldinfo_screen_lease_term_type_str_first) + " " +
+                                    mDimensionsDataList.get(i).getDimension().getLease_term_type() + " " +
+                                    getResources().getString(R.string.fieldinfo_screen_lease_term_type_str_second));
+                        }
+                    }
+                    if (mDimensionsDataList.get(i).getDimension().getSize() != null &&
+                            mDimensionsDataList.get(i).getDimension().getSize().length() > 0 &&
+                            !mSizeStrList.contains(mDimensionsDataList.get(i).getDimension().getSize())) {
+                        mSizeStrList.add(mDimensionsDataList.get(i).getDimension().getSize());
+                        if (i == 0) {
+                            mFieldinfoSizeCB.setText(mDimensionsDataList.get(i).getDimension().getSize());
+                            mFieldinfoPwSizeCB.setText(mDimensionsDataList.get(i).getDimension().getSize());
+                        }
+                    }
+                    if (mDimensionsDataList.get(i).getDimension().getCustom_dimension() != null &&
+                            mDimensionsDataList.get(i).getDimension().getCustom_dimension().length() > 0 &&
+                            !mCustomDimensionStrList.contains(mDimensionsDataList.get(i).getDimension().getCustom_dimension())) {
+                        mCustomDimensionStrList.add(mDimensionsDataList.get(i).getDimension().getCustom_dimension());
+                    }
+                }
+                mDepositStrList.add(getResources().getString(R.string.fieldinfo_no_deposit_str));
+                mDepositStrList.add(getResources().getString(R.string.fieldinfo_have_deposit_str));
+//                    showResourceScreeningPw();
+
+                mfieldinfo_pricelist_layout.setVisibility(View.VISIBLE);
+                List<List<FieldInfoSellResourceModel>> datas = new ArrayList<>();
+                for (int i = 0; i < mDimensionsDataList.size(); i++) {
+                    datas.add(mDimensionsDataList.get(i).getResource());
+                }
+                adapter = new FieldInfoPriceSizeAdapter(
+                        FieldInfoActivity.this, FieldInfoActivity.this, mDimensionsDataList, datas);
+                mFieldInfoSizeLV.setAdapter(adapter);
+                mFieldInfoSizeLV.setGroupIndicator(null);
+                for (int i = 0; i < mDimensionsDataList.size(); i++) {
+                    mFieldInfoSizeLV.expandGroup(i);
+                }
+                mFieldInfoReserveTV.setVisibility(View.GONE);
+            } else {
+                mFieldinfoChooseSizeLL.setVisibility(View.GONE);
+                mFieldInfoReserveTV.setVisibility(View.GONE);
+                mFieldinfoFocusonLL.setVisibility(View.GONE);
+            }
+            if (isRefreshSize) {
+                isRefreshSize = false;
+                return;
+            }
             getfieldid = String.valueOf(resourceinfolist.getPhysical_resource().getId());
             //展位下的所有供给（活动）
             if (getfieldid != null && getfieldid.length() > 0 && isSellResource) {
@@ -4404,99 +4526,6 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
             } else {
                 mFieldInfoFousonImgv.setBackgroundDrawable(getResources().getDrawable(R.drawable.popup_ic_collection));
             }
-            //场地规格
-            if (resourceinfolist.getSize() != null && resourceinfolist.getSize().size() > 0) {
-                mDimensionsDataList = resourceinfolist.getSize();
-//                    mDimensionsDataScreenList = (ArrayList<FieldInfoSizeModel>) mDimensionsDataList.clone();
-                try {
-                    mDimensionsDataScreenList = (ArrayList<FieldInfoSizeModel>) com.linhuiba.linhuifield.connector.Constants.deepCopy(mDimensionsDataList);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                //2018/1/8 规格筛选
-                if (mDimensionsDataList.size() > 5) {
-                    mFieldinfoChooseSizeLL.setVisibility(View.VISIBLE);
-                } else {
-                    int size = 0;
-                    for (int i = 0; i < mDimensionsDataList.size(); i++) {
-                        if (mDimensionsDataList.get(i).getResource().size() > 1) {
-                            for (int j = 0; j < mDimensionsDataList.get(i).getResource().size(); j++) {
-                                size++;
-                            }
-                        } else {
-                            size++;
-                        }
-                    }
-                    if (size > 5) {
-                        mFieldinfoChooseSizeLL.setVisibility(View.VISIBLE);
-                    } else {
-                        mFieldinfoChooseSizeLL.setVisibility(View.GONE);
-                    }
-                }
-                for (int i = 0; i < mDimensionsDataList.size(); i++) {
-                    if (mDimensionsDataList.get(i).getDimension().getLease_term_type() != null &&
-                            mDimensionsDataList.get(i).getDimension().getLease_term_type().length() > 0 &&
-                            !mLeaseTermTypeStrList.contains(mDimensionsDataList.get(i).getDimension().getLease_term_type())) {
-                        if (mDimensionsDataList.get(i).getDimension().getLease_term_type().equals(
-                                getResources().getString(R.string.term_types_unit_txt))) {
-                            mLeaseTermTypeMap.put(mDimensionsDataList.get(i).getDimension().getLease_term_type(),
-                                    -1);
-                        } else {
-                            if (mDimensionsDataList.get(i).getResource().get(0).getSelling_resource_price().get(0) != null &&
-                                    mDimensionsDataList.get(i).getResource().get(0).getSelling_resource_price().get(0).getLease_term_type_id() != null) {
-                                mLeaseTermTypeMap.put(mDimensionsDataList.get(i).getDimension().getLease_term_type(),
-                                        mDimensionsDataList.get(i).getResource().get(0).getSelling_resource_price().get(0).getLease_term_type_id());
-                            }
-                        }
-                        mLeaseTermTypeStrList.add(mDimensionsDataList.get(i).getDimension().getLease_term_type());
-                        if (i == 0) {
-                            mFieldinfoLeaseTermTypeCB.setText(getResources().getString(R.string.fieldinfo_screen_lease_term_type_str_first) + " " +
-                                    mDimensionsDataList.get(i).getDimension().getLease_term_type() + " " +
-                                    getResources().getString(R.string.fieldinfo_screen_lease_term_type_str_second));
-                            mFieldinfoPwLeaseTermTypeCB.setText(getResources().getString(R.string.fieldinfo_screen_lease_term_type_str_first) + " " +
-                                    mDimensionsDataList.get(i).getDimension().getLease_term_type() + " " +
-                                    getResources().getString(R.string.fieldinfo_screen_lease_term_type_str_second));
-                        }
-                    }
-                    if (mDimensionsDataList.get(i).getDimension().getSize() != null &&
-                            mDimensionsDataList.get(i).getDimension().getSize().length() > 0 &&
-                            !mSizeStrList.contains(mDimensionsDataList.get(i).getDimension().getSize())) {
-                        mSizeStrList.add(mDimensionsDataList.get(i).getDimension().getSize());
-                        if (i == 0) {
-                            mFieldinfoSizeCB.setText(mDimensionsDataList.get(i).getDimension().getSize());
-                            mFieldinfoPwSizeCB.setText(mDimensionsDataList.get(i).getDimension().getSize());
-                        }
-                    }
-                    if (mDimensionsDataList.get(i).getDimension().getCustom_dimension() != null &&
-                            mDimensionsDataList.get(i).getDimension().getCustom_dimension().length() > 0 &&
-                            !mCustomDimensionStrList.contains(mDimensionsDataList.get(i).getDimension().getCustom_dimension())) {
-                        mCustomDimensionStrList.add(mDimensionsDataList.get(i).getDimension().getCustom_dimension());
-                    }
-                }
-                mDepositStrList.add(getResources().getString(R.string.fieldinfo_no_deposit_str));
-                mDepositStrList.add(getResources().getString(R.string.fieldinfo_have_deposit_str));
-//                    showResourceScreeningPw();
-
-                mfieldinfo_pricelist_layout.setVisibility(View.VISIBLE);
-                List<List<FieldInfoSellResourceModel>> datas = new ArrayList<>();
-                for (int i = 0; i < mDimensionsDataList.size(); i++) {
-                    datas.add(mDimensionsDataList.get(i).getResource());
-                }
-                adapter = new FieldInfoPriceSizeAdapter(
-                        FieldInfoActivity.this, FieldInfoActivity.this, mDimensionsDataList, datas);
-                mFieldInfoSizeLV.setAdapter(adapter);
-                mFieldInfoSizeLV.setGroupIndicator(null);
-                for (int i = 0; i < mDimensionsDataList.size(); i++) {
-                    mFieldInfoSizeLV.expandGroup(i);
-                }
-                mFieldInfoReserveTV.setVisibility(View.GONE);
-            } else {
-                mFieldinfoChooseSizeLL.setVisibility(View.GONE);
-                mFieldInfoReserveTV.setVisibility(View.GONE);
-                mFieldinfoFocusonLL.setVisibility(View.GONE);
-            }
             //询价列表显示
             if (resourceinfolist.getEnquiry_resource() != null &&
                     resourceinfolist.getEnquiry_resource().size() > 0) {
@@ -4532,378 +4561,377 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                     }
                 }
             }
-        }
-        if (resourceinfolist.getPhysical_resource().getPhysical_resource_imgs() != null) {
-            if (resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().size() > 0) {
-                // FIXME: 2018/12/10 分享修改界面
-                if (resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(0).get("pic_url") != null &&
-                        resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(0).get("pic_url").length() > 0) {
-                    ShareIconStr = resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(0).get("pic_url").toString() + com.linhuiba.linhuipublic.config.Config.Linhui_Mid_Watermark;
-                    Picasso.with(FieldInfoActivity.this).load(ShareIconStr).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(370, 250).into(mShareImageView);
-                }
-                for (int i = 0; i < resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().size(); i++) {
-                    if (resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(i).get("pic_url") != null &&
-                            resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(i).get("pic_url").length() > 0) {
-                        mPicList.add(resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(i).get("pic_url").toString() + com.linhuiba.linhuipublic.config.Config.Linhui_Max_Watermark);
+            if (resourceinfolist.getPhysical_resource().getPhysical_resource_imgs() != null) {
+                if (resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().size() > 0) {
+                    // FIXME: 2018/12/10 分享修改界面
+                    if (resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(0).get("pic_url") != null &&
+                            resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(0).get("pic_url").length() > 0) {
+                        ShareIconStr = resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(0).get("pic_url").toString() + com.linhuiba.linhuipublic.config.Config.Linhui_Mid_Watermark;
+                        Picasso.with(FieldInfoActivity.this).load(ShareIconStr).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(370, 250).into(mShareImageView);
+                    }
+                    for (int i = 0; i < resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().size(); i++) {
+                        if (resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(i).get("pic_url") != null &&
+                                resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(i).get("pic_url").length() > 0) {
+                            mPicList.add(resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(i).get("pic_url").toString() + com.linhuiba.linhuipublic.config.Config.Linhui_Max_Watermark);
+                        }
+                    }
+                    if (mCasePicList != null && mCasePicList.size() > 0) {
+                        mPicList.addAll(mCasePicList);
+                    }
+                    if (mPicList.size() > 0) {
+                        //设置图片加载器
+                        mFieldInfoBanner.setImageLoader(mFieldinfoImageLoader);
+                        //设置图片集合
+                        mFieldInfoBanner.setImages(mPicList);
+                        //设置banner动画效果
+                        mFieldInfoBanner.setBannerAnimation(Transformer.Default);
+                        //设置自动轮播，默认为true
+                        mFieldInfoBanner.isAutoPlay(false);
+                        //显示数字指示器
+                        mFieldInfoBanner.setBannerStyle(BannerConfig.NOT_INDICATOR);
+                        //设置指示器位置（当banner模式中有指示器时）
+                        mFieldInfoBanner.setIndicatorGravity(BannerConfig.RIGHT);
+                        //banner设置方法全部调用完毕时最后调用
+                        mFieldInfoBanner.setOnBannerClickListener(new OnBannerClickListener() {
+                            @Override
+                            public void OnBannerClick(int position) {
+                                if (zoom_picture_dialog != null && zoom_picture_dialog.isShowing()) {
+                                    zoom_picture_dialog.dismiss();
+                                }
+                                showZoomPicDialog((position - 1) % mPicList.size());
+                            }
+                        });
+                        mFieldInfoBanner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                            @Override
+                            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                            }
+
+                            @Override
+                            public void onPageSelected(int position) {
+                                if (position % mPicList.size() == 0) {
+                                    mFieldinfoBannerNumTV.setText(String.valueOf(mPicList.size()));
+                                } else {
+                                    mFieldinfoBannerNumTV.setText(String.valueOf(position % mPicList.size()));
+                                }
+                            }
+
+                            @Override
+                            public void onPageScrollStateChanged(int state) {
+
+                            }
+                        });
+                        mFieldinfoBannerSizeTV.setText("/" + String.valueOf(mPicList.size()));
+                        mFieldInfoBanner.start();
                     }
                 }
-                if (mCasePicList != null && mCasePicList.size() > 0) {
-                    mPicList.addAll(mCasePicList);
-                }
-                if (mPicList.size() > 0) {
-                    //设置图片加载器
-                    mFieldInfoBanner.setImageLoader(mFieldinfoImageLoader);
-                    //设置图片集合
-                    mFieldInfoBanner.setImages(mPicList);
-                    //设置banner动画效果
-                    mFieldInfoBanner.setBannerAnimation(Transformer.Default);
-                    //设置自动轮播，默认为true
-                    mFieldInfoBanner.isAutoPlay(false);
-                    //显示数字指示器
-                    mFieldInfoBanner.setBannerStyle(BannerConfig.NOT_INDICATOR);
-                    //设置指示器位置（当banner模式中有指示器时）
-                    mFieldInfoBanner.setIndicatorGravity(BannerConfig.RIGHT);
-                    //banner设置方法全部调用完毕时最后调用
-                    mFieldInfoBanner.setOnBannerClickListener(new OnBannerClickListener() {
-                        @Override
-                        public void OnBannerClick(int position) {
-                            if (zoom_picture_dialog != null && zoom_picture_dialog.isShowing()) {
-                                zoom_picture_dialog.dismiss();
-                            }
-                            showZoomPicDialog((position - 1) % mPicList.size());
-                        }
-                    });
-                    mFieldInfoBanner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                        @Override
-                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                        }
-
-                        @Override
-                        public void onPageSelected(int position) {
-                            if (position % mPicList.size() == 0) {
-                                mFieldinfoBannerNumTV.setText(String.valueOf(mPicList.size()));
-                            } else {
-                                mFieldinfoBannerNumTV.setText(String.valueOf(position % mPicList.size()));
-                            }
-                        }
-
-                        @Override
-                        public void onPageScrollStateChanged(int state) {
-
-                        }
-                    });
-                    mFieldinfoBannerSizeTV.setText("/" + String.valueOf(mPicList.size()));
-                    mFieldInfoBanner.start();
-                }
-            }
-
-            if (resourceinfolist.getPhysical_resource().getIs_activity() == 0) {
-                if (resourceinfolist.getPhysical_resource().getField_type() != null &&
-                        resourceinfolist.getPhysical_resource().getField_type().getId() > 0 &&
-                        resourceinfolist.getPhysical_resource().getField_type().getDisplay_name() != null &&
-                        resourceinfolist.getPhysical_resource().getField_type().getDisplay_name().length() > 0) {
-                    mtxt_fieldtitle.setText(resourceinfolist.getPhysical_resource().getField_type().getDisplay_name());
-                    SharedescriptionStr = resourceinfolist.getPhysical_resource().getField_type().getDisplay_name() + "  ";
-                } else {
-                    mtxt_fieldtitle.setVisibility(View.GONE);
-                }
-                mactivityinfo_layout.setVisibility(View.GONE);
-            } else if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
-                isActivityRes = true;
-                TitleBarUtils.setTitleText(this, getResources().getString(R.string.fieldinfo_activitys_title_text));
-                if (resourceinfolist.getSize().size() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource().size() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type() != null &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type().getId() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type().getDisplay_name() != null &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type().getDisplay_name().length() > 0) {
-                    mtxt_fieldtitle.setText(resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type().getDisplay_name());
-                    SharedescriptionStr = resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type().getDisplay_name() + "  ";
-                } else {
-                    mtxt_fieldtitle.setVisibility(View.GONE);
-                }
-
-                if (resourceinfolist.getSize().size() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource().size() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getDescription() != null &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getDescription().length() > 0) {
-                    mActivityDescription = resourceinfolist.getSize().get(0).getResource().get(0).getDescription();
-                    mFieldinfoActivityDescriptionLL.setVisibility(View.VISIBLE);
-                    mFieldInfoActivityDescriptionTV.setText(mActivityDescription);
-                }
-                mactivityinfo_layout.setVisibility(View.VISIBLE);
-
-                if (resourceinfolist.getSize() != null && resourceinfolist.getSize().size() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource() != null &&
-                        resourceinfolist.getSize().get(0).getResource().size() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getActivity_start_date() != null &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getActivity_start_date().length() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getDeadline() != null &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getDeadline().length() > 0) {
-                    mactivityinfo_start_date_text.setText(resourceinfolist.getSize().get(0).getResource().get(0).getActivity_start_date().replaceAll("-", "."));
-                    mactivityinfo_end_date_text.setText(resourceinfolist.getSize().get(0).getResource().get(0).getDeadline().replaceAll("-", "."));
-                    mShareActivityTimeTV.setText(mactivityinfo_start_date_text.getText().toString() + "-" +
-                            mactivityinfo_end_date_text.getText().toString());
-                    mActivityStartDate = resourceinfolist.getSize().get(0).getResource().get(0).getActivity_start_date();
-                    mDeadline = resourceinfolist.getSize().get(0).getResource().get(0).getDeadline();
-                }
-                if (resourceinfolist.getSize().size() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource().size() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).isExpired()) {
-                    mactivityinfo_start_date_text.setText(getResources().getString(R.string.fieldinfo_activity_expired_text));
-                    mactivityinfo_end_date_text.setVisibility(View.GONE);
-                    mactivityinfo_date_text.setVisibility(View.GONE);
-                    mactivity_overdue_btn.setVisibility(View.GONE);
-                } else {
-                    mactivity_overdue_btn.setVisibility(View.GONE);
-                }
-            }
-            if (resourceinfolist.getPhysical_resource().getIs_activity() == 1 &&
-                    resourceinfolist.getSize().size() > 0 &&
-                    resourceinfolist.getSize().get(0).getResource().size() > 0 &&
-                    resourceinfolist.getSize().get(0).getResource().get(0).getCustom_name() != null &&
-                    resourceinfolist.getSize().get(0).getResource().get(0).getCustom_name().length() > 0) {
-                ShareTitleStr = resourceinfolist.getSize().get(0).getResource().get(0).getCustom_name();
-            } else {
-                if (resourceinfolist.getPhysical_resource().getCommunity().getName() != null) {
-                    if (resourceinfolist.getPhysical_resource().getName() != null) {
-                        ShareTitleStr = resourceinfolist.getPhysical_resource().getCommunity().getName() +
-                                resourceinfolist.getPhysical_resource().getName().toString();
+                if (resourceinfolist.getPhysical_resource().getIs_activity() == 0) {
+                    if (resourceinfolist.getPhysical_resource().getField_type() != null &&
+                            resourceinfolist.getPhysical_resource().getField_type().getId() > 0 &&
+                            resourceinfolist.getPhysical_resource().getField_type().getDisplay_name() != null &&
+                            resourceinfolist.getPhysical_resource().getField_type().getDisplay_name().length() > 0) {
+                        mtxt_fieldtitle.setText(resourceinfolist.getPhysical_resource().getField_type().getDisplay_name());
+                        SharedescriptionStr = resourceinfolist.getPhysical_resource().getField_type().getDisplay_name() + "  ";
                     } else {
-                        ShareTitleStr = resourceinfolist.getPhysical_resource().getCommunity().getName();
+                        mtxt_fieldtitle.setVisibility(View.GONE);
                     }
-                } else {
-                    if (resourceinfolist.getPhysical_resource().getName() != null) {
-                        ShareTitleStr = resourceinfolist.getPhysical_resource().getName().toString();
+                    mactivityinfo_layout.setVisibility(View.GONE);
+                } else if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
+                    isActivityRes = true;
+                    TitleBarUtils.setTitleText(this, getResources().getString(R.string.fieldinfo_activitys_title_text));
+                    if (resourceinfolist.getSize().size() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource().size() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type() != null &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type().getId() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type().getDisplay_name() != null &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type().getDisplay_name().length() > 0) {
+                        mtxt_fieldtitle.setText(resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type().getDisplay_name());
+                        SharedescriptionStr = resourceinfolist.getSize().get(0).getResource().get(0).getActivity_type().getDisplay_name() + "  ";
+                    } else {
+                        mtxt_fieldtitle.setVisibility(View.GONE);
                     }
-                }
-            }
-            mtxt_field_description.setText(Constants.getDifferentColorStr(".........." +
-                    ShareTitleStr, 0, 10, getResources().getColor(R.color.color_null)));
-            String shareUrl = "";
-            if (mApiResourcesModel != null) {
-                String min_price = "";
-                String max_price = "";
-                String min_area = "";
-                String max_area = "";
-                String min_person_flow = "";
-                String max_person_flow = "";
-                if (mApiResourcesModel.getMin_price() != null && mApiResourcesModel.getMin_price().length() > 0) {
-                    min_price = ("&min_price=" + Constants.getpricestring(mApiResourcesModel.getMin_price(), 0.01));
-                }
-                if (mApiResourcesModel.getMax_price() != null && mApiResourcesModel.getMax_price().length() > 0) {
-                    max_price = ("&max_price=" + Constants.getpricestring(mApiResourcesModel.getMax_price(), 0.01));
-                }
-                if (mApiResourcesModel.getMin_area() != null && mApiResourcesModel.getMin_area().length() > 0) {
-                    min_area = ("&min_area=" + mApiResourcesModel.getMin_area());
-                }
-                if (mApiResourcesModel.getMax_area() != null && mApiResourcesModel.getMax_area().length() > 0) {
-                    max_area = ("&max_area=" + mApiResourcesModel.getMax_area());
-                }
-                if (mApiResourcesModel.getMin_person_flow() != null && mApiResourcesModel.getMin_person_flow().length() > 0) {
-                    min_person_flow = ("&min_person_flow=" + mApiResourcesModel.getMin_person_flow());
-                }
-                if (mApiResourcesModel.getMax_person_flow() != null && mApiResourcesModel.getMax_person_flow().length() > 0) {
-                    max_person_flow = ("&max_person_flow=" + mApiResourcesModel.getMax_person_flow());
-                }
-                shareUrl = min_price + max_price + min_area + max_area + min_person_flow + max_person_flow;
-            }
-            //2018/11/14 分享供给详情
-            if (resourceinfolist.getPhysical_resource().getIs_activity() == 0) {
-                sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_FIELDS_INFO_URL + getfieldid + shareUrl;
-                share_linkurl = Config.SHARE_FIELDS_INFO_URL + getfieldid + "?BackKey=1&is_app=1" + shareUrl;
-            } else if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
-                sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_ACTIVITY_INFO_URL + mSellResId + shareUrl;
-                share_linkurl = Config.SHARE_ACTIVITIES_INFO_URL + mSellResId + "?res_type_id=3&BackKey=1&is_app=1" + shareUrl;
-            }
-            if (resourceinfolist.getPhysical_resource().getNumber_of_people() != null &&
-                    resourceinfolist.getPhysical_resource().getNumber_of_people() > 0) {
-                mFieldinfoNumberOfPeopleTV.setText(
-                        String.valueOf(resourceinfolist.getPhysical_resource().getNumber_of_people()));
-            } else {
-                mFieldinfoNumberOfPeopleTV.setText(getResources().getString(R.string.groupbooding_no_data_str));
-            }
-            if (resourceinfolist.getPhysical_resource().getNumber_of_order() != null) {
-                mtxt_transaction_success.setText(
-                        String.valueOf(resourceinfolist.getPhysical_resource().getNumber_of_order()));
-            } else {
-                mtxt_transaction_success.setText(getResources().getString(R.string.groupbooding_no_data_str));
-            }
-            if (resourceinfolist.getIndustry_str() != null &&
-                    resourceinfolist.getIndustry_str().length() > 0) {
-                mFieldInfoIndustryTV.setText(resourceinfolist.getIndustry_str());
-            } else {
-                mFieldInfoIndustryTV.setText(getResources().getString(R.string.groupbooding_no_data_str));
-            }
 
-            //标签使用labels
-            if (resourceinfolist.getPhysical_resource().getLabels() != null &&
-                    resourceinfolist.getPhysical_resource().getLabels().size() > 0) {
-                mFieldInfoAgeLabelLL.setVisibility(View.VISIBLE);
-                for (int i = 0; i < resourceinfolist.getPhysical_resource().getLabels().size(); i++) {
-                    if (i < 3) {
-                        if (i == 0) {
-                            if (resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name() != null &&
-                                    resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name().length() > 0) {
-                                mFieldInfoLabelTV0.setVisibility(View.VISIBLE);
-                                mFieldInfoLabelTV0.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name());
-                            } else {
-                                if (resourceinfolist.getPhysical_resource().getLabels().get(i).getName() != null &&
-                                        resourceinfolist.getPhysical_resource().getLabels().get(i).getName().length() > 0) {
+                    if (resourceinfolist.getSize().size() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource().size() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getDescription() != null &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getDescription().length() > 0) {
+                        mActivityDescription = resourceinfolist.getSize().get(0).getResource().get(0).getDescription();
+                        mFieldinfoActivityDescriptionLL.setVisibility(View.VISIBLE);
+                        mFieldInfoActivityDescriptionTV.setText(mActivityDescription);
+                    }
+                    mactivityinfo_layout.setVisibility(View.VISIBLE);
+
+                    if (resourceinfolist.getSize() != null && resourceinfolist.getSize().size() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource() != null &&
+                            resourceinfolist.getSize().get(0).getResource().size() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getActivity_start_date() != null &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getActivity_start_date().length() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getDeadline() != null &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getDeadline().length() > 0) {
+                        mactivityinfo_start_date_text.setText(resourceinfolist.getSize().get(0).getResource().get(0).getActivity_start_date().replaceAll("-", "."));
+                        mactivityinfo_end_date_text.setText(resourceinfolist.getSize().get(0).getResource().get(0).getDeadline().replaceAll("-", "."));
+                        mShareActivityTimeTV.setText(mactivityinfo_start_date_text.getText().toString() + "-" +
+                                mactivityinfo_end_date_text.getText().toString());
+                        mActivityStartDate = resourceinfolist.getSize().get(0).getResource().get(0).getActivity_start_date();
+                        mDeadline = resourceinfolist.getSize().get(0).getResource().get(0).getDeadline();
+                    }
+                    if (resourceinfolist.getSize().size() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource().size() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).isExpired()) {
+                        mactivityinfo_start_date_text.setText(getResources().getString(R.string.fieldinfo_activity_expired_text));
+                        mactivityinfo_end_date_text.setVisibility(View.GONE);
+                        mactivityinfo_date_text.setVisibility(View.GONE);
+                        mactivity_overdue_btn.setVisibility(View.GONE);
+                    } else {
+                        mactivity_overdue_btn.setVisibility(View.GONE);
+                    }
+                }
+                if (resourceinfolist.getPhysical_resource().getIs_activity() == 1 &&
+                        resourceinfolist.getSize().size() > 0 &&
+                        resourceinfolist.getSize().get(0).getResource().size() > 0 &&
+                        resourceinfolist.getSize().get(0).getResource().get(0).getCustom_name() != null &&
+                        resourceinfolist.getSize().get(0).getResource().get(0).getCustom_name().length() > 0) {
+                    ShareTitleStr = resourceinfolist.getSize().get(0).getResource().get(0).getCustom_name();
+                } else {
+                    if (resourceinfolist.getPhysical_resource().getCommunity().getName() != null) {
+                        if (resourceinfolist.getPhysical_resource().getName() != null) {
+                            ShareTitleStr = resourceinfolist.getPhysical_resource().getCommunity().getName() +
+                                    resourceinfolist.getPhysical_resource().getName().toString();
+                        } else {
+                            ShareTitleStr = resourceinfolist.getPhysical_resource().getCommunity().getName();
+                        }
+                    } else {
+                        if (resourceinfolist.getPhysical_resource().getName() != null) {
+                            ShareTitleStr = resourceinfolist.getPhysical_resource().getName().toString();
+                        }
+                    }
+                }
+                mtxt_field_description.setText(Constants.getDifferentColorStr(".........." +
+                        ShareTitleStr, 0, 10, getResources().getColor(R.color.color_null)));
+                String shareUrl = "";
+                if (mApiResourcesModel != null) {
+                    String min_price = "";
+                    String max_price = "";
+                    String min_area = "";
+                    String max_area = "";
+                    String min_person_flow = "";
+                    String max_person_flow = "";
+                    if (mApiResourcesModel.getMin_price() != null && mApiResourcesModel.getMin_price().length() > 0) {
+                        min_price = ("&min_price=" + Constants.getpricestring(mApiResourcesModel.getMin_price(), 0.01));
+                    }
+                    if (mApiResourcesModel.getMax_price() != null && mApiResourcesModel.getMax_price().length() > 0) {
+                        max_price = ("&max_price=" + Constants.getpricestring(mApiResourcesModel.getMax_price(), 0.01));
+                    }
+                    if (mApiResourcesModel.getMin_area() != null && mApiResourcesModel.getMin_area().length() > 0) {
+                        min_area = ("&min_area=" + mApiResourcesModel.getMin_area());
+                    }
+                    if (mApiResourcesModel.getMax_area() != null && mApiResourcesModel.getMax_area().length() > 0) {
+                        max_area = ("&max_area=" + mApiResourcesModel.getMax_area());
+                    }
+                    if (mApiResourcesModel.getMin_person_flow() != null && mApiResourcesModel.getMin_person_flow().length() > 0) {
+                        min_person_flow = ("&min_person_flow=" + mApiResourcesModel.getMin_person_flow());
+                    }
+                    if (mApiResourcesModel.getMax_person_flow() != null && mApiResourcesModel.getMax_person_flow().length() > 0) {
+                        max_person_flow = ("&max_person_flow=" + mApiResourcesModel.getMax_person_flow());
+                    }
+                    shareUrl = min_price + max_price + min_area + max_area + min_person_flow + max_person_flow;
+                }
+                //2018/11/14 分享供给详情
+                if (resourceinfolist.getPhysical_resource().getIs_activity() == 0) {
+                    sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_FIELDS_INFO_URL + getfieldid + shareUrl;
+                    share_linkurl = Config.SHARE_FIELDS_INFO_URL + getfieldid + "?BackKey=1&is_app=1" + shareUrl;
+                } else if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
+                    sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_ACTIVITY_INFO_URL + mSellResId + shareUrl;
+                    share_linkurl = Config.SHARE_ACTIVITIES_INFO_URL + mSellResId + "?res_type_id=3&BackKey=1&is_app=1" + shareUrl;
+                }
+                if (resourceinfolist.getPhysical_resource().getNumber_of_people() != null &&
+                        resourceinfolist.getPhysical_resource().getNumber_of_people() > 0) {
+                    mFieldinfoNumberOfPeopleTV.setText(
+                            String.valueOf(resourceinfolist.getPhysical_resource().getNumber_of_people()));
+                } else {
+                    mFieldinfoNumberOfPeopleTV.setText(getResources().getString(R.string.groupbooding_no_data_str));
+                }
+                if (resourceinfolist.getPhysical_resource().getNumber_of_order() != null) {
+                    mtxt_transaction_success.setText(
+                            String.valueOf(resourceinfolist.getPhysical_resource().getNumber_of_order()));
+                } else {
+                    mtxt_transaction_success.setText(getResources().getString(R.string.groupbooding_no_data_str));
+                }
+                if (resourceinfolist.getIndustry_str() != null &&
+                        resourceinfolist.getIndustry_str().length() > 0) {
+                    mFieldInfoIndustryTV.setText(resourceinfolist.getIndustry_str());
+                } else {
+                    mFieldInfoIndustryTV.setText(getResources().getString(R.string.groupbooding_no_data_str));
+                }
+
+                //标签使用labels
+                if (resourceinfolist.getPhysical_resource().getLabels() != null &&
+                        resourceinfolist.getPhysical_resource().getLabels().size() > 0) {
+                    mFieldInfoAgeLabelLL.setVisibility(View.VISIBLE);
+                    for (int i = 0; i < resourceinfolist.getPhysical_resource().getLabels().size(); i++) {
+                        if (i < 3) {
+                            if (i == 0) {
+                                if (resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name() != null &&
+                                        resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name().length() > 0) {
                                     mFieldInfoLabelTV0.setVisibility(View.VISIBLE);
-                                    mFieldInfoLabelTV0.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getName());
+                                    mFieldInfoLabelTV0.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name());
                                 } else {
-                                    mFieldInfoLabelTV0.setVisibility(View.GONE);
+                                    if (resourceinfolist.getPhysical_resource().getLabels().get(i).getName() != null &&
+                                            resourceinfolist.getPhysical_resource().getLabels().get(i).getName().length() > 0) {
+                                        mFieldInfoLabelTV0.setVisibility(View.VISIBLE);
+                                        mFieldInfoLabelTV0.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getName());
+                                    } else {
+                                        mFieldInfoLabelTV0.setVisibility(View.GONE);
+                                    }
                                 }
-                            }
-                        } else if (i == 1) {
-                            if (resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name() != null &&
-                                    resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name().length() > 0) {
-                                mFieldInfoLabelTV1.setVisibility(View.VISIBLE);
-                                mFieldInfoLabelTV1.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name());
-                            } else {
-                                if (resourceinfolist.getPhysical_resource().getLabels().get(i).getName() != null &&
-                                        resourceinfolist.getPhysical_resource().getLabels().get(i).getName().length() > 0) {
+                            } else if (i == 1) {
+                                if (resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name() != null &&
+                                        resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name().length() > 0) {
                                     mFieldInfoLabelTV1.setVisibility(View.VISIBLE);
-                                    mFieldInfoLabelTV1.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getName());
+                                    mFieldInfoLabelTV1.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name());
                                 } else {
-                                    mFieldInfoLabelTV1.setVisibility(View.GONE);
+                                    if (resourceinfolist.getPhysical_resource().getLabels().get(i).getName() != null &&
+                                            resourceinfolist.getPhysical_resource().getLabels().get(i).getName().length() > 0) {
+                                        mFieldInfoLabelTV1.setVisibility(View.VISIBLE);
+                                        mFieldInfoLabelTV1.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getName());
+                                    } else {
+                                        mFieldInfoLabelTV1.setVisibility(View.GONE);
+                                    }
                                 }
-                            }
-                        } else if (i == 2) {
-                            if (resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name() != null &&
-                                    resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name().length() > 0) {
-                                mFieldInfoLabelTV2.setVisibility(View.VISIBLE);
-                                mFieldInfoLabelTV2.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name());
-                            } else {
-                                if (resourceinfolist.getPhysical_resource().getLabels().get(i).getName() != null &&
-                                        resourceinfolist.getPhysical_resource().getLabels().get(i).getName().length() > 0) {
+                            } else if (i == 2) {
+                                if (resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name() != null &&
+                                        resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name().length() > 0) {
                                     mFieldInfoLabelTV2.setVisibility(View.VISIBLE);
-                                    mFieldInfoLabelTV2.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getName());
+                                    mFieldInfoLabelTV2.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getDisplay_name());
                                 } else {
-                                    mFieldInfoLabelTV2.setVisibility(View.GONE);
+                                    if (resourceinfolist.getPhysical_resource().getLabels().get(i).getName() != null &&
+                                            resourceinfolist.getPhysical_resource().getLabels().get(i).getName().length() > 0) {
+                                        mFieldInfoLabelTV2.setVisibility(View.VISIBLE);
+                                        mFieldInfoLabelTV2.setText(resourceinfolist.getPhysical_resource().getLabels().get(i).getName());
+                                    } else {
+                                        mFieldInfoLabelTV2.setVisibility(View.GONE);
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            } else {
-                mFieldInfoAgeLabelLL.setVisibility(View.GONE);
-            }
-            String cityName = "";
-            if (resourceinfolist.getPhysical_resource().getCommunity().getDetailed_address() != null &&
-                    resourceinfolist.getPhysical_resource().getCommunity().getDetailed_address().length() > 0) {
-                if (resourceinfolist.getPhysical_resource().getCommunity().getDistrict() != null &&
-                        resourceinfolist.getPhysical_resource().getCommunity().getDistrict().getName() != null &&
-                        resourceinfolist.getPhysical_resource().getCommunity().getDistrict().getName().length() > 0) {
-                    mResAddressStr = resourceinfolist.getPhysical_resource().getCommunity().getDistrict().getName() +
-                            resourceinfolist.getPhysical_resource().getCommunity().getDetailed_address();
                 } else {
-                    mResAddressStr = resourceinfolist.getPhysical_resource().getCommunity().getDetailed_address();
+                    mFieldInfoAgeLabelLL.setVisibility(View.GONE);
                 }
-
-                //2017/10/19 分享时的描述
-                String mShareResPrice = "";
-                if (resourceinfolist.getPhysical_resource().getMin_price() != null) {
-                    mSharePriceLL.setVisibility(View.VISIBLE);
-                    mSharePriceTV.setText(Constants.getpricestring(String.valueOf(resourceinfolist.getPhysical_resource().getMin_price()), 0.01));
-                    if (isShareSubsidy) {
-                        mShareSubsidyImgv.setVisibility(View.VISIBLE);
+                String cityName = "";
+                if (resourceinfolist.getPhysical_resource().getCommunity().getDetailed_address() != null &&
+                        resourceinfolist.getPhysical_resource().getCommunity().getDetailed_address().length() > 0) {
+                    if (resourceinfolist.getPhysical_resource().getCommunity().getDistrict() != null &&
+                            resourceinfolist.getPhysical_resource().getCommunity().getDistrict().getName() != null &&
+                            resourceinfolist.getPhysical_resource().getCommunity().getDistrict().getName().length() > 0) {
+                        mResAddressStr = resourceinfolist.getPhysical_resource().getCommunity().getDistrict().getName() +
+                                resourceinfolist.getPhysical_resource().getCommunity().getDetailed_address();
+                    } else {
+                        mResAddressStr = resourceinfolist.getPhysical_resource().getCommunity().getDetailed_address();
                     }
-                }
-                if (resourceinfolist.getPhysical_resource().getCommunity().getCity() != null &&
-                        resourceinfolist.getPhysical_resource().getCommunity().getCity().getName() != null &&
-                        resourceinfolist.getPhysical_resource().getCommunity().getCity().getName().length() > 0) {
-                    cityName = resourceinfolist.getPhysical_resource().getCommunity().getCity().getName();
-                    mResAddressStr = resourceinfolist.getPhysical_resource().getCommunity().getCity().getName() + mResAddressStr;
-                    SharedescriptionStr = SharedescriptionStr + "\n" +
-                            mResAddressStr;
-                }
-                mtxt_address.setText(mResAddressStr);
-                // FIXME: 2018/12/10 分享修改
-                mShareDescriptionTV.setText(SharedescriptionStr);
-            }
-            //朋友圈分享标题
-            mSharePYQTitleStr = getResources().getString(R.string.fieldinfo_share_text) + "(" +
-                    cityName + ShareTitleStr + ")" +
-                    getResources().getString(R.string.fieldinfo_share_linhuiba_mark_text);
 
-            if (resourceinfolist.getPhysical_resource().getDoLocation() != null &&
-                    resourceinfolist.getPhysical_resource().getDoLocation().length() > 0) {
-                mFieldinfoDoLocationTV.setText(resourceinfolist.getPhysical_resource().getDoLocation());
-                mFieldinfoLocationTV.setText(getResources().getString(R.string.fieldinfo_dolocation_tv_str) +
-                        resourceinfolist.getPhysical_resource().getDoLocation());
-                if (resourceinfolist.getPhysical_resource().getIndoor() != null) {
-                    if (resourceinfolist.getPhysical_resource().getIndoor() == 0) {
-                        mFieldinfoLocationIndoorTV.setText(getResources().getString(R.string.fieldinfo_location_unindoor_tv_str));
-                        mFieldinfoLocationIndoorTV.setVisibility(View.VISIBLE);
-                    } else if (resourceinfolist.getPhysical_resource().getIndoor() == 1) {
-                        mFieldinfoLocationIndoorTV.setText(getResources().getString(R.string.fieldinfo_location_indoor_tv_str));
-                        mFieldinfoLocationIndoorTV.setVisibility(View.VISIBLE);
+                    //2017/10/19 分享时的描述
+                    String mShareResPrice = "";
+                    if (resourceinfolist.getPhysical_resource().getMin_price() != null) {
+                        mSharePriceLL.setVisibility(View.VISIBLE);
+                        mSharePriceTV.setText(Constants.getpricestring(String.valueOf(resourceinfolist.getPhysical_resource().getMin_price()), 0.01));
+                        if (isShareSubsidy) {
+                            mShareSubsidyImgv.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    if (resourceinfolist.getPhysical_resource().getCommunity().getCity() != null &&
+                            resourceinfolist.getPhysical_resource().getCommunity().getCity().getName() != null &&
+                            resourceinfolist.getPhysical_resource().getCommunity().getCity().getName().length() > 0) {
+                        cityName = resourceinfolist.getPhysical_resource().getCommunity().getCity().getName();
+                        mResAddressStr = resourceinfolist.getPhysical_resource().getCommunity().getCity().getName() + mResAddressStr;
+                        SharedescriptionStr = SharedescriptionStr + "\n" +
+                                mResAddressStr;
+                    }
+                    mtxt_address.setText(mResAddressStr);
+                    // FIXME: 2018/12/10 分享修改
+                    mShareDescriptionTV.setText(SharedescriptionStr);
+                }
+                //朋友圈分享标题
+                mSharePYQTitleStr = getResources().getString(R.string.fieldinfo_share_text) + "(" +
+                        cityName + ShareTitleStr + ")" +
+                        getResources().getString(R.string.fieldinfo_share_linhuiba_mark_text);
+
+                if (resourceinfolist.getPhysical_resource().getDoLocation() != null &&
+                        resourceinfolist.getPhysical_resource().getDoLocation().length() > 0) {
+                    mFieldinfoDoLocationTV.setText(resourceinfolist.getPhysical_resource().getDoLocation());
+                    mFieldinfoLocationTV.setText(getResources().getString(R.string.fieldinfo_dolocation_tv_str) +
+                            resourceinfolist.getPhysical_resource().getDoLocation());
+                    if (resourceinfolist.getPhysical_resource().getIndoor() != null) {
+                        if (resourceinfolist.getPhysical_resource().getIndoor() == 0) {
+                            mFieldinfoLocationIndoorTV.setText(getResources().getString(R.string.fieldinfo_location_unindoor_tv_str));
+                            mFieldinfoLocationIndoorTV.setVisibility(View.VISIBLE);
+                        } else if (resourceinfolist.getPhysical_resource().getIndoor() == 1) {
+                            mFieldinfoLocationIndoorTV.setText(getResources().getString(R.string.fieldinfo_location_indoor_tv_str));
+                            mFieldinfoLocationIndoorTV.setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        mFieldinfoLocationIndoorTV.setVisibility(View.GONE);
                     }
                 } else {
-                    mFieldinfoLocationIndoorTV.setVisibility(View.GONE);
+                    mFieldinfoDoLocationTV.setText(getResources().getString(R.string.fieldinfo_no_parameter_message));
                 }
-            } else {
-                mFieldinfoDoLocationTV.setText(getResources().getString(R.string.fieldinfo_no_parameter_message));
-            }
 
-            if (resourceinfolist.getPhysical_resource().getDo_begin() != null &&
-                    resourceinfolist.getPhysical_resource().getDo_finish() != null &&
-                    resourceinfolist.getPhysical_resource().getDo_begin().length() > 0 &&
-                    resourceinfolist.getPhysical_resource().getDo_finish().length() > 0) {
-                mtxt_stall_time.setText(resourceinfolist.getPhysical_resource().getDo_begin() + "-" +
-                        resourceinfolist.getPhysical_resource().getDo_finish());
-            } else {
-                mtxt_stall_time.setText(getResources().getString(R.string.groupbooding_no_data_str));
-            }
-            if (resourceinfolist.getPhysical_resource().getTotal_area() != null &&
-                    resourceinfolist.getPhysical_resource().getTotal_area() > 0) {
-                mtxt_total_area.setText(String.valueOf(resourceinfolist.getPhysical_resource().getTotal_area()) +
-                        getResources().getString(R.string.myselfinfo_company_demand_area_unit_text));
-            } else {
-                mtxt_total_area.setText(getResources().getString(R.string.groupbooding_no_data_str));
-            }
-            if (resourceinfolist.getCoupons() != null && resourceinfolist.getCoupons().size() > 0) {
-                mFieldinfoReceiveCouponsLL.setVisibility(View.VISIBLE);
-                if (resourceinfolist.getCoupons().get(0).getAmount() != null &&
-                        resourceinfolist.getCoupons().get(0).getAmount().toString().length() > 0) {
-                    mFieldinfoCouponsPrice.setText(Constants.getpricestring(resourceinfolist.getCoupons().get(0).getAmount(),
-                            1));
+                if (resourceinfolist.getPhysical_resource().getDo_begin() != null &&
+                        resourceinfolist.getPhysical_resource().getDo_finish() != null &&
+                        resourceinfolist.getPhysical_resource().getDo_begin().length() > 0 &&
+                        resourceinfolist.getPhysical_resource().getDo_finish().length() > 0) {
+                    mtxt_stall_time.setText(resourceinfolist.getPhysical_resource().getDo_begin() + "-" +
+                            resourceinfolist.getPhysical_resource().getDo_finish());
+                } else {
+                    mtxt_stall_time.setText(getResources().getString(R.string.groupbooding_no_data_str));
                 }
-                for (int i = 0; i < resourceinfolist.getCoupons().size(); i++) {
-                    if (i < 3) {
-                        if (i == 0) {
-                            mFieldinfoCoupons1.setVisibility(View.VISIBLE);
-                            if (resourceinfolist.getCoupons().get(i).getMin_goods_amount() != null &&
-                                    resourceinfolist.getCoupons().get(i).getMin_goods_amount().length() > 0 &&
-                                    Double.parseDouble(resourceinfolist.getCoupons().get(i).getMin_goods_amount()) > 0) {
-                                mFieldinfoCoupons1.setText(getResources().getString(R.string.module_coupons_first_register_item_amount_first_str) +
-                                        Constants.getpricestring(resourceinfolist.getCoupons().get(i).getMin_goods_amount(), 1) +
-                                        getResources().getString(R.string.module_my_coupons_item_amount_last_str) +
-                                        Constants.getpricestring(resourceinfolist.getCoupons().get(i).getAmount(), 1));
-                            } else {
-                                mFieldinfoCoupons1.setText(Constants.getpricestring(resourceinfolist.getCoupons().get(i).getAmount(), 1) +
-                                        getResources().getString(R.string.term_types_unit_txt) +
-                                        getResources().getString(R.string.module_fieldinfo_coupons_no_threshold));
-                            }
+                if (resourceinfolist.getPhysical_resource().getTotal_area() != null &&
+                        resourceinfolist.getPhysical_resource().getTotal_area() > 0) {
+                    mtxt_total_area.setText(String.valueOf(resourceinfolist.getPhysical_resource().getTotal_area()) +
+                            getResources().getString(R.string.myselfinfo_company_demand_area_unit_text));
+                } else {
+                    mtxt_total_area.setText(getResources().getString(R.string.groupbooding_no_data_str));
+                }
+                if (resourceinfolist.getCoupons() != null && resourceinfolist.getCoupons().size() > 0) {
+                    mFieldinfoReceiveCouponsLL.setVisibility(View.VISIBLE);
+                    if (resourceinfolist.getCoupons().get(0).getAmount() != null &&
+                            resourceinfolist.getCoupons().get(0).getAmount().toString().length() > 0) {
+                        mFieldinfoCouponsPrice.setText(Constants.getpricestring(resourceinfolist.getCoupons().get(0).getAmount(),
+                                1));
+                    }
+                    for (int i = 0; i < resourceinfolist.getCoupons().size(); i++) {
+                        if (i < 3) {
+                            if (i == 0) {
+                                mFieldinfoCoupons1.setVisibility(View.VISIBLE);
+                                if (resourceinfolist.getCoupons().get(i).getMin_goods_amount() != null &&
+                                        resourceinfolist.getCoupons().get(i).getMin_goods_amount().length() > 0 &&
+                                        Double.parseDouble(resourceinfolist.getCoupons().get(i).getMin_goods_amount()) > 0) {
+                                    mFieldinfoCoupons1.setText(getResources().getString(R.string.module_coupons_first_register_item_amount_first_str) +
+                                            Constants.getpricestring(resourceinfolist.getCoupons().get(i).getMin_goods_amount(), 1) +
+                                            getResources().getString(R.string.module_my_coupons_item_amount_last_str) +
+                                            Constants.getpricestring(resourceinfolist.getCoupons().get(i).getAmount(), 1));
+                                } else {
+                                    mFieldinfoCoupons1.setText(Constants.getpricestring(resourceinfolist.getCoupons().get(i).getAmount(), 1) +
+                                            getResources().getString(R.string.term_types_unit_txt) +
+                                            getResources().getString(R.string.module_fieldinfo_coupons_no_threshold));
+                                }
 
-                        } else if (i == 1) {
-                            mFieldinfoCoupons2.setVisibility(View.VISIBLE);
-                            if (resourceinfolist.getCoupons().get(i).getMin_goods_amount() != null &&
-                                    resourceinfolist.getCoupons().get(i).getMin_goods_amount().length() > 0 &&
-                                    Double.parseDouble(resourceinfolist.getCoupons().get(i).getMin_goods_amount()) > 0) {
-                                mFieldinfoCoupons2.setText(getResources().getString(R.string.module_coupons_first_register_item_amount_first_str) +
-                                        Constants.getpricestring(resourceinfolist.getCoupons().get(i).getMin_goods_amount(), 1) +
-                                        getResources().getString(R.string.module_my_coupons_item_amount_last_str) +
-                                        Constants.getpricestring(resourceinfolist.getCoupons().get(i).getAmount(), 1));
-                            } else {
-                                mFieldinfoCoupons2.setText(Constants.getpricestring(resourceinfolist.getCoupons().get(i).getAmount(), 1) +
-                                        getResources().getString(R.string.term_types_unit_txt) +
-                                        getResources().getString(R.string.module_fieldinfo_coupons_no_threshold));
-                            }
-                        } //                        else if (i == 2) {
+                            } else if (i == 1) {
+                                mFieldinfoCoupons2.setVisibility(View.VISIBLE);
+                                if (resourceinfolist.getCoupons().get(i).getMin_goods_amount() != null &&
+                                        resourceinfolist.getCoupons().get(i).getMin_goods_amount().length() > 0 &&
+                                        Double.parseDouble(resourceinfolist.getCoupons().get(i).getMin_goods_amount()) > 0) {
+                                    mFieldinfoCoupons2.setText(getResources().getString(R.string.module_coupons_first_register_item_amount_first_str) +
+                                            Constants.getpricestring(resourceinfolist.getCoupons().get(i).getMin_goods_amount(), 1) +
+                                            getResources().getString(R.string.module_my_coupons_item_amount_last_str) +
+                                            Constants.getpricestring(resourceinfolist.getCoupons().get(i).getAmount(), 1));
+                                } else {
+                                    mFieldinfoCoupons2.setText(Constants.getpricestring(resourceinfolist.getCoupons().get(i).getAmount(), 1) +
+                                            getResources().getString(R.string.term_types_unit_txt) +
+                                            getResources().getString(R.string.module_fieldinfo_coupons_no_threshold));
+                                }
+                            } //                        else if (i == 2) {
 //                            mFieldinfoCoupons3.setVisibility(View.VISIBLE);
 //                            if (resourceinfolist.getCoupons().get(i).getMin_goods_amount() != null &&
 //                                    resourceinfolist.getCoupons().get(i).getMin_goods_amount().length() > 0 &&
@@ -4920,260 +4948,262 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
 //                            }
 //                        }
 
-                    }
-                }
-            } else {
-                mFieldinfoReceiveCouponsLL.setVisibility(View.GONE);
-            }
-            //物业要求显示
-            if ((resourceinfolist.getPhysical_resource().getRequirement() != null && resourceinfolist.getPhysical_resource().getRequirement().size() > 0) ||
-                    (resourceinfolist.getPhysical_resource().getProperty_requirement() != null && resourceinfolist.getPhysical_resource().getProperty_requirement().length() > 0)) {
-                mtxt_property_requirement_layout.setVisibility(View.VISIBLE);
-                String property_requirement = "";
-                if (resourceinfolist.getPhysical_resource().getRequirement() != null && resourceinfolist.getPhysical_resource().getRequirement().size() > 0) {
-                    for (int i = 0; i < resourceinfolist.getPhysical_resource().getRequirement().size(); i++) {
-                        if (resourceinfolist.getPhysical_resource().getRequirement().get(i).getDisplay_name() != null &&
-                                resourceinfolist.getPhysical_resource().getRequirement().get(i).getDisplay_name().length() > 0) {
-                            if (i != 0) {
-                                property_requirement = property_requirement + "、" + resourceinfolist.getPhysical_resource().getRequirement().get(i).getDisplay_name();
-                            } else {
-                                property_requirement = property_requirement + resourceinfolist.getPhysical_resource().getRequirement().get(i).getDisplay_name();
-                            }
                         }
                     }
+                } else {
+                    mFieldinfoReceiveCouponsLL.setVisibility(View.GONE);
                 }
-                if (resourceinfolist.getPhysical_resource().getProperty_requirement() != null && resourceinfolist.getPhysical_resource().getProperty_requirement().length() > 0) {
+                //物业要求显示
+                if ((resourceinfolist.getPhysical_resource().getRequirement() != null && resourceinfolist.getPhysical_resource().getRequirement().size() > 0) ||
+                        (resourceinfolist.getPhysical_resource().getProperty_requirement() != null && resourceinfolist.getPhysical_resource().getProperty_requirement().length() > 0)) {
+                    mtxt_property_requirement_layout.setVisibility(View.VISIBLE);
+                    String property_requirement = "";
                     if (resourceinfolist.getPhysical_resource().getRequirement() != null && resourceinfolist.getPhysical_resource().getRequirement().size() > 0) {
-                        property_requirement = property_requirement + "、" + resourceinfolist.getPhysical_resource().getProperty_requirement();
-                    } else {
-                        property_requirement = property_requirement + resourceinfolist.getPhysical_resource().getProperty_requirement();
-                    }
-                }
-                mtxt_property_requirement.setText(property_requirement);
-            } else {
-                mtxt_property_requirement.setText(getResources().getString(R.string.groupbooding_no_data_str));
-            }
-
-            if ((resourceinfolist.getPhysical_resource().getContraband() != null && resourceinfolist.getPhysical_resource().getContraband().size() > 0) ||
-                    (resourceinfolist.getPhysical_resource().getOther_contraband() != null && resourceinfolist.getPhysical_resource().getOther_contraband().length() > 0)) {
-                String contraband_str = "";
-                if (resourceinfolist.getPhysical_resource().getContraband() != null && resourceinfolist.getPhysical_resource().getContraband().size() > 0) {
-                    for (int i = 0; i < resourceinfolist.getPhysical_resource().getContraband().size(); i++) {
-                        if (resourceinfolist.getPhysical_resource().getContraband().get(i).getDisplay_name() != null &&
-                                resourceinfolist.getPhysical_resource().getContraband().get(i).getDisplay_name().length() > 0) {
-                            if (i != 0) {
-                                contraband_str = contraband_str + "、" + resourceinfolist.getPhysical_resource().getContraband().get(i).getDisplay_name();
-                            } else {
-                                contraband_str = contraband_str + resourceinfolist.getPhysical_resource().getContraband().get(i).getDisplay_name();
+                        for (int i = 0; i < resourceinfolist.getPhysical_resource().getRequirement().size(); i++) {
+                            if (resourceinfolist.getPhysical_resource().getRequirement().get(i).getDisplay_name() != null &&
+                                    resourceinfolist.getPhysical_resource().getRequirement().get(i).getDisplay_name().length() > 0) {
+                                if (i != 0) {
+                                    property_requirement = property_requirement + "、" + resourceinfolist.getPhysical_resource().getRequirement().get(i).getDisplay_name();
+                                } else {
+                                    property_requirement = property_requirement + resourceinfolist.getPhysical_resource().getRequirement().get(i).getDisplay_name();
+                                }
                             }
                         }
                     }
+                    if (resourceinfolist.getPhysical_resource().getProperty_requirement() != null && resourceinfolist.getPhysical_resource().getProperty_requirement().length() > 0) {
+                        if (resourceinfolist.getPhysical_resource().getRequirement() != null && resourceinfolist.getPhysical_resource().getRequirement().size() > 0) {
+                            property_requirement = property_requirement + "、" + resourceinfolist.getPhysical_resource().getProperty_requirement();
+                        } else {
+                            property_requirement = property_requirement + resourceinfolist.getPhysical_resource().getProperty_requirement();
+                        }
+                    }
+                    mtxt_property_requirement.setText(property_requirement);
+                } else {
+                    mtxt_property_requirement.setText(getResources().getString(R.string.groupbooding_no_data_str));
                 }
-                if (resourceinfolist.getPhysical_resource().getOther_contraband() != null && resourceinfolist.getPhysical_resource().getOther_contraband().length() > 0) {
+
+                if ((resourceinfolist.getPhysical_resource().getContraband() != null && resourceinfolist.getPhysical_resource().getContraband().size() > 0) ||
+                        (resourceinfolist.getPhysical_resource().getOther_contraband() != null && resourceinfolist.getPhysical_resource().getOther_contraband().length() > 0)) {
+                    String contraband_str = "";
                     if (resourceinfolist.getPhysical_resource().getContraband() != null && resourceinfolist.getPhysical_resource().getContraband().size() > 0) {
-                        contraband_str = contraband_str + "、" + resourceinfolist.getPhysical_resource().getOther_contraband();
+                        for (int i = 0; i < resourceinfolist.getPhysical_resource().getContraband().size(); i++) {
+                            if (resourceinfolist.getPhysical_resource().getContraband().get(i).getDisplay_name() != null &&
+                                    resourceinfolist.getPhysical_resource().getContraband().get(i).getDisplay_name().length() > 0) {
+                                if (i != 0) {
+                                    contraband_str = contraband_str + "、" + resourceinfolist.getPhysical_resource().getContraband().get(i).getDisplay_name();
+                                } else {
+                                    contraband_str = contraband_str + resourceinfolist.getPhysical_resource().getContraband().get(i).getDisplay_name();
+                                }
+                            }
+                        }
+                    }
+                    if (resourceinfolist.getPhysical_resource().getOther_contraband() != null && resourceinfolist.getPhysical_resource().getOther_contraband().length() > 0) {
+                        if (resourceinfolist.getPhysical_resource().getContraband() != null && resourceinfolist.getPhysical_resource().getContraband().size() > 0) {
+                            contraband_str = contraband_str + "、" + resourceinfolist.getPhysical_resource().getOther_contraband();
+                        } else {
+                            contraband_str = contraband_str + resourceinfolist.getPhysical_resource().getOther_contraband();
+                        }
+                    }
+                    mtxt_contraband.setText(contraband_str);
+                    mContrabandLL.setVisibility(View.VISIBLE);
+                } else {
+                    mContrabandLL.setVisibility(View.GONE);
+                }
+                if (resourceinfolist.getPhysical_resource().getPeak_time() != null &&
+                        resourceinfolist.getPhysical_resource().getPeak_time().getDisplay_name() != null &&
+                        resourceinfolist.getPhysical_resource().getPeak_time().getDisplay_name().length() > 0) {
+                    mtxt_number_of_people_peak_time.setText(resourceinfolist.getPhysical_resource().getPeak_time().getDisplay_name());
+                } else {
+                    mtxt_number_of_people_peak_time.setText(getResources().getString(R.string.groupbooding_no_data_str));
+                }
+                if (resourceinfolist.getPhysical_resource().getMale_proportion() != null &&
+                        resourceinfolist.getPhysical_resource().getMale_proportion() > 0) {
+                    mgender_ratio.setVisibility(View.VISIBLE);
+                    mtxt_gender_ratio.setText(getResources().getString(R.string.fieldinfo_man_proportion_text) +
+                            String.valueOf(resourceinfolist.getPhysical_resource().getMale_proportion()) + getResources().getString(R.string.fieldinfo_man_proportion_unit_text) +
+                            "," + getResources().getString(R.string.fieldinfo_woman_proportion_text) +
+                            String.valueOf(100 - resourceinfolist.getPhysical_resource().getMale_proportion()) + getResources().getString(R.string.fieldinfo_man_proportion_unit_text));
+                } else {
+                    mgender_ratio.setVisibility(View.GONE);
+                }
+
+                // 配套设施
+
+
+                if (resourceinfolist.getPhysical_resource().getFacade() != null && resourceinfolist.getPhysical_resource().getFacade() > 0) {
+                    mtxt_number_of_people_facade.setText(String.valueOf(resourceinfolist.getPhysical_resource().getFacade()) + "面");
+                } else {
+                    mtxt_number_of_people_facade.setText(getResources().getString(R.string.fieldinfo_no_parameter_message));
+                }
+                if (resourceinfolist.getPhysical_resource().getDescription() != null &&
+                        resourceinfolist.getPhysical_resource().getDescription().length() > 0) {
+                    mtxt_description_ll.setVisibility(View.VISIBLE);
+                    mtxt_description.setText(resourceinfolist.getPhysical_resource().getDescription());
+                } else {
+                    mtxt_description_ll.setVisibility(View.GONE);
+                }
+
+                if (resourceinfolist.getPhysical_resource().getParticipation_level() != null &&
+                        resourceinfolist.getPhysical_resource().getParticipation_level().getDisplay_name() != null &&
+                        resourceinfolist.getPhysical_resource().getParticipation_level().getDisplay_name().length() > 0) {
+                    mtxt_participation.setText(resourceinfolist.getPhysical_resource().getParticipation_level().getDisplay_name());
+                }
+
+                if (resourceinfolist.getPhysical_resource().getConsumption_level() != null &&
+                        resourceinfolist.getPhysical_resource().getConsumption_level().getDisplay_name() != null &&
+                        resourceinfolist.getPhysical_resource().getConsumption_level().getDisplay_name().length() > 0) {
+                    mtxt_consumption_level.setText(resourceinfolist.getPhysical_resource().getConsumption_level().getDisplay_name());
+                }
+
+
+                //历史单量字段确认
+                if (resourceinfolist.getPhysical_resource().getInformation() != null &&
+                        resourceinfolist.getPhysical_resource().getInformation().length() > 0) {
+                    mFieldinfoSaleVolumTV.setText(resourceinfolist.getPhysical_resource().getInformation());
+                } else {
+                    mFieldinfoSaleVolumLL.setVisibility(View.GONE);
+                }
+
+                //评价列表显示
+                if (resourceinfolist.getPhysical_resource().getCount_of_reviews() != null) {
+                    mreview_number_txt.setText("(" + String.valueOf(resourceinfolist.getPhysical_resource().getCount_of_reviews()) + ")");
+                }
+
+                //评论列表
+                mFieldinfoMvpPresenter.getResInfoReview(getfieldid, "1", "2");
+                //筛选条件
+                boolean isScreenShow = false;
+                String priceStr = "";
+                String areaStr = "";
+                String personStr = "";
+                if (mApiResourcesModel != null) {
+                    if (mApiResourcesModel.getMin_price() != null && mApiResourcesModel.getMin_price().length() > 0) {
+                        isScreenShow = true;
+                        priceStr = Constants.getpricestring(mApiResourcesModel.getMin_price(), 0.01);
+                    }
+                    if (mApiResourcesModel.getMax_price() != null && mApiResourcesModel.getMax_price().length() > 0) {
+                        isScreenShow = true;
+                        if (priceStr.length() > 0) {
+                            priceStr = priceStr + "-" + Constants.getpricestring(mApiResourcesModel.getMax_price(), 0.01);
+                        } else {
+                            priceStr = Constants.getpricestring(mApiResourcesModel.getMax_price(), 0.01) +
+                                    getResources().getString(R.string.module_fieldinfo_screen_max);
+                        }
                     } else {
-                        contraband_str = contraband_str + resourceinfolist.getPhysical_resource().getOther_contraband();
+                        if (priceStr.length() > 0) {
+                            priceStr = priceStr + getResources().getString(R.string.module_fieldinfo_screen_min);
+                        }
+                    }
+                    if (mApiResourcesModel.getMin_area() != null && mApiResourcesModel.getMin_area().length() > 0) {
+                        isScreenShow = true;
+                        areaStr = mApiResourcesModel.getMin_area();
+                    }
+                    if (mApiResourcesModel.getMax_area() != null && mApiResourcesModel.getMax_area().length() > 0) {
+                        isScreenShow = true;
+                        if (areaStr.length() > 0) {
+                            areaStr = areaStr + "-" + mApiResourcesModel.getMax_area();
+                        } else {
+                            areaStr = mApiResourcesModel.getMax_area() +
+                                    getResources().getString(R.string.module_fieldinfo_screen_max);
+                        }
+                    } else {
+                        if (areaStr.length() > 0) {
+                            areaStr = areaStr + getResources().getString(R.string.module_fieldinfo_screen_min);
+                        }
+                    }
+                    if (mApiResourcesModel.getMin_person_flow() != null && mApiResourcesModel.getMin_person_flow().length() > 0) {
+                        isScreenShow = true;
+                        personStr = mApiResourcesModel.getMin_person_flow();
+                    }
+                    if (mApiResourcesModel.getMax_person_flow() != null && mApiResourcesModel.getMax_person_flow().length() > 0) {
+                        isScreenShow = true;
+                        if (personStr.length() > 0) {
+                            personStr = personStr + "-" + mApiResourcesModel.getMax_person_flow();
+                        } else {
+                            personStr = mApiResourcesModel.getMax_person_flow() +
+                                    getResources().getString(R.string.module_fieldinfo_screen_max);
+                        }
+                    } else {
+                        if (personStr.length() > 0) {
+                            personStr = personStr + getResources().getString(R.string.module_fieldinfo_screen_min);
+                        }
                     }
                 }
-                mtxt_contraband.setText(contraband_str);
-                mContrabandLL.setVisibility(View.VISIBLE);
-            } else {
-                mContrabandLL.setVisibility(View.GONE);
-            }
-            if (resourceinfolist.getPhysical_resource().getPeak_time() != null &&
-                    resourceinfolist.getPhysical_resource().getPeak_time().getDisplay_name() != null &&
-                    resourceinfolist.getPhysical_resource().getPeak_time().getDisplay_name().length() > 0) {
-                mtxt_number_of_people_peak_time.setText(resourceinfolist.getPhysical_resource().getPeak_time().getDisplay_name());
-            } else {
-                mtxt_number_of_people_peak_time.setText(getResources().getString(R.string.groupbooding_no_data_str));
-            }
-            if (resourceinfolist.getPhysical_resource().getMale_proportion() != null &&
-                    resourceinfolist.getPhysical_resource().getMale_proportion() > 0) {
-                mgender_ratio.setVisibility(View.VISIBLE);
-                mtxt_gender_ratio.setText(getResources().getString(R.string.fieldinfo_man_proportion_text) +
-                        String.valueOf(resourceinfolist.getPhysical_resource().getMale_proportion()) + getResources().getString(R.string.fieldinfo_man_proportion_unit_text) +
-                        "," + getResources().getString(R.string.fieldinfo_woman_proportion_text) +
-                        String.valueOf(100 - resourceinfolist.getPhysical_resource().getMale_proportion()) + getResources().getString(R.string.fieldinfo_man_proportion_unit_text));
-            } else {
-                mgender_ratio.setVisibility(View.GONE);
-            }
-
-            // 配套设施
-
-
-            if (resourceinfolist.getPhysical_resource().getFacade() != null && resourceinfolist.getPhysical_resource().getFacade() > 0) {
-                mtxt_number_of_people_facade.setText(String.valueOf(resourceinfolist.getPhysical_resource().getFacade()) + "面");
-            } else {
-                mtxt_number_of_people_facade.setText(getResources().getString(R.string.fieldinfo_no_parameter_message));
-            }
-            if (resourceinfolist.getPhysical_resource().getDescription() != null &&
-                    resourceinfolist.getPhysical_resource().getDescription().length() > 0) {
-                mtxt_description_ll.setVisibility(View.VISIBLE);
-                mtxt_description.setText(resourceinfolist.getPhysical_resource().getDescription());
-            } else {
-                mtxt_description_ll.setVisibility(View.GONE);
-            }
-
-            if (resourceinfolist.getPhysical_resource().getParticipation_level() != null &&
-                    resourceinfolist.getPhysical_resource().getParticipation_level().getDisplay_name() != null &&
-                    resourceinfolist.getPhysical_resource().getParticipation_level().getDisplay_name().length() > 0) {
-                mtxt_participation.setText(resourceinfolist.getPhysical_resource().getParticipation_level().getDisplay_name());
-            }
-
-            if (resourceinfolist.getPhysical_resource().getConsumption_level() != null &&
-                    resourceinfolist.getPhysical_resource().getConsumption_level().getDisplay_name() != null &&
-                    resourceinfolist.getPhysical_resource().getConsumption_level().getDisplay_name().length() > 0) {
-                mtxt_consumption_level.setText(resourceinfolist.getPhysical_resource().getConsumption_level().getDisplay_name());
-            }
-
-
-            //历史单量字段确认
-            if (resourceinfolist.getPhysical_resource().getInformation() != null &&
-                    resourceinfolist.getPhysical_resource().getInformation().length() > 0) {
-                mFieldinfoSaleVolumTV.setText(resourceinfolist.getPhysical_resource().getInformation());
-            } else {
-                mFieldinfoSaleVolumLL.setVisibility(View.GONE);
-            }
-
-            //评价列表显示
-            if (resourceinfolist.getPhysical_resource().getCount_of_reviews() != null) {
-                mreview_number_txt.setText("(" + String.valueOf(resourceinfolist.getPhysical_resource().getCount_of_reviews()) + ")");
-            }
-
-            //评论列表
-            mFieldinfoMvpPresenter.getResInfoReview(getfieldid, "1", "2");
-            //筛选条件
-            boolean isScreenShow = false;
-            String priceStr = "";
-            String areaStr = "";
-            String personStr = "";
-            if (mApiResourcesModel != null) {
-                if (mApiResourcesModel.getMin_price() != null && mApiResourcesModel.getMin_price().length() > 0) {
-                    isScreenShow = true;
-                    priceStr = Constants.getpricestring(mApiResourcesModel.getMin_price(), 0.01);
-                }
-                if (mApiResourcesModel.getMax_price() != null && mApiResourcesModel.getMax_price().length() > 0) {
-                    isScreenShow = true;
+                if (isScreenShow == true) {
+                    mFieldinfoScreenConditionLL.setVisibility(View.VISIBLE);
                     if (priceStr.length() > 0) {
-                        priceStr = priceStr + "-" + Constants.getpricestring(mApiResourcesModel.getMax_price(), 0.01);
-                    } else {
-                        priceStr = Constants.getpricestring(mApiResourcesModel.getMax_price(), 0.01) +
-                                getResources().getString(R.string.module_fieldinfo_screen_max);
+                        mFieldinfoScreenPriceTV.setVisibility(View.VISIBLE);
+                        mFieldinfoScreenPriceTV.setText(getResources().getString(R.string.module_searchlist_screen_price_tv_str) +
+                                priceStr);
+                        updataSizeLv(false);
                     }
-                } else {
-                    if (priceStr.length() > 0) {
-                        priceStr = priceStr + getResources().getString(R.string.module_fieldinfo_screen_min);
-                    }
-                }
-                if (mApiResourcesModel.getMin_area() != null && mApiResourcesModel.getMin_area().length() > 0) {
-                    isScreenShow = true;
-                    areaStr = mApiResourcesModel.getMin_area();
-                }
-                if (mApiResourcesModel.getMax_area() != null && mApiResourcesModel.getMax_area().length() > 0) {
-                    isScreenShow = true;
+                    // FIXME: 2018/12/27 筛选条件 展位面积和人流量代码  取消这两个条件
                     if (areaStr.length() > 0) {
-                        areaStr = areaStr + "-" + mApiResourcesModel.getMax_area();
-                    } else {
-                        areaStr = mApiResourcesModel.getMax_area() +
-                                getResources().getString(R.string.module_fieldinfo_screen_max);
+                        mFieldinfoScreenAreaTV.setVisibility(View.GONE);
+                        mFieldinfoScreenAreaTV.setText(getResources().getString(R.string.module_searchlist_screen_area_tv_str) +
+                                areaStr + getResources().getString(R.string.module_community_info_area_unit));
                     }
-                } else {
-                    if (areaStr.length() > 0) {
-                        areaStr = areaStr + getResources().getString(R.string.module_fieldinfo_screen_min);
-                    }
-                }
-                if (mApiResourcesModel.getMin_person_flow() != null && mApiResourcesModel.getMin_person_flow().length() > 0) {
-                    isScreenShow = true;
-                    personStr = mApiResourcesModel.getMin_person_flow();
-                }
-                if (mApiResourcesModel.getMax_person_flow() != null && mApiResourcesModel.getMax_person_flow().length() > 0) {
-                    isScreenShow = true;
                     if (personStr.length() > 0) {
-                        personStr = personStr + "-" + mApiResourcesModel.getMax_person_flow();
-                    } else {
-                        personStr = mApiResourcesModel.getMax_person_flow() +
-                                getResources().getString(R.string.module_fieldinfo_screen_max);
-                    }
-                } else {
-                    if (personStr.length() > 0) {
-                        personStr = personStr + getResources().getString(R.string.module_fieldinfo_screen_min);
+                        mFieldinfoScreenPersonTV.setVisibility(View.GONE);
+                        mFieldinfoScreenPersonTV.setText(getResources().getString(R.string.fieldinfo_number_of_people_text) +
+                                personStr);
                     }
                 }
-            }
-            if (isScreenShow == true) {
-                mFieldinfoScreenConditionLL.setVisibility(View.VISIBLE);
-                if (priceStr.length() > 0) {
-                    mFieldinfoScreenPriceTV.setVisibility(View.VISIBLE);
-                    mFieldinfoScreenPriceTV.setText(getResources().getString(R.string.module_searchlist_screen_price_tv_str) +
-                            priceStr);
-                    updataSizeLv(false);
+                // FIXME: 2018/12/19 顾问
+                if (resourceinfolist.getService_representative() != null &&
+                        resourceinfolist.getService_representative().getId() > 0) {
+                    mFieldinfoCounseLL.setVisibility(View.VISIBLE);
+                    if (resourceinfolist.getService_representative().getAvatar() != null &&
+                            resourceinfolist.getService_representative().getAvatar().length() > 0) {
+                        Picasso.with(FieldInfoActivity.this).load(resourceinfolist.getService_representative().getAvatar()).resize(
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,100),
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,106)
+                        ).into(mFieldinfoCounselorImgv);
+                    }
+                    if (resourceinfolist.getService_representative().getName() != null &&
+                            resourceinfolist.getService_representative().getName().length() > 0) {
+                        mFieldinfoCounselorNameTV.setText(resourceinfolist.getService_representative().getName());
+                    }
+                    if (resourceinfolist.getService_representative().getProfile() != null &&
+                            resourceinfolist.getService_representative().getProfile().length() > 0) {
+                        mFieldinfoCounselorDescriptionTV.setText(resourceinfolist.getService_representative().getProfile());
+                    }
                 }
-                if (areaStr.length() > 0) {
-                    mFieldinfoScreenAreaTV.setVisibility(View.VISIBLE);
-                    mFieldinfoScreenAreaTV.setText(getResources().getString(R.string.module_searchlist_screen_area_tv_str) +
-                            areaStr + getResources().getString(R.string.module_community_info_area_unit));
-                }
-                if (personStr.length() > 0) {
-                    mFieldinfoScreenPersonTV.setVisibility(View.VISIBLE);
-                    mFieldinfoScreenPersonTV.setText(getResources().getString(R.string.fieldinfo_number_of_people_text) +
-                            personStr);
-                }
-            }
-            // FIXME: 2018/12/19 顾问
-            if (resourceinfolist.getService_representative() != null &&
-                    resourceinfolist.getService_representative().getId() > 0) {
-                mFieldinfoCounseLL.setVisibility(View.VISIBLE);
-                if (resourceinfolist.getService_representative().getAvatar() != null &&
-                        resourceinfolist.getService_representative().getAvatar().length() > 0) {
-                    Picasso.with(FieldInfoActivity.this).load(resourceinfolist.getService_representative().getAvatar()).resize(
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,100),
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,106)
-                    ).into(mFieldinfoCounselorImgv);
-                }
-                if (resourceinfolist.getService_representative().getName() != null &&
-                        resourceinfolist.getService_representative().getName().length() > 0) {
-                    mFieldinfoCounselorNameTV.setText(resourceinfolist.getService_representative().getName());
-                }
-                if (resourceinfolist.getService_representative().getProfile() != null &&
-                        resourceinfolist.getService_representative().getProfile().length() > 0) {
-                    mFieldinfoCounselorDescriptionTV.setText(resourceinfolist.getService_representative().getProfile());
-                }
-            }
-            // FIXME: 2018/12/22 图文详情
+                // FIXME: 2018/12/22 图文详情
 
-            if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
-                if (resourceinfolist.getSize() != null && resourceinfolist.getSize().size() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource() != null &&
-                        resourceinfolist.getSize().get(0).getResource().size() > 0 &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getImg_description() != null &&
-                        resourceinfolist.getSize().get(0).getResource().get(0).getImg_description().length() > 0) {
-                    mFieldinfoPicWordLL.setVisibility(View.VISIBLE);
-                    mFieldinfoPicWordWebview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);//设置js可以直接打开窗口，如window.open()，默认为false
-                    mFieldinfoPicWordWebview.getSettings().setJavaScriptEnabled(true);//是否允许执行js，默认为false。设置true时，会提醒可能造成XSS漏洞
-                    mFieldinfoPicWordWebview.getSettings().setSupportZoom(true);//是否可以缩放，默认true
-                    mFieldinfoPicWordWebview.getSettings().setBuiltInZoomControls(true);//是否显示缩放按钮，默认false
-                    mFieldinfoPicWordWebview.getSettings().setUseWideViewPort(true);//设置此属性，可任意比例缩放。大视图模式
-                    mFieldinfoPicWordWebview.getSettings().setLoadWithOverviewMode(true);//和setUseWideViewPort(true)一起解决网页自适应问题
-                    mFieldinfoPicWordWebview.getSettings().setAppCacheEnabled(false);//是否使用缓存
-                    mFieldinfoPicWordWebview.getSettings().setDomStorageEnabled(true);//DOM Storage
-                    mFieldinfoPicWordWebview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-                    mFieldinfoPicWordWebview.loadUrl(Config.FIELDINFO_PIC_WORD_URL + "?type=3&id=" + mSellResId);
-                }
-            } else {
-                if (resourceinfolist.getPhysical_resource().getImg_description() != null &&
-                        resourceinfolist.getPhysical_resource().getImg_description().length() > 0) {
-                    mFieldinfoPicWordLL.setVisibility(View.VISIBLE);
-                    mFieldinfoPicWordWebview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);//设置js可以直接打开窗口，如window.open()，默认为false
-                    mFieldinfoPicWordWebview.getSettings().setJavaScriptEnabled(true);//是否允许执行js，默认为false。设置true时，会提醒可能造成XSS漏洞
-                    mFieldinfoPicWordWebview.getSettings().setSupportZoom(true);//是否可以缩放，默认true
-                    mFieldinfoPicWordWebview.getSettings().setBuiltInZoomControls(true);//是否显示缩放按钮，默认false
-                    mFieldinfoPicWordWebview.getSettings().setUseWideViewPort(true);//设置此属性，可任意比例缩放。大视图模式
-                    mFieldinfoPicWordWebview.getSettings().setLoadWithOverviewMode(true);//和setUseWideViewPort(true)一起解决网页自适应问题
-                    mFieldinfoPicWordWebview.getSettings().setAppCacheEnabled(false);//是否使用缓存
-                    mFieldinfoPicWordWebview.getSettings().setDomStorageEnabled(true);//DOM Storage
-                    mFieldinfoPicWordWebview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-                    mFieldinfoPicWordWebview.loadUrl(Config.FIELDINFO_PIC_WORD_URL + "?type=2&id=" + getfieldid);
+                if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
+                    if (resourceinfolist.getSize() != null && resourceinfolist.getSize().size() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource() != null &&
+                            resourceinfolist.getSize().get(0).getResource().size() > 0 &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getImg_description() != null &&
+                            resourceinfolist.getSize().get(0).getResource().get(0).getImg_description().length() > 0) {
+                        mFieldinfoPicWordLL.setVisibility(View.VISIBLE);
+                        mFieldinfoPicWordWebview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);//设置js可以直接打开窗口，如window.open()，默认为false
+                        mFieldinfoPicWordWebview.getSettings().setJavaScriptEnabled(true);//是否允许执行js，默认为false。设置true时，会提醒可能造成XSS漏洞
+                        mFieldinfoPicWordWebview.getSettings().setSupportZoom(true);//是否可以缩放，默认true
+                        mFieldinfoPicWordWebview.getSettings().setBuiltInZoomControls(true);//是否显示缩放按钮，默认false
+                        mFieldinfoPicWordWebview.getSettings().setUseWideViewPort(true);//设置此属性，可任意比例缩放。大视图模式
+                        mFieldinfoPicWordWebview.getSettings().setLoadWithOverviewMode(true);//和setUseWideViewPort(true)一起解决网页自适应问题
+                        mFieldinfoPicWordWebview.getSettings().setAppCacheEnabled(false);//是否使用缓存
+                        mFieldinfoPicWordWebview.getSettings().setDomStorageEnabled(true);//DOM Storage
+                        mFieldinfoPicWordWebview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+                        mFieldinfoPicWordWebview.loadUrl(Config.FIELDINFO_PIC_WORD_URL + "?type=3&id=" + mSellResId);
+                    }
+                } else {
+                    if (resourceinfolist.getPhysical_resource().getImg_description() != null &&
+                            resourceinfolist.getPhysical_resource().getImg_description().length() > 0) {
+                        mFieldinfoPicWordLL.setVisibility(View.VISIBLE);
+                        mFieldinfoPicWordWebview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);//设置js可以直接打开窗口，如window.open()，默认为false
+                        mFieldinfoPicWordWebview.getSettings().setJavaScriptEnabled(true);//是否允许执行js，默认为false。设置true时，会提醒可能造成XSS漏洞
+                        mFieldinfoPicWordWebview.getSettings().setSupportZoom(true);//是否可以缩放，默认true
+                        mFieldinfoPicWordWebview.getSettings().setBuiltInZoomControls(true);//是否显示缩放按钮，默认false
+                        mFieldinfoPicWordWebview.getSettings().setUseWideViewPort(true);//设置此属性，可任意比例缩放。大视图模式
+                        mFieldinfoPicWordWebview.getSettings().setLoadWithOverviewMode(true);//和setUseWideViewPort(true)一起解决网页自适应问题
+                        mFieldinfoPicWordWebview.getSettings().setAppCacheEnabled(false);//是否使用缓存
+                        mFieldinfoPicWordWebview.getSettings().setDomStorageEnabled(true);//DOM Storage
+                        mFieldinfoPicWordWebview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+                        mFieldinfoPicWordWebview.loadUrl(Config.FIELDINFO_PIC_WORD_URL + "?type=2&id=" + getfieldid);
+                    }
                 }
             }
         }
@@ -5296,11 +5326,31 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
             mOtherPhyResAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    Intent fieldinfo = new Intent(FieldInfoActivity.this, FieldInfoActivity.class);
-                    fieldinfo.putExtra("model", (Serializable) mApiResourcesModel);
-                    fieldinfo.putExtra("fieldId", String.valueOf(mFieldInfoOtherDataList.get(position).getId()));
-                    fieldinfo.putExtra("community_id", mCommunityId);
-                    startActivity(fieldinfo);
+                    Intent fieldinfo = null;
+                    if (mFieldInfoOtherDataList.get(position).getType() != null) {
+                        if (mFieldInfoOtherDataList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_COMMUNITY_RES)) {
+                            fieldinfo = new Intent(FieldInfoActivity.this, CommunityInfoActivity.class);
+                            fieldinfo.putExtra("city_id", mCityId);
+                            fieldinfo.putExtra("id", mFieldInfoOtherDataList.get(position).getCommunity_id());
+                            startActivity(fieldinfo);
+                        } else if (mFieldInfoOtherDataList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_PHYSICAL_RES)) {
+                            if (mFieldInfoOtherDataList.get(position).getTop_resource_id() != null) {
+                                fieldinfo = new Intent(FieldInfoActivity.this, FieldInfoActivity.class);
+                                fieldinfo.putExtra("good_type", 1);
+                                fieldinfo.putExtra("fieldId", String.valueOf(mFieldInfoOtherDataList.get(position).getTop_resource_id()));
+                                fieldinfo.putExtra("community_id", mFieldInfoOtherDataList.get(position).getCommunity_id());
+                                startActivity(fieldinfo);
+                            }
+                        } else if (mFieldInfoOtherDataList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_SELLING_RES)) {
+                            if (mFieldInfoOtherDataList.get(position).getTop_resource_id() != null) {
+                                fieldinfo = new Intent(FieldInfoActivity.this, FieldInfoActivity.class);
+                                fieldinfo.putExtra("sell_res_id", String.valueOf(mFieldInfoOtherDataList.get(position).getTop_resource_id()));
+                                fieldinfo.putExtra("is_sell_res", true);
+                                fieldinfo.putExtra("community_id", mFieldInfoOtherDataList.get(position).getCommunity_id());
+                                startActivity(fieldinfo);
+                            }
+                        }
+                    }
                 }
             });
         } else {
@@ -5804,7 +5854,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         demandIntent.putExtra("community_type_ids", (Serializable) communityTypeIds);
         startActivityForResult(demandIntent,DEMAND_RESULTCODE);
     }
-    private void showCounselorDialog(int showWxcode) {
+    private void showCounselorDialog(int showWxcode, boolean isCall, final int callPhoneCode) {
         if (mIntegralDialog == null || !mIntegralDialog.isShowing()) {
             View.OnClickListener uploadListener = new View.OnClickListener() {
                 @Override
@@ -5857,58 +5907,92 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                             }
 
                             break;
+                        case R.id.app_defaylt_cancel_tv:
+                            mIntegralDialog.dismiss();
+                            break;
+                        case R.id.app_defaylt_confirm_tv:
+                            mIntegralDialog.dismiss();
+                            AndPermission.with(FieldInfoActivity.this)
+                                    .requestCode(callPhoneCode)
+                                    .permission(
+                                            Manifest.permission.CALL_PHONE,
+                                            Manifest.permission.READ_PHONE_STATE)
+                                    .callback(listener)
+                                    .start();
+                            break;
                         default:
                             break;
                     }
                 }
             };
-            String name = "";
-            String call = "";
-            String profile = "";
-            String imgUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
-            String qrcodeUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
-            if (resourceinfolist.getService_representative().getName() != null) {
-                name = resourceinfolist.getService_representative().getName();
-            }
-            if (resourceinfolist.getService_representative().getTel() != null) {
-                call = resourceinfolist.getService_representative().getTel();
-            }
-            if (resourceinfolist.getService_representative().getProfile() != null) {
-                profile = resourceinfolist.getService_representative().getProfile();
-            }
-            if (resourceinfolist.getService_representative().getAvatar() != null) {
-                imgUrl = resourceinfolist.getService_representative().getAvatar();
-            }
-            if (resourceinfolist.getService_representative().getQrcode() != null) {
-                qrcodeUrl = resourceinfolist.getService_representative().getQrcode();
-            }
+            if (isCall) {
+                String phone = "";
+                if (callPhoneCode == 111) {
+                    phone = resourceinfolist.getService_phone();
+                } else {
+                    phone = resourceinfolist.getService_representative().getTel();
+                }
+                CustomDialog.Builder builder = new CustomDialog.Builder(FieldInfoActivity.this);
+                mIntegralDialog = builder
+                        .cancelTouchout(true)
+                        .view(R.layout.activity_fieldinfo_refund_price_popuwindow)
+                        .addViewOnclick(R.id.app_defaylt_cancel_tv,uploadListener)
+                        .addViewOnclick(R.id.app_defaylt_confirm_tv,uploadListener)
+                        .setText(R.id.app_defaylt_title_tv,phone)
+                        .setText(R.id.app_defaylt_confirm_tv,getResources().getString(R.string.module_fieldinfo_call))
+                        .showView(R.id.app_defaylt_dialog_ll,View.VISIBLE)
+                        .showView(R.id.app_defaylt_dialog_remind_ll,View.VISIBLE)
+                        .showView(R.id.app_defaylt_content_tv,View.GONE)
+                        .build();
+            } else {
+                String name = "";
+                String call = "";
+                String profile = "";
+                String imgUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
+                String qrcodeUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
+                if (resourceinfolist.getService_representative().getName() != null) {
+                    name = resourceinfolist.getService_representative().getName();
+                }
+                if (resourceinfolist.getService_representative().getTel() != null) {
+                    call = resourceinfolist.getService_representative().getTel();
+                }
+                if (resourceinfolist.getService_representative().getProfile() != null) {
+                    profile = resourceinfolist.getService_representative().getProfile();
+                }
+                if (resourceinfolist.getService_representative().getAvatar() != null) {
+                    imgUrl = resourceinfolist.getService_representative().getAvatar();
+                }
+                if (resourceinfolist.getService_representative().getQrcode() != null) {
+                    qrcodeUrl = resourceinfolist.getService_representative().getQrcode();
+                }
 
-            CustomDialog.Builder builder = new CustomDialog.Builder(FieldInfoActivity.this);
-            mIntegralDialog = builder
-                    .cancelTouchout(true)
-                    .view(R.layout.activity_fieldinfo_refund_price_popuwindow)
-                    .addViewOnclick(R.id.app_defaylt_dialog_counselor_save_ll,uploadListener)
-                    .addViewOnclick(R.id.app_defaylt_dialog_counselor_call_ll,uploadListener)
-                    .addViewOnclick(R.id.app_defaylt_close_img_btn,uploadListener)
-                    .addViewOnclick(R.id.fieldinfo_counselor_save_wx_code_btn_ll,uploadListener)
-                    .setText(R.id.fieldinfo_counselor_name_tv,name)// FIXME: 2018/12/19 测试数据
-                    .setText(R.id.app_defaylt_dialog_counselor_call_tv,
-                            getResources().getString(R.string.module_fieldinfo_counselor_call) +call)// FIXME: 2018/12/19 测试数据
-                    .setText(R.id.fieldinfo_counselor_description_tv,profile)
-                    .setOvalImgvUrl(FieldInfoActivity.this,R.id.fieldinfo_counselor_imgv,imgUrl,// FIXME: 2018/12/19 测试数据
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,80),
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,80))
-                    .setImgvUrl(FieldInfoActivity.this,R.id.app_defaylt_dialog_counselor_qrcode_imgv,qrcodeUrl,
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40),
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40))
-                    .setImgvUrl(FieldInfoActivity.this,R.id.app_defaylt_dialog_counselor_qrcode_imgv,imgUrl,
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40),
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40))
-                    .showView(R.id.app_defaylt_dialog_ll,View.VISIBLE)
-                    .showView(R.id.app_defaylt_dialog_counselor_ll,View.VISIBLE)
-                    .showView(R.id.app_defaylt_close_img_btn,View.VISIBLE)
-                    .showView(R.id.fieldinfo_counselor_contact_ll,View.GONE)
-                    .build();
+                CustomDialog.Builder builder = new CustomDialog.Builder(FieldInfoActivity.this);
+                mIntegralDialog = builder
+                        .cancelTouchout(true)
+                        .view(R.layout.activity_fieldinfo_refund_price_popuwindow)
+                        .addViewOnclick(R.id.app_defaylt_dialog_counselor_save_ll,uploadListener)
+                        .addViewOnclick(R.id.app_defaylt_dialog_counselor_call_ll,uploadListener)
+                        .addViewOnclick(R.id.app_defaylt_close_img_btn,uploadListener)
+                        .addViewOnclick(R.id.fieldinfo_counselor_save_wx_code_btn_ll,uploadListener)
+                        .setText(R.id.fieldinfo_counselor_name_tv,name)// FIXME: 2018/12/19 测试数据
+                        .setText(R.id.app_defaylt_dialog_counselor_call_tv,
+                                getResources().getString(R.string.module_fieldinfo_counselor_call) +call)// FIXME: 2018/12/19 测试数据
+                        .setText(R.id.fieldinfo_counselor_description_tv,profile)
+                        .setOvalImgvUrl(FieldInfoActivity.this,R.id.fieldinfo_counselor_imgv,imgUrl,// FIXME: 2018/12/19 测试数据
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,80),
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,80))
+                        .setImgvUrl(FieldInfoActivity.this,R.id.app_defaylt_dialog_counselor_qrcode_imgv,qrcodeUrl,
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40),
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40))
+                        .setImgvUrl(FieldInfoActivity.this,R.id.app_defaylt_dialog_counselor_avatar_imgv,imgUrl,
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40),
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40))
+                        .showView(R.id.app_defaylt_dialog_ll,View.VISIBLE)
+                        .showView(R.id.app_defaylt_dialog_counselor_ll,View.VISIBLE)
+                        .showView(R.id.app_defaylt_close_img_btn,View.VISIBLE)
+                        .showView(R.id.fieldinfo_counselor_contact_ll,View.GONE)
+                        .build();
+            }
             com.linhuiba.linhuifield.connector.Constants.hideUploadPictureLine(FieldInfoActivity.this,mIntegralDialog);
             mIntegralDialog.show();
             if (showWxcode == 1) {

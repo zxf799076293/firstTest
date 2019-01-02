@@ -378,9 +378,12 @@ public class UserApi {
         HashMap<String, String> paramsMap = new HashMap<>();
         paramsMap.put("device_token", device_token);
         paramsMap.put("os", "android");
+        if (uid != null && uid.length() > 0) {
+            paramsMap.put("user_id", uid);
+        }
         Call call = client.newCall(Request.RequestPost(Config.BASE_API_URL_PHP,
-                "users/"+uid+"/devices",
-                paramsMap,2));
+                "/devices",
+                paramsMap,1));
         call.enqueue(handler);
     }
     //退出登录接口 2.4.2

@@ -24,6 +24,7 @@ import com.linhuiba.business.connector.Constants;
 import com.linhuiba.business.connector.OnMultiClickListener;
 import com.linhuiba.business.fragment.SelfSupportShopFragment;
 import com.linhuiba.business.model.ResourceSearchItemModel;
+import com.linhuiba.business.model.SearchSellResModel;
 import com.linhuiba.linhuipublic.config.Config;
 import com.squareup.picasso.Picasso;
 
@@ -33,7 +34,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/3/3.
  */
 public class SearchListAdapter extends BaseAdapter {
-    private ArrayList<ResourceSearchItemModel> mFeildList;
+    private ArrayList<SearchSellResModel> mFeildList;
     private LayoutInflater mInflater = null;
     private Activity mactivity;
     private Context mContext;
@@ -42,7 +43,7 @@ public class SearchListAdapter extends BaseAdapter {
     private Drawable mDrawable;
     private int width;
     private int height;
-    public SearchListAdapter(Context context, ArrayList<ResourceSearchItemModel> list, int type, Activity mactivity,boolean isSelfSupportShop) {
+    public SearchListAdapter(Context context, ArrayList<SearchSellResModel> list, int type, Activity mactivity,boolean isSelfSupportShop) {
         if (context != null && mactivity != null) {
             this.mFeildList = list;
             this.mactivity = mactivity;
@@ -162,23 +163,20 @@ public class SearchListAdapter extends BaseAdapter {
                 } else {
                     holder.field_name.setText("");
                 }
+                String address = "";
+                if (mFeildList.get(position).getCity() != null &&
+                        mFeildList.get(position).getCity().length() > 0) {
+                    address = mFeildList.get(position).getCity();
+                }
                 if (mFeildList.get(position).getDistrict_name() != null &&
                         mFeildList.get(position).getDistrict_name().length() > 0) {
-                    if (mFeildList.get(position).getDetailed_address() != null &&
-                            mFeildList.get(position).getDetailed_address().length() > 0) {
-                        holder.address.setText(mFeildList.get(position).getDistrict_name() +
-                                mFeildList.get(position).getDetailed_address());
-                    } else {
-                        holder.address.setText(mFeildList.get(position).getDistrict_name());
-                    }
-                } else {
-                    if (mFeildList.get(position).getDetailed_address() != null &&
-                            mFeildList.get(position).getDetailed_address().length() > 0) {
-                        holder.address.setText(mFeildList.get(position).getDetailed_address());
-                    } else {
-                        holder.address.setText("");
-                    }
+                    address = address + mFeildList.get(position).getDistrict_name();
                 }
+                if (mFeildList.get(position).getDetailed_address() != null &&
+                        mFeildList.get(position).getDetailed_address().length() > 0) {
+                    address = address + mFeildList.get(position).getDetailed_address();
+                }
+                holder.address.setText(address);
                 if (mFeildList.get(position).getDeadline() != null && mFeildList.get(position).getDeadline().length() > 0) {
                     holder.msearchlist_activity_endtime.setText(mFeildList.get(position).getDeadline().replaceAll("-", "."));
                 }

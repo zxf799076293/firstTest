@@ -183,6 +183,9 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
     LinearLayout mFieldinfoOtherResShowAllLL;
     @InjectView(R.id.fieldinfo_other_res_layout) LinearLayout mFieldinfoOtherResLL;
     @InjectView(R.id.fieldinfo_other_res_tv) TextView mFieldinfoOtherResTV;
+    @InjectView(R.id.fieldinfo_other_res_show_all_tv)
+    TextView mFieldinfoOtherResShowAllTV;
+
     // FIXME: 2018/12/14 专属顾问
 
     @InjectView(R.id.fieldinfo_counselor_imgv)
@@ -266,7 +269,9 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
     private FieldinfoRecommendResourcesAdapter mOtherPhyResAdapter;
     //顾问
     private final int CALL_PHONE_CODE = 110;
+    private final int CALL_SERVICE_PHONE_CODE = 111;
     private CustomDialog mIntegralDialog;
+    private boolean isShowAllOtherRes = false;//判断是否展开所有场地其他展位
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -437,7 +442,8 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
             R.id.fieldinfo_receive_coupons_ll,
             R.id.fieldinfo_counselor_call_tv,
             R.id.fieldinfo_counselor_wx_tv,
-            R.id.community_info_counselor_tv
+            R.id.community_info_counselor_tv,
+            R.id.fieldinfo_other_res_show_all_ll,
     })
     public void onViewClick(View view) {
         switch (view.getId()) {
@@ -453,9 +459,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
             case R.id.community_info_phone:
                 if (mCommunityInfoModel.getService_phone() != null &&
                         mCommunityInfoModel.getService_phone().length() > 0) {
-                    Intent intent_mobile = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"
-                            + mCommunityInfoModel.getService_phone().toString().trim()));
-                    startActivity(intent_mobile);
+                    showCounselorDialog(0,true,CALL_SERVICE_PHONE_CODE);
                 }
                 break;
             case R.id.community_info_navbar_titile_ll:
@@ -528,21 +532,18 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 break;
             case R.id.fieldinfo_counselor_call_tv:
                 // FIXME: 2018/12/14 联系顾问
-                AndPermission.with(CommunityInfoActivity.this)
-                        .requestCode(CALL_PHONE_CODE)
-                        .permission(
-                                Manifest.permission.CALL_PHONE,
-                                Manifest.permission.READ_PHONE_STATE)
-                        .callback(listener)
-                        .start();
-
+                if (mCommunityInfoModel.getService_representative() != null &&
+                        mCommunityInfoModel.getService_representative().getTel() != null &&
+                        mCommunityInfoModel.getService_representative().getTel().length() > 0) {
+                    showCounselorDialog(0,true,CALL_PHONE_CODE);
+                }
                 break;
             case R.id.fieldinfo_counselor_wx_tv:
                 // FIXME: 2018/12/14 加顾问微信
                 if (mCommunityInfoModel.getService_representative() != null &&
                         mCommunityInfoModel.getService_representative().getQrcode() != null &&
                         mCommunityInfoModel.getService_representative().getQrcode().length() > 0) {
-                    showCounselorDialog(1);
+                    showCounselorDialog(1,false,0);
                 } else {
                     MessageUtils.showToast(getResources().getString(R.string.review_error_text));
                 }
@@ -551,11 +552,31 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 // FIXME: 2018/12/14 顾问
                 if (mCommunityInfoModel.getService_representative() != null &&
                         mCommunityInfoModel.getService_representative().getId() > 0) {
-                    showCounselorDialog(0);
+                    showCounselorDialog(0,false,0);
                 } else {
                     MessageUtils.showToast(getResources().getString(R.string.order_nodata_toast));
                 }
 
+                break;
+            case R.id.fieldinfo_other_res_show_all_ll:
+                if (isShowAllOtherRes) {
+                    isShowAllOtherRes = false;
+                    mFieldinfoOtherResShowAllTV.setCompoundDrawables(null, null, mShowAllDownDrawable, null);
+                    mFieldinfoOtherResShowAllTV.setText(getResources().getString(R.string.module_fieldinfo_other_res_show));
+                    // FIXME: 2018/12/14 其他展位收起
+                    mFieldInfoOtherDataListTemp.clear();
+                    for (int i = 0; i < 3; i++) {
+                        mFieldInfoOtherDataListTemp.add(mFieldInfoOtherDataList.get(i));
+                    }
+                    mOtherPhyResAdapter.notifyDataSetChanged();
+                } else {
+                    mFieldinfoOtherResShowAllTV.setCompoundDrawables(null, null, mShowAllUpDrawable, null);
+                    isShowAllOtherRes = true;
+                    mFieldinfoOtherResShowAllTV.setText(getResources().getString(R.string.module_fieldinfo_other_res_pack_up));
+                    mFieldInfoOtherDataListTemp.clear();
+                    mFieldInfoOtherDataListTemp.addAll(mFieldInfoOtherDataList);
+                    mOtherPhyResAdapter.notifyDataSetChanged();
+                }
                 break;
             default:
                 break;
@@ -636,6 +657,16 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                     }
                     startActivity(intent);
                 }
+            } else if (requestCode == CALL_SERVICE_PHONE_CODE) {
+                if (mCommunityInfoModel.getService_phone() != null &&
+                        mCommunityInfoModel.getService_phone().length() > 0) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
+                            + mCommunityInfoModel.getService_phone()));// FIXME: 2018/12/19 测试数据
+                    if (ActivityCompat.checkSelfPermission(CommunityInfoActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    startActivity(intent);
+                }
             }
         }
 
@@ -704,16 +735,16 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                             fieldinfo.putExtra("id", mNearByResList.get(position).getId());
                             startActivity(fieldinfo);
                         } else if (mNearByResList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_PHYSICAL_RES)) {
-                            if (mNearByResList.get(position).getTop_physical_id() != null) {
+                            if (mNearByResList.get(position).getTop_resource_id() != null) {
                                 fieldinfo = new Intent(CommunityInfoActivity.this, FieldInfoActivity.class);
-                                fieldinfo.putExtra("fieldId", String.valueOf(mNearByResList.get(position).getTop_physical_id()));
+                                fieldinfo.putExtra("fieldId", String.valueOf(mNearByResList.get(position).getTop_resource_id()));
                                 fieldinfo.putExtra("community_id", mNearByResList.get(position).getId());
                                 startActivity(fieldinfo);
                             }
                         } else if (mNearByResList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_SELLING_RES)) {
-                            if (mNearByResList.get(position).getTop_physical_id() != null) {
+                            if (mNearByResList.get(position).getTop_resource_id() != null) {
                                 fieldinfo = new Intent(CommunityInfoActivity.this, FieldInfoActivity.class);
-                                fieldinfo.putExtra("sell_res_id", String.valueOf(mNearByResList.get(position).getTop_physical_id()));
+                                fieldinfo.putExtra("sell_res_id", String.valueOf(mNearByResList.get(position).getTop_resource_id()));
                                 fieldinfo.putExtra("is_sell_res", true);
                                 fieldinfo.putExtra("community_id", mNearByResList.get(position).getId());
                                 startActivity(fieldinfo);
@@ -772,7 +803,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 }
             }
             mFieldinfoOtherResLL.setVisibility(View.VISIBLE);
-            mFieldinfoOtherResTV.setText(getResources().getString(R.string.module_fieldinfo_other_all_physicals) +
+            mFieldinfoOtherResTV.setText(getResources().getString(R.string.module_community_info_all_phy_res) +
                     "(" + String.valueOf(total) + ")");
             mOtherPhyResAdapter = new FieldinfoRecommendResourcesAdapter(this,this,
                     R.layout.activity_fieldinfo_recommend_resources_item,mFieldInfoOtherDataListTemp, 2);
@@ -783,10 +814,31 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
             mOtherPhyResAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    Intent fieldinfo = new Intent(CommunityInfoActivity.this, FieldInfoActivity.class);
-                    fieldinfo.putExtra("fieldId", String.valueOf(mFieldInfoOtherDataList.get(position).getId()));
-                    fieldinfo.putExtra("community_id", mCommunityId);
-                    startActivity(fieldinfo);
+                    Intent fieldinfo = null;
+                    if (mFieldInfoOtherDataList.get(position).getType() != null) {
+                        if (mFieldInfoOtherDataList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_COMMUNITY_RES)) {
+                            fieldinfo = new Intent(CommunityInfoActivity.this, CommunityInfoActivity.class);
+                            fieldinfo.putExtra("city_id", mFieldInfoOtherDataList.get(position).getCity().getId());
+                            fieldinfo.putExtra("id", mFieldInfoOtherDataList.get(position).getCommunity_id());
+                            startActivity(fieldinfo);
+                        } else if (mFieldInfoOtherDataList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_PHYSICAL_RES)) {
+                            if (mFieldInfoOtherDataList.get(position).getTop_physical_id() != null) {
+                                fieldinfo = new Intent(CommunityInfoActivity.this, FieldInfoActivity.class);
+                                fieldinfo.putExtra("good_type", 1);
+                                fieldinfo.putExtra("fieldId", String.valueOf(mFieldInfoOtherDataList.get(position).getTop_physical_id()));
+                                fieldinfo.putExtra("community_id", mFieldInfoOtherDataList.get(position).getCommunity_id());
+                                startActivity(fieldinfo);
+                            }
+                        } else if (mFieldInfoOtherDataList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_SELLING_RES)) {
+                            if (mFieldInfoOtherDataList.get(position).getTop_physical_id() != null) {
+                                fieldinfo = new Intent(CommunityInfoActivity.this, FieldInfoActivity.class);
+                                fieldinfo.putExtra("sell_res_id", String.valueOf(mFieldInfoOtherDataList.get(position).getTop_physical_id()));
+                                fieldinfo.putExtra("is_sell_res", true);
+                                fieldinfo.putExtra("community_id", mFieldInfoOtherDataList.get(position).getCommunity_id());
+                                startActivity(fieldinfo);
+                            }
+                        }
+                    }
                 }
             });
         } else {
@@ -891,6 +943,10 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                     mCommunityInfoModel.getCity().getName().length() > 0) {
                 cityName = mCommunityInfoModel.getCity().getName();
                 SharedescriptionStr = SharedescriptionStr + mCommunityInfoModel.getCity().getName();
+            }
+            if (mCommunityInfoModel.getCity() != null &&
+                    mCommunityInfoModel.getCity().getId() > 0) {
+                mCityId = mCommunityInfoModel.getCity().getId();
             }
             if (mCommunityInfoModel.getDistrict() != null &&
                     mCommunityInfoModel.getDistrict().getName() != null &&
@@ -1959,7 +2015,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
     }
 
     // FIXME: 2018/12/19 顾问
-    private void showCounselorDialog(int showWxcode) {
+    private void showCounselorDialog(int showWxcode, boolean isCall, final int callPhoneCode) {//phoneType :111客服;110顾问
         if (mDemandSuccessDialog == null || !mDemandSuccessDialog.isShowing()) {
             View.OnClickListener uploadListener = new View.OnClickListener() {
                 @Override
@@ -2000,63 +2056,97 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                             new Thread(){
                                 public void run(){
                                     com.linhuiba.linhuifield.connector.Constants.saveToSystemGallery(CommunityInfoActivity.this,
-                                            "https://img.linhuiba.com/FumFJpAq1EHu5J_27usq2wIAKcLI-linhuiba_watermark?v=1");// FIXME: 2018/12/19 测试url
+                                            mCommunityInfoModel.getService_representative().getQrcode());// FIXME: 2018/12/19 测试url
                                     mHandler.sendEmptyMessage(2);
                                 }
                             }.start();
+                            break;
+                        case R.id.app_defaylt_cancel_tv:
+                            mDemandSuccessDialog.dismiss();
+                            break;
+                        case R.id.app_defaylt_confirm_tv:
+                            mDemandSuccessDialog.dismiss();
+                            AndPermission.with(CommunityInfoActivity.this)
+                                    .requestCode(callPhoneCode)
+                                    .permission(
+                                            Manifest.permission.CALL_PHONE,
+                                            Manifest.permission.READ_PHONE_STATE)
+                                    .callback(listener)
+                                    .start();
                             break;
                         default:
                             break;
                     }
                 }
             };
-            String name = "";
-            String call = "";
-            String profile = "";
-            String imgUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
-            String qrcodeUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
-            if (mCommunityInfoModel.getService_representative().getName() != null) {
-                name = mCommunityInfoModel.getService_representative().getName();
-            }
-            if (mCommunityInfoModel.getService_representative().getTel() != null) {
-                call = mCommunityInfoModel.getService_representative().getTel();
-            }
-            if (mCommunityInfoModel.getService_representative().getProfile() != null) {
-                profile = mCommunityInfoModel.getService_representative().getProfile();
-            }
-            if (mCommunityInfoModel.getService_representative().getAvatar() != null) {
-                imgUrl = mCommunityInfoModel.getService_representative().getAvatar();
-            }
-            if (mCommunityInfoModel.getService_representative().getQrcode() != null) {
-                qrcodeUrl = mCommunityInfoModel.getService_representative().getQrcode();
-            }
+            if (isCall) {
+                String phone = "";
+                if (callPhoneCode == 111) {
+                    phone = mCommunityInfoModel.getService_phone();
+                } else {
+                    phone = mCommunityInfoModel.getService_representative().getTel();
+                }
+                CustomDialog.Builder builder = new CustomDialog.Builder(CommunityInfoActivity.this);
+                mDemandSuccessDialog = builder
+                        .cancelTouchout(true)
+                        .view(R.layout.activity_fieldinfo_refund_price_popuwindow)
+                        .addViewOnclick(R.id.app_defaylt_cancel_tv,uploadListener)
+                        .addViewOnclick(R.id.app_defaylt_confirm_tv,uploadListener)
+                        .setText(R.id.app_defaylt_title_tv,phone)
+                        .setText(R.id.app_defaylt_confirm_tv,getResources().getString(R.string.module_fieldinfo_call))
+                        .showView(R.id.app_defaylt_dialog_ll,View.VISIBLE)
+                        .showView(R.id.app_defaylt_dialog_remind_ll,View.VISIBLE)
+                        .showView(R.id.app_defaylt_content_tv,View.GONE)
+                        .build();
+            } else {
+                String name = "";
+                String call = "";
+                String profile = "";
+                String imgUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
+                String qrcodeUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
+                if (mCommunityInfoModel.getService_representative().getName() != null) {
+                    name = mCommunityInfoModel.getService_representative().getName();
+                }
+                if (mCommunityInfoModel.getService_representative().getTel() != null) {
+                    call = mCommunityInfoModel.getService_representative().getTel();
+                }
+                if (mCommunityInfoModel.getService_representative().getProfile() != null) {
+                    profile = mCommunityInfoModel.getService_representative().getProfile();
+                }
+                if (mCommunityInfoModel.getService_representative().getAvatar() != null) {
+                    imgUrl = mCommunityInfoModel.getService_representative().getAvatar();
+                }
+                if (mCommunityInfoModel.getService_representative().getQrcode() != null) {
+                    qrcodeUrl = mCommunityInfoModel.getService_representative().getQrcode();
+                }
 
-            CustomDialog.Builder builder = new CustomDialog.Builder(CommunityInfoActivity.this);
-            mDemandSuccessDialog = builder
-                    .cancelTouchout(true)
-                    .view(R.layout.activity_fieldinfo_refund_price_popuwindow)
-                    .addViewOnclick(R.id.app_defaylt_dialog_counselor_save_ll,uploadListener)
-                    .addViewOnclick(R.id.app_defaylt_dialog_counselor_call_ll,uploadListener)
-                    .addViewOnclick(R.id.app_defaylt_close_img_btn,uploadListener)
-                    .addViewOnclick(R.id.fieldinfo_counselor_save_wx_code_btn_ll,uploadListener)
-                    .setText(R.id.fieldinfo_counselor_name_tv,name)// FIXME: 2018/12/19 测试数据
-                    .setText(R.id.app_defaylt_dialog_counselor_call_tv,
-                            getResources().getString(R.string.module_fieldinfo_counselor_call) +call)// FIXME: 2018/12/19 测试数据
-                    .setText(R.id.fieldinfo_counselor_description_tv,profile)
-                    .setOvalImgvUrl(CommunityInfoActivity.this,R.id.fieldinfo_counselor_imgv,imgUrl,// FIXME: 2018/12/19 测试数据
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,80),
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,80))
-                    .setImgvUrl(CommunityInfoActivity.this,R.id.app_defaylt_dialog_counselor_qrcode_imgv,qrcodeUrl,
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,40),
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,40))
-                    .setImgvUrl(CommunityInfoActivity.this,R.id.app_defaylt_dialog_counselor_qrcode_imgv,imgUrl,
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,40),
-                            com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,40))
-                    .showView(R.id.app_defaylt_dialog_ll,View.VISIBLE)
-                    .showView(R.id.app_defaylt_dialog_counselor_ll,View.VISIBLE)
-                    .showView(R.id.app_defaylt_close_img_btn,View.VISIBLE)
-                    .showView(R.id.fieldinfo_counselor_contact_ll,View.GONE)
-                    .build();
+                CustomDialog.Builder builder = new CustomDialog.Builder(CommunityInfoActivity.this);
+                mDemandSuccessDialog = builder
+                        .cancelTouchout(true)
+                        .view(R.layout.activity_fieldinfo_refund_price_popuwindow)
+                        .addViewOnclick(R.id.app_defaylt_dialog_counselor_save_ll,uploadListener)
+                        .addViewOnclick(R.id.app_defaylt_dialog_counselor_call_ll,uploadListener)
+                        .addViewOnclick(R.id.app_defaylt_close_img_btn,uploadListener)
+                        .addViewOnclick(R.id.fieldinfo_counselor_save_wx_code_btn_ll,uploadListener)
+                        .setText(R.id.fieldinfo_counselor_name_tv,name)// FIXME: 2018/12/19 测试数据
+                        .setText(R.id.app_defaylt_dialog_counselor_call_tv,
+                                getResources().getString(R.string.module_fieldinfo_counselor_call) +call)// FIXME: 2018/12/19 测试数据
+                        .setText(R.id.fieldinfo_counselor_description_tv,profile)
+                        .setOvalImgvUrl(CommunityInfoActivity.this,R.id.fieldinfo_counselor_imgv,imgUrl,// FIXME: 2018/12/19 测试数据
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,80),
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,80))
+                        .setImgvUrl(CommunityInfoActivity.this,R.id.app_defaylt_dialog_counselor_qrcode_imgv,qrcodeUrl,
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,40),
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,40))
+                        .setImgvUrl(CommunityInfoActivity.this,R.id.app_defaylt_dialog_counselor_avatar_imgv,imgUrl,
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,40),
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,40))
+                        .showView(R.id.app_defaylt_dialog_ll,View.VISIBLE)
+                        .showView(R.id.app_defaylt_dialog_counselor_ll,View.VISIBLE)
+                        .showView(R.id.app_defaylt_close_img_btn,View.VISIBLE)
+                        .showView(R.id.fieldinfo_counselor_contact_ll,View.GONE)
+                        .build();
+            }
             com.linhuiba.linhuifield.connector.Constants.hideUploadPictureLine(CommunityInfoActivity.this,mDemandSuccessDialog);
             mDemandSuccessDialog.show();
             if (showWxcode == 1) {

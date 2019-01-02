@@ -151,7 +151,7 @@
     <string name="module_home_another_time">下次再说</string>
     <string name="module_home_push_notification_title">开启推送通知</string>
     <string name="module_home_push_notification_description">随时了解场地/订单消息</string>
-    <string name="module_home_service_provider_settled">我要入住</string>
+    <string name="module_home_service_provider_settled">我要入驻</string>
     <!-- register -->
     <string name="btn_securitycode">获取验证码</string>
     <string name="btn_securitycode_reget">已发送</string>
@@ -428,6 +428,7 @@
     <string name="fieldinfo_location_unindoor_text">（室外）</string>
     <string name="fieldinfo_is_agent_text">（代理）</string>
     <string name="module_fieldinfo_size_item_is_agent">代理</string>
+    <string name="module_fieldinfo_size_item_is_property">物业</string>
 
     <string name="fieldinfo_restaurant_text">有餐厅，餐厅容纳人数</string>
     <string name="fieldinfo_restaurant_unit_text">人</string>
@@ -540,6 +541,9 @@
     <string name="module_fieldinfo_look_pic_case_tl_title">案例图片</string>
     <string name="module_fieldinfo_pic_word_info">图文详情</string>
     <string name="module_fieldinfo_statement_info">**本网页全部信息来源于用户注册免费发布或通过网络搜索技术收集，如信息中图片、商标、文字等有侵犯版权以及有信息遭冒用不真实的情况，请立即通知我们（400-102-8028），提供相关证据我们核实后将积极配合予以删除</string>
+    <string name="module_fieldinfo_call">呼叫</string>
+    <string name="module_fieldinfo_other_res_show">查看该场地所有展位</string>
+    <string name="module_fieldinfo_other_res_pack_up">收起展位</string>
     <!-- order -->
     <string name="all_order_txt">全部</string>
     <string name="order_exclusiver_txt">自营</string>
@@ -827,7 +831,7 @@
     <string name="module_searchlist_screen_price_tv_str">展位价格：</string>
     <string name="module_searchlist_screen_area_tv_str">展位面积：</string>
     <string name="module_searchlist_community_name">场地：</string>
-    <string name="module_searchlist_demand">我有需求</string>
+    <string name="module_searchlist_demand">发起需求</string>
     <!-- 筛选 -->
     <string name="resourcesscreening_resourcetype">选择类型</string>
     <string name="resourcesscreening_fieldtype">小区类型</string>
@@ -1660,6 +1664,7 @@
     <string name="module_community_info_no_car">无车</string>
     <string name="module_community_no_have_price">暂无档期</string>
     <string name="module_community_industry">近期预定该场地行业：</string>
+    <string name="module_community_info_all_phy_res">所有展位</string>
     <!-- 优惠券 -->
     <string name="module_coupons_immediate_use">立即使用</string>
     <string name="module_coupons_consumption_integral">消耗积分</string>

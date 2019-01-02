@@ -20,6 +20,7 @@ public class CaseInfoModel {
     private ArrayList<Field_AddResourceCreateItemModel> activity_case_url = new ArrayList<>();
     private Integer last;
     private Integer next;
+    private int source;
     public int getId() {
         return id;
     }
@@ -106,5 +107,13 @@ public class CaseInfoModel {
 
     public void setNext(Integer next) {
         this.next = next;
+    }
+
+    public int getSource() {
+        return source;
+    }
+
+    public void setSource(int source) {
+        this.source = source;
     }
 }

@@ -129,6 +129,8 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
     ImageButton mCaseinfoStatementRemindImgBtn;
     @InjectView(R.id.caseinfo_statement_close_imgbtn)
     ImageButton mCaseinfoStatementCloseImgBtn;
+    @InjectView(R.id.caseinfo_statement_ll)
+    LinearLayout mCaseinfoStatementLL;
 
     private RelativeLayout mTitleBarRL;//taitlebar的layout
     private ImageView mCaseInfoTitleBackImg;
@@ -738,6 +740,11 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
     public void onCaseInfoSuccess(CaseInfoModel caseInfoModel) {
         mCaseInfoModel = caseInfoModel;
         if (mCaseInfoModel != null) {
+            if (mCaseInfoModel.getSource() == 1) {
+                mCaseinfoStatementLL.setVisibility(View.VISIBLE);
+            } else {
+                mCaseinfoStatementLL.setVisibility(View.GONE);
+            }
             if (mCaseInfoModel.getActivity_case_url().size() > 0) {
                 for (int i = 0; i < mCaseInfoModel.getActivity_case_url().size(); i++) {
                     if  (mCaseInfoModel.getActivity_case_url().get(i).getActivity_case_url().length() > 0) {
@@ -849,8 +856,8 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
                                 mCaseInfoModel.getPhysical_resources().getPrice(), 0.01
                         ));
             }
-            if (mCaseInfoModel.getPhysical_resources().getNumber_of_order() != null) {
-                mCaseInfoResPeopleTV.setText(String.valueOf(mCaseInfoModel.getPhysical_resources().getNumber_of_order()));
+            if (mCaseInfoModel.getPhysical_resources().getNumber_of_people() != null) {
+                mCaseInfoResPeopleTV.setText(String.valueOf(mCaseInfoModel.getPhysical_resources().getNumber_of_people()));
             }
             if (mCaseInfoModel.getPhysical_resources().getNumber_of_order() != null) {
                 mCaseInfoResNumOrderTV.setText(String.valueOf(mCaseInfoModel.getPhysical_resources().getNumber_of_order()));

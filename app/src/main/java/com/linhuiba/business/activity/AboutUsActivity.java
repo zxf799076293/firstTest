@@ -104,7 +104,8 @@ public class AboutUsActivity extends BaseMvpActivity {
     private String mShareLinkurl;
     private String mShareTitleStr;
     private String mShareDescriptionStr;
-    private String cityId;
+    private String cityId = "";//服务商列表
+    private String mServiceUrl = "";//服务商筛选条件
     private boolean isDemand;//判断是否是需求定制进来的
     //需求定制选择图片交互
     private ValueCallback<Uri> mUploadMessage;
@@ -411,7 +412,7 @@ public class AboutUsActivity extends BaseMvpActivity {
             public void handler(String data, CallBackFunction function) {
                 JSONObject json = JSONObject.parseObject(data.toString());
                 showShareDialog(Config.SHARE_FACILITATOR_CASE_URL + json.get("case_id").toString() +
-                                "?city_id=" + cityId,
+                                "?city_id=" + cityId + mServiceUrl,
                         json.get("pic_url").toString(),
                         json.get("title").toString(),
                         json.get("desc").toString());
@@ -970,7 +971,6 @@ public class AboutUsActivity extends BaseMvpActivity {
                     isDemand = true;
                     isAddfile = true;
                     setTransparentStatusBar();
-                    mFacilitatorLL.setVisibility(View.VISIBLE);
                     mabout_WebView.loadUrl(Config.ADD_DEMAND_WEB_URL);
                     AndPermission.with(AboutUsActivity.this)
                             .requestCode(Constants.PermissionRequestCode)
@@ -1007,18 +1007,25 @@ public class AboutUsActivity extends BaseMvpActivity {
             } else if (intent.getExtras().getInt("type") == Config.FACILITATOR_INT) {
                 // 优质服务商
                 intentTypeInt = Config.FACILITATOR_INT;
+                setTransparentStatusBar();
                 if (intent.getExtras().get("city_id") != null) {
-                    setTransparentStatusBar();
-                    mFacilitatorLL.setVisibility(View.VISIBLE);
                     cityId = intent.getExtras().get("city_id").toString();
-                    int is_login = 0;
-                    if (LoginManager.isLogin()) {
-                        is_login = 1;
-                    }
-                    mabout_WebView.loadUrl(Config.FACILITATOR_LIST_URL + "?city_ids=" +
-                            intent.getExtras().get("city_id").toString() + "&is_login=" +
-                    String.valueOf(is_login));
                 }
+                if (intent.getExtras().get("service_url") != null) {
+                    mServiceUrl = intent.getExtras().get("service_url").toString();
+                    if (mServiceUrl.length() > 0) {
+                        mServiceUrl = "&" + mServiceUrl;
+                    }
+                }
+
+                int is_login = 0;
+                if (LoginManager.isLogin()) {
+                    is_login = 1;
+                }
+                mabout_WebView.loadUrl(Config.FACILITATOR_LIST_URL + "?city_ids=" +
+                        cityId + "&is_login=" +
+                        String.valueOf(is_login) + mServiceUrl);
+
             } else if (intent.getExtras().getInt("type") == Config.FACILITATOR_INFO_INT) {
                 // 优质服务商详情
                 intentTypeInt = Config.FACILITATOR_INFO_INT;
@@ -1275,12 +1282,12 @@ public class AboutUsActivity extends BaseMvpActivity {
 
     private void setTransparentStatusBar() {
         mabout_title_layout.setVisibility(View.GONE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-//                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            //透明状态栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            //透明导航栏
+////                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//        }
     }
 
     @Override
@@ -1718,7 +1725,7 @@ public class AboutUsActivity extends BaseMvpActivity {
                     is_login = 1;
                     mabout_WebView.loadUrl(Config.FACILITATOR_LIST_URL + "?city_id=" +
                             cityId + "&is_login=" +
-                            String.valueOf(is_login));
+                            String.valueOf(is_login) + mServiceUrl);
                 }
                 break;
             case Config.SMALL_ORDER_INFO_INT:

@@ -60,6 +60,8 @@
                                 android:paddingLeft="@dimen/searchlist_item_txt_margintop"
                                 android:paddingRight="@dimen/searchlist_item_txt_margintop"
                                 android:gravity="center_vertical"
+                                android:visibility="gone"
+                                android:id="@+id/caseinfo_statement_ll"
                                 android:background="@drawable/module_bg_caseinfo_statement">
                                 <TextView
                                     android:layout_width="wrap_content"

@@ -89,6 +89,8 @@ public class FieldinfoRecommendResourcesAdapter extends BaseQuickAdapter<Resourc
                 OvalImageView mOtherResImg = (OvalImageView) helper.getView(R.id.resource_info_other_phy_img);
                 LinearLayout mOtherResSelectedLL = (LinearLayout) helper.getView(R.id.fieldinfo_other_res_selected_ll);
                 View mOtherResBottomView = (View) helper.getView(R.id.fieldinfo_other_res_bottom_view);
+                LinearLayout mFieldinfoOtherResdemandLL = (LinearLayout) helper.getView(R.id.fieldinfo_orher_res_demand_ll);
+                ImageView mFieldinfoOtherResSubsidyImgv = (ImageView) helper.getView(R.id.fieldinfo_orher_res_subsidy_imgv);
                 if (type != 2) {
                     RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((width / 2 - com.linhuiba.linhuifield.connector.Constants.Dp2Px(mcontext,16)),
                             (width / 2 - com.linhuiba.linhuifield.connector.Constants.Dp2Px(mcontext,16)) * 262 / 338);
@@ -159,7 +161,6 @@ public class FieldinfoRecommendResourcesAdapter extends BaseQuickAdapter<Resourc
 //                    } else {
 //                        mRecommendResPriceTV.setText(mcontext.getResources().getString(R.string.home_hot_inquiry_tv_str));
 //                    }
-                    mFieldinfoOtherResOriginalPriceUnitTV.setVisibility(View.GONE);
                     String name = "";
                     if (item.getName() != null && item.getName().length() > 0) {
                         if (item.getLocation_type() != null && item.getLocation_type().getDisplay_name() != null &&
@@ -177,16 +178,26 @@ public class FieldinfoRecommendResourcesAdapter extends BaseQuickAdapter<Resourc
                     } else {
                         mFieldinfoOtherResNameTV.setText("");
                     }
-                    if (item.getMin_price() != null && item.getMin_price().length() > 0) {
-                        if (Double.parseDouble(item.getMin_price()) > 0) {
-                            mFieldinfoOtherResPriceTV.setText(Constants.getPriceUnitStr(mcontext,(mactivity.getResources().getString(R.string.order_listitem_price_unit_text)+
-                                    Constants.getpricestring(item.getMin_price(),0.01)),11));
-                            mFieldinfoOtherResOriginalPriceUnitTV.setVisibility(View.VISIBLE);
+                    mFieldinfoOtherResOriginalPriceUnitTV.setVisibility(View.GONE);
+                    mFieldinfoOtherResSubsidyImgv.setVisibility(View.GONE);
+                    if (item.getHas_selling() > 0) {
+                        mFieldinfoOtherResdemandLL.setVisibility(View.GONE);
+                        if (item.getMin_price() != null && item.getMin_price().length() > 0) {
+                            if (Double.parseDouble(item.getMin_price()) > 0) {
+                                if (item.getIs_subsidy() == 1) {
+                                    mFieldinfoOtherResSubsidyImgv.setVisibility(View.VISIBLE);
+                                }
+                                mFieldinfoOtherResPriceTV.setText(Constants.getPriceUnitStr(mcontext,(mactivity.getResources().getString(R.string.order_listitem_price_unit_text)+
+                                        Constants.getpricestring(item.getMin_price(),0.01)),11));
+                                mFieldinfoOtherResOriginalPriceUnitTV.setVisibility(View.VISIBLE);
+                            } else {
+                                mFieldinfoOtherResPriceTV.setText(mcontext.getResources().getString(R.string.home_hot_inquiry_tv_str));
+                            }
                         } else {
                             mFieldinfoOtherResPriceTV.setText(mcontext.getResources().getString(R.string.home_hot_inquiry_tv_str));
                         }
                     } else {
-                        mFieldinfoOtherResPriceTV.setText(mcontext.getResources().getString(R.string.home_hot_inquiry_tv_str));
+                        mFieldinfoOtherResdemandLL.setVisibility(View.VISIBLE);
                     }
                     if (item.getSelected() == 1) {
                         mOtherResSelectedLL.setBackgroundDrawable(mcontext.getResources().getDrawable(R.drawable.module_bg_fieldinfo_other_phy_res));
@@ -236,6 +247,7 @@ public class FieldinfoRecommendResourcesAdapter extends BaseQuickAdapter<Resourc
                             mRecommendResPriceTV.setText(Constants.getPriceUnitStr(mcontext,(mactivity.getResources().getString(R.string.order_listitem_price_unit_text)+
                                     Constants.getpricestring(item.getPrice(),0.01)),11));
                             mRecommendResPriceUnitTV.setVisibility(View.VISIBLE);
+                            mRecommendResPriceUnitTV.setTextColor(mcontext.getResources().getColor(R.color.register_edit_color));
                         } else {
                             mRecommendResPriceTV.setText(mcontext.getResources().getString(R.string.home_hot_inquiry_tv_str));
                         }

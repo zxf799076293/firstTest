@@ -157,21 +157,21 @@ public class Constants {
     public static Context mcontext;
     public static Activity mactivity;
     //推送判断跳转界面
-    private static final int OrderInfoInt = 1;
-    private static final int OrdersManageInt = 2;
-    private static final int InvoiceInfoInt = 3;
-    private static final int WalletsInt = 4;
-    private static final int PointsInfoInt = 5;
-    private static final int COMMENTS = 6;
+    private static final int OrderInfoInt = 1;//不是待支付大订单详情
+    private static final int OrdersManageInt = 2;//物业订单
+    private static final int InvoiceInfoInt = 3;//票据详情
+    private static final int WalletsInt = 4;//钱包
+    private static final int PointsInfoInt = 5;//积分详情
+    private static final int COMMENTS = 6;//评价
     private static final int DEMAND = 7;
-    private static final int ORDER_ITEM_INFO = 8;
-    private static final int DEMAND_INFO = 9;
-    private static final int ENQUIRY_ORDER_INFO = 10;
-    private static final int COUPON_INT = 11;
-    private static final int PROPERTY_FIELDS = 12;
-    private static final int PROPERTY_ACTIVITIES = 13;
-    private static final int HELP_WEB = 14;
-    private static final int CARTS = 15;
+    private static final int ORDER_ITEM_INFO = 8; //物业订单详情
+    private static final int DEMAND_INFO = 9;//需求详情
+    private static final int ENQUIRY_ORDER_INFO = 10;//询价详情
+    private static final int COUPON_INT = 11;//我的优惠券
+    private static final int PROPERTY_FIELDS = 12;//发布资源列表
+    private static final int PROPERTY_ACTIVITIES = 13;//发布活动资源列表
+    private static final int HELP_WEB = 14;//帮助中心
+    private static final int CARTS = 15;//购物车
     public static final int RELEASE_PERMISSIONS = 16;
     private static final int FIELD_INFO = 17;//展位详情
     private static final int FIELD_LIST = 18;//场地列表
@@ -182,6 +182,7 @@ public class Constants {
     private static final int ACTIVITY_LIST = 23;//活动列表
     private static final int THEME_INFO = 24;//专题详情 theme
     private static final int WEAL_LIST = 25;//新人礼包 weal
+    private static final int SERVICE_INFO = 26;//服务商详情
 
     public static final String picture_file_str = Environment.getExternalStorageDirectory() + "/linhuiba/";
     public static final File picture_file = new File(Environment.getExternalStorageDirectory() + "/linhuiba/");
@@ -1483,12 +1484,10 @@ public class Constants {
 
     //绑定推送设备接口
     public void binding_devices() {
-        if (LoginManager.isLogin()) {
-            if (LoginManager.getInstance().getDevice_token() != null &&
-                    LoginManager.getInstance().getDevice_token().length() > 0) {
-                UserApi.binding_devices(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),
-                        devicesHandler, LoginManager.getUid(), LoginManager.getInstance().getDevice_token());
-            }
+        if (LoginManager.getInstance().getDevice_token() != null &&
+                LoginManager.getInstance().getDevice_token().length() > 0) {
+            UserApi.binding_devices(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),
+                    devicesHandler, LoginManager.getUid(), LoginManager.getInstance().getDevice_token());
         }
     }
 
@@ -1612,6 +1611,8 @@ public class Constants {
                 banner_intetnt = THEME_INFO;//专题详情
             } else if (url.indexOf("company/weal") != -1) {
                 banner_intetnt = WEAL_LIST;//新人礼包
+            } else if (url.indexOf("service/view") != -1) {
+                banner_intetnt = SERVICE_INFO;//服务商详情
             }
         }
         return banner_intetnt;
@@ -2041,6 +2042,24 @@ public class Constants {
      */
     public static void pushUrlJumpActivity(String data,Context context,boolean isApplicationContext) {
         if (data != null && data.length() > 0) {
+            if (!LoginManager.isLogin()) {
+                int type = getpush_msg_type(data);
+                if (type == OrderInfoInt || type == OrdersManageInt || type == WalletsInt ||
+                        type == PointsInfoInt || type == COMMENTS || type == ORDER_ITEM_INFO ||
+                        type == DEMAND_INFO  || type == ENQUIRY_ORDER_INFO || type == COUPON_INT ||
+                        type == PROPERTY_FIELDS || type == PROPERTY_ACTIVITIES || type == CARTS) {
+                    Intent loginIntent = new Intent(context, LoginActivity.class);
+                    if (isApplicationContext) {
+                        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        if (com.linhuiba.linhuifield.connector.Constants.IsCurrentActivity(context,"com.business.loginActivity")) {
+                            loginIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        }
+                    }
+                    loginIntent.putExtra("jump_url", data);
+                    context.startActivity(loginIntent);
+                    return;
+                }
+            }
             if (getpush_msg_type(data) == OrderInfoInt) {
                 String id = getpush_msg_id(data,"/");
                 if (id != null && id.length() > 0) {
@@ -2290,26 +2309,16 @@ public class Constants {
                 }
                 context.startActivity(caseIntent);
             } else if (getpush_msg_type(data) == SERVICE_LIST) {
+                Intent resources_web = new Intent(context, AboutUsActivity.class);
+                if (isApplicationContext) {
+                    resources_web.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
+                resources_web.putExtra("type", com.linhuiba.business.config.Config.FACILITATOR_INT);
                 String[] urlParts = data.split("\\?");
-                String str = "";
                 if (urlParts.length > 1) {
-                    str = urlParts[1];
+                    resources_web.putExtra("service_url", urlParts[1]);
                 }
-                if (str.length() > 0) {
-                    int is_login = 0;
-                    if (LoginManager.isLogin()) {
-                        is_login = 1;
-                    }
-                    Intent resources_web = new Intent(context, AboutUsActivity.class);
-                    if (isApplicationContext) {
-                        resources_web.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    }
-                    resources_web.putExtra("type", com.linhuiba.business.config.Config.COMMON_WEB_INT);
-                    resources_web.putExtra("web_url",com.linhuiba.business.config.Config.FACILITATOR_LIST_URL + "?is_app=1" +
-                            "&is_login=" +
-                            String.valueOf(is_login) + "&" + str);
-                    context.startActivity(resources_web);
-                }
+                context.startActivity(resources_web);
             } else if (getpush_msg_type(data) == COMMUNITY_INFO) {
                 String resourceid = getInfoid_url_jsonobject(data);
                 Intent fieldinfo = new Intent(context, CommunityInfoActivity.class);
@@ -2361,6 +2370,12 @@ public class Constants {
                     firstRegisterCouponsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
                 context.startActivity(firstRegisterCouponsIntent);
+            } else if (getpush_msg_type(data) == SERVICE_INFO) {
+                String id = getInfoid_url_jsonobject(data);
+                Intent serviceInfoIntent = new Intent(context, AboutUsActivity.class);
+                serviceInfoIntent.putExtra("type", com.linhuiba.business.config.Config.FACILITATOR_INFO_INT);
+                serviceInfoIntent.putExtra("resource_id",id);
+                context.startActivity(serviceInfoIntent);
             } else {
                 if (Constants.getpush_msg_type(data) != RELEASE_PERMISSIONS) {
                     Intent resources_web = new Intent(context, AboutUsActivity.class);
