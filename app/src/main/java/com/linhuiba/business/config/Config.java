@@ -9,32 +9,32 @@ import com.linhuiba.business.BuildConfig;
 public class Config {
     /* 真实环境  PE*/
     public static final String BASE_API_URL_PHP_PE = "https://api.linhuiba.com/api/";
-    private static final String Domain_Name_PE = "https://m.linhuiba.com";
+    public static final String Domain_Name_PE = "https://m.linhuiba.com";
     /* 预演环境  PE_TEST*/
-    private static final String Domain_Name_PE_TEST = "http://m.lanhanba.com";
-    private static final String BASE_API_URL_PHP_PE_TEST = "http://hz.lanhanba.com/api/";
+    public static final String Domain_Name_PE_TEST = "http://m.lanhanba.com";
+    public static final String BASE_API_URL_PHP_PE_TEST = "http://hz.lanhanba.com/api/";
     /* SE测试环境 */
-    private static final String BASE_API_URL_PHP_SE = "https://hz.lanhanba.net/api/";
-    private static final String Domain_Name_SE = "https://m.lanhanba.net";
+    public static final String BASE_API_URL_PHP_SE = "https://hz.lanhanba.net/api/";
+    public static final String Domain_Name_SE = "https://m.lanhanba.net";
   /* IE */
 //    private final String BASE_API_URL_PHP_IE = "https://192.168.0.196:443/api/";
 //    private final String Domain_Name_IE = "https://192.168.0.196";
-    private static final String BASE_API_URL_PHP_IE = "http://192.168.0.196:80/api/";
-    private static final String Domain_Name_IE = "https://m.lanhanba.net";
-    private static final String Domain_Name_IE_TEST = "http://wap.vaiwan.com:8081";
+    public static final String BASE_API_URL_PHP_IE = "http://192.168.0.196:80/api/";
+    public static final String Domain_Name_IE = "https://m.lanhanba.net";
+    public static final String Domain_Name_IE_TEST = "http://wap.vaiwan.com:8081";
     public static final String Domain_Name_COOKING_IE_TEST = "http://wap.vaiwan.com";
 
     /* DE */
-    private static final String BASE_API_URL_PHP_DE = "http://192.168.0.104:8009/api/";
-    private static final String Domain_Name_DE = "https://m.lanhanba.net";
-    private static final String BASE_API_URL_PHP_DETEST = "http://192.168.0.109/api/";
-    private static final String Domain_Name_DETEST = "http://wap.vaiwan.com:8081";
-    private static final String BASE_API_URL_PHP_DETESTLL = "http://192.168.0.109:8039/api/";
-    private static final String BASE_API_URL_PHP_DETESTZR = "http://gitlhbzxr.vaiwan.com:8081/api/";
-
+    public static final String BASE_API_URL_PHP_DE = "http://192.168.0.104:8009/api/";
+    public static final String Domain_Name_DE = "https://m.lanhanba.net";
+    public static final String BASE_API_URL_PHP_DETEST = "http://192.168.0.109/api/";
+    public static final String Domain_Name_DETEST = "http://wap.vaiwan.com:8081";
+    public static final String BASE_API_URL_PHP_DETESTLL = "http://192.168.0.109:8039/api/";
+    public static final String BASE_API_URL_PHP_DETESTZR = "http://gitlhbzxr.vaiwan.com:8081/api/";
+    public static final String BASE_API_URL_PHP_DETESTJLP = "http://192.168.0.123/api/";
     //api请求网络头url 和 web加载网络头url
-    public static final String BASE_API_URL_PHP = !BuildConfig.DEBUG?BASE_API_URL_PHP_SE:BASE_API_URL_PHP_PE;
-    public static final String Domain_Name = !BuildConfig.DEBUG?Domain_Name_SE:Domain_Name_PE;
+    public static String BASE_API_URL_PHP = BuildConfig.DEBUG?BASE_API_URL_PHP_PE_TEST:BASE_API_URL_PHP_PE;
+    public static final String Domain_Name = BuildConfig.DEBUG?Domain_Name_PE_TEST:Domain_Name_PE;
     //加载页面
     public static final String INVITE_WEBVIEW_URL = Domain_Name+"/admin/profile/invite?&is_mobile=1&is_app=1&invite_code=";//邀请有奖url
     public static final String INVITE_SHARE_URL = Domain_Name+"/admin/profile/invited?&is_mobile=1&is_app=1&invite_code=";//邀请有奖分享链接
@@ -169,15 +169,17 @@ public class Config {
     //案例详情小程序分享链接
     public static final String SHARE_CASE_INFO_WXMINI_URL = "otherPages/pages/caseDetail/caseDetail?BackKey=1&is_app=1&id=";
     //场地详情微信分享
-    public static final String SHARE_COMMUNITY_INFO_URL = Domain_Name + "#/community/";
+    public static final String SHARE_COMMUNITY_INFO_URL = Domain_Name + "/#/community/";
     //场地详情小程序分享
     public static final String WX_MINI_SHARE_COMMUNITY_INFO_URL = "pages/fieldsDetail/fieldsDetail?type=community&is_app=1&BackKey=1&id=";
     //礼包小程序分享
     public static final String WX_MINI_SHARE_GIFT_URL = "pages/couponPages/pages/gift/gift";
     //礼包微信分享
-    public static final String WX_SHARE_GIFT_URL = Domain_Name + "#/newCoupon";
+    public static final String WX_SHARE_GIFT_URL = Domain_Name + "/#/newCoupon";
     //专题小程序分享
     public static final String WX_MINI_SHARE_THEME_URL = "themePages/pages/themeDetail/themeDetail?is_app=1&id=";
+    //专题分享
+    public static final String WX_SHARE_THEME_URL = Domain_Name + "/#/specialTopic/";
     //分享链接
 
     //需求详情

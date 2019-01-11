@@ -92,19 +92,19 @@ public abstract class LinhuiAsyncHttpResponseHandler implements Callback {
                 sendFailedStringCallback(false, statusCode, headers, responseBody, new NullPointerException("出错(405)"));
             } else if (statusCode == 500) {
                 String errormsg = "";
-//            try {
-//                errormsg = new String(responseBody,"UTF-8");
-//                Log.i("报500错的msg:",errormsg);
-//                JSONObject jsonObject = JSONObject.parseObject(errormsg);
-//                String showerrormsg = "";
-//                if (jsonObject != null &&
-//                        jsonObject.get("message") != null) {
-//                    showerrormsg = jsonObject.get("message").toString();
-//                    Log.i("errer:500:",showerrormsg);
-//                }
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                errormsg = new String(responseBody,"UTF-8");
+                Log.i("报500错的msg:",errormsg);
+                JSONObject jsonObject = JSONObject.parseObject(errormsg);
+                String showerrormsg = "";
+                if (jsonObject != null &&
+                        jsonObject.get("message") != null) {
+                    showerrormsg = jsonObject.get("message").toString();
+                    Log.i("errer:500:",showerrormsg);
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
                 sendFailedStringCallback(false, statusCode, headers, responseBody, new NullPointerException("服务器内部出错(500)" +
                         errormsg));
             } else {

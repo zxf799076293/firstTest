@@ -563,6 +563,14 @@
             android:name=".activity.FieldinfoLookPictureActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".activity.CommentCentreActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.ActivityCasePicSaveActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
         <!-- 魔窗总的activity，必须注册！！！ -->
         <activity
@@ -653,6 +661,7 @@
             android:screenOrientation="behind"
 
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activity.CommentCentreActivity" />
         <!-- qq -->
         <!-- 适配全面屏/刘海屏 -->
         <!-- 华为适配全面屏/刘海屏 -->

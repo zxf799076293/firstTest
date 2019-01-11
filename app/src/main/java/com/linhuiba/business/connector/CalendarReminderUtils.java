@@ -13,7 +13,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 public class CalendarReminderUtils {
-    // FIXME: 2018/12/7 日历提醒
+    //2018/12/7 日历提醒
     private static String CALENDER_URL = "content://com.android.calendar/calendars";
     private static String CALENDER_EVENT_URL = "content://com.android.calendar/events";
     private static String CALENDER_REMINDER_URL = "content://com.android.calendar/reminders";

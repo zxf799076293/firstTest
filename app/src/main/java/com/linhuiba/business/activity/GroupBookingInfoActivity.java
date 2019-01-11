@@ -1833,7 +1833,7 @@ public class GroupBookingInfoActivity extends BaseMvpActivity implements Field_M
                     FieldApi.getGroupBookingList(MyAsyncHttpClient.MyAsyncHttpClient(), mOtherResHandler, 1, LoginManager.getInstance().getTrackcityid(),6,mGroupBookingInfoModel.getGroup_purchase().getId());
                 }
             }
-            mGroupPresenter.getResInfoReview(String.valueOf(mGroupBookingInfoModel.getId()), "1", "2");
+            mGroupPresenter.getResInfoReview(String.valueOf(mGroupBookingInfoModel.getId()), "1", "2",false);
             mGroupInfoInformationRL.setVisibility(View.VISIBLE);
             mGroupInfoPaidRL.setVisibility(View.VISIBLE);
         }

@@ -50,30 +50,63 @@ public class FieldinfoMvpPresenter extends BasePresenter<FieldinfoMvpView> {
             }
         });
     }
-    public void getResInfoReview(String fieldid,String page,String pageSize) {
+    public void getResInfoReview(String fieldid,String page,String pageSize,boolean isActivity) {
         if (!isViewAttached()){
             //如果没有View引用就不加载数据
             return;
         }
-        FieldinfoMvpModel.getResInfoReviewData(fieldid, page, pageSize ,
-                new LinhuiAsyncHttpResponseHandler(ReviewModel.class, true) {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, Response response, Object data) {
-                        if(isViewAttached()){
-                            getView().hideLoading();
-                            if (data != null) {
-                                getView().onResReviewSuccess((ArrayList<ReviewModel>) data);
+        if (isActivity) {
+            FieldinfoMvpModel.getSellResInfoCpmments(fieldid, page, pageSize ,
+                    new LinhuiAsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, Response response, Object data) {
+                            if(isViewAttached()) {
+                                getView().hideLoading();
+                                if (data != null && data.toString().length() > 0) {
+                                    JSONObject jsonObject = JSONObject.parseObject(data.toString());
+                                    if (jsonObject.get("data") != null &&
+                                            jsonObject.get("data").toString().length() > 0) {
+                                        ArrayList<ReviewModel> list = (ArrayList<ReviewModel>) JSONArray.parseArray(jsonObject.get("data").toString(), ReviewModel.class);
+                                        getView().onResReviewSuccess(list);
+                                    }
+                                }
                             }
                         }
-                    }
-                    @Override
-                    public void onFailure(boolean superresult, int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        if(isViewAttached()){
-                            getView().hideLoading();
-                            getView().onResReviewFailure(superresult, error);
+                        @Override
+                        public void onFailure(boolean superresult, int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                            if(isViewAttached()){
+                                getView().hideLoading();
+                                getView().onResReviewFailure(superresult, error);
+                            }
                         }
-                    }
-                });
+                    });
+
+        } else {
+            FieldinfoMvpModel.getResInfoReviewData(fieldid, page, pageSize ,
+                    new LinhuiAsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, Response response, Object data) {
+                            if(isViewAttached()) {
+                                getView().hideLoading();
+                                if (data != null && data.toString().length() > 0) {
+                                    JSONObject jsonObject = JSONObject.parseObject(data.toString());
+                                    if (jsonObject.get("data") != null &&
+                                            jsonObject.get("data").toString().length() > 0) {
+                                        ArrayList<ReviewModel> list = (ArrayList<ReviewModel>) JSONArray.parseArray(jsonObject.get("data").toString(), ReviewModel.class);
+                                        getView().onResReviewSuccess(list);
+                                    }
+                                }
+                            }
+                        }
+                        @Override
+                        public void onFailure(boolean superresult, int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                            if(isViewAttached()){
+                                getView().hideLoading();
+                                getView().onResReviewFailure(superresult, error);
+                            }
+                        }
+                    });
+        }
     }
     public void getGroupResInfo(String id) {
         if (!isViewAttached()){

@@ -733,7 +733,7 @@ public class FieldApi {
                 paramsMap,5));
         call.enqueue(handler);
     }
-    //获取指定资源的评论列表 3.6.1
+    //展位评论列表 3.10
     public static void get_resources_commentslist(OkHttpClient client, LinhuiAsyncHttpResponseHandler handler,
                                               String fieldid,String page,String pageSize) {
         HashMap<String, String> paramsMap = new HashMap<>();
@@ -741,54 +741,62 @@ public class FieldApi {
         paramsMap.put("pageSize", pageSize);
         Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
                 "physical_resources/" + fieldid + "/comments",
+                paramsMap,4));
+        call.enqueue(handler);
+    }
+    //供给评论列表 3.10
+    public static void getSellResCpmments(OkHttpClient client, LinhuiAsyncHttpResponseHandler handler,
+                                          String fieldid,String page,String pageSize) {
+        HashMap<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("page", page);
+        paramsMap.put("pageSize", pageSize);
+        Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
+                "selling_resources/" + fieldid + "/comments",
                 paramsMap,3));
         call.enqueue(handler);
     }
-    //发表评论 3.0
+    /**
+     * 发表评论 3.10
+     * @param client
+     * @param handler
+     * @param fieldid 子订单ID
+     * @param score 评分星级
+     * @param anonymity 是否匿名发表 0：否 1：是
+     * @param score_of_visitorsflowrate 人流量评分星级 1：超过 2：差不多 3：不足
+     * @param score_of_propertymatching 物业配合度评分星级 1：满意 2：一般 3：不满意
+     * @param score_of_goalcompletion 目完成度评分星级 1：满意 2：一般 3：不满意
+     * @param content 评论内容
+     * @param tags 标签ID // [1,2,3]
+     * @param images 图片URLjson数组(必须符合JSON格式,且最多4张)
+     */
     public static void published_resources_comments(OkHttpClient client, LinhuiAsyncHttpResponseHandler handler,
-                                                  String fieldid,int score,int score_of_visitorsflowrate,
-                                                    int score_of_userparticipation,int score_of_propertymatching,
-                                                    int score_of_goalcompletion , String content,int anonymity,
-                                                    String tags,String images,String number_of_people) {
-        JSONArray jsonArray = new JSONArray();
+                                                  String fieldid,int score,int anonymity,int score_of_visitorsflowrate,
+                                                    int score_of_propertymatching, int score_of_goalcompletion, String content,
+                                                    ArrayList<Integer> tags,ArrayList<String> images) {
         HashMap<String, String> paramsMap = new HashMap<>();
         paramsMap.put("score", String.valueOf(score));
-        paramsMap.put("score_of_visitorsflowrate", String.valueOf(score_of_visitorsflowrate));
-        paramsMap.put("score_of_userparticipation", String.valueOf(score_of_userparticipation));
-        paramsMap.put("score_of_propertymatching", String.valueOf(score_of_propertymatching));
-        paramsMap.put("score_of_goalcompletion", String.valueOf(score_of_goalcompletion));
+        paramsMap.put("anonymity", String.valueOf(anonymity));
+        paramsMap.put("score_of_visitorsflowrate", String.valueOf(score_of_visitorsflowrate));//人流量
+        paramsMap.put("score_of_propertymatching", String.valueOf(score_of_propertymatching));//物业配合度
+        paramsMap.put("score_of_goalcompletion", String.valueOf(score_of_goalcompletion));//目标完成度评分星级
         if (content != null) {
             if (content.length() > 0) {
                 paramsMap.put("content", content);
             }
         }
-        paramsMap.put("anonymity", String.valueOf(anonymity));
-        if (tags != null) {
-            if (tags.length() > 0) {
-                paramsMap.put("tags", tags);
-            } else {
-                paramsMap.put("tags", jsonArray.toJSONString());
+        if (tags != null && tags.size() > 0) {
+            for (int i = 0; i < tags.size(); i++) {
+                paramsMap.put("tags["+String.valueOf(i)+"]",String.valueOf(tags.get(i)));
             }
-        } else {
-            paramsMap.put("tags", jsonArray.toJSONString());
         }
-        if (images != null) {
-            if (images.length() > 0) {
-                paramsMap.put("images", images);
-            } else {
-                paramsMap.put("images", jsonArray.toJSONString());
+        if (images != null && images.size() > 0) {
+            for (int i = 0; i < images.size(); i++) {
+                paramsMap.put("images["+String.valueOf(i)+"]",images.get(i));
             }
-        } else {
-            paramsMap.put("images", jsonArray.toJSONString());
-        }
-        if (number_of_people != null && number_of_people.length() > 0) {
-            paramsMap.put("number_of_people", number_of_people);
-        } else {
-            paramsMap.put("number_of_people", "0");
         }
         Call call = client.newCall(Request.RequestPost(Config.BASE_API_URL_PHP,
                 "order_items/" + fieldid + "/comments",
-                paramsMap,2));
+                paramsMap,3));
         call.enqueue(handler);
     }
     //获取订单列表 3.6.1
@@ -1571,7 +1579,7 @@ public class FieldApi {
         Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
                 "communities/" + String.valueOf(community_id) +
                         "/other_physicals",
-                paramsMap,2));// FIXME: 2018/12/20 版本号是2
+                paramsMap,2));//2018/12/20 版本号是2
         call.enqueue(handler);
     }
     //获取最新签约列表
@@ -2264,7 +2272,7 @@ public class FieldApi {
         }
         Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
                 "lists/"+ id,
-                paramsMap,2));// FIXME: 2018/12/20 版本号升级为2
+                paramsMap,2));//2018/12/20 版本号升级为2
         call.enqueue(handler);
     }
     //获取场地所有展位 3.6.1
@@ -2445,7 +2453,7 @@ public class FieldApi {
         paramsMap.put("res_type_id","3");
         Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
                 "resources/" + id,
-                paramsMap,7));// FIXME: 2018/12/20 版本号升级为7
+                paramsMap,7));//2018/12/20 版本号升级为7
         call.enqueue(handler);
     }
 
@@ -2547,6 +2555,64 @@ public class FieldApi {
         Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
                 "configurations/app_home_page_hover_window",
                 paramsMap,1));
+        call.enqueue(handler);
+    }
+
+    /**
+     * 快速评价 3.10
+     * @param client
+     * @param handler
+     * @param score 评分星级
+     * @param anonymity 是否匿名发表 0：否 1：是
+     * @param score_of_visitorsflowrate 人流量评分星级 1：超过 2：差不多 3：不足
+     * @param score_of_propertymatching 物业配合度评分星级 1：满意 2：一般 3：不满意
+     * @param score_of_goalcompletion 目完成度评分星级 1：满意 2：一般 3：不满意
+     * @param content 评论内容
+     * @param tags 标签ID // [1,2,3]
+     * @param images 图片URLjson数组(必须符合JSON格式,且最多4张)
+     * @param field_order_item_ids 小订单id数组 [1,2,3,4]
+     */
+    public static void commentsOrderItems(OkHttpClient client, LinhuiAsyncHttpResponseHandler handler,
+                                                    int score,int anonymity,int score_of_visitorsflowrate,
+                                                    int score_of_propertymatching, int score_of_goalcompletion, String content,
+                                                    ArrayList<Integer> tags,ArrayList<String> images,ArrayList<Integer> field_order_item_ids) {
+        HashMap<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("score", String.valueOf(score));
+        paramsMap.put("anonymity", String.valueOf(anonymity));
+        paramsMap.put("score_of_visitorsflowrate", String.valueOf(score_of_visitorsflowrate));//人流量
+        paramsMap.put("score_of_propertymatching", String.valueOf(score_of_propertymatching));//物业配合度
+        paramsMap.put("score_of_goalcompletion", String.valueOf(score_of_goalcompletion));//目标完成度评分星级
+        if (content != null) {
+            if (content.length() > 0) {
+                paramsMap.put("content", content);
+            }
+        }
+        if (tags != null && tags.size() > 0) {
+            for (int i = 0; i < tags.size(); i++) {
+                paramsMap.put("tags["+String.valueOf(i)+"]",String.valueOf(tags.get(i)));
+            }
+        }
+        if (images != null && images.size() > 0) {
+            for (int i = 0; i < images.size(); i++) {
+                paramsMap.put("images["+String.valueOf(i)+"]",images.get(i));
+            }
+        }
+        if (field_order_item_ids != null && field_order_item_ids.size() > 0) {
+            for (int i = 0; i < field_order_item_ids.size(); i++) {
+                paramsMap.put("field_order_item_ids["+String.valueOf(i)+"]",String.valueOf(field_order_item_ids.get(i)));
+            }
+        }
+        Call call = client.newCall(Request.RequestPost(Config.BASE_API_URL_PHP,
+                "order_items/comments",
+                paramsMap,1));
+        call.enqueue(handler);
+    }
+    //评价中心订单列表 3.10
+    public static void getCommentCentreOrders(OkHttpClient client, LinhuiAsyncHttpResponseHandler handler) {
+        HashMap<String, String> paramsMap = new HashMap<>();
+        Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
+                "orders",
+                paramsMap,4));
         call.enqueue(handler);
     }
 }

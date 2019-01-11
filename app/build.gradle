@@ -22,8 +22,8 @@ android {
         applicationId "com.linhuiba.business"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 40
-        versionName "3.9Beta"
+        versionCode 42
+        versionName "3.9.1"
         flavorDimensions "versionCode"//3.0添加配置
         signingConfig signingConfigs.release
         multiDexEnabled true
@@ -130,6 +130,28 @@ android {
         // ...
         maven { url "https://jitpack.io" }
     }
+    //友盟
+    buildscript {
+        repositories {
+            google()
+            jcenter()
+            maven { url 'https://dl.bintray.com/umsdk/release' }
+        }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:3.1.4'
+
+            // NOTE: Do not place your application dependencies here; they belong
+            // in the individual module build.gradle files
+        }
+    }
+    allprojects {
+        repositories {
+            google()
+            jcenter()
+            mavenCentral()
+            maven { url 'https://dl.bintray.com/umsdk/release' }
+        }
+    }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -148,5 +170,12 @@ dependencies {
     // ~80KB拼音
     implementation files('libs/mta-android-sdk-3.4.3.jar')
     implementation files('libs/mid-sdk-3.73.jar')
+    //友盟推送
+    //PushSDK必须依赖基础组件库，所以需要加入对应依赖
+    implementation 'com.umeng.umsdk:common:1.5.4'
+    //PushSDK必须依赖utdid库，所以需要加入对应依赖
+    implementation 'com.umeng.umsdk:utdid:1.1.5.3'
+    //PushSDK
+    implementation 'com.umeng.umsdk:push:5.0.2'
 }
 

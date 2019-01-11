@@ -98,6 +98,8 @@ public class Fieldinfo_ReviewAdapter extends BaseAdapter{
             holder.mfield_review_alllayout = (LinearLayout)convertView.findViewById(R.id.field_review_alllayout);
             holder.mSizeTV = (TextView) convertView.findViewById(R.id.review_res_size_tv);
             holder.mIndustryTV = (TextView) convertView.findViewById(R.id.review_res_industry_tv);
+            holder.mPromotionPurposeTV = (TextView) convertView.findViewById(R.id.comment_item_promotion_purpose_tv);
+            holder.mSpreadWayTV = (TextView) convertView.findViewById(R.id.comment_item_spread_way_tv);
             //将设置好的布局保存到缓存中，并将其设置在Tag里，以便后面方便取出Tag
             convertView.setTag(holder);
         }else
@@ -201,7 +203,7 @@ public class Fieldinfo_ReviewAdapter extends BaseAdapter{
                                 img[i].setImageResource(pic_dark[i]);
                             }
                         }
-                        // FIXME: 2018/12/14 size 和 industry
+                        //2018/12/14 size 和 industry
                         if (mFeildList.get(position).getSize() != null &&
                                 mFeildList.get(position).getSize().length() > 0) {
                             holder.mSizeTV.setText(context.getResources().getString(R.string.order_listitem_sizetxt) +
@@ -218,6 +220,8 @@ public class Fieldinfo_ReviewAdapter extends BaseAdapter{
                         } else {
                             holder.mIndustryTV.setVisibility(View.GONE);
                         }
+                        // FIXME: 2019/1/10 推广目的推广形式
+
                     } else {
                         convertView.setVisibility(View.GONE);
                     }
@@ -240,6 +244,8 @@ public class Fieldinfo_ReviewAdapter extends BaseAdapter{
         public LinearLayout mfield_review_alllayout;
         public TextView mSizeTV;
         public TextView mIndustryTV;
+        public TextView mPromotionPurposeTV;
+        public TextView mSpreadWayTV;
     }
     /** 列表适配器 */
     private class Mygridviewadapter extends BaseAdapter {

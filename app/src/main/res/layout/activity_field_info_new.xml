@@ -493,12 +493,6 @@
                                         android:textSize="@dimen/user_info_photo_txt_size"
                                         android:textStyle="bold" />
                                 </LinearLayout>
-
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/txt_padding_line"
-                                    android:background="@color/new_viewbg"></View>
-
                                 <LinearLayout
                                     android:id="@+id/fieldinfo_choose_size_ll"
                                     android:layout_width="match_parent"

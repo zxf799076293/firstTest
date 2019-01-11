@@ -119,7 +119,7 @@ public class HomeDynamicCommunityAdapter extends BaseQuickAdapter<ResourceSearch
             mHomeCommunityItemLL.setVisibility(View.GONE);
             mHomeCommunityItemNoDataLL.setVisibility(View.VISIBLE);
             if (isFieldinfoLookPicture) {
-                // FIXME: 2018/12/17 详情图片所有图片预览
+                //2018/12/17 详情图片所有图片预览
                 LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(width/2 - Constants.Dp2Px(mContext,5),
                         (width/2 - Constants.Dp2Px(mContext,5)) * 136 / 170);
                 mHomeCommunityItemNoDataLL.setLayoutParams(params);

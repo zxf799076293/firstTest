@@ -265,7 +265,7 @@ public class HomeFragment extends BaseMvpFragment implements MySwipeRefreshLayou
         if (mMainTabActivity == null) {
             mMainTabActivity = (MainTabActivity) HomeFragment.this.getActivity();
             if (mMainTabActivity.mNotchHeight > 0) {
-                // FIXME: 2018/12/5 适配刘海屏
+                //2018/12/5 适配刘海屏
                 mNavbarTtileHeight = 40 + com.linhuiba.linhuifield.connector.Constants.Px2Dp(HomeFragment.this.getContext(),
                         mMainTabActivity.mNotchHeight);
                 FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -471,7 +471,7 @@ public class HomeFragment extends BaseMvpFragment implements MySwipeRefreshLayou
         mVersionPresenter.attachView(this);
         mSearchResListMvpPresenter = new SearchResListMvpPresenter();
         mSearchResListMvpPresenter.attachView(this);
-        // FIXME: 2018/12/5 适配刘海屏
+        //2018/12/5 适配刘海屏
         if (mMainTabActivity != null && mMainTabActivity.mNotchHeight > 0) {
             mNavbarTtileHeight = 40 + com.linhuiba.linhuifield.connector.Constants.Px2Dp(HomeFragment.this.getContext(),
                     mMainTabActivity.mNotchHeight);
@@ -1679,24 +1679,24 @@ public class HomeFragment extends BaseMvpFragment implements MySwipeRefreshLayou
             homeModuleBarAdapter1.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    ArrayList<Integer> community_type_ids = new ArrayList<>();
                     if (mCategoriesBarList.get(position).getCategories() != null &&
                             mCategoriesBarList.get(position).getCategories().size() > 0) {
-                        ArrayList<Integer> community_type_ids = new ArrayList<>();
                         for (int i = 0; i < mCategoriesBarList.get(position).getCategories().size(); i++) {
                             community_type_ids.add(mCategoriesBarList.get(position).getCategories().get(i).getId());
                         }
-                        apiResourcesModel = new ApiResourcesModel();
-                        apiResourcesModel.setOrder_by("weight_score");
-                        apiResourcesModel.setOrder("desc");
-                        ArrayList<Integer> city_ids = new ArrayList<>();
-                        city_ids.add(Integer.parseInt(mCityIdStr));
-                        apiResourcesModel.setCity_ids(city_ids);
-                        apiResourcesModel.setCommunity_type_ids(community_type_ids);
-                        Intent searchListIntent = new Intent(HomeFragment.this.getActivity(),SearchListActivity.class);
-                        searchListIntent.putExtra("is_home_page",4);
-                        searchListIntent.putExtra("ApiResourcesModel",(Serializable) apiResourcesModel);
-                        startActivity(searchListIntent);
                     }
+                    apiResourcesModel = new ApiResourcesModel();
+                    apiResourcesModel.setOrder_by("weight_score");
+                    apiResourcesModel.setOrder("desc");
+                    ArrayList<Integer> city_ids = new ArrayList<>();
+                    city_ids.add(Integer.parseInt(mCityIdStr));
+                    apiResourcesModel.setCity_ids(city_ids);
+                    apiResourcesModel.setCommunity_type_ids(community_type_ids);
+                    Intent searchListIntent = new Intent(HomeFragment.this.getActivity(),SearchListActivity.class);
+                    searchListIntent.putExtra("is_home_page",4);
+                    searchListIntent.putExtra("ApiResourcesModel",(Serializable) apiResourcesModel);
+                    startActivity(searchListIntent);
                 }
             });
         }
@@ -1770,7 +1770,8 @@ public class HomeFragment extends BaseMvpFragment implements MySwipeRefreshLayou
     @Override
     public void onVersionSuccess(Version versions) {
         final Version version = versions;
-        if (version != null && version.getVid() > BuildConfig.VERSION_CODE){
+        if ((version != null && version.getVid() > BuildConfig.VERSION_CODE) ||
+                (version != null && version.getForce_update() == 1)) {
             if (mCustomDialog == null || !mCustomDialog.isShowing()) {
                 View.OnClickListener uploadListener = new View.OnClickListener() {
                     @Override

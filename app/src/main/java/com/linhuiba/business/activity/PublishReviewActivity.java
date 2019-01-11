@@ -14,17 +14,17 @@ import android.provider.MediaStore;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
-import com.alibaba.fastjson.JSON;
 import com.baselib.app.util.MessageUtils;
 import com.linhuiba.business.R;
 import com.linhuiba.business.basemvp.BaseMvpActivity;
@@ -38,6 +38,7 @@ import com.linhuiba.business.fieldcallback.Field_AddFieldChoosePictureCallBack;
 import com.linhuiba.business.fieldcallback.Field_MyAllCallBack;
 import com.linhuiba.business.fieldview.Field_MyGridView;
 import com.linhuiba.business.model.ReviewFieldInfoModel;
+import com.linhuiba.business.model.ReviewModel;
 import com.linhuiba.business.mvppresenter.PublishReviewMvpPresenter;
 import com.linhuiba.business.mvpview.PublishReviewMvpView;
 import com.linhuiba.business.network.LinhuiAsyncHttpResponseHandler;
@@ -74,25 +75,14 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
     @InjectView(R.id.review_edittext)
     EditText mreview_edittext;
     @InjectView(R.id.ToggleButton_review_Competence)
-    ToggleButton mToggleButton_review_Competence;
+    CheckBox mToggleButton_review_Competence;
+    @InjectView(R.id.publish_review_fast_cb)
+    CheckBox mPublishReviewFastCB;
+
     @InjectView(R.id.pulish_review_sv)
     ScrollView mPulishReview;
-
-    @InjectView(R.id.scoretxt)
-    TextView mscoretxt;
-    @InjectView(R.id.number_of_people_scoretxt)
-    TextView mnumber_of_people_scoretxt;
-    @InjectView(R.id.property_cooperate_scoretxt)
-    TextView mproperty_cooperate_scoretxt;
-    @InjectView(R.id.user_participation_scoretxt)
-    TextView muser_participation_scoretxt;
-    @InjectView(R.id.complete_target_scoretxt)
-    TextView mcomplete_target_scoretxt;
     @InjectView(R.id.remarks_addpicture)
     Field_MyGridView mremarks_addpicturegridview;
-
-    @InjectView(R.id.numberofpeople_edit)
-    EditText mnumberofpeople_edit;
     @InjectView(R.id.publishreview_fieldname_textview)
     TextView mpublishreview_fieldname_textview;
     @InjectView(R.id.publishreview_price_textview)
@@ -103,6 +93,36 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
     Button mReviewBtn;
     @InjectView(R.id.publish_review_show_ll)
     LinearLayout mPublishReviewShowLL;
+
+    @InjectView(R.id.publish_review_propertymatching_group)
+    RadioGroup mPropertymatchingGroup;
+    @InjectView(R.id.publish_review_propertymatching1)
+    RadioButton mPropertymatching1;
+    @InjectView(R.id.publish_review_propertymatching2)
+    RadioButton mPropertymatching2;
+    @InjectView(R.id.publish_review_propertymatching3)
+    RadioButton mPropertymatching3;
+    @InjectView(R.id.publish_review_goalcompletion_group)
+    RadioGroup mGoalcompletionGroup;
+    @InjectView(R.id.publish_review_goalcompletion1)
+    RadioButton mGoalcompletion1;
+    @InjectView(R.id.publish_review_goalcompletion2)
+    RadioButton mGoalcompletion2;
+    @InjectView(R.id.publish_review_goalcompletion3)
+    RadioButton mGoalcompletion3;
+    @InjectView(R.id.publish_people_group)
+    RadioGroup mPeopleGroup;
+    @InjectView(R.id.publish_people_btn_1)
+    RadioButton mPeopleBtn1;
+    @InjectView(R.id.publish_people_btn_2)
+    RadioButton mPeopleBtn2;
+    @InjectView(R.id.publish_people_btn_3)
+    RadioButton mPeopleBtn3;
+    @InjectView(R.id.publish_review_date_tv)
+    TextView mPublishReviewDateTV;
+    @InjectView(R.id.publist_review_people_tv)
+    TextView mPublishReviewPeopleTV;
+
     private int anonymous = 0;
     private String orderid;
 
@@ -123,15 +143,10 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
     private int addfieldimgsize;//要上传图片的position
     private boolean upload = true;//上传到七牛的图片成功的标志
     private ImageView[] synthesize_imglist = new ImageView[5];
-    private ImageView[] number_of_people_imglist = new ImageView[5];
-    private ImageView[] property_cooperate_imglist = new ImageView[5];
-    private ImageView[] user_participation_imglist = new ImageView[5];
-    private ImageView[] complete_target_imglist = new ImageView[5];
     private int review_fraction = 5;
-    private int number_of_people_review_fraction = 5;
-    private int property_cooperate_review_fraction = 5;
-    private int user_participation_review_fraction = 5;
-    private int complete_target_review_fraction = 5;
+    private int number_of_people_review_fraction = 3;
+    private int property_cooperate_review_fraction = 3;
+    private int complete_target_review_fraction = 3;
     private Dialog mZoomPictureDialog;
     private List<ImageView> mImageViewList = new ArrayList<>();
     private boolean mIsRefreshZoomImageview = true;
@@ -146,21 +161,14 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
     private ReviewFieldInfoModel reviewFieldInfoModel;
     private int pic_light[] = new int[5];
     private int pic_dark[] = new int[5];
+    private ReviewModel mReviewModel;
+    private ArrayList<Integer> mOrderItems;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publishreview);
         ButterKnife.inject(this);
-        mPublishReviewMvpPresenter = new PublishReviewMvpPresenter();
-        mPublishReviewMvpPresenter.attachView(this);
-        TitleBarUtils.setTitleText(this, getResources().getString(R.string.review_title_text));
-        TitleBarUtils.showBackImg(this, true);
-        Intent orderadpterintent = getIntent();
-        orderid = orderadpterintent.getStringExtra("orderid");
-        ToggleButtonClick();
         initView();
-        showProgressDialog();
-        initData();
     }
 
     @Override
@@ -176,20 +184,29 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
         mReviewBtn.setVisibility(View.GONE);
         mPublishReviewMvpPresenter.getReviewInfo(orderid);
     }
-    private void ToggleButtonClick() {
-        mToggleButton_review_Competence.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    anonymous = 1;
-                } else {
-                    anonymous = 0;
-                }
-            }
-        });
-
-    }
     private void initView() {
+        mPublishReviewMvpPresenter = new PublishReviewMvpPresenter();
+        mPublishReviewMvpPresenter.attachView(this);
+        TitleBarUtils.setTitleText(this, getResources().getString(R.string.review_title_text));
+        TitleBarUtils.showBackImg(this, true);
+        Intent orderadpterintent = getIntent();
+        if (orderadpterintent.getExtras() != null) {
+            // FIXME: 2019/1/9 评价中心跳转后的
+            if (orderadpterintent.getExtras().get("model") != null) {
+                mReviewModel = (ReviewModel) orderadpterintent.getExtras().get("model");
+                showCentreView();
+            } else if (orderadpterintent.getExtras().get("orderid") != null) {
+                orderid = orderadpterintent.getStringExtra("orderid");
+                showProgressDialog();
+                initData();
+            } else {
+                MessageUtils.showToast(getResources().getString(R.string.review_error_text));
+                return;
+            }
+        } else {
+            MessageUtils.showToast(getResources().getString(R.string.review_error_text));
+            return;
+        }
         initPreviewZoomView();
         choose_filepicture.add("firstgridviewitem");
         adapter = new Field_ChoosePictureGridViewAdapter(this,this,choose_filepicture,2);
@@ -199,38 +216,7 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
             int id = getResources().getIdentifier("review_img_" + i, "id", getPackageName());
             ImageView imageview = (ImageView) findViewById(id);
             synthesize_imglist[i]= (imageview);
-            int number_of_people_id = getResources().getIdentifier("review_number_of_people_img_" + i, "id", getPackageName());
-            ImageView number_of_people_imageview = (ImageView) findViewById(number_of_people_id);
-            number_of_people_imglist[i]= (number_of_people_imageview);
-            int property_cooperate_id = getResources().getIdentifier("review_property_cooperate_img_" + i, "id", getPackageName());
-            ImageView property_cooperate_imageview = (ImageView) findViewById(property_cooperate_id);
-            property_cooperate_imglist[i]= (property_cooperate_imageview);
-            int user_participation_id = getResources().getIdentifier("review_user_participation_img_" + i, "id", getPackageName());
-            ImageView user_participation_imageview = (ImageView) findViewById(user_participation_id);
-            user_participation_imglist[i]= (user_participation_imageview);
-            int complete_target_id = getResources().getIdentifier("review_complete_target_img_" + i, "id", getPackageName());
-            ImageView complete_target_imageview = (ImageView) findViewById(complete_target_id);
-            complete_target_imglist[i]= (complete_target_imageview);
         }
-        final int[] synthesize_strlist = new int[5];
-        final int[] number_of_people_strlist = new int[5];
-        final int[] complete_target_strlist = new int[5];
-        synthesize_strlist[0] = R.string.score_one_txt;
-        synthesize_strlist[1] = R.string.score_two_txt;
-        synthesize_strlist[2] = R.string.score_three_txt;
-        synthesize_strlist[3] = R.string.score_four_txt;
-        synthesize_strlist[4] = R.string.score_five_txt;
-        number_of_people_strlist[0] = R.string.number_of_people_score_one_txt;
-        number_of_people_strlist[1] = R.string.number_of_people_score_two_txt;
-        number_of_people_strlist[2] = R.string.number_of_people_score_three_txt;
-        number_of_people_strlist[3] = R.string.number_of_people_score_four_txt;
-        number_of_people_strlist[4] = R.string.number_of_people_score_five_txt;
-        complete_target_strlist[0] = R.string.complete_target_score_one_txt;
-        complete_target_strlist[1] = R.string.complete_target_score_two_txt;
-        complete_target_strlist[2] = R.string.complete_target_score_three_txt;
-        complete_target_strlist[3] = R.string.complete_target_score_four_txt;
-        complete_target_strlist[4] = R.string.complete_target_score_five_txt;
-
         for (int i = 0; i < 5; i ++) {
             pic_light[i] = R.drawable.publish_review_img;
             pic_dark[i] = R.drawable.publish_review_grey_img;
@@ -250,82 +236,121 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
                             }
                         }
                         review_fraction = score+1;
-                        mscoretxt.setText(getResources().getString(synthesize_strlist[score]));
-                    }
-                }
-            });
-            number_of_people_imglist[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (reviewFieldInfoModel != null &&
-                            !reviewFieldInfoModel.isIs_reviewed()) {
-                        for(int j = 0;j < 5; j ++) {
-                            if(j < score + 1) {
-                                number_of_people_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_light[j]));
-                            } else {
-                                number_of_people_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_dark[j]));
-                            }
-                        }
-                        number_of_people_review_fraction = score+1;
-                        mnumber_of_people_scoretxt.setText(getResources().getString(number_of_people_strlist[score]));
                     }
                 }
             });
 
-            property_cooperate_imglist[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (reviewFieldInfoModel != null &&
-                            !reviewFieldInfoModel.isIs_reviewed()) {
-                        for(int j = 0;j < 5; j ++) {
-                            if(j < score + 1) {
-                                property_cooperate_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_light[j]));
-                            } else {
-                                property_cooperate_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_dark[j]));
-                            }
-                        }
-                        property_cooperate_review_fraction = score+1;
-                        mproperty_cooperate_scoretxt.setText(getResources().getString(synthesize_strlist[score]));
-                    }
-                }
-            });
-
-            user_participation_imglist[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (reviewFieldInfoModel != null &&
-                            !reviewFieldInfoModel.isIs_reviewed()) {
-                        for(int j = 0;j < 5; j ++) {
-                            if(j < score + 1) {
-                                user_participation_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_light[j]));
-                            } else {
-                                user_participation_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_dark[j]));
-                            }
-                        }
-                        user_participation_review_fraction = score+1;
-                        muser_participation_scoretxt.setText(getResources().getString(synthesize_strlist[score]));
-                    }
-                }
-            });
-            complete_target_imglist[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (reviewFieldInfoModel != null &&
-                            !reviewFieldInfoModel.isIs_reviewed()) {
-                        for(int j = 0;j < 5; j ++) {
-                            if(j < score + 1) {
-                                complete_target_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_light[j]));
-                            } else {
-                                complete_target_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_dark[j]));
-                            }
-                        }
-                        complete_target_review_fraction = score+1;
-                        mcomplete_target_scoretxt.setText(getResources().getString(complete_target_strlist[score]));
-                    }
-                }
-            });
         }
+        mToggleButton_review_Competence.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    anonymous = 1;
+                } else {
+                    anonymous = 0;
+                }
+            }
+        });
 
+        mPropertymatchingGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.publish_review_propertymatching1:
+                        property_cooperate_review_fraction = 1;
+                        break;
+                    case R.id.publish_review_propertymatching2:
+                        property_cooperate_review_fraction = 2;
+                        break;
+                    case R.id.publish_review_propertymatching3:
+                        property_cooperate_review_fraction = 3;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+        mGoalcompletionGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.publish_review_goalcompletion1:
+                        complete_target_review_fraction = 1;
+                        break;
+                    case R.id.publish_review_goalcompletion2:
+                        complete_target_review_fraction = 2;
+                        break;
+                    case R.id.publish_review_goalcompletion3:
+                        complete_target_review_fraction = 3;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+        mPeopleGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.publish_people_btn_3:
+                        number_of_people_review_fraction = 1;
+                        break;
+                    case R.id.publish_people_btn_2:
+                        number_of_people_review_fraction = 2;
+                        break;
+                    case R.id.publish_people_btn_1:
+                        number_of_people_review_fraction = 3;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+    }
+    private void showCentreView() {
+        if (mReviewModel != null) {
+            mOrderItems = mReviewModel.getField_order_item_ids();
+            if (mReviewModel.getPhysical_resource_first_img() != null &&
+                    mReviewModel.getPhysical_resource_first_img().getPic_url() != null &&
+                    mReviewModel.getPhysical_resource_first_img().getPic_url().length() > 0) {
+                Picasso.with(this).load(mReviewModel.getPhysical_resource_first_img().getPic_url() + com.linhuiba.linhuipublic.config.Config.Linhui_Min_Watermark).placeholder(R.drawable.ic_jiazai_small).error(R.drawable.ic_no_pic_small)
+                        .resize(com.linhuiba.linhuifield.connector.Constants.Dp2Px(this,70),
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(this,70)).into(mpublishreview_imageview);
+            } else {
+                Picasso.with(this).load(R.drawable.ic_no_pic_small).resize(160, 160).placeholder(R.drawable.ic_jiazai_small).error(R.drawable.ic_no_pic_small).into(mpublishreview_imageview);
+            }
+            if (mReviewModel.getFull_name() != null && mReviewModel.getFull_name().length() > 0) {
+                mpublishreview_fieldname_textview.setText(mReviewModel.getFull_name());
+            } else {
+                mpublishreview_fieldname_textview.setText(getResources().getString(R.string.fieldinfo_no_parameter_message));
+            }
+            if (mReviewModel.getSize() != null && mReviewModel.getSize().length() > 0) {
+                mpublishreview_price_textview.setText(mReviewModel.getSize());
+            } else {
+                mpublishreview_price_textview.setText(getResources().getString(R.string.module_comment_centre_item_size) +
+                        getResources().getString(R.string.fieldinfo_no_parameter_message));
+            }
+            if (mReviewModel.getExecute_time() != null && mReviewModel.getExecute_time().length() > 0) {
+                mPublishReviewDateTV.setText(getResources().getString(R.string.module_comment_centre_item_execute_time) +
+                        mReviewModel.getExecute_time());
+            } else {
+                mPublishReviewDateTV.setText(getResources().getString(R.string.module_comment_centre_item_execute_time) +
+                        getResources().getString(R.string.fieldinfo_no_parameter_message));
+            }
+            if (mReviewModel.getNumber_of_people() != null) {
+                mPublishReviewPeopleTV.setText(String.valueOf(mReviewModel.getNumber_of_people()));
+                mPeopleBtn3.setText(getResources().getString(R.string.module_publish_review_number_of_people_greater_than) +
+                        String.valueOf(mReviewModel.getNumber_of_people()));
+                mPeopleBtn2.setText(getResources().getString(R.string.module_publish_review_number_of_people_equality) +
+                        String.valueOf(mReviewModel.getNumber_of_people()));
+                mPeopleBtn1.setText(getResources().getString(R.string.module_publish_review_number_of_people_less_than) +
+                        String.valueOf(mReviewModel.getNumber_of_people()));
+            }
+        } else {
+            MessageUtils.showToast(getResources().getString(R.string.review_error_text));
+            return;
+        }
     }
     @OnClick({
             R.id.review_confirm_btn
@@ -723,9 +748,9 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
         } else {
             showProgressDialog();
             mPublishReviewMvpPresenter.confirmReview(orderid,review_fraction,
-                    number_of_people_review_fraction,user_participation_review_fraction,property_cooperate_review_fraction,
+                    number_of_people_review_fraction,property_cooperate_review_fraction,
                     complete_target_review_fraction,mreview_edittext.getText().toString(),
-                    anonymous, null, JSON.toJSONString(addfieldimg_str,true), mnumberofpeople_edit.getText().toString());
+                    anonymous, null, addfieldimg_str,mOrderItems);
         }
     }
     private LinhuiAsyncHttpResponseHandler UptokenHandler = new LinhuiAsyncHttpResponseHandler() {
@@ -768,9 +793,9 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
                     addfieldimg_str.add(Config.qiniu_domain_comment + jsonObject.getString("key").toString());
                     if (addfieldimgsize == choose_filepicture.size() && upload == true) {
                         mPublishReviewMvpPresenter.confirmReview(orderid,review_fraction,
-                                number_of_people_review_fraction,user_participation_review_fraction,property_cooperate_review_fraction,
+                                number_of_people_review_fraction,property_cooperate_review_fraction,
                                 complete_target_review_fraction,mreview_edittext.getText().toString(),
-                                anonymous, null, JSON.toJSONString(addfieldimg_str,true), mnumberofpeople_edit.getText().toString());
+                                anonymous, null, addfieldimg_str,mOrderItems);
                     } else if (addfieldimgsize < choose_filepicture.size() && upload == true) {
                         uploadManager.put(choose_filepicture.get(addfieldimgsize), null, uploadtoken,
                                 upCompletionHandler, null);
@@ -866,9 +891,15 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
         super.onNewIntent(intent);
         setIntent(intent);
         Intent orderadpterintent = getIntent();
-        orderid = orderadpterintent.getStringExtra("orderid");
-        showProgressDialog();
-        initData();
+        if (orderadpterintent.getExtras() != null &&
+                orderadpterintent.getExtras().get("orderid") != null) {
+            orderid = orderadpterintent.getStringExtra("orderid");
+            showProgressDialog();
+            initData();
+        } else {
+            MessageUtils.showToast(getResources().getString(R.string.review_error_text));
+            return;
+        }
     }
 
     @Override
@@ -881,6 +912,7 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
                     reviewFieldInfoModel.getName().length() > 0) {
                 mpublishreview_fieldname_textview.setText(reviewFieldInfoModel.getName());
             }
+            // FIXME: 2019/1/9 展位规格
             if (reviewFieldInfoModel.getPrice() != null &&
                     reviewFieldInfoModel.getPrice().length() > 0) {
                 mpublishreview_price_textview.setText(Constants.getPriceUnitStr(PublishReviewActivity.this,(getResources().getString(R.string.order_listitem_price_unit_text)+Constants.getpricestring(reviewFieldInfoModel.getPrice(),0.01)),12));
@@ -918,33 +950,57 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
                     } else {
                         synthesize_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_dark[j]));
                     }
-                    if( j < reviewFieldInfoModel.getNumber_of_people()) {
-                        number_of_people_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_light[j]));
-                    } else {
-                        number_of_people_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_dark[j]));
-                    }
-                    if( j < reviewFieldInfoModel.getScore_of_propertymatching() + 1) {
-                        property_cooperate_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_light[j]));
-                    } else {
-                        property_cooperate_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_dark[j]));
-                    }
-                    if( j < reviewFieldInfoModel.getScore_of_userparticipation() + 1) {
-                        user_participation_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_light[j]));
-                    } else {
-                        user_participation_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_dark[j]));
-                    }
-                    if( j < reviewFieldInfoModel.getScore_of_goalcompletion() + 1) {
-                        complete_target_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_light[j]));
-                    } else {
-                        complete_target_imglist[j].setBackgroundDrawable(getResources().getDrawable(pic_dark[j]));
-                    }
                 }
+                // FIXME: 2019/1/9 目标完成度评分 等显示
+                if (reviewFieldInfoModel.getScore_of_visitorsflowrate() == 1) {
+                    mPeopleBtn3.setChecked(true);
+                }
+                if (reviewFieldInfoModel.getScore_of_visitorsflowrate() == 2) {
+                    mPeopleBtn2.setChecked(true);
+                }
+                if (reviewFieldInfoModel.getScore_of_visitorsflowrate() == 3) {
+                    mPeopleBtn1.setChecked(true);
+                }
+                if (reviewFieldInfoModel.getScore_of_propertymatching() == 1) {
+                    mPropertymatching1.setChecked(true);
+                }
+                if (reviewFieldInfoModel.getScore_of_propertymatching() == 2) {
+                    mPropertymatching2.setChecked(true);
+                }
+                if (reviewFieldInfoModel.getScore_of_propertymatching() == 3) {
+                    mPropertymatching3.setChecked(true);
+                }
+                if (reviewFieldInfoModel.getScore_of_goalcompletion() == 1) {
+                    mGoalcompletion1.setChecked(true);
+                }
+                if (reviewFieldInfoModel.getScore_of_goalcompletion() == 2) {
+                    mGoalcompletion2.setChecked(true);
+                }
+                if (reviewFieldInfoModel.getScore_of_goalcompletion() == 3) {
+                    mGoalcompletion3.setChecked(true);
+                }
+                // FIXME: 2019/1/9 人流量显示
+                mPublishReviewPeopleTV.setText(String.valueOf(reviewFieldInfoModel.getNumber_of_people()));
+                mPeopleBtn3.setText(getResources().getString(R.string.module_publish_review_number_of_people_greater_than) +
+                        String.valueOf(reviewFieldInfoModel.getNumber_of_people()));
+                mPeopleBtn2.setText(getResources().getString(R.string.module_publish_review_number_of_people_equality) +
+                        String.valueOf(reviewFieldInfoModel.getNumber_of_people()));
+                mPeopleBtn1.setText(getResources().getString(R.string.module_publish_review_number_of_people_less_than) +
+                        String.valueOf(reviewFieldInfoModel.getNumber_of_people()));
+                // FIXME: 2019/1/9 档期和订单列表
+//                if () {
+//                    mPublishReviewDateTV.setText();
+//                } else {
+//                    mPublishReviewDateTV.setText("");
+//                }
+//                mOrderItems =
+
                 if (reviewFieldInfoModel.getAnonymity() == 0) {
                     mToggleButton_review_Competence.setChecked(false);
                 } else {
                     mToggleButton_review_Competence.setChecked(true);
                 }
-                mnumberofpeople_edit.setText(String.valueOf(reviewFieldInfoModel.getNumber_of_people()));
+                mPublishReviewFastCB.setVisibility(View.GONE);
                 mreview_edittext.setText(reviewFieldInfoModel.getContent());
             }
         }
@@ -962,5 +1018,25 @@ public class PublishReviewActivity  extends BaseMvpActivity implements Field_Add
         if (!superresult)
             MessageUtils.showToast(error.getMessage());
         checkAccess_new(error);
+    }
+
+    @Override
+    public void onResReviewSuccess(ArrayList<ReviewModel> list,String detailScore) {
+
+    }
+
+    @Override
+    public void onResReviewFailure(boolean superresult, Throwable error) {
+
+    }
+
+    @Override
+    public void onResReviewMoreSuccess(ArrayList<ReviewModel> list,String detailScore) {
+
+    }
+
+    @Override
+    public void onResReviewMoreFailure(boolean superresult, Throwable error) {
+
     }
 }

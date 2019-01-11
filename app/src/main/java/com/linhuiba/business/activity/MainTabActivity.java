@@ -511,9 +511,13 @@ public class MainTabActivity extends BaseMvpActivity implements TabHost.OnTabCha
         });
         MLinkAPIFactory.createAPI(context).register("thematicDetail", new MLinkCallback() {
             public void execute(Map paramMap, Uri uri, Context context) {
+                String resourceid = "1";
+                if (paramMap.get("id") != null) {
+                    resourceid = paramMap.get("id").toString();
+                }
                 Intent aboutusintent = new Intent(MainTabActivity.this, AboutUsActivity.class);
-                aboutusintent.putExtra("type", com.linhuiba.business.config.Config.THEMATIC_INFO_INT);
-                aboutusintent.putExtra("resource_id",paramMap.get("resource_id").toString());
+                aboutusintent.putExtra("type", com.linhuiba.business.config.Config.THEME_WEB_INT);
+                aboutusintent.putExtra("id", resourceid);
                 startActivity(aboutusintent);
             }
         });

@@ -100,15 +100,6 @@ public class GroupBookingListFragment extends BaseMvpFragment implements SwipeRe
             mMainContentView = inflater.inflate(R.layout.fragment_groupbooking_list, container , false);
             ButterKnife.inject(this, mMainContentView);
             initView();
-            //浏览记录
-            if (LoginManager.isLogin()) {
-                try {
-                    String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl(mPagePosition,mCityIdStr,0,0));
-                    LoginMvpModel.sendBrowseHistories("group_list",parameter,mCityIdStr);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-            }
             showProgressDialog();
             initData();
         }
@@ -190,6 +181,7 @@ public class GroupBookingListFragment extends BaseMvpFragment implements SwipeRe
                         mGroupListLoadMoreLL.setVisibility(View.VISIBLE);
                         mPagePosition ++;
                         FieldApi.getGroupBookingList(MyAsyncHttpClient.MyAsyncHttpClient(), getPublicActivityListMoreHandler, mPagePosition,mCityIdStr,0,0);
+                        browseHistories();
                     }
                 }
             }
@@ -199,6 +191,7 @@ public class GroupBookingListFragment extends BaseMvpFragment implements SwipeRe
         mPagePosition = 1;
         if (mCityIdStr != null && mCityIdStr.length() > 0) {
             FieldApi.getGroupBookingList(MyAsyncHttpClient.MyAsyncHttpClient(), getPublicActivityListHandler, mPagePosition,mCityIdStr,0,0);
+            browseHistories();
         } else {
             hideProgressDialog();
             MessageUtils.showToast(getResources().getString(R.string.review_error_text));
@@ -251,7 +244,7 @@ public class GroupBookingListFragment extends BaseMvpFragment implements SwipeRe
                             }
                         });
                     }
-                    // FIXME: 2018/12/12 倒计时
+                    //2018/12/12 倒计时
                     if (mTimers == null) {
                         mTimers = new Timer();
                     }
@@ -390,6 +383,17 @@ public class GroupBookingListFragment extends BaseMvpFragment implements SwipeRe
             paramsMap.put("group_purchase_id",String.valueOf(group_purchase_id));
         }
         return paramsMap;
+    }
+    private void browseHistories() {
+        //浏览记录
+        if (LoginManager.isLogin()) {
+            try {
+                String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl(mPagePosition,mCityIdStr,0,0));
+                LoginMvpModel.sendBrowseHistories("group_list",parameter,mCityIdStr);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

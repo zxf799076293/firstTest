@@ -9,10 +9,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 public class BootReceiver extends BroadcastReceiver {
-    // FIXME: 2018/12/7 本地通知
+    //2018/12/7 本地通知
     @Override
     public void onReceive(Context context, Intent intent1) {
-        // TODO Auto-generated method stub
         String action = intent1.getAction();
         if (action.equals(Intent.ACTION_BOOT_COMPLETED)) {
             resetPush(context);

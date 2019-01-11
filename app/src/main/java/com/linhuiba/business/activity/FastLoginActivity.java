@@ -135,7 +135,7 @@ public class FastLoginActivity extends BaseMvpActivity implements LoginMvpView {
         mLoginMvpPresenter = new LoginMvpPresenter();
         mLoginMvpPresenter.attachView(this);
         addTextChangedListener(mLoginAccountET, mLoginPwET);
-        addTextChangedListener(mLoginPwET, mLoginAccountET);
+        addAccountTextChangedListener(mLoginPwET, mLoginAccountET);
         WXapi = WXAPIFactory.createWXAPI(com.linhuiba.business.activity.FastLoginActivity.this.getContext(), com.linhuiba.linhuifield.connector.Constants.APP_ID, true);
         mTencent = Tencent.createInstance(com.linhuiba.linhuipublic.config.Config.TENGXUN_QQ_APPID, com.linhuiba.business.activity.FastLoginActivity.this.getContext());
         mIUiListener = new IUiListener() {
@@ -505,6 +505,41 @@ public class FastLoginActivity extends BaseMvpActivity implements LoginMvpView {
 
     }
     //账号的限制 onTextChanged
+    private void addAccountTextChangedListener(final EditText accountET,
+                                        final EditText pwET) {
+        pwET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String oldStr = com.linhuiba.business.connector.Constants.
+                        userNameStringFilter(pwET.getText().toString());
+                if(!pwET.getText().toString().
+                        equals(oldStr)){
+                    pwET.setText(oldStr); //设置EditText的字符
+                    pwET.setSelection(com.linhuiba.business.connector.Constants.
+                            userNameStringFilter(pwET.getText().toString()).length()); //因为删除了字符，要重写设置新的光标所在位置
+                }
+                if (pwET.getText().toString().length() > 0 &&
+                        accountET.getText().toString().length() > 0) {
+                    mLoginBtn.setEnabled(true);
+                    mLoginBtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.loginbtn_bg));
+                } else {
+                    mLoginBtn.setEnabled(false);
+                    mLoginBtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.register_btn_unenable_bg));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
     private void addTextChangedListener(final EditText accountET,
                                         final EditText pwET) {
         pwET.addTextChangedListener(new TextWatcher() {

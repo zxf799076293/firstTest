@@ -80,6 +80,12 @@ public class FieldEvaluationAdapter extends BaseAdapter {
             holder.mfield_review_grade_layout = (LinearLayout)convertView.findViewById(R.id.field_review_grade_layout);
             holder.mSizeTV = (TextView) convertView.findViewById(R.id.review_res_size_tv);
             holder.mIndustryTV = (TextView) convertView.findViewById(R.id.review_res_industry_tv);
+            holder.mCompositeTV = (TextView) convertView.findViewById(R.id.comment_composite_score_tv);
+            holder.mPropertymatchingTV = (TextView) convertView.findViewById(R.id.comment_item_propertymatching_tv);
+            holder.mGoalcompletionTV = (TextView) convertView.findViewById(R.id.comment_item_goalcompletion_tv);
+            holder.mPromotionPurposeTV = (TextView) convertView.findViewById(R.id.comment_item_promotion_purpose_tv);
+            holder.mSpreadWayTV = (TextView) convertView.findViewById(R.id.comment_item_spread_way_tv);
+
             //将设置好的布局保存到缓存中，并将其设置在Tag里，以便后面方便取出Tag
             convertView.setTag(holder);
         }else {
@@ -88,79 +94,15 @@ public class FieldEvaluationAdapter extends BaseAdapter {
 
         if (mFeildList != null) {
             if (mFeildList.size() != 0) {
-                if (position == 0) {
-                    ImageView[] synthesize_imglist = new ImageView[5];
-                    ImageView[] number_of_people_imglist = new ImageView[5];
-                    ImageView[] property_cooperate_imglist = new ImageView[5];
-                    ImageView[] user_participation_imglist = new ImageView[5];
-                    ImageView[] complete_target_imglist = new ImageView[5];
-                    for (int i = 0; i < 5; i++) {
-                        int id = context.getResources().getIdentifier("review_img_" + i, "id", context.getPackageName());
-                        ImageView imageview = (ImageView)convertView.findViewById(id);
-                        synthesize_imglist[i]= (imageview);
-                        int number_of_people_id = context.getResources().getIdentifier("review_number_of_people_img_" + i, "id", context.getPackageName());
-                        ImageView number_of_people_imageview = (ImageView) convertView.findViewById(number_of_people_id);
-                        number_of_people_imglist[i]= (number_of_people_imageview);
-                        int property_cooperate_id = context.getResources().getIdentifier("review_property_cooperate_img_" + i, "id", context.getPackageName());
-                        ImageView property_cooperate_imageview = (ImageView) convertView.findViewById(property_cooperate_id);
-                        property_cooperate_imglist[i]= (property_cooperate_imageview);
-                        int user_participation_id = context.getResources().getIdentifier("review_user_participation_img_" + i, "id", context.getPackageName());
-                        ImageView user_participation_imageview = (ImageView) convertView.findViewById(user_participation_id);
-                        user_participation_imglist[i]= (user_participation_imageview);
-                        int complete_target_id = context.getResources().getIdentifier("review_complete_target_img_" + i, "id", context.getPackageName());
-                        ImageView complete_target_imageview = (ImageView) convertView.findViewById(complete_target_id);
-                        complete_target_imglist[i]= (complete_target_imageview);
-                    }
-                    final int pic_light[] = new int[5];
-                    final int pic_dark[] = new int[5];
-                    for (int i = 0; i < 5; i ++) {
-                        pic_light[i] = R.drawable.ic_xingxing_click;
-                        pic_dark[i] = R.drawable.ic_xingxing_normal;
-                    }
+                if (position == 0 && mFeildList.get(position).getDetailScore() != null) {
                     if (mFeildList.get(position).getDetailScore().getComposite_score() != null) {
-                        for(int j = 0;j < 5; j ++) {
-                            if(j < mFeildList.get(position).getDetailScore().getComposite_score()) {
-                                synthesize_imglist[j].setBackgroundDrawable(context.getResources().getDrawable(pic_light[j]));
-                            } else {
-                                synthesize_imglist[j].setBackgroundDrawable(context.getResources().getDrawable(pic_dark[j]));
-                            }
-                        }
-                    }
-                    if (mFeildList.get(position).getDetailScore().getScore_of_visitorsflowrate() != null) {
-                        for(int j = 0;j < 5; j ++) {
-                            if(j < mFeildList.get(position).getDetailScore().getScore_of_visitorsflowrate()) {
-                                number_of_people_imglist[j].setBackgroundDrawable(context.getResources().getDrawable(pic_light[j]));
-                            } else {
-                                number_of_people_imglist[j].setBackgroundDrawable(context.getResources().getDrawable(pic_dark[j]));
-                            }
-                        }
+                        holder.mCompositeTV.setText(Constants.getdoublepricestring(mFeildList.get(position).getDetailScore().getComposite_score(),1));
                     }
                     if (mFeildList.get(position).getDetailScore().getScore_of_propertymatching() != null) {
-                        for(int j = 0;j < 5; j ++) {
-                            if(j < mFeildList.get(position).getDetailScore().getScore_of_propertymatching()) {
-                                property_cooperate_imglist[j].setBackgroundDrawable(context.getResources().getDrawable(pic_light[j]));
-                            } else {
-                                property_cooperate_imglist[j].setBackgroundDrawable(context.getResources().getDrawable(pic_dark[j]));
-                            }
-                        }
-                    }
-                    if (mFeildList.get(position).getDetailScore().getScore_of_userparticipation() != null) {
-                        for(int j = 0;j < 5; j ++) {
-                            if(j < mFeildList.get(position).getDetailScore().getScore_of_userparticipation()) {
-                                user_participation_imglist[j].setBackgroundDrawable(context.getResources().getDrawable(pic_light[j]));
-                            } else {
-                                user_participation_imglist[j].setBackgroundDrawable(context.getResources().getDrawable(pic_dark[j]));
-                            }
-                        }
+                        holder.mPropertymatchingTV.setText(Constants.getdoublepricestring(mFeildList.get(position).getDetailScore().getScore_of_propertymatching(),1));
                     }
                     if (mFeildList.get(position).getDetailScore().getScore_of_goalcompletion() != null) {
-                        for(int j = 0;j < 5; j ++) {
-                            if(j < mFeildList.get(position).getDetailScore().getScore_of_goalcompletion()) {
-                                complete_target_imglist[j].setBackgroundDrawable(context.getResources().getDrawable(pic_light[j]));
-                            } else {
-                                complete_target_imglist[j].setBackgroundDrawable(context.getResources().getDrawable(pic_dark[j]));
-                            }
-                        }
+                        holder.mGoalcompletionTV.setText(Constants.getdoublepricestring(mFeildList.get(position).getDetailScore().getScore_of_goalcompletion(),1));
                     }
                     holder.mfield_review_grade_layout.setVisibility(View.VISIBLE);
                 } else {
@@ -255,7 +197,7 @@ public class FieldEvaluationAdapter extends BaseAdapter {
                         img[i].setImageResource(pic_dark[i]);
                     }
                 }
-                // FIXME: 2018/12/14 size 和 industry
+                //2018/12/14 size 和 industry
                 if (mFeildList.get(position).getSize() != null &&
                         mFeildList.get(position).getSize().length() > 0) {
                     holder.mSizeTV.setText(context.getResources().getString(R.string.order_listitem_sizetxt) +
@@ -272,6 +214,8 @@ public class FieldEvaluationAdapter extends BaseAdapter {
                 } else {
                     holder.mIndustryTV.setVisibility(View.GONE);
                 }
+                // FIXME: 2019/1/10 推广目的推广形式
+
             }
         }
         return convertView;
@@ -288,6 +232,11 @@ public class FieldEvaluationAdapter extends BaseAdapter {
         public LinearLayout mfield_review_grade_layout;
         public TextView mSizeTV;
         public TextView mIndustryTV;
+        public TextView mCompositeTV;
+        public TextView mPropertymatchingTV;
+        public TextView mGoalcompletionTV;
+        public TextView mPromotionPurposeTV;
+        public TextView mSpreadWayTV;
     }
     /** 列表适配器 */
     private class Mygridviewadapter extends BaseAdapter {

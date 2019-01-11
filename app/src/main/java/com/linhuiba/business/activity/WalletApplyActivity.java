@@ -214,7 +214,7 @@ public class WalletApplyActivity extends BaseMvpActivity {
                 }
                 showProgressDialog(WalletApplyActivity.this.getResources().getString(R.string.txt_waiting));
                 UserApi.apiauthcaptcha(MyAsyncHttpClient.MyAsyncHttpClient(), getLoginCodeeHandler,
-                        mwalletapply_mobile_edit.getText().toString(),"2");
+                        mwalletapply_mobile_edit.getText().toString(),"3");
             }
         });
         mwalletapply_captcha_edit.addTextChangedListener(new TextWatcher() {

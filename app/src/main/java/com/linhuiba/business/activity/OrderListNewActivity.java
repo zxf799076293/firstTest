@@ -511,7 +511,7 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
                     return true;
                 }
             });
-            // FIXME: 2018/12/12 倒计时
+            //2018/12/12 倒计时
             if (currIndex == 0 || currIndex == 1) {
                 if (mTimers[currIndex] == null) {
                     mTimers[currIndex] = new Timer();
@@ -819,7 +819,7 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
             });
             mOrderExpandableList[currIndex].onLoadComplete();
 
-            // FIXME: 2018/12/12 倒计时
+            //2018/12/12 倒计时
             if (currIndex == 0 || currIndex == 1) {
                 if (mTimers[currIndex] == null) {
                     mTimers[currIndex] = new Timer();

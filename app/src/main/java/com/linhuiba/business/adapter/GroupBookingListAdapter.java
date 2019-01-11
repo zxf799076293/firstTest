@@ -175,7 +175,7 @@ public class GroupBookingListAdapter extends BaseAdapter {
             if (mDataList.get(position).getTime_left() > 0) {
                 holder.mGroupBookingListParticipateTV.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.addfield_editorprice_dateedittextbg));
                 holder.mGroupBookingListParticipateTV.setTextColor(mContext.getResources().getColor(R.color.white));
-                // FIXME: 2018/12/12 倒计时
+                //2018/12/12 倒计时
                 long useTime = Long.parseLong(String.valueOf(mDataList.get(position).getTime_left() * 1000));
                 holder.mGroupBookingListResidueTimeTV.setText(mContext.getResources().getString(R.string.groupbooding_list_item_residue_tiem_first_str) +
                         com.linhuiba.linhuifield.connector.Constants.getFormatTime(useTime,1));

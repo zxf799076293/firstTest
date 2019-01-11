@@ -837,7 +837,8 @@ public class AboutUsActivity extends BaseMvpActivity {
                                 TitleBarUtils.setTitleText(AboutUsActivity.this,mShareTitleStr);
                                 mShareDescriptionStr = jsonObject.get("description").toString();
                                 sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_THEME_URL + mThemeId;
-                                shareWXLinkurl = Config.THEME_INFO_URL + mThemeId;
+                                // FIXME: 2019/1/10 专题详情分享链接修改
+                                shareWXLinkurl = Config.WX_SHARE_THEME_URL + mThemeId+ "?is_app=1&BackKey=1";
                                 TitleBarUtils.showActionImg(AboutUsActivity.this, true, getResources().getDrawable(R.drawable.popup_ic_share), new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {

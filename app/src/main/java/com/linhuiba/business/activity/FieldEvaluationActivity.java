@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baselib.app.activity.BaseActivity;
 import com.baselib.app.util.MessageUtils;
 import com.linhuiba.business.R;
@@ -22,7 +23,10 @@ import com.linhuiba.business.connector.MyAsyncHttpClient;
 import com.linhuiba.business.fieldcallback.Field_AddFieldChoosePictureCallBack;
 import com.linhuiba.business.fieldcallback.Field_MyAllCallBack;
 import com.linhuiba.business.model.CommentScoreModel;
+import com.linhuiba.business.model.ReviewFieldInfoModel;
 import com.linhuiba.business.model.ReviewModel;
+import com.linhuiba.business.mvppresenter.PublishReviewMvpPresenter;
+import com.linhuiba.business.mvpview.PublishReviewMvpView;
 import com.linhuiba.business.network.LinhuiAsyncHttpResponseHandler;
 import com.linhuiba.business.network.Response;
 import com.linhuiba.business.util.TitleBarUtils;
@@ -37,7 +41,8 @@ import butterknife.InjectView;
 /**
  * Created by Administrator on 2016/3/8.
  */
-public class FieldEvaluationActivity extends BaseMvpActivity implements SwipeRefreshLayout.OnRefreshListener, LoadMoreListView.OnLoadMore,Field_AddFieldChoosePictureCallBack.FieldreviewCall{
+public class FieldEvaluationActivity extends BaseMvpActivity implements SwipeRefreshLayout.OnRefreshListener, LoadMoreListView.OnLoadMore,Field_AddFieldChoosePictureCallBack.FieldreviewCall,
+        PublishReviewMvpView{
     @InjectView(R.id.swipe_refresh)
     SwipeRefreshLayout ReviewListswipList;
     @InjectView(R.id.order_list)
@@ -54,19 +59,27 @@ public class FieldEvaluationActivity extends BaseMvpActivity implements SwipeRef
     private Dialog mZoomPictureDialog;
     private List<ImageView> mImageViewList = new ArrayList<>();
     private boolean mIsRefreshZoomImageview = true;
+    private boolean isSellRes;
+    private PublishReviewMvpPresenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fieldevaluation);
         ButterKnife.inject(this);
-        TitleBarUtils.showBackImg(this, true);
-        TitleBarUtils.setTitleText(this, getResources().getString(R.string.review_title_first_str));
-        Intent fieldinfoIntent = getIntent();
-        fieldid = fieldinfoIntent.getStringExtra("fieldid");
         initview();
         initdata();
     }
     private void initview() {
+        mPresenter = new PublishReviewMvpPresenter();
+        mPresenter.attachView(this);
+        TitleBarUtils.showBackImg(this, true);
+        TitleBarUtils.setTitleText(this, getResources().getString(R.string.review_title_first_str));
+        Intent fieldinfoIntent = getIntent();
+        fieldid = fieldinfoIntent.getStringExtra("fieldid");
+        if (fieldinfoIntent.getExtras().get("is_sell_res") != null &&
+                fieldinfoIntent.getExtras().getInt("is_sell_res") == 1) {
+            isSellRes = true;
+        }
         ReviewListswipList.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light,
                 android.R.color.holo_green_light);
         ReviewListloadmoreList.setLoadMoreListen(this);
@@ -78,12 +91,21 @@ public class FieldEvaluationActivity extends BaseMvpActivity implements SwipeRef
             }
         });
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null) {
+            mPresenter.detachView();
+        }
+    }
+
     private void initdata() {
         ReviewListloadmoreList.set_refresh();
         if (LoginManager.isLogin()) {
             reviewlistpagesize = 1;
             showProgressDialog(this.getResources().getString(R.string.txt_waiting));
-            FieldApi.get_resources_commentslist(MyAsyncHttpClient.MyAsyncHttpClient3(), ReviewHandler, fieldid, String.valueOf(reviewlistpagesize), "10");
+            mPresenter.getComments(fieldid, reviewlistpagesize, 10,isSellRes);
         } else {
             LoginManager.getInstance().clearLoginInfo();
             LoginActivity.BaesActivityreloadLogin(this);
@@ -91,102 +113,13 @@ public class FieldEvaluationActivity extends BaseMvpActivity implements SwipeRef
         }
 
     }
-    private LinhuiAsyncHttpResponseHandler ReviewHandler = new LinhuiAsyncHttpResponseHandler(ReviewModel.class,true) {
-        @Override
-        public void onSuccess(int statusCode, okhttp3.internal.http2.Header[] headers, Response response, Object data) {
-            hideProgressDialog();
-            mReviewList = (ArrayList<ReviewModel>) data;
-            if (mReviewList == null || mReviewList.isEmpty()) {
-                mlay_no_review.setVisibility(View.VISIBLE);
-                if(ReviewListswipList.isShown()){
-                    ReviewListswipList.setRefreshing(false);
-                }
-                return;
-            }
-            if (response.detailScore != null && response.detailScore.length() > 0) {
-                CommentScoreModel commentScoreModel = com.alibaba.fastjson.JSONObject.parseObject(response.detailScore,CommentScoreModel.class);
-                if (commentScoreModel != null) {
-                    mReviewList.get(0).setDetailScore(commentScoreModel);
-                    if (mReviewList.get(0).getDetailScore().getCount_of_composite_score() != null) {
-                        TitleBarUtils.setTitleText(FieldEvaluationActivity.this,getResources().getString(R.string.review_title_first_str) +"(" +
-                                String.valueOf(mReviewList.get(0).getDetailScore().getCount_of_composite_score()) +
-                                getResources().getString(R.string.review_people_count_unit_text)+")");
-                    }
-                }
-            }
-            mlay_no_review.setVisibility(View.GONE);
-            mFieldEvaluationAdapter = new FieldEvaluationAdapter(FieldEvaluationActivity.this,mReviewList,FieldEvaluationActivity.this);
-            ReviewListloadmoreList.setAdapter(mFieldEvaluationAdapter);
-            if (mReviewList.size() <10) {
-                ReviewListloadmoreList.set_loaded();
-            }
-            if(ReviewListswipList.isShown()){
-                ReviewListswipList.setRefreshing(false);
-            }
-
-        }
-
-        @Override
-        public void onFailure(boolean superresult, int statusCode, okhttp3.internal.http2.Header[] headers, byte[] responseBody, Throwable error) {
-            hideProgressDialog();
-            if(ReviewListswipList.isShown()){
-                ReviewListswipList.setRefreshing(false);
-            }
-            if (!superresult) {
-                MessageUtils.showToast(getContext(), error.getMessage());
-            }
-            if (error != null && error instanceof Response.LinhuiResponseException) {
-                if (((Response.LinhuiResponseException) error).code == -99) {
-                    LoginManager.getInstance().clearLoginInfo();
-                    LoginActivity.BaesActivityreloadLogin(FieldEvaluationActivity.this);
-                    FieldEvaluationActivity.this.finish();
-                }
-            }
-
-        }
-    };
-    private LinhuiAsyncHttpResponseHandler ReviewMoreHandler = new LinhuiAsyncHttpResponseHandler(ReviewModel.class,true) {
-        @Override
-        public void onSuccess(int statusCode, okhttp3.internal.http2.Header[] headers, Response response, Object data) {
-            ArrayList<ReviewModel> tmp = (ArrayList<ReviewModel>) data;
-            if( (tmp == null || tmp.isEmpty())){
-                reviewlistpagesize = reviewlistpagesize-1;
-                ReviewListloadmoreList.onLoadComplete();
-                ReviewListloadmoreList.set_loaded();
-                return;
-            }
-            for( ReviewModel order: tmp ){
-                mReviewList.add(order);
-            }
-            mFieldEvaluationAdapter.notifyDataSetChanged();
-            ReviewListloadmoreList.onLoadComplete();
-            if (tmp.size() < 10 ) {
-                ReviewListloadmoreList.set_loaded();
-            }
-         }
-
-        @Override
-        public void onFailure(boolean superresult, int statusCode, okhttp3.internal.http2.Header[] headers, byte[] responseBody, Throwable error) {
-            ReviewListloadmoreList.onLoadComplete();
-            reviewlistpagesize = reviewlistpagesize-1;
-            if (!superresult)
-                MessageUtils.showToast(getContext(), error.getMessage());
-            if (error != null && error instanceof Response.LinhuiResponseException) {
-                if (((Response.LinhuiResponseException) error).code == -99) {
-                    LoginManager.getInstance().clearLoginInfo();
-                    LoginActivity.BaesActivityreloadLogin(FieldEvaluationActivity.this);
-                    FieldEvaluationActivity.this.finish();
-                }
-            }
-        }
-    };
     @Override
     public void loadMore() {
         if (LoginManager.isLogin()) {
             if (mReviewList != null) {
                 if (mReviewList.size() != 0) {
                     reviewlistpagesize = reviewlistpagesize + 1;
-                    FieldApi.get_resources_commentslist(MyAsyncHttpClient.MyAsyncHttpClient3(), ReviewMoreHandler, fieldid, String.valueOf(reviewlistpagesize), "10");
+                    mPresenter.getComments(fieldid, reviewlistpagesize, 10,isSellRes);
                 } else {
                     ReviewListloadmoreList.onLoadComplete();
                 }
@@ -265,5 +198,109 @@ public class FieldEvaluationActivity extends BaseMvpActivity implements SwipeRef
             }
         });
 
+    }
+
+    @Override
+    public void onReviewInfoSuccess(ReviewFieldInfoModel mReviewFieldInfoModel) {
+
+    }
+
+    @Override
+    public void onReviewSuccess() {
+
+    }
+
+    @Override
+    public void onReviewFailure(boolean superresult, Throwable error) {
+
+    }
+
+    @Override
+    public void onResReviewSuccess(ArrayList<ReviewModel> list,String detailScore) {
+        mReviewList = list;
+        if (mReviewList == null || mReviewList.isEmpty()) {
+            mlay_no_review.setVisibility(View.VISIBLE);
+            if(ReviewListswipList.isShown()){
+                ReviewListswipList.setRefreshing(false);
+            }
+            return;
+        }
+        if (detailScore != null && detailScore.length() > 0) {
+            JSONObject jsonObject = JSONObject.parseObject(detailScore);
+            if (jsonObject.get("detailScore") != null &&
+                    jsonObject.get("detailScore").toString().length() > 0) {
+                CommentScoreModel commentScoreModel = com.alibaba.fastjson.JSONObject.parseObject(detailScore,CommentScoreModel.class);
+                mReviewList.get(0).setDetailScore(commentScoreModel);
+            } else {
+                mReviewList.get(0).setDetailScore(new CommentScoreModel());
+            }
+            if (jsonObject.get("total") != null &&
+                    jsonObject.get("total").toString().length() > 0) {
+                TitleBarUtils.setTitleText(FieldEvaluationActivity.this,getResources().getString(R.string.review_title_first_str) +"(" +
+                        jsonObject.get("total").toString() +
+                        getResources().getString(R.string.review_people_count_unit_text)+")");
+
+            }
+        }
+        mlay_no_review.setVisibility(View.GONE);
+        mFieldEvaluationAdapter = new FieldEvaluationAdapter(FieldEvaluationActivity.this,mReviewList,FieldEvaluationActivity.this);
+        ReviewListloadmoreList.setAdapter(mFieldEvaluationAdapter);
+        if (mReviewList.size() <10) {
+            ReviewListloadmoreList.set_loaded();
+        }
+        if(ReviewListswipList.isShown()){
+            ReviewListswipList.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void onResReviewFailure(boolean superresult, Throwable error) {
+        if(ReviewListswipList.isShown()){
+            ReviewListswipList.setRefreshing(false);
+        }
+        if (!superresult) {
+            MessageUtils.showToast(getContext(), error.getMessage());
+        }
+        if (error != null && error instanceof Response.LinhuiResponseException) {
+            if (((Response.LinhuiResponseException) error).code == -99) {
+                LoginManager.getInstance().clearLoginInfo();
+                LoginActivity.BaesActivityreloadLogin(FieldEvaluationActivity.this);
+                FieldEvaluationActivity.this.finish();
+            }
+        }
+    }
+
+    @Override
+    public void onResReviewMoreSuccess(ArrayList<ReviewModel> list,String detailScore) {
+        ArrayList<ReviewModel> tmp = list;
+        if( (tmp == null || tmp.isEmpty())){
+            reviewlistpagesize = reviewlistpagesize-1;
+            ReviewListloadmoreList.onLoadComplete();
+            ReviewListloadmoreList.set_loaded();
+            return;
+        }
+        for( ReviewModel order: tmp ){
+            mReviewList.add(order);
+        }
+        mFieldEvaluationAdapter.notifyDataSetChanged();
+        ReviewListloadmoreList.onLoadComplete();
+        if (tmp.size() < 10 ) {
+            ReviewListloadmoreList.set_loaded();
+        }
+    }
+
+    @Override
+    public void onResReviewMoreFailure(boolean superresult, Throwable error) {
+        ReviewListloadmoreList.onLoadComplete();
+        reviewlistpagesize = reviewlistpagesize-1;
+        if (!superresult)
+            MessageUtils.showToast(getContext(), error.getMessage());
+        if (error != null && error instanceof Response.LinhuiResponseException) {
+            if (((Response.LinhuiResponseException) error).code == -99) {
+                LoginManager.getInstance().clearLoginInfo();
+                LoginActivity.BaesActivityreloadLogin(FieldEvaluationActivity.this);
+                FieldEvaluationActivity.this.finish();
+            }
+        }
     }
 }

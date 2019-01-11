@@ -185,9 +185,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
     @InjectView(R.id.fieldinfo_other_res_tv) TextView mFieldinfoOtherResTV;
     @InjectView(R.id.fieldinfo_other_res_show_all_tv)
     TextView mFieldinfoOtherResShowAllTV;
-
-    // FIXME: 2018/12/14 专属顾问
-
+    //2018/12/14 专属顾问
     @InjectView(R.id.fieldinfo_counselor_imgv)
     OvalImageView mFieldinfoCounselorImgv;
     @InjectView(R.id.fieldinfo_counselor_name_tv)
@@ -200,7 +198,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
     TextView mCommunityinfoBannerNumTV;
     @InjectView(R.id.communityinfo_banner_size_tv)
     TextView mCommunityinfoBannerSizeTV;
-    // FIXME: 2018/12/22 图文详情
+    //2018/12/22 图文详情
     @InjectView(R.id.communityinfo_pic_word_info_ll)
     LinearLayout mCommunityInfoPicWordLL;
     @InjectView(R.id.communityinfo_pic_word_info_webview)
@@ -506,7 +504,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 showFeedbacksDialog(0);
                 break;
             case R.id.communityinfo_no_sell_res_reserve_tv:
-                if (mCommunityInfoModel.getId() > 0) {
+                if (mCommunityInfoModel != null && mCommunityInfoModel.getId() > 0) {
                     if (LoginManager.isLogin()) {
                         startDemandActivity();
                     } else {
@@ -531,7 +529,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 }
                 break;
             case R.id.fieldinfo_counselor_call_tv:
-                // FIXME: 2018/12/14 联系顾问
+                //2018/12/14 联系顾问
                 if (mCommunityInfoModel.getService_representative() != null &&
                         mCommunityInfoModel.getService_representative().getTel() != null &&
                         mCommunityInfoModel.getService_representative().getTel().length() > 0) {
@@ -539,7 +537,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 }
                 break;
             case R.id.fieldinfo_counselor_wx_tv:
-                // FIXME: 2018/12/14 加顾问微信
+                //2018/12/14 加顾问微信
                 if (mCommunityInfoModel.getService_representative() != null &&
                         mCommunityInfoModel.getService_representative().getQrcode() != null &&
                         mCommunityInfoModel.getService_representative().getQrcode().length() > 0) {
@@ -549,7 +547,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 }
                 break;
             case R.id.community_info_counselor_tv:
-                // FIXME: 2018/12/14 顾问
+                //2018/12/14 顾问
                 if (mCommunityInfoModel.getService_representative() != null &&
                         mCommunityInfoModel.getService_representative().getId() > 0) {
                     showCounselorDialog(0,false,0);
@@ -563,7 +561,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                     isShowAllOtherRes = false;
                     mFieldinfoOtherResShowAllTV.setCompoundDrawables(null, null, mShowAllDownDrawable, null);
                     mFieldinfoOtherResShowAllTV.setText(getResources().getString(R.string.module_fieldinfo_other_res_show));
-                    // FIXME: 2018/12/14 其他展位收起
+                    //2018/12/14 其他展位收起
                     mFieldInfoOtherDataListTemp.clear();
                     for (int i = 0; i < 3; i++) {
                         mFieldInfoOtherDataListTemp.add(mFieldInfoOtherDataList.get(i));
@@ -583,21 +581,23 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
         }
     }
     private void startDemandActivity() {
-        Intent demandIntent = new Intent(CommunityInfoActivity.this,SubmitDemandActivity.class);
-        demandIntent.putExtra("community_res_id", String.valueOf(mCommunityInfoModel.getId()));
-        ArrayList<Integer> cityIds = new ArrayList<>();
-        if (mCommunityInfoModel.getCity() != null &&
-                mCommunityInfoModel.getCity().getId() > 0) {
-            cityIds.add(mCommunityInfoModel.getCity().getId());
+        if (mCommunityInfoModel != null) {
+            Intent demandIntent = new Intent(CommunityInfoActivity.this,SubmitDemandActivity.class);
+            demandIntent.putExtra("community_res_id", String.valueOf(mCommunityInfoModel.getId()));
+            ArrayList<Integer> cityIds = new ArrayList<>();
+            if (mCommunityInfoModel.getCity() != null &&
+                    mCommunityInfoModel.getCity().getId() > 0) {
+                cityIds.add(mCommunityInfoModel.getCity().getId());
+            }
+            ArrayList<Integer> communityTypeIds = new ArrayList<>();
+            if (mCommunityInfoModel.getCategory() != null &&
+                    mCommunityInfoModel.getCategory().getId() > 0) {
+                communityTypeIds.add(mCommunityInfoModel.getCategory().getId());
+            }
+            demandIntent.putExtra("city_ids", (Serializable) cityIds);
+            demandIntent.putExtra("community_type_ids", (Serializable) communityTypeIds);
+            startActivityForResult(demandIntent,DEMAND_RESULTCODE);
         }
-        ArrayList<Integer> communityTypeIds = new ArrayList<>();
-        if (mCommunityInfoModel.getCategory() != null &&
-                mCommunityInfoModel.getCategory().getId() > 0) {
-            communityTypeIds.add(mCommunityInfoModel.getCategory().getId());
-        }
-        demandIntent.putExtra("city_ids", (Serializable) cityIds);
-        demandIntent.putExtra("community_type_ids", (Serializable) communityTypeIds);
-        startActivityForResult(demandIntent,DEMAND_RESULTCODE);
     }
     private PermissionListener listener = new PermissionListener() {
         @Override
@@ -646,12 +646,12 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 mLocationClient.registerLocationListener(new MyLocationListener());//注册定位监听接口
                 initLocation();
             } else if (requestCode == CALL_PHONE_CODE) {
-                // FIXME: 2018/12/19 顾问电话
+                //2018/12/19 顾问电话
                 if (mCommunityInfoModel.getService_representative() != null &&
                         mCommunityInfoModel.getService_representative().getTel() != null &&
                         mCommunityInfoModel.getService_representative().getTel().length() > 0) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
-                            + mCommunityInfoModel.getService_representative().getTel()));// FIXME: 2018/12/19 测试数据
+                            + mCommunityInfoModel.getService_representative().getTel()));
                     if (ActivityCompat.checkSelfPermission(CommunityInfoActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         return;
                     }
@@ -661,7 +661,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 if (mCommunityInfoModel.getService_phone() != null &&
                         mCommunityInfoModel.getService_phone().length() > 0) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
-                            + mCommunityInfoModel.getService_phone()));// FIXME: 2018/12/19 测试数据
+                            + mCommunityInfoModel.getService_phone()));
                     if (ActivityCompat.checkSelfPermission(CommunityInfoActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         return;
                     }
@@ -735,16 +735,16 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                             fieldinfo.putExtra("id", mNearByResList.get(position).getId());
                             startActivity(fieldinfo);
                         } else if (mNearByResList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_PHYSICAL_RES)) {
-                            if (mNearByResList.get(position).getTop_resource_id() != null) {
+                            if (mNearByResList.get(position).getTop_physical_id() != null) {
                                 fieldinfo = new Intent(CommunityInfoActivity.this, FieldInfoActivity.class);
-                                fieldinfo.putExtra("fieldId", String.valueOf(mNearByResList.get(position).getTop_resource_id()));
+                                fieldinfo.putExtra("fieldId", String.valueOf(mNearByResList.get(position).getTop_physical_id()));
                                 fieldinfo.putExtra("community_id", mNearByResList.get(position).getId());
                                 startActivity(fieldinfo);
                             }
                         } else if (mNearByResList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_SELLING_RES)) {
-                            if (mNearByResList.get(position).getTop_resource_id() != null) {
+                            if (mNearByResList.get(position).getTop_physical_id() != null) {
                                 fieldinfo = new Intent(CommunityInfoActivity.this, FieldInfoActivity.class);
-                                fieldinfo.putExtra("sell_res_id", String.valueOf(mNearByResList.get(position).getTop_resource_id()));
+                                fieldinfo.putExtra("sell_res_id", String.valueOf(mNearByResList.get(position).getTop_physical_id()));
                                 fieldinfo.putExtra("is_sell_res", true);
                                 fieldinfo.putExtra("community_id", mNearByResList.get(position).getId());
                                 startActivity(fieldinfo);
@@ -822,17 +822,17 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                             fieldinfo.putExtra("id", mFieldInfoOtherDataList.get(position).getCommunity_id());
                             startActivity(fieldinfo);
                         } else if (mFieldInfoOtherDataList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_PHYSICAL_RES)) {
-                            if (mFieldInfoOtherDataList.get(position).getTop_physical_id() != null) {
+                            if (mFieldInfoOtherDataList.get(position).getTop_resource_id() != null) {
                                 fieldinfo = new Intent(CommunityInfoActivity.this, FieldInfoActivity.class);
                                 fieldinfo.putExtra("good_type", 1);
-                                fieldinfo.putExtra("fieldId", String.valueOf(mFieldInfoOtherDataList.get(position).getTop_physical_id()));
+                                fieldinfo.putExtra("fieldId", String.valueOf(mFieldInfoOtherDataList.get(position).getTop_resource_id()));
                                 fieldinfo.putExtra("community_id", mFieldInfoOtherDataList.get(position).getCommunity_id());
                                 startActivity(fieldinfo);
                             }
                         } else if (mFieldInfoOtherDataList.get(position).getType().equals(com.linhuiba.business.config.Config.JUMP_SELLING_RES)) {
-                            if (mFieldInfoOtherDataList.get(position).getTop_physical_id() != null) {
+                            if (mFieldInfoOtherDataList.get(position).getTop_resource_id() != null) {
                                 fieldinfo = new Intent(CommunityInfoActivity.this, FieldInfoActivity.class);
-                                fieldinfo.putExtra("sell_res_id", String.valueOf(mFieldInfoOtherDataList.get(position).getTop_physical_id()));
+                                fieldinfo.putExtra("sell_res_id", String.valueOf(mFieldInfoOtherDataList.get(position).getTop_resource_id()));
                                 fieldinfo.putExtra("is_sell_res", true);
                                 fieldinfo.putExtra("community_id", mFieldInfoOtherDataList.get(position).getCommunity_id());
                                 startActivity(fieldinfo);
@@ -1295,7 +1295,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                                 getString(R.string.fieldinfo_man_proportion_unit_text));
             }
             mCommunityinfoNoDataLL.setVisibility(View.GONE);
-            // FIXME: 2018/12/18 优惠券
+            //2018/12/18 优惠券
             if (mCommunityInfoModel.getCoupons() != null && mCommunityInfoModel.getCoupons().size() > 0) {
                 mFieldinfoReceiveCouponsLL.setVisibility(View.VISIBLE);
                 if (mCommunityInfoModel.getCoupons().get(0).getAmount() != null &&
@@ -1363,7 +1363,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
             } else {
                 mCommunityInfoPriceNoTV.setVisibility(View.VISIBLE);
             }
-            // FIXME: 2018/12/19 顾问
+            //2018/12/19 顾问
             if (mCommunityInfoModel.getService_representative() != null &&
                     mCommunityInfoModel.getService_representative().getId() > 0) {
                 mFieldinfoCounseLL.setVisibility(View.VISIBLE);
@@ -1383,7 +1383,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                     mFieldinfoCounselorDescriptionTV.setText(mCommunityInfoModel.getService_representative().getProfile());
                 }
             }
-            // FIXME: 2018/12/22 图文详情
+            //2018/12/22 图文详情
             if (mCommunityInfoModel.getImg_description() != null &&
                     mCommunityInfoModel.getImg_description().length() > 0) {
                 mCommunityInfoPicWordLL.setVisibility(View.VISIBLE);
@@ -1545,7 +1545,8 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
         mDialogErrorCorrectionTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (merror_recovery_content_edit.getText().toString().trim().length() > 0) {
+                if (merror_recovery_content_edit.getText().toString().trim().length() > 0 &&
+                        mCommunityInfoModel != null) {
                     mDialogErrorCorrectionTV.setEnabled(false);
                     showProgressDialog();
                     mPresenter.releaseFeedbacks(0,mCommunityInfoModel.getId(),merror_recovery_content_edit.getText().toString());
@@ -2014,7 +2015,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
         }
     }
 
-    // FIXME: 2018/12/19 顾问
+    //2018/12/19 顾问
     private void showCounselorDialog(int showWxcode, boolean isCall, final int callPhoneCode) {//phoneType :111客服;110顾问
         if (mDemandSuccessDialog == null || !mDemandSuccessDialog.isShowing()) {
             View.OnClickListener uploadListener = new View.OnClickListener() {
@@ -2056,7 +2057,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                             new Thread(){
                                 public void run(){
                                     com.linhuiba.linhuifield.connector.Constants.saveToSystemGallery(CommunityInfoActivity.this,
-                                            mCommunityInfoModel.getService_representative().getQrcode());// FIXME: 2018/12/19 测试url
+                                            mCommunityInfoModel.getService_representative().getQrcode());
                                     mHandler.sendEmptyMessage(2);
                                 }
                             }.start();
@@ -2102,8 +2103,8 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 String name = "";
                 String call = "";
                 String profile = "";
-                String imgUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
-                String qrcodeUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
+                String imgUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;
+                String qrcodeUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;
                 if (mCommunityInfoModel.getService_representative().getName() != null) {
                     name = mCommunityInfoModel.getService_representative().getName();
                 }
@@ -2128,11 +2129,11 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                         .addViewOnclick(R.id.app_defaylt_dialog_counselor_call_ll,uploadListener)
                         .addViewOnclick(R.id.app_defaylt_close_img_btn,uploadListener)
                         .addViewOnclick(R.id.fieldinfo_counselor_save_wx_code_btn_ll,uploadListener)
-                        .setText(R.id.fieldinfo_counselor_name_tv,name)// FIXME: 2018/12/19 测试数据
+                        .setText(R.id.fieldinfo_counselor_name_tv,name)
                         .setText(R.id.app_defaylt_dialog_counselor_call_tv,
-                                getResources().getString(R.string.module_fieldinfo_counselor_call) +call)// FIXME: 2018/12/19 测试数据
+                                getResources().getString(R.string.module_fieldinfo_counselor_call) +call)
                         .setText(R.id.fieldinfo_counselor_description_tv,profile)
-                        .setOvalImgvUrl(CommunityInfoActivity.this,R.id.fieldinfo_counselor_imgv,imgUrl,// FIXME: 2018/12/19 测试数据
+                        .setOvalImgvUrl(CommunityInfoActivity.this,R.id.fieldinfo_counselor_imgv,imgUrl,
                                 com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,80),
                                 com.linhuiba.linhuifield.connector.Constants.Dp2Px(CommunityInfoActivity.this,80))
                         .setImgvUrl(CommunityInfoActivity.this,R.id.app_defaylt_dialog_counselor_qrcode_imgv,qrcodeUrl,

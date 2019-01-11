@@ -178,5 +178,13 @@
     <style name="TabLayoutItemStyle" parent="android:Widget">
         <item name="tabBackground">@drawable/module_coupon_centre_tab_bg</item>
     </style>
+    <style name="PublishReviewCheckBoxStyle" parent="android:Widget">
+        <item name="android:background">@drawable/module_bg_publish_review_radiobutton</item>
+        <item name="android:textColor">@drawable/module_bg_textcolor_white_gray</item>
+    </style>
+    <style name="PublishReviewGradeStyle" parent="android:Widget">
+        <item name="android:background">@drawable/module_bg_publish_review_grade</item>
+        <item name="android:textColor">@drawable/module_bg_textcolor_black_gray</item>
+    </style>
 
 </resources>

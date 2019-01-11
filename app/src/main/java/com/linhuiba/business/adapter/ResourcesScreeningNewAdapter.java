@@ -211,7 +211,7 @@ public class ResourcesScreeningNewAdapter extends BaseAdapter {
                             baiduMapActivity.field_labels_int == 1) {
                         itemlist_showall = true;
                     }
-                } else if (data.get(position).get("type").toString().equals("location_types")) {// FIXME: 2018/12/11 位置类型
+                } else if (data.get(position).get("type").toString().equals("location_types")) {//2018/12/11 位置类型
                     if (baiduMapActivity == null && mactivity != null &&
                             mactivity.mLocationTypeChooseInt == 1) {
                         itemlist_showall = true;
@@ -250,7 +250,7 @@ public class ResourcesScreeningNewAdapter extends BaseAdapter {
                                 baiduMapActivity.field_labels_int == 1) {
                             finalItemlist_showall = true;
                         }
-                    } else if (data.get(position).get("type").toString().equals("location_types")) {// FIXME: 2018/12/11 位置类型
+                    } else if (data.get(position).get("type").toString().equals("location_types")) {//2018/12/11 位置类型
                         if (baiduMapActivity == null && mactivity != null &&
                                 mactivity.mLocationTypeChooseInt == 1) {
                             finalItemlist_showall = true;
@@ -293,7 +293,7 @@ public class ResourcesScreeningNewAdapter extends BaseAdapter {
                                 baiduMapActivity.field_labels_int = 0;
                             }
                         }
-                    } else if (data.get(position).get("type").toString().equals("location_types")) {// FIXME: 2018/12/11 位置类型
+                    } else if (data.get(position).get("type").toString().equals("location_types")) {//2018/12/11 位置类型
                         if (!finalItemlist_showall) {
                             if (baiduMapActivity == null && mactivity != null) {
                                 mactivity.mLocationTypeChooseInt = 1;

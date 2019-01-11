@@ -411,13 +411,13 @@ public class MyCouponsAdapter extends BaseQuickAdapter<MyCouponsModel, BaseViewH
             if (item.getStatus() == 1) {//进行中
                 couponCentreReceiveLL.setVisibility(View.VISIBLE);
                 couponCentreReceiveTVLL.setVisibility(View.VISIBLE);
-                // FIXME: 2018/12/11 判断是否领取
+                //2018/12/11 判断是否领取
                 couponCentreReceiveTV.setText(mContext.getResources().getString(R.string.module_fieldinfo_pw_receive_coupons));
                 couponCentreReceiveTVLL.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.activity_splash_screen_selected_text_bg));
                 couponCentreReceiveTVLL.setOnClickListener(new OnMultiClickListener() {
                     @Override
                     public void onMultiClick(View v) {
-                        // FIXME: 2018/12/11 立即领取
+                        //2018/12/11 立即领取
                         if (LoginManager.isLogin()) {
                             mCouponReceiveCentreActivity.mCouponsMvpPresenter.receiveCoupons(item.getId(),1);
                         } else {
@@ -431,7 +431,7 @@ public class MyCouponsAdapter extends BaseQuickAdapter<MyCouponsModel, BaseViewH
                 couponCentreReceiveLL.setVisibility(View.VISIBLE);
                 couponCentreReceiveTVLL.setVisibility(View.VISIBLE);
                 couponCentreStatusImgv.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.ic_jijaingjieshu_three_nine));
-                // FIXME: 2018/12/11 判断是否领取
+                //2018/12/11 判断是否领取
                 couponCentreReceiveTV.setText(mContext.getResources().getString(R.string.module_fieldinfo_pw_receive_coupons));
                 couponCentreReceiveTVLL.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.activity_splash_screen_selected_text_bg));
                 couponCentreReceiveTVLL.setOnClickListener(new OnMultiClickListener() {
@@ -459,11 +459,10 @@ public class MyCouponsAdapter extends BaseQuickAdapter<MyCouponsModel, BaseViewH
                                 mContext.getResources().getString(R.string.module_coupon_centre_receive_start));
                     }
                 }
-                // FIXME: 2018/12/12
                 MyCouponsModel timeDownBean = mDatas.get(helper.getLayoutPosition());
                 if (timeDownBean.getRemind_time() > 1) {
                     long useTime = timeDownBean.getRemind_time();
-                    // FIXME: 2018/12/21 倒计时显示
+                    //2018/12/21 倒计时显示
                     if (useTime < 1800) {
                         couponCentreCountDownTV.setText(com.linhuiba.linhuifield.connector.Constants.getFormatTime(useTime * 1000,3));
                     }
@@ -474,7 +473,7 @@ public class MyCouponsAdapter extends BaseQuickAdapter<MyCouponsModel, BaseViewH
                         couponCentreReceiveTVLL.setOnClickListener(new OnMultiClickListener() {
                             @Override
                             public void onMultiClick(View v) {
-                                // FIXME: 2018/12/11 日历取消提醒
+                                //2018/12/11 日历取消提醒
                                 mCouponReceiveCentreActivity.cancelRemind(item.getTitle() +
                                         mContext.getResources().getString(R.string.module_coupon_centre_title)+
                                         String.valueOf(item.getId()));
@@ -490,7 +489,7 @@ public class MyCouponsAdapter extends BaseQuickAdapter<MyCouponsModel, BaseViewH
                         couponCentreReceiveTVLL.setOnClickListener(new OnMultiClickListener() {
                             @Override
                             public void onMultiClick(View v) {
-                                // FIXME: 2018/12/11 日历提醒
+                                //2018/12/11 日历提醒
                                 mCouponReceiveCentreActivity.setRemindClick(item.getId(),item.getTitle() +
                                         mContext.getResources().getString(R.string.module_coupon_centre_title)+
                                         String.valueOf(item.getId()),item.getShelf_time());
@@ -498,7 +497,7 @@ public class MyCouponsAdapter extends BaseQuickAdapter<MyCouponsModel, BaseViewH
                         });
                     }
                 } else {
-                    // FIXME: 2018/12/11 倒计时测试
+                    //2018/12/11 倒计时测试
                     couponCentreReceiveTV.setCompoundDrawables(null, null, null, null);
                     couponCentreReceiveTV.setText(mContext.getResources().getString(R.string.module_fieldinfo_pw_receive_coupons));
                     couponCentreReceiveTVLL.setOnClickListener(new OnMultiClickListener() {

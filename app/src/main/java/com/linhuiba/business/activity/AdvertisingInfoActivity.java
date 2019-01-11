@@ -1075,58 +1075,6 @@ public class AdvertisingInfoActivity extends BaseMvpActivity implements Field_Ad
                 }
         }
     };
-    private LinhuiAsyncHttpResponseHandler ReviewHandler = new LinhuiAsyncHttpResponseHandler(ReviewModel.class, true) {
-        @Override
-        public void onSuccess(int statusCode, okhttp3.internal.http2.Header[] headers, Response response, Object data) {
-            hideProgressDialog();
-            mReviewList = (ArrayList<ReviewModel>) data;
-            if (mReviewList == null || mReviewList.size() == 0) {
-                mreview_listview.setVisibility(View.GONE);
-            } else{
-                mreview_listview.setVisibility(View.VISIBLE);
-                if (mReviewList.size() == 2) {
-                    ArrayList<ReviewModel> mtmpReviewList = new ArrayList<>();
-                    mtmpReviewList.addAll(mReviewList);
-                    int oneitemsize = 0;int twoitemsize = 0;
-                    for (int i = 0; i < mtmpReviewList.size(); i++) {
-                        int itemsize = 0;
-                        if (mReviewList.get(i).getContent() != null && mReviewList.get(i).getContent().length() > 0) {
-                            itemsize = itemsize + mReviewList.get(i).getContent().length();
-                        }
-                        if (mReviewList.get(i).getImages() != null && mReviewList.get(i).getImages().size() > 0) {
-                            itemsize = itemsize + mReviewList.get(i).getImages().size();
-                        }
-                        if (mReviewList.get(i).getTags() != null && mReviewList.get(i).getTags().size() > 0) {
-                            itemsize = itemsize + mReviewList.get(i).getTags().size();
-                        }
-                        if (i == 0) {
-                            oneitemsize = itemsize;
-                        } else if (i == 1) {
-                            twoitemsize = itemsize;
-                        }
-                    }
-                    if (twoitemsize > oneitemsize) {
-                        if (mReviewList != null) {
-                            mReviewList.clear();
-                        }
-                        mReviewList.add(mtmpReviewList.get(1));
-                        mReviewList.add(mtmpReviewList.get(0));
-                    }
-                }
-                mFieldEvaluationAdapter = new Fieldinfo_ReviewAdapter(AdvertisingInfoActivity.this, mReviewList, AdvertisingInfoActivity.this);
-                mreview_listview.setAdapter(mFieldEvaluationAdapter);
-            }
-        }
-
-        @Override
-        public void onFailure(boolean superresult, int statusCode, okhttp3.internal.http2.Header[] headers, byte[] responseBody, Throwable error) {
-            hideProgressDialog();
-            if (!superresult) {
-                MessageUtils.showToast(getContext(), error.getMessage());
-            }
-
-        }
-    };
     @OnClick({
             R.id.field_order_layout,
             R.id.select_time,

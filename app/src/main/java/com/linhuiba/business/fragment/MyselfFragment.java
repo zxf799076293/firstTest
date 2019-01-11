@@ -638,7 +638,7 @@ public class MyselfFragment extends BaseMvpFragment implements MyDampViewScrollv
                 }
                 break;
             case R.id.myself_coupon_centre_ll:
-                // FIXME: 2018/12/12 test coupon centre
+                //2018/12/12 test coupon centre
                 Intent couponsCentreIntent = new Intent(MyselfFragment.this.getActivity(), CouponReceiveCentreActivity.class);
                 startActivity(couponsCentreIntent);
                 break;
@@ -856,7 +856,8 @@ public class MyselfFragment extends BaseMvpFragment implements MyDampViewScrollv
     @Override
     public void onVersionSuccess(Version versions) {
         final Version version = versions;
-        if (version != null && version.getVid() > BuildConfig.VERSION_CODE){
+        if ((version != null && version.getVid() > BuildConfig.VERSION_CODE) ||
+                (version != null && version.getForce_update() == 1)) {
             View.OnClickListener uploadListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -901,9 +902,10 @@ public class MyselfFragment extends BaseMvpFragment implements MyDampViewScrollv
             }
             com.linhuiba.linhuifield.connector.Constants.hideUploadPictureLine(MyselfFragment.this.getContext(),mCustomDialog);
             mCustomDialog.show();
-        } else if (version != null && version.getVid() == BuildConfig.VERSION_CODE) {
+        } else if ((version != null && version.getVid() == BuildConfig.VERSION_CODE) ||
+                (version != null && version.getVid() < BuildConfig.VERSION_CODE)) {
             MessageUtils.showToast(getContext(), getContext().getResources().getString(R.string.txt_version));
-        } else if (version.getVid() == 0) {
+        } else if (version != null && version.getVid() == 0) {
             MessageUtils.showToast(getContext(), getContext().getResources().getString(R.string.txt_version));
         } else {
             MessageUtils.showToast(getContext(), getContext().getResources().getString(R.string.txt_version));

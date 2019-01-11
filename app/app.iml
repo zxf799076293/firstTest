@@ -8,12 +8,11 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="baiduDebug" />
-        <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleBaiduDebug" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileBaiduDebugSources" />
+        <option name="SELECTED_BUILD_VARIANT" value="AliDebug" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleAliDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileAliDebugSources" />
         <afterSyncTasks>
-          <task>generateBaiduDebugSources</task>
+          <task>generateAliDebugSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
@@ -23,78 +22,87 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/build/intermediates/classes/baidu/debug" />
-    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/baidu/debug" />
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
+    <output url="file://$MODULE_DIR$/build/intermediates/classes/Ali/debug" />
+    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/Ali/debug" />
+    <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/baidu/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/baidu/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/baidu/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/baidu/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/baidu/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/baidu/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/baidu/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baiduDebug/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baiduDebug/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baiduDebug/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baiduDebug/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baiduDebug/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baiduDebug/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baiduDebug/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baiduDebug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaiduDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaiduDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaiduDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaiduDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaiduDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaiduDebug/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaiduDebug/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaiduDebug/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/baidu/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/baidu/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/baidu/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/baidu/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/baidu/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/baidu/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/baidu/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baidu/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baidu/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baidu/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baidu/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baidu/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baidu/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baidu/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/baidu/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/Ali/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/Ali/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/Ali/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/Ali/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/Ali/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/Ali/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/Ali/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/AliDebug/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/AliDebug/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/AliDebug/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/AliDebug/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/AliDebug/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/AliDebug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/AliDebug/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/Ali/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/Ali/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/Ali/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/Ali/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/Ali/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/Ali/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/Ali/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAliDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAliDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAliDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAliDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAliDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAliDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAliDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/test/Ali/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAliDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAliDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAliDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAliDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAliDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAliDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAliDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Ali/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Ali/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Ali/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Ali/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Ali/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Ali/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Ali/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAli/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAli/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAli/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAli/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAli/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAli/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testAli/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAli/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAli/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAli/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAli/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAli/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAli/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestAli/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/aidl" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/debug/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/aidl" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
@@ -102,99 +110,102 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/aidl" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/aidl" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/multidex-instrumentation/1.0.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.daasuu/BubbleLayout/1.0.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.lzyzsd/jsbridge/1.0.4/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/org.apmem.tools/layouts/1.8/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaPrecompile" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/multi-dex" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/splits-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" scope="TEST" name="multidex-instrumentation-1.0.1" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="httpmime-4.1.2" level="project" />
-    <orderEntry type="library" exported="" name="IndoorscapeAlbumPlugin" level="project" />
-    <orderEntry type="library" exported="" name="layouts-1.8" level="project" />
-    <orderEntry type="library" exported="" name="happy-dns-0.2.7" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="support-media-compat-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="support-compat-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="support-fragment-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="BubbleLayout-1.0.0" level="project" />
-    <orderEntry type="library" exported="" name="animated-vector-drawable-23.4.0" level="project" />
-    <orderEntry type="library" exported="" name="multidex-1.0.1" level="project" />
-    <orderEntry type="library" exported="" name="support-core-ui-25.0.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
-    <orderEntry type="library" exported="" name="butterknife-6.1.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
-    <orderEntry type="library" exported="" name="support-core-utils-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="support-vector-drawable-23.4.0" level="project" />
-    <orderEntry type="library" exported="" name="BaiduLBS_Android" level="project" />
-    <orderEntry type="library" exported="" name="jsbridge-1.0.4" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-23.4.0" level="project" />
-    <orderEntry type="module" module-name="PushSDK" exported="" />
-    <orderEntry type="module" module-name="linhuifield" exported="" />
-    <orderEntry type="module" module-name="linhui_public" exported="" />
-    <orderEntry type="library" exported="" name="utdid4all-1.1.5.3_proguard" level="project" />
-    <orderEntry type="library" exported="" name="alicloud-android-sdk-httpdns-1.0.7" level="project" />
-    <orderEntry type="library" exported="" name="com.umeng.message_3.1.5a" level="project" />
-    <orderEntry type="library" exported="" name="analytics-6.1.2" level="project" />
-    <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
-    <orderEntry type="library" exported="" name="httpcore-4.4.2" level="project" />
-    <orderEntry type="library" exported="" name="imageselector-1.3.3" level="project" />
-    <orderEntry type="library" exported="" name="fastjson-1.2.1" level="project" />
-    <orderEntry type="library" exported="" name="secure-preferences-lib-0.0.4" level="project" />
-    <orderEntry type="library" exported="" name="glide-3.6.0" level="project" />
-    <orderEntry type="library" exported="" name="meiqiasdk-3.4.0" level="project" />
-    <orderEntry type="library" exported="" name="libammsdk" level="project" />
-    <orderEntry type="library" exported="" name="lib_crop-1.0.0" level="project" />
-    <orderEntry type="library" exported="" name="recyclerview-v7-23.3.0" level="project" />
-    <orderEntry type="library" exported="" name="library-1.2.8" level="project" />
-    <orderEntry type="library" exported="" name="qiniu-android-sdk-7.2.0" level="project" />
-    <orderEntry type="library" exported="" name="takephoto_library-4.0.2" level="project" />
-    <orderEntry type="library" exported="" name="multipleimageselect-1.0.4" level="project" />
-    <orderEntry type="library" exported="" name="rxjava-1.2.1" level="project" />
-    <orderEntry type="library" exported="" name="rxandroid-1.2.1" level="project" />
-    <orderEntry type="library" exported="" name="okio-1.11.0" level="project" />
-    <orderEntry type="library" exported="" name="design-23.3.0" level="project" />
-    <orderEntry type="library" exported="" name="banner-1.4.9" level="project" />
-    <orderEntry type="library" exported="" name="okhttp-3.6.0" level="project" />
-    <orderEntry type="library" exported="" name="permissiongen-0.0.6" level="project" />
-    <orderEntry type="library" exported="" name="alipaySingle-20170510" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-annotations:25.0.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-fragment-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.CymChad:BaseRecyclerViewAdapterHelper-2.9.40" level="project" />
+    <orderEntry type="library" name="Gradle: com.soundcloud.android.crop:lib_crop-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.growingio.android:vds-android-agent-2.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-compat-25.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.android.support:multidex-1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:multidex-1.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.youth.banner:banner-1.4.9" level="project" />
+    <orderEntry type="library" name="Gradle: com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6@jar" level="project" />
+    <orderEntry type="library" name="Gradle: io.reactivex:rxjava:1.2.1@jar" level="project" />
+    <orderEntry type="library" name="Gradle: io.reactivex:rxandroid-1.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:D.\mygithub\businesss\app\libs\IndoorscapeAlbumPlugin.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.bumptech.glide:glide:3.6.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.11.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.daasuu:BubbleLayout-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.darsh.multipleimageselect:multipleimageselect-1.0.4" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:D.\mygithub\businesss\app\libs\mta-android-sdk-3.4.3.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7-23.4.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.android.support:multidex-instrumentation-1.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:D.\mygithub\businesss\app\libs\happy-dns-0.2.7.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.scottyab:secure-preferences-lib-0.0.4" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:D.\mygithub\businesss\linhui_public\libs\qiniu-android-sdk-7.2.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: q.rorbin:badgeview-1.1.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable-23.4.0" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:D.\mygithub\businesss\linhui_public\libs\alipaySingle-20170510.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:D.\mygithub\businesss\linhui_public\libs\open_sdk_r6019_lite.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.lzyzsd:jsbridge-1.0.4" level="project" />
+    <orderEntry type="library" name="Gradle: cn.magicwindow:MagicWindowSDK:4.1@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.yancy.imageselector:imageselector-1.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.meiqia:meiqiasdk-3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.umeng.sdk:utdid:1.1.5.3@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.1993hzw:Androids-1.2.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.jph.takephoto:takephoto_library-4.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:D.\mygithub\businesss\app\libs\BaiduLBS_Android.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.promeg:tinypinyin:2.0.3@jar" level="project" />
+    <orderEntry type="library" name="Gradle: org.apmem.tools:layouts-1.8" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-media-compat-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-23.3.0" level="project" />
+    <orderEntry type="library" name="Gradle: me.shaohui.advancedluban:library-1.2.8" level="project" />
+    <orderEntry type="library" name="Gradle: com.umeng.sdk:push-4.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.ahocorasick:ahocorasick:0.3.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.jakewharton:butterknife:6.1.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:design-23.3.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-23.4.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.4.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.alibaba:fastjson:1.2.1@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.6.0@jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-v4-25.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.picasso:picasso:2.5.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:D.\mygithub\businesss\app\libs\httpmime-4.1.2.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.umeng.sdk:analytics:7.5.3@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.umeng.sdk:common:1.5.3@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:D.\mygithub\businesss\app\libs\mid-sdk-3.73.jar:unspecified@jar" level="project" />
+    <orderEntry type="module" module-name="linhuifield" />
+    <orderEntry type="module" module-name="linhui_public" />
   </component>
 </module>

@@ -272,6 +272,7 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
                             apiResourcesModel.setPageSize("10");
                             showProgressDialog();
                             FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), getPublicFieldListHandler, apiResourcesModel);
+                            sendBrowseHistories();
                         } else {
                             getintentcity_code = LoginManager.getInstance().getTrackcityid();
                             good_type = HomePageTypeField;
@@ -295,6 +296,7 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
                             apiResourcesModel.setPageSize("10");
                             showProgressDialog();
                             FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), getPublicFieldListHandler, apiResourcesModel);
+                            sendBrowseHistories();
                         }
                     } else if (homeintent.getExtras().getInt("is_home_page") == HomePageTypeActivity) {
                         getintentcity_code = LoginManager.getInstance().getTrackcityid();
@@ -429,15 +431,6 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
             getAreaList();
             showChooseAreaState();
             isCreate = true;
-            //浏览记录
-            if (LoginManager.isLogin()) {
-                try {
-                    String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl());
-                    LoginMvpModel.sendBrowseHistories("adv_list",parameter,apiResourcesModel.getCity_id());
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
         return mMainContent;
@@ -724,6 +717,7 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
         apiResourcesModel.setPage(String.valueOf(fieldlistpagesize));
         apiResourcesModel.setPageSize("10");
         FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient(), getPublicFieldListHandler,apiResourcesModel);
+        sendBrowseHistories();
     }
     private void searchinitdata() {
         SearchListloadmoreList.set_refresh();
@@ -739,6 +733,7 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
             apiResourcesModel.setKeywords(medit_search.getText().toString());
         }
         FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), getPublicFieldListHandler,apiResourcesModel);
+        sendBrowseHistories();
     }
     private void loadmoresearchfielddata() {
         if (mSearchInfoList != null) {
@@ -747,6 +742,7 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
                 apiResourcesModel.setPage(String.valueOf(fieldlistpagesize));
                 apiResourcesModel.setPageSize("10");
                 FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), getMoreOrderListHandler,apiResourcesModel);
+                sendBrowseHistories();
             } else {
                 SearchListloadmoreList.onLoadComplete();
             }
@@ -3468,5 +3464,15 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
         }
         return paramsMap;
     }
-
+    private void sendBrowseHistories() {
+        //浏览记录
+        if (LoginManager.isLogin()) {
+            try {
+                String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl());
+                LoginMvpModel.sendBrowseHistories("adv_list",parameter,apiResourcesModel.getCity_id());
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

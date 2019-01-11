@@ -623,7 +623,8 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
         }
     }
     private void gotoResInfo() {
-        if (mCaseInfoModel.getPhysical_resources() != null) {
+        if (mCaseInfoModel != null &&
+                mCaseInfoModel.getPhysical_resources() != null) {
             Intent resourceIntent = null;
             resourceIntent = new Intent(ActivityCaseInfoActivity.this, FieldInfoActivity.class);
             resourceIntent.putExtra("fieldId", String.valueOf(mCaseInfoModel.getPhysical_resources().getSelling_resource_id()));

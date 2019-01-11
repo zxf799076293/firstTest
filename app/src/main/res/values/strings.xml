@@ -735,6 +735,21 @@
     <string name="publishreview_review_no_message_text">请对场地评价</string>
     <string name="module_publish_reviewed_btn_str">已评论</string>
     <string name="module_reviewed_industry">所在行业：</string>
+    <string name="module_publish_review_explain_first">10字以上图文评价可得</string>
+    <string name="module_publish_review_explain_second">5元无门槛券</string>
+    <string name="module_publish_review_explain_third">哦！</string>
+    <string name="module_publish_review_fast">快速评价</string>
+    <string name="module_publish_review_number_of_people_first">现场人流量有达到</string>
+    <string name="module_publish_review_number_of_people_second">么？</string>
+    <string name="module_publish_review_number_of_people_less_than">不足</string>
+    <string name="module_publish_review_number_of_people_equality">差不多</string>
+    <string name="module_publish_review_number_of_people_greater_than">超过</string>
+    <string name="module_publish_review_property_server">物业服务</string>
+    <string name="module_publish_review_promotional_effectiveness">推广效果</string>
+    <string name="module_publish_review_approving">满意</string>
+    <string name="module_publish_review_general">一般</string>
+    <string name="module_publish_review_dissatisfied">不满意</string>
+    <string name="module_publish_review_goalcompletion">推广效果</string>
     <!-- aboutus -->
     <string name="aboutus_text">邻汇吧，是目前国内首家提供地推场地在线预订查询的社区资源平台。汇聚全杭城多样地推场地，小区、园区、写字楼多方位覆盖。为需要推广的商家提供场地预订，地推打包，整合推广等一站式服务。</string>
     <string name="aboutus_area">杭州总部</string>
@@ -1644,6 +1659,8 @@
     <string name="module_case_spread_ways">形式</string>
     <string name="module_case_promotion_purposes">目的</string>
     <string name="module_case_info_statement">本案例信息来源于线下收集，如有版权或其他冲突，请联系我们</string>
+    <string name="module_case_pic_save_title">保存案例图片</string>
+    <string name="module_case_pic_save_btn_text">保存到相册</string>
     <!-- community_info -->
     <string name="module_community_info_business_district">所在商圈：</string>
     <string name="module_community_info_year">建筑年份：</string>
@@ -1752,4 +1769,13 @@
     <string name="module_submit_demand_success_third_msg">免费客服电话：</string>
     <string name="module_submit_demand_success_msg">提交成功！</string>
     <string name="module_theme_title">专题详情</string>
+    <!-- 评价中心 -->
+    <string name="module_comment_centre_item_size">展位规格：</string>
+    <string name="module_comment_centre_item_execute_time">档期：</string>
+    <string name="module_comment_propertymatching">物业满意度</string>
+    <string name="module_comment_goalcompletion">效果满意度</string>
+    <string name="module_comment_composite_score">综合平均分</string>
+    <string name="module_comment_promotion_purpose">推广目的：</string>
+    <string name="module_comment_spread_way">推广形式：</string>
+    <string name="module_comment_centre_title">评价中心</string>
 </resources>

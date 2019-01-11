@@ -2222,27 +2222,33 @@ public class Constants {
                 context.startActivity(cartsIntent);
             } if (getpush_msg_type(data) == FIELD_LIST) {
                 String link_jsonobject = getlisturl_jsonobject(data,1);
-                ApiResourcesModel apiResourcesModel = (ApiResourcesModel) JSONObject.parseObject(link_jsonobject,ApiResourcesModel.class);
-                if (apiResourcesModel.getCity_ids() != null &&
-                        apiResourcesModel.getCity_ids().size() > 0) {
-                    ArrayList<Integer> cityIds = new ArrayList<>();
-                    if (apiResourcesModel.getCity_ids().get(0) == 0) {
-                        cityIds.add(Integer.parseInt(LoginManager.getTrackcityid()));
+                ApiResourcesModel apiResourcesModel = null;
+                if (link_jsonobject != null && link_jsonobject.length() > 0) {
+                    apiResourcesModel = (ApiResourcesModel) JSONObject.parseObject(link_jsonobject,ApiResourcesModel.class);
+                    if (apiResourcesModel.getCity_ids() != null &&
+                            apiResourcesModel.getCity_ids().size() > 0) {
+                        ArrayList<Integer> cityIds = new ArrayList<>();
+                        if (apiResourcesModel.getCity_ids().get(0) == 0) {
+                            cityIds.add(Integer.parseInt(LoginManager.getTrackcityid()));
+                        } else {
+                            cityIds.add(apiResourcesModel.getCity_ids().get(0));
+                        }
+                        apiResourcesModel.setCity_ids(cityIds);
                     } else {
-                        cityIds.add(apiResourcesModel.getCity_ids().get(0));
+                        ArrayList<Integer> cityList = new ArrayList();
+                        cityList.add(Integer.parseInt(LoginManager.getTrackcityid()));
+                        apiResourcesModel.setCity_ids(cityList);
                     }
-                    apiResourcesModel.setCity_ids(cityIds);
-                } else {
-                    ArrayList<Integer> cityList = new ArrayList();
-                    cityList.add(Integer.parseInt(LoginManager.getTrackcityid()));
-                    apiResourcesModel.setCity_ids(cityList);
                 }
+
                 Intent searchintent = new Intent(context, SearchListActivity.class);
                 if (isApplicationContext) {
                     searchintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
                 searchintent.putExtra("is_home_page",4);
-                searchintent.putExtra("ApiResourcesModel",(Serializable)apiResourcesModel);
+                if (apiResourcesModel != null) {
+                    searchintent.putExtra("ApiResourcesModel",(Serializable)apiResourcesModel);
+                }
                 context.startActivity(searchintent);
             } else if (getpush_msg_type(data) == FIELD_INFO) {
                 String resourcetype = getresource_type_url_jsonobject(data);

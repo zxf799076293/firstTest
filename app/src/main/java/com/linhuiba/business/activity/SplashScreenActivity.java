@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baselib.app.activity.BaseActivity;
+import com.linhuiba.business.BuildConfig;
 import com.linhuiba.business.R;
 import com.linhuiba.business.adapter.SplashScreenViewPagerAdapter;
 import com.linhuiba.business.basemvp.BaseMvpActivity;

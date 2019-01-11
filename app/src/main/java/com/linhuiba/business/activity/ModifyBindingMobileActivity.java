@@ -112,7 +112,7 @@ public class ModifyBindingMobileActivity extends BaseMvpActivity {
                 }
                 showProgressDialog(ModifyBindingMobileActivity.this.getResources().getString(R.string.txt_waiting));
                 UserApi.apiauthcaptcha(MyAsyncHttpClient.MyAsyncHttpClient(), getLoginCodeeHandler,
-                        mmobile_mobile_edit.getText().toString(),"2");
+                        mmobile_mobile_edit.getText().toString(),"3");
                 break;
             case R.id.new_mobile_modify_btn:
                 if (TextUtils.getTrimmedLength(mnew_mobile_mobile_edit.getText().toString()) == 0) {

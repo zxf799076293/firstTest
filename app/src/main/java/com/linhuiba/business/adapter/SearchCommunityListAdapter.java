@@ -129,7 +129,7 @@ public class SearchCommunityListAdapter extends BaseQuickAdapter<ResourceSearchI
         }
         if (item.getHas_selling() > 0) {
             if (item.isIs_only_enquiry()) {
-                // FIXME: 2018/12/13 询价
+                //2018/12/13 询价
                 mPhyResEnquiryPriceLL.setVisibility(View.VISIBLE);
                 mPhyResPriceLL.setVisibility(View.GONE);
                 mSearchListQuantityOrderSizeTV.setText(
@@ -161,7 +161,7 @@ public class SearchCommunityListAdapter extends BaseQuickAdapter<ResourceSearchI
             if (category.getName() != null &&
                     category.getName().length() > 0) {
                 msearchlist_txt_fieldtitle_layout.setVisibility(View.VISIBLE);
-                // FIXME: 2018/12/22 标签
+                //2018/12/22 标签
                 if (item.getTotal_area() != null && item.getTotal_area().length() > 0) {
                     msearchlist_txt_fieldtitle.setText(category.getName() + "·" +
                     Constants.getpricestring(item.getTotal_area(),1) + mContext.getResources().getString(R.string.myselfinfo_company_demand_area_unit_text));
@@ -223,7 +223,7 @@ public class SearchCommunityListAdapter extends BaseQuickAdapter<ResourceSearchI
             mSearchListDistanceTV.setVisibility(View.GONE);
             mSearchListDistanceView.setVisibility(View.GONE);
         }
-        // FIXME: 2018/12/8 场地名字显示
+        //2018/12/8 场地名字显示
         if (item.getCommunity() != null && item.getCommunity().length() > 0) {
             mPhyResCommunityNameLL.setVisibility(View.VISIBLE);
             mPhyResCommunityNameTV.setText(item.getCommunity());

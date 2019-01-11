@@ -295,6 +295,18 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
                         getmapresourcesmarks(0);
                     }
                     break;
+                case 0:
+                    View myView = BaiduMapActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
+                    String shareurl = com.linhuiba.business.config.Config.SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
+                    String sharewxMinShareLinkUrl = com.linhuiba.business.config.Config.WX_MINI_SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
+                    String ShareIconStr = "";//分享列表图片的url
+                    Constants constants = new Constants(BaiduMapActivity.this,
+                            ShareIconStr);
+                    constants.shareWXMiniPopupWindow(BaiduMapActivity.this,myView,mSearchShareDialog,mIWXAPI,shareurl,
+                            getResources().getString(R.string.search_fieldlist_activvity_sharetitle_text),
+                            getResources().getString(R.string.search_fieldlist_activvity_sharetitle_text)
+                            ,mShareBitmap,sharewxMinShareLinkUrl,mShareBitmap,getResources().getString(R.string.search_fieldlist_activvity_sharetitle_text));
+                    break;
                 default:
                     break;
             }
@@ -909,6 +921,7 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
                                     mMapSearchList.clear();
                                 }
                                 mPresenter.getMapResourcesList(BaiduMapActivity.this,apiResourcesModel);
+                                browseHistories();
                             }
                         }
                     } else {
@@ -1014,19 +1027,6 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
                         Manifest.permission.ACCESS_FINE_LOCATION)
                 .callback(listener)
                 .start();
-        //浏览记录
-        if (LoginManager.isLogin()) {
-            new Handler().postDelayed(new Runnable() {
-                public void run() {
-                    try {
-                        String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl());
-                        LoginMvpModel.sendBrowseHistories("map_list",parameter,apiResourcesModel.getCity_id());
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, 1000);
-        }
     }
     private void getmapresourcesmarks(int mOtherStatuszoom) {
         mMapNearbyImgv.setVisibility(View.GONE);
@@ -1097,6 +1097,7 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
                 mMapSearchList.clear();
             }
             mPresenter.getMapResourcesList(BaiduMapActivity.this,apiResourcesModel);
+            browseHistories();
         }
     }
     //区域标注
@@ -3598,23 +3599,26 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
         return paramsMap;
     }
     private void shareDialog() {
-        View myView = BaiduMapActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
         mSearchShareDialog = new AlertDialog.Builder(BaiduMapActivity.this).create();
         if (mSearchShareDialog!= null && mSearchShareDialog.isShowing()) {
             mSearchShareDialog.dismiss();
         }
         if (mShareBitmap == null) {
-            mShareBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sharelogo);
+            mShareBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.image_ditufenxiang);
+            mShareBitmap = Bitmap.createScaledBitmap(mShareBitmap, 300, 220, true);//压缩Bitmap
+            mHandler.sendEmptyMessage(0);
+        } else {
+            View myView = BaiduMapActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
+            String shareurl = com.linhuiba.business.config.Config.SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
+            String sharewxMinShareLinkUrl = com.linhuiba.business.config.Config.WX_MINI_SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
+            String ShareIconStr = "";//分享列表图片的url
+            Constants constants = new Constants(BaiduMapActivity.this,
+                    ShareIconStr);
+            constants.shareWXMiniPopupWindow(BaiduMapActivity.this,myView,mSearchShareDialog,mIWXAPI,shareurl,
+                    getResources().getString(R.string.search_fieldlist_activvity_sharetitle_text),
+                    getResources().getString(R.string.search_fieldlist_activvity_sharetitle_text)
+                    ,mShareBitmap,sharewxMinShareLinkUrl,mShareBitmap,getResources().getString(R.string.search_fieldlist_activvity_sharetitle_text));
         }
-        String shareurl = com.linhuiba.business.config.Config.SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
-        String sharewxMinShareLinkUrl = com.linhuiba.business.config.Config.WX_MINI_SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
-        String ShareIconStr = "";// FIXME: 2018/12/21 分享列表图片的url
-        Constants constants = new Constants(BaiduMapActivity.this,
-                ShareIconStr);
-        constants.shareWXMiniPopupWindow(BaiduMapActivity.this,myView,mSearchShareDialog,mIWXAPI,shareurl,
-                getResources().getString(R.string.search_fieldlist_activvity_sharetitle_text),
-                getResources().getString(R.string.search_fieldlist_activvity_sharetitle_text)
-                ,mShareBitmap,sharewxMinShareLinkUrl,mShareBitmap,getResources().getString(R.string.search_fieldlist_activvity_sharetitle_text));
     }
     private String getshareurl() {
         String keywords = "";
@@ -3626,7 +3630,7 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
         String in_trading_area = "";
         String community_type_ids = "";
         String label_ids = "";
-        String locationTypeIds = "";// FIXME: 2018/12/11 位置类型
+        String locationTypeIds = "";//2018/12/11 位置类型
         String field_cooperation_type_ids = "";//
         String activity_type_ids = "";
         String age_level_ids = "";
@@ -3727,7 +3731,7 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
             }
             label_ids = ("&label_ids=" + params);
         }
-        // FIXME: 2018/12/11 分享时加位置类型
+        //分享时加位置类型
         if (apiResourcesModel.getLocation_type_ids() != null && apiResourcesModel.getLocation_type_ids().size() > 0) {
             String params = "";
             for (int i = 0; i < apiResourcesModel.getLocation_type_ids().size(); i++) {
@@ -3869,5 +3873,19 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
                 +page_size + page + zoom_level;
         return shareurl;
     }
-
+    private void browseHistories() {
+        //浏览记录
+        if (LoginManager.isLogin()) {
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    try {
+                        String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl());
+                        LoginMvpModel.sendBrowseHistories("map_list",parameter,apiResourcesModel.getCity_id());
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, 1000);
+        }
+    }
 }

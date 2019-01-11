@@ -13,11 +13,10 @@ import com.linhuiba.business.R;
 import com.linhuiba.business.activity.MainTabActivity;
 
 public class PushReceiver extends BroadcastReceiver {
-    // FIXME: 2018/12/7 本地通知
+    //2018/12/7 本地通知
     private NotificationManager manager;
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO Auto-generated method stub
         manager = (NotificationManager)context.getSystemService(android.content.Context.NOTIFICATION_SERVICE);
         int noticeId = intent.getIntExtra("noticeId", 0);
         String noticeStr = intent.getStringExtra("noticeStr");

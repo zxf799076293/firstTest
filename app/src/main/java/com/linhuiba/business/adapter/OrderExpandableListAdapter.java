@@ -125,7 +125,7 @@ public class OrderExpandableListAdapter extends BaseExpandableListAdapter {
             holder.morder_num.setText(mactivity.getResources().getString(R.string.order_confirm_ordernum_text) +
                     mData.get(groupPosition).get("order_num").toString());
         }
-        // FIXME: 2018/12/12 倒计时
+        //2018/12/12 倒计时
         if (mData.get(groupPosition).get("remind_time") != null &&
                 mData.get(groupPosition).get("remind_time").toString().length() > 0) {
             holder.mDisableTimeLL.setVisibility(View.VISIBLE);
@@ -133,7 +133,7 @@ public class OrderExpandableListAdapter extends BaseExpandableListAdapter {
                 long useTime = Long.parseLong(mData.get(groupPosition).get("remind_time").toString());
                 holder.mDisableTimeTV.setText(com.linhuiba.linhuifield.connector.Constants.getFormatTime(useTime,3));
             } else {
-                // FIXME: 2018/12/13 倒计时完成后的操作
+                //2018/12/13 倒计时完成后的操作
                 mactivity.onRefreshData();
             }
         } else {

@@ -366,8 +366,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
     TextView mFieldinfoOtherResShowAllTV;
     @InjectView(R.id.fieldinfo_other_res_show_all_ll)
     LinearLayout mFieldinfoOtherResShowAllLL;
-    // FIXME: 2018/12/14 专属顾问
-
+    //2018/12/14 专属顾问
     @InjectView(R.id.fieldinfo_counselor_imgv)
     OvalImageView mFieldinfoCounselorImgv;
     @InjectView(R.id.fieldinfo_counselor_name_tv)
@@ -404,7 +403,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
     TextView mFieldinfoBannerSizeTV;
     @InjectView(R.id.fieldinfo_recommend_ll)
     LinearLayout mFieldinfoRecommendLL;
-    // FIXME: 2018/12/22 图文详情
+    //2018/12/22 图文详情
     @InjectView(R.id.fieldinfo_pic_word_info_ll)
     LinearLayout mFieldinfoPicWordLL;
     @InjectView(R.id.fieldinfo_pic_word_info_webview)
@@ -699,7 +698,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         mFieldinfoNoDataLL.setVisibility(View.VISIBLE);
         mno_resources_layout.setVisibility(View.GONE);
         maction_layout_top.setVisibility(View.VISIBLE);
-        // FIXME: 2018/12/10 分享修改
+        //2018/12/10 分享修改
         mShareView = LayoutInflater.from(FieldInfoActivity.this).inflate(R.layout.module_share_bg, null);
         mShareImageView = (ImageView) mShareView.findViewById(R.id.app_share_imgv);
         mShareDescriptionTV = (TextView) mShareView.findViewById(R.id.app_share_descriptive);
@@ -723,7 +722,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
 //                                ShareIconStr = resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(0).get("pic_url").toString()+ com.linhuiba.linhuipublic.config.Config.Linhui_Mid_Watermark;
 //                                ShareBitmap = com.linhuiba.linhuifield.connector.Constants.GetLocalOrNetBitmap(ShareIconStr);
 //                                ShareBitmap = com.linhuiba.linhuifield.connector.Constants.addWaterMark(ShareBitmap,SharedescriptionStr,FieldInfoActivity.this);
-                                // FIXME: 2018/12/10 分享修改
+                                //2018/12/10 分享修改
                                 ShareBitmap = com.linhuiba.linhuifield.connector.Constants.addWaterMark(mShareView,FieldInfoActivity.this);
                                 ShareBitmap = com.linhuiba.linhuifield.connector.Constants.compressImage(ShareBitmap);
                                 ShareBitmap = Bitmap.createScaledBitmap(ShareBitmap, 370, 296, true);//压缩Bitmap
@@ -824,7 +823,6 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         } else {
             if (getfieldid != null && getfieldid.length() > 0) {
                 //展位详情接口调用
-                // FIXME: 2018/12/18 测试id
                 mFieldinfoMvpPresenter.getResInfo(getfieldid,mApiResourcesModel);
                 //浏览记录
                 if (LoginManager.isLogin()) {
@@ -942,6 +940,9 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 if (LoginManager.isLogin()) {
                     Intent review = new Intent(FieldInfoActivity.this, FieldEvaluationActivity.class);
                     review.putExtra("fieldid", getfieldid);
+                    if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
+                        review.putExtra("is_sell_res", 1);
+                    }
                     startActivity(review);
                 } else {
                     new AlertDialog.Builder(FieldInfoActivity.this)
@@ -1121,10 +1122,9 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                     mApiResourcesModel.setMin_price(null);
                     mApiResourcesModel.setMax_price(null);
                 }
-                // FIXME: 2018/12/27 刷新规格请求接口
+                //2018/12/27 刷新规格请求接口
                 if (getfieldid != null && getfieldid.length() > 0) {
                     //展位详情接口调用
-                    // FIXME: 2018/12/18 测试id
                     isRefreshSize = true;
                     mFieldinfoMvpPresenter.getResInfo(getfieldid,mApiResourcesModel);
                 }
@@ -1173,7 +1173,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                     isShowAllOtherRes = false;
                     mFieldinfoOtherResShowAllTV.setCompoundDrawables(null, null, mShowAllDownDrawable, null);
                     mFieldinfoOtherResShowAllTV.setText(getResources().getString(R.string.module_fieldinfo_other_res_show));
-                    // FIXME: 2018/12/14 其他展位收起
+                    //2018/12/14 其他展位收起
                     mFieldInfoOtherDataListTemp.clear();
                     for (int i = 0; i < 3; i++) {
                         mFieldInfoOtherDataListTemp.add(mFieldInfoOtherDataList.get(i));
@@ -1189,7 +1189,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 }
                 break;
             case R.id.fieldinfo_counselor_call_tv:
-                // FIXME: 2018/12/14 联系顾问
+                //2018/12/14 联系顾问
                 if (resourceinfolist.getService_representative() != null &&
                         resourceinfolist.getService_representative().getTel() != null &&
                         resourceinfolist.getService_representative().getTel().length() > 0) {
@@ -1197,7 +1197,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 }
                 break;
             case R.id.fieldinfo_counselor_wx_tv:
-                // FIXME: 2018/12/14 加顾问微信
+                //2018/12/14 加顾问微信
                 if (resourceinfolist.getService_representative() != null &&
                         resourceinfolist.getService_representative().getQrcode() != null &&
                         resourceinfolist.getService_representative().getQrcode().length() > 0) {
@@ -1218,7 +1218,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 startActivity(fieldinfo);
                 break;
             case R.id.fieldinfo_counselor_tv:
-                // FIXME: 2018/12/20 顾问
+                //2018/12/20 顾问
                 if (resourceinfolist.getService_representative() != null &&
                         resourceinfolist.getService_representative().getId() > 0) {
                     showCounselorDialog(0,false,0);
@@ -1934,7 +1934,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         View myView = FieldInfoActivity.this.getLayoutInflater().inflate(R.layout.module_dialog_fieldinfo_look_price, null);
         zoom_picture_dialog = new AlertDialog.Builder(FieldInfoActivity.this).create();
         Constants.show_dialog(myView,zoom_picture_dialog);
-        // FIXME: 2018/12/17 预览图片
+        //2018/12/17 预览图片
         TextView mshowpicture_back = (TextView)myView.findViewById(R.id.fieldinfo_look_pic_back_tv);
         TextView mShowPictureTitleTV = (TextView)myView.findViewById(R.id.fieldinfo_look_pic_title_tv);
         ViewPager mzoom_viewpage = (ViewPager)myView.findViewById(R.id.fieldinfo_look_pic_zoom_dialog_viewpage);
@@ -1956,7 +1956,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(mShowPicSizeLL.getLayoutParams());
         lp.setMargins(0, margintop, com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,12), 0);
         mShowPicSizeLL.setLayoutParams(lp);
-        // FIXME: 2018/12/18 案例数量 展位图片最后是第几个
+        //2018/12/18 案例数量 展位图片最后是第几个
         int phyEndInt = mPicList.size();
         if (mCasePicList != null && mCasePicList.size() > 0) {
             phyEndInt = mPicList.size() - mCasePicList.size();
@@ -2021,7 +2021,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 Picasso.with(this).load(mPicList.get(i).toString()).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width_new, height_new).into(imageView);
                 mImageViewList.add(imageView);
             }
-            // FIXME: 2018/12/26 设置循环的数据
+            //2018/12/26 设置循环的数据
             ZoomImageView imageView2 = new ZoomImageView(
                     getApplicationContext());
             Picasso.with(this).load(mPicList.get(mPicList.size() - 1).toString()).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width_new, height_new).into(imageView2);
@@ -2095,23 +2095,23 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 mLocationClient.registerLocationListener(new MyLocationListener());//注册定位监听接口
                 initLocation();
             } else if (requestCode == CALL_PHONE_CODE) {
-                // FIXME: 2018/12/19 顾问电话
+                //2018/12/19 顾问电话
                 if (resourceinfolist.getService_representative() != null &&
                         resourceinfolist.getService_representative().getTel() != null &&
                         resourceinfolist.getService_representative().getTel().length() > 0) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
-                            + resourceinfolist.getService_representative().getTel()));// FIXME: 2018/12/19 测试数据
+                            + resourceinfolist.getService_representative().getTel()));
                     if (ActivityCompat.checkSelfPermission(FieldInfoActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         return;
                     }
                     startActivity(intent);
                 }
             } else if (requestCode == CALL_SERVICE_PHONE_CODE) {
-                // FIXME: 2018/12/19 顾问电话
+                //2018/12/19 顾问电话
                 if (resourceinfolist.getService_phone() != null &&
                         resourceinfolist.getService_phone().length() > 0) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
-                            + resourceinfolist.getService_phone()));// FIXME: 2018/12/19 测试数据
+                            + resourceinfolist.getService_phone()));
                     if (ActivityCompat.checkSelfPermission(FieldInfoActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         return;
                     }
@@ -4563,7 +4563,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
             }
             if (resourceinfolist.getPhysical_resource().getPhysical_resource_imgs() != null) {
                 if (resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().size() > 0) {
-                    // FIXME: 2018/12/10 分享修改界面
+                    //2018/12/10 分享修改界面
                     if (resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(0).get("pic_url") != null &&
                             resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(0).get("pic_url").length() > 0) {
                         ShareIconStr = resourceinfolist.getPhysical_resource().getPhysical_resource_imgs().get(0).get("pic_url").toString() + com.linhuiba.linhuipublic.config.Config.Linhui_Mid_Watermark;
@@ -4849,7 +4849,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                                 mResAddressStr;
                     }
                     mtxt_address.setText(mResAddressStr);
-                    // FIXME: 2018/12/10 分享修改
+                    //2018/12/10 分享修改
                     mShareDescriptionTV.setText(SharedescriptionStr);
                 }
                 //朋友圈分享标题
@@ -5070,7 +5070,11 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 }
 
                 //评论列表
-                mFieldinfoMvpPresenter.getResInfoReview(getfieldid, "1", "2");
+                if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
+                    mFieldinfoMvpPresenter.getResInfoReview(getfieldid, "1", "2",true);
+                } else {
+                    mFieldinfoMvpPresenter.getResInfoReview(getfieldid, "1", "2",false);
+                }
                 //筛选条件
                 boolean isScreenShow = false;
                 String priceStr = "";
@@ -5137,7 +5141,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                                 priceStr);
                         updataSizeLv(false);
                     }
-                    // FIXME: 2018/12/27 筛选条件 展位面积和人流量代码  取消这两个条件
+                    //2018/12/27 筛选条件 展位面积和人流量代码  取消这两个条件
                     if (areaStr.length() > 0) {
                         mFieldinfoScreenAreaTV.setVisibility(View.GONE);
                         mFieldinfoScreenAreaTV.setText(getResources().getString(R.string.module_searchlist_screen_area_tv_str) +
@@ -5149,7 +5153,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                                 personStr);
                     }
                 }
-                // FIXME: 2018/12/19 顾问
+                //2018/12/19 顾问
                 if (resourceinfolist.getService_representative() != null &&
                         resourceinfolist.getService_representative().getId() > 0) {
                     mFieldinfoCounseLL.setVisibility(View.VISIBLE);
@@ -5169,8 +5173,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                         mFieldinfoCounselorDescriptionTV.setText(resourceinfolist.getService_representative().getProfile());
                     }
                 }
-                // FIXME: 2018/12/22 图文详情
-
+                //2018/12/22 图文详情
                 if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
                     if (resourceinfolist.getSize() != null && resourceinfolist.getSize().size() > 0 &&
                             resourceinfolist.getSize().get(0).getResource() != null &&
@@ -5898,7 +5901,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                                 new Thread(){
                                     public void run(){
                                         com.linhuiba.linhuifield.connector.Constants.saveToSystemGallery(FieldInfoActivity.this,
-                                                resourceinfolist.getService_representative().getQrcode());// FIXME: 2018/12/19 测试url
+                                                resourceinfolist.getService_representative().getQrcode());
                                         mHandler.sendEmptyMessage(2);
                                     }
                                 }.start();
@@ -5948,8 +5951,8 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 String name = "";
                 String call = "";
                 String profile = "";
-                String imgUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
-                String qrcodeUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;// FIXME: 2018/12/19 测试数据
+                String imgUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;
+                String qrcodeUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;
                 if (resourceinfolist.getService_representative().getName() != null) {
                     name = resourceinfolist.getService_representative().getName();
                 }
@@ -5974,11 +5977,11 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                         .addViewOnclick(R.id.app_defaylt_dialog_counselor_call_ll,uploadListener)
                         .addViewOnclick(R.id.app_defaylt_close_img_btn,uploadListener)
                         .addViewOnclick(R.id.fieldinfo_counselor_save_wx_code_btn_ll,uploadListener)
-                        .setText(R.id.fieldinfo_counselor_name_tv,name)// FIXME: 2018/12/19 测试数据
+                        .setText(R.id.fieldinfo_counselor_name_tv,name)
                         .setText(R.id.app_defaylt_dialog_counselor_call_tv,
-                                getResources().getString(R.string.module_fieldinfo_counselor_call) +call)// FIXME: 2018/12/19 测试数据
+                                getResources().getString(R.string.module_fieldinfo_counselor_call) +call)
                         .setText(R.id.fieldinfo_counselor_description_tv,profile)
-                        .setOvalImgvUrl(FieldInfoActivity.this,R.id.fieldinfo_counselor_imgv,imgUrl,// FIXME: 2018/12/19 测试数据
+                        .setOvalImgvUrl(FieldInfoActivity.this,R.id.fieldinfo_counselor_imgv,imgUrl,
                                 com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,80),
                                 com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,80))
                         .setImgvUrl(FieldInfoActivity.this,R.id.app_defaylt_dialog_counselor_qrcode_imgv,qrcodeUrl,

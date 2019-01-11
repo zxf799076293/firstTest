@@ -16,271 +16,102 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="@dimen/txt_padding_left"
-            android:paddingBottom="@dimen/txt_padding_left"
             android:id="@+id/field_review_grade_layout"
             android:visibility="gone">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/TableRow_img_marginleft"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="@dimen/regiter_btnlayout_width"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                    android:text="@string/review_score_text"
-                    android:textColor="@color/top_title_center_txt_color"
-                    android:textSize="@dimen/login_leftright_txt_size"/>
+                android:layout_height="@dimen/advertising_tffs_height"
+                android:orientation="horizontal">
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/title_bar_back_layout_width_height"
-                    android:background="@color/white"
-                    android:layout_marginLeft="@dimen/home_gridview_texttwo_marginleft"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    >
-                    <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/review_img_0"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
+                        android:text="0"
+                        android:id="@+id/comment_composite_score_tv"
+                        android:textColor="@color/headline_tv_color"
+                        android:textSize="@dimen/wallet_balance_textview_size"/>
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_img_1"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_img_2"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_img_3"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_img_4"
-                        android:background="@drawable/publish_review_img"/>
-
+                        android:layout_marginTop="@dimen/tab_item_img_margintop"
+                        android:text="@string/module_comment_composite_score"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/txt_title_size_info"/>
                 </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/TableRow_img_marginleft"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="@dimen/regiter_btnlayout_width"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                    android:text="@string/search_fieldlist_number_of_people"
-                    android:textColor="@color/top_title_center_txt_color"
-                    android:textSize="@dimen/login_leftright_txt_size"/>
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/title_bar_back_layout_width_height"
-                    android:background="@color/white"
-                    android:layout_marginLeft="@dimen/home_gridview_texttwo_marginleft"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    >
-                    <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/review_number_of_people_img_0"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_number_of_people_img_1"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_number_of_people_img_2"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_number_of_people_img_3"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_number_of_people_img_4"
-                        android:background="@drawable/publish_review_img"/>
+                        android:orientation="horizontal"
+                        android:gravity="bottom">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:id="@+id/comment_item_propertymatching_tv"
+                            android:textColor="@color/headline_tv_color"
+                            android:textSize="@dimen/wallet_balance_textview_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="%"
+                            android:textColor="@color/headline_tv_color"
+                            android:textSize="@dimen/login_leftright_txt_size"/>
 
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tab_item_img_margintop"
+                        android:text="@string/module_comment_propertymatching"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/txt_title_size_info"/>
                 </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/TableRow_img_marginleft"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="@dimen/regiter_btnlayout_width"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                    android:text="@string/review_property_cooperate_text"
-                    android:textColor="@color/top_title_center_txt_color"
-                    android:textSize="@dimen/login_leftright_txt_size"/>
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/title_bar_back_layout_width_height"
-                    android:background="@color/white"
-                    android:layout_marginLeft="@dimen/home_gridview_texttwo_marginleft"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    >
-                    <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/review_property_cooperate_img_0"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_property_cooperate_img_1"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_property_cooperate_img_2"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_property_cooperate_img_3"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_property_cooperate_img_4"
-                        android:background="@drawable/publish_review_img"/>
+                        android:orientation="horizontal"
+                        android:gravity="bottom">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:id="@+id/comment_item_goalcompletion_tv"
+                            android:textColor="@color/headline_tv_color"
+                            android:textSize="@dimen/wallet_balance_textview_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="%"
+                            android:textColor="@color/headline_tv_color"
+                            android:textSize="@dimen/login_leftright_txt_size"/>
 
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tab_item_img_margintop"
+                        android:text="@string/module_comment_goalcompletion"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/txt_title_size_info"/>
                 </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/TableRow_img_marginleft"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="@dimen/regiter_btnlayout_width"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                    android:text="@string/review_user_participation_text"
-                    android:textColor="@color/top_title_center_txt_color"
-                    android:textSize="@dimen/login_leftright_txt_size"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/title_bar_back_layout_width_height"
-                    android:background="@color/white"
-                    android:layout_marginLeft="@dimen/home_gridview_texttwo_marginleft"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    >
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/review_user_participation_img_0"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_user_participation_img_1"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_user_participation_img_2"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_user_participation_img_3"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_user_participation_img_4"
-                        android:background="@drawable/publish_review_img"/>
 
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/TableRow_img_marginleft"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="@dimen/regiter_btnlayout_width"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                    android:text="@string/review_complete_target_text"
-                    android:textColor="@color/top_title_center_txt_color"
-                    android:textSize="@dimen/login_leftright_txt_size"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/title_bar_back_layout_width_height"
-                    android:background="@color/white"
-                    android:layout_marginLeft="@dimen/home_gridview_texttwo_marginleft"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    >
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/review_complete_target_img_0"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_complete_target_img_1"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_complete_target_img_2"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_complete_target_img_3"
-                        android:background="@drawable/publish_review_img"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/txt_padding_left"
-                        android:id="@+id/review_complete_target_img_4"
-                        android:background="@drawable/publish_review_img"/>
-
-                </LinearLayout>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -298,6 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:layout_marginTop="@dimen/app_backbtn_marginleft">
                 <TextView
                     android:layout_width="0dp"
@@ -307,9 +139,31 @@
                     android:layout_marginRight="@dimen/app_backbtn_marginleft"
                     android:text=""
                     android:id="@+id/field_user_txt"
-                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                    android:textColor="@color/headline_tv_color"
                     android:textSize="@dimen/login_leftright_txt_size"
                     android:layout_marginLeft="@dimen/app_backbtn_marginleft"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_time"
+                    android:text="2016-6-6"
+                    android:textColor="@color/register_edit_color"
+                    android:textSize="@dimen/register_codebtn_txt_size" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/searchlist_item_txt_margintop"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/module_caseinfo_score"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:layout_marginRight="@dimen/txt_margin"
+                    android:textColor="@color/register_edit_color"
+                    android:textSize="@dimen/fieldinfo_chair_textsize" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -342,16 +196,9 @@
                         android:id="@+id/score_img_five"
                         android:src="@drawable/ic_xingxing_normal"/>
                 </LinearLayout>
+
             </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                android:id="@+id/txt_time"
-                android:text="2016-6-6"
-                android:textColor="@color/register_edit_color"
-                android:textSize="@dimen/register_codebtn_txt_size"
-                android:layout_marginTop="@dimen/searchlist_item_txt_margintop" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -373,58 +220,88 @@
             android:scrollbars="none"
             android:gravity="center"
             android:layout_marginTop="@dimen/orderlist_item_linearlayout_marginleft"
-            android:id="@+id/review_imggridview"
-            >
-
+            android:id="@+id/review_imggridview">
         </com.linhuiba.business.view.MyGridview>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/app_backbtn_marginleft"
             android:layout_marginLeft="@dimen/app_backbtn_marginleft"
             android:layout_marginRight="@dimen/app_backbtn_marginleft"
-            android:layout_marginTop="@dimen/searchlist_item_txt_margintop">
+            android:paddingTop="@dimen/field_list_item_padding"
+            android:paddingBottom="@dimen/field_list_item_padding"
+            android:background="@drawable/activity_fieldinfo_show_all_resource_info_bg">
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginRight="@dimen/txt_margin"
-                android:layout_marginTop="@dimen/tab_item_margintop"
-                android:id="@+id/txt_number_of_people_ll">
+                android:gravity="center_vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/fieldinfo_number_of_people_text"
+                    android:id="@+id/comment_item_promotion_purpose_tv"
+                    android:singleLine="true"
+                    android:text="@string/module_comment_promotion_purpose"
                     android:textColor="@color/register_edit_color"
+                    android:layout_marginRight="@dimen/myself_red_prompt_width"
                     android:textSize="@dimen/txt_title_size_info" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txt_number_of_people"
+                    android:id="@+id/comment_item_spread_way_tv"
+                    android:singleLine="true"
+                    android:layout_marginRight="@dimen/myself_red_prompt_width"
+                    android:text="@string/module_comment_spread_way"
+                    android:textColor="@color/register_edit_color"
+                    android:textSize="@dimen/txt_title_size_info" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="@dimen/txt_margin"
+                    android:id="@+id/txt_number_of_people_ll">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fieldinfo_number_of_people_text"
+                        android:textColor="@color/register_edit_color"
+                        android:textSize="@dimen/txt_title_size_info" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txt_number_of_people"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/register_edit_color"
+                        android:textSize="@dimen/txt_title_size_info" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/home_gridview_textone_marginleft">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/review_res_size_tv"
+                    android:singleLine="true"
+                    android:text="@string/review_people_number_tv_str"
+                    android:textColor="@color/register_edit_color"
+                    android:layout_marginRight="@dimen/txt_margin"
+                    android:textSize="@dimen/txt_title_size_info" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/review_res_industry_tv"
+                    android:layout_marginTop="@dimen/home_gridview_textone_marginleft"
                     android:singleLine="true"
                     android:text="@string/review_people_number_tv_str"
                     android:textColor="@color/register_edit_color"
                     android:textSize="@dimen/txt_title_size_info" />
             </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/review_res_size_tv"
-                android:singleLine="true"
-                android:text="@string/review_people_number_tv_str"
-                android:textColor="@color/register_edit_color"
-                android:layout_marginRight="@dimen/txt_margin"
-                android:textSize="@dimen/txt_title_size_info" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/review_res_industry_tv"
-                android:singleLine="true"
-                android:text="@string/review_people_number_tv_str"
-                android:textColor="@color/register_edit_color"
-                android:textSize="@dimen/txt_title_size_info" />
         </LinearLayout>
 
         <RelativeLayout

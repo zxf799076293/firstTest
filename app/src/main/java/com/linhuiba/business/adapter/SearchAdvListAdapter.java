@@ -124,7 +124,7 @@ public class SearchAdvListAdapter extends BaseAdapter {
                 } else {
                     holder.mselfOperatedImg.setVisibility(View.GONE);
                 }
-                // FIXME: 2018/12/8 广告人流量
+                //2018/12/8 广告人流量
                 holder.mSearchListLabelsLL.setVisibility(View.GONE);
                 holder.mSearchAdvListTimeLL.setVisibility(View.GONE);
                 holder.address.setVisibility(View.GONE);
@@ -214,7 +214,7 @@ public class SearchAdvListAdapter extends BaseAdapter {
                     holder.mSearchListOrderSizeTV.setText(
                             String.valueOf(mFeildList.get(position).getNumber_of_order()) +
                                     mContext.getResources().getString(R.string.module_searchlist_item_otder_size));
-                    // FIXME: 2018/12/8 是否显示我有需求
+                    //2018/12/8 是否显示我有需求
                     holder.mSearchListDemandLL.setVisibility(View.GONE);
 
                     if (mFeildList.get(position).getRes_type_id() == 3) {
@@ -307,7 +307,12 @@ public class SearchAdvListAdapter extends BaseAdapter {
                     if (mFeildList.get(position).getActivity_type() != null &&
                             mFeildList.get(position).getActivity_type().length() > 0) {
                         holder.msearchlist_txt_fieldtitle_layout.setVisibility(View.VISIBLE);
-                        holder.msearchlist_txt_fieldtitle.setText(mFeildList.get(position).getActivity_type());
+                        if (mFeildList.get(position).getTotal_area() != null && mFeildList.get(position).getTotal_area().length() > 0) {
+                            holder.msearchlist_txt_fieldtitle.setText(mFeildList.get(position).getActivity_type() + "·" +
+                                    Constants.getpricestring(mFeildList.get(position).getTotal_area(),1) + mContext.getResources().getString(R.string.myselfinfo_company_demand_area_unit_text));
+                        } else {
+                            holder.msearchlist_txt_fieldtitle.setText(mFeildList.get(position).getActivity_type());
+                        }
                     } else {
                         holder.msearchlist_txt_fieldtitle_layout.setVisibility(View.GONE);
                     }

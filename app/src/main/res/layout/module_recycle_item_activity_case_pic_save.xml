@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_linearlayout_bg">
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/case_pic_save_rl"
+        android:layout_marginTop="@dimen/tab_item_img_margintop">
+        <com.linhuiba.linhuifield.fieldview.OvalImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:id="@+id/case_pic_save_imgv"
+            android:background="@color/red"
+            app:round="2"
+            app:show_leftup="true"
+            app:show_rightup="true"
+            app:show_leftdown="false"
+            app:show_rightdown="false" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/txt_margin"
+            android:layout_marginRight="@dimen/text_title_next_padding"
+            android:layout_alignRight="@+id/case_pic_save_imgv"
+            android:layout_alignBottom="@+id/case_pic_save_imgv"
+            android:checked="true"
+            android:visibility="visible"
+            android:button="@drawable/module_bg_publish_review_checkbox"
+            android:id="@+id/case_pic_save_cb"/>
+
+    </RelativeLayout>
+</LinearLayout>

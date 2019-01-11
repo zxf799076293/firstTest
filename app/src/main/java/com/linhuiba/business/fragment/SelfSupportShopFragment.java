@@ -175,15 +175,6 @@ public class SelfSupportShopFragment extends BaseMvpFragment implements SwipeRef
         } else {
             mCity_Id = LoginManager.getInstance().getTrackcityid();
         }
-        //浏览记录
-        if (LoginManager.isLogin() && mSelfSupportShopActivity.mResTypeId == 3) {
-            try {
-                String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl(mCity_Id,latitude,longitude,mPagePosition));
-                LoginMvpModel.sendBrowseHistories("activity_list",parameter,mCity_Id);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
         showProgressDialog();
         initData();
         mSelfSupportShopListLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -240,6 +231,7 @@ public class SelfSupportShopFragment extends BaseMvpFragment implements SwipeRef
         mPagePosition = 1;
         if (mSelfSupportShopActivity.mResTypeId == 3) {
             mSearchResListMvpPresenter.getActivityList(mCity_Id,latitude,longitude,mPagePosition);
+            sendBrowseHistories();
         } else {
             mApiAdvResourcesModel.setOrder_by("default_sort");
             mApiAdvResourcesModel.setOrder("desc");
@@ -265,6 +257,7 @@ public class SelfSupportShopFragment extends BaseMvpFragment implements SwipeRef
         apiResourcesModel.setPage(String.valueOf(mPagePosition));
         if (mSelfSupportShopActivity.mResTypeId == 3) {
             mSearchResListMvpPresenter.getActivityList(mCity_Id,latitude,longitude,mPagePosition);
+            sendBrowseHistories();
         } else {
             mApiAdvResourcesModel.setPage(String.valueOf(mPagePosition));
             mSearchResListMvpPresenter.getSelfResList(mApiAdvResourcesModel);
@@ -478,5 +471,16 @@ public class SelfSupportShopFragment extends BaseMvpFragment implements SwipeRef
             paramsMap.put("longitude", String.valueOf(lng));
         }
         return paramsMap;
+    }
+    private void sendBrowseHistories() {
+        //浏览记录
+        if (LoginManager.isLogin() && mSelfSupportShopActivity.mResTypeId == 3) {
+            try {
+                String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl(mCity_Id,latitude,longitude,mPagePosition));
+                LoginMvpModel.sendBrowseHistories("activity_list",parameter,mCity_Id);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -126,7 +126,7 @@ public class BinDingMobileActivity extends BaseMvpActivity {
                 }
                 showProgressDialog(getResources().getString(R.string.txt_waiting));
                 UserApi.apiauthcaptcha(MyAsyncHttpClient.MyAsyncHttpClient(), getLoginCodeeHandler,
-                        mbingding_mobile_mobile_edit.getText().toString(),"2");
+                        mbingding_mobile_mobile_edit.getText().toString(),"3");
                 break;
             default:
                 break;

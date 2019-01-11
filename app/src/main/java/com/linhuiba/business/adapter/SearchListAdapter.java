@@ -351,7 +351,7 @@ public class SearchListAdapter extends BaseAdapter {
                 holder.msearchlist_item_activity_data_middle_text.setTextColor(mactivity.getResources().getColor(R.color.default_redbg));
                 holder.mSearchListPriceUnitTV.setTextColor(mactivity.getResources().getColor(R.color.default_redbg));
             }
-            // FIXME: 2018/12/8 列表页显示我有需求 mSearchListDemandLL
+            //2018/12/8 列表页显示我有需求 mSearchListDemandLL
             if (mFeildList.get(position).getIs_enquiry() != null &&
                     mFeildList.get(position).getIs_enquiry() == 1) {
                 holder.mSearchListDemandLL.setVisibility(View.VISIBLE);

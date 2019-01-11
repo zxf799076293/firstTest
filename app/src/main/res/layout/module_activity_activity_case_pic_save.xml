@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_linearlayout_bg">
+    <include layout="@layout/linhui_business_title_bar">
+    </include>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/app_linearlayout_bg"
+        android:id="@+id/case_pic_rv">
+    </android.support.v7.widget.RecyclerView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/maintab_width"
+        android:background="@color/default_bluebg"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/user_info_photo_txt_size"
+        android:id="@+id/activity_case_pic_save_btn"
+        android:text="@string/module_case_pic_save_btn_text"/>
+</LinearLayout>

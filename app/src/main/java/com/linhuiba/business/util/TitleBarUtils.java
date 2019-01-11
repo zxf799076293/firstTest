@@ -330,6 +330,21 @@ public class TitleBarUtils  {
 
         }
     }
+    public static void showTitleBarRightThreeImg(final Activity activity,boolean show,Integer img_src,View.OnClickListener l) {
+        if (activity != null && show) {
+            ImageView backImgButton = (ImageView)activity.findViewById(R.id.business_titlebar_right_three_img);
+            RelativeLayout backButton = (RelativeLayout)activity.findViewById(R.id.business_titlebar_right_three_rl);
+            if (img_src != null) {
+                backImgButton.setImageResource(img_src);
+            }
+            backButton.setVisibility(View.VISIBLE);
+            backImgButton.setVisibility(View.VISIBLE);
+            if (backButton != null) {
+                backButton.setOnClickListener(l);
+                backImgButton.setOnClickListener(l);
+            }
+        }
+    }
 
 }
 

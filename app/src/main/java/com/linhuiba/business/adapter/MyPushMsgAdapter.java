@@ -48,6 +48,8 @@ public class MyPushMsgAdapter extends BaseQuickAdapter<MyPushMsgModel, BaseViewH
         TextView pushMsgReadSignTV = (TextView) helper.getView(R.id.push_msg_item_read_sign_tv);
         TextView pushMsgDeleteTV = (TextView) helper.getView(R.id.push_msg_item_delete_tv);
         SwipeItemView swipeItemView = (SwipeItemView) helper.getView(R.id.push_msg_item_swipe_view);
+        LinearLayout pushClickLL = (LinearLayout) helper.getView(R.id.push_msg_click_ll);
+
         pushMsgReadSignTV.setText(mContext.getResources().getString(R.string.module_my_push_msg_read_sign));
         pushMsgDeleteTV.setText(mContext.getResources().getString(R.string.invoiceinfo_delete_address_txt));
 
@@ -108,6 +110,20 @@ public class MyPushMsgAdapter extends BaseQuickAdapter<MyPushMsgModel, BaseViewH
                 pushMsgShowInfoTV.setVisibility(View.GONE);
             } else {
                 pushMsgShowInfoTV.setVisibility(View.VISIBLE);
+                pushMsgShowInfoTV.setOnClickListener(new OnMultiClickListener() {
+                    @Override
+                    public void onMultiClick(View v) {
+                        //2018/11/5 msg info 点击
+                        mMySelfPushMessageActivity.onInfoClick(item.getUrl(),item.getId(),helper.getLayoutPosition());
+                    }
+                });
+                pushClickLL.setOnClickListener(new OnMultiClickListener() {
+                    @Override
+                    public void onMultiClick(View v) {
+                        //2018/11/5 msg info 点击
+                        mMySelfPushMessageActivity.onInfoClick(item.getUrl(),item.getId(),helper.getLayoutPosition());
+                    }
+                });
             }
         } else {
             pushMsgShowInfoTV.setVisibility(View.GONE);
@@ -122,13 +138,6 @@ public class MyPushMsgAdapter extends BaseQuickAdapter<MyPushMsgModel, BaseViewH
                 }
                 notifyDataSetChanged();
                 mMySelfPushMessageActivity.setBottomTVText();
-            }
-        });
-        pushMsgShowInfoTV.setOnClickListener(new OnMultiClickListener() {
-            @Override
-            public void onMultiClick(View v) {
-                //2018/11/5 msg info 点击
-                mMySelfPushMessageActivity.onInfoClick(item.getUrl(),item.getId(),helper.getLayoutPosition());
             }
         });
         pushMsgReadSignTV.setOnClickListener(new OnMultiClickListener() {

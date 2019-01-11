@@ -316,6 +316,7 @@ public class UserApi {
     public static void version(OkHttpClient client,
                                LinhuiAsyncHttpResponseHandler handler) {
         HashMap<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("vid",String.valueOf(com.linhuiba.business.BuildConfig.VERSION_CODE));
         Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
                 "config/app_latest_version/android",
                 paramsMap,1));

@@ -195,7 +195,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
     private ArrayList<SearchAreaPwModel> mSearchAreaList;//区域第一列列表
     private ResourcesScreeningNewAdapter resourcesScreeningNewAdapter;
     public int GridviewNumColumns = 0;//根据屏幕尺寸设置gridview的一行显示个数
-    public int mLocationTypeChooseInt = 0;// FIXME: 2018/12/11 //判断位置类型是否有选中 1选中显示全部反之显示3条数据
+    public int mLocationTypeChooseInt = 0;//2018/12/11 //判断位置类型是否有选中 1选中显示全部反之显示3条数据
     public int field_labels_int = 0;//判断邻汇推荐是否有选中 1选中显示全部反之显示3条数据
     public int category_id_int = 0;//判断类目是否有选中 1选中显示全部反之显示3条数据
     public HashMap<String,Integer> attributesChooseMap;//判断属性是否有选中 1选中显示全部反之显示3条数据
@@ -1413,7 +1413,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                 (apiResourcesModel.getMin_person_flow() != null && apiResourcesModel.getMin_person_flow().length() > 0) ||
                 (apiResourcesModel.getMax_person_flow() != null && apiResourcesModel.getMax_person_flow().length() > 0) ||
                 (apiResourcesModel.getLabel_ids() != null && apiResourcesModel.getLabel_ids().size() > 0)
-                || (apiResourcesModel.getLocation_type_ids() != null && apiResourcesModel.getLocation_type_ids().size() > 0)// FIXME: 2018/12/11 位置类型
+                || (apiResourcesModel.getLocation_type_ids() != null && apiResourcesModel.getLocation_type_ids().size() > 0)//2018/12/11 位置类型
                 || (apiResourcesModel.getCommunity_type_ids() != null && apiResourcesModel.getCommunity_type_ids().size() > 0)
                 || (apiResourcesModel.getAttributes() != null && apiResourcesModel.getAttributes().size() > 0)) {
             mscreening_txt.setTextColor(getResources().getColor(R.color.default_bluebg));
@@ -1492,7 +1492,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
         String in_trading_area = "";
         String community_type_ids = "";
         String label_ids = "";
-        String locationTypeIds = "";// FIXME: 2018/12/11 位置类型
+        String locationTypeIds = "";//2018/12/11 位置类型
         String field_cooperation_type_ids = "";//
         String activity_type_ids = "";
         String age_level_ids = "";
@@ -1593,7 +1593,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
             }
             label_ids = ("&label_ids=" + params);
         }
-        // FIXME: 2018/12/11 分享时加位置类型
+        //2018/12/11 分享时加位置类型
         if (apiResourcesModel.getLocation_type_ids() != null && apiResourcesModel.getLocation_type_ids().size() > 0) {
             String params = "";
             for (int i = 0; i < apiResourcesModel.getLocation_type_ids().size(); i++) {
@@ -1776,7 +1776,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                         String min_person_flow_edit = "";
                         String max_person_flow_edit = "";
                         ArrayList<Integer> fieldlabel_list = new ArrayList<>();
-                        ArrayList<Integer> locationTypeIdsList = new ArrayList<>();// FIXME: 2018/12/11 位置类型确认按钮操作
+                        ArrayList<Integer> locationTypeIdsList = new ArrayList<>();//2018/12/11 位置类型确认按钮操作
                         ArrayList<Integer> communityTypeList = new ArrayList<>();
                         ArrayList<SearchListAttributesModel> attributesList = new ArrayList<>();
                         for (int j = 0;j < data_new.size(); j++ ) {
@@ -1791,7 +1791,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                                         if ((boolean)ResourcesScreeningItemAdapter.getresourcescreeninglist().get(data_new_temp.get(i).get("type").toString()+data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString())) {
                                             if (data_new_temp.get(i).get("type").toString().equals("field_labels")) {
                                                 fieldlabel_list.add(Integer.parseInt(data_new_temp.get(i).get("id").toString()));
-                                            } else if (data_new_temp.get(i).get("type").toString().equals("location_types")) {// FIXME: 2018/12/11 位置类型
+                                            } else if (data_new_temp.get(i).get("type").toString().equals("location_types")) {//2018/12/11 位置类型
                                                 locationTypeIdsList.add(Integer.parseInt(data_new_temp.get(i).get("id").toString()));
                                             } else if (data_new_temp.get(i).get("type").toString().equals("category")) {
                                                 communityTypeList.add(Integer.parseInt(mCategoryMap.get(data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString())));
@@ -1890,7 +1890,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                             }
                         }
                         apiResourcesModel.setLabel_ids(fieldlabel_list);
-                        apiResourcesModel.setLocation_type_ids(locationTypeIdsList);// FIXME: 2018/12/11 赋值位置类型到筛选
+                        apiResourcesModel.setLocation_type_ids(locationTypeIdsList);//2018/12/11 赋值位置类型到筛选
                         apiResourcesModel.setCommunity_type_ids(communityTypeList);
                         apiResourcesModel.setAttributes(attributesList);
                         if (mminimum_yearedit.length() > 0) {
@@ -1926,7 +1926,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                         if (apiResourcesModel.getMin_area() != null || apiResourcesModel.getMax_area() != null||
                                 apiResourcesModel.getMin_person_flow() != null  || apiResourcesModel.getMax_person_flow() != null
                                 || apiResourcesModel.getLabel_ids().size() > 0
-                                || apiResourcesModel.getLocation_type_ids().size() > 0 // FIXME: 2018/12/11 位置类型
+                                || apiResourcesModel.getLocation_type_ids().size() > 0 //2018/12/11 位置类型
                                 || apiResourcesModel.getCommunity_type_ids().size() > 0
                                 || apiResourcesModel.getAttributes().size() > 0) {
                             mscreening_txt.setTextColor(getResources().getColor(R.color.default_bluebg));
@@ -2622,7 +2622,9 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
         if (mAttributesList != null) {
             mAttributesList.clear();
         }
-        setResScreeningAdapter();
+        if (isShowScreenAttributes) {
+            setResScreeningAdapter();
+        }
     }
 
     @Override
@@ -2715,7 +2717,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
             field_labels_listmap.put("datalist",field_labels_listdata);
             data_new.add(field_labels_listmap);
         }
-        // FIXME: 2018/12/11 位置类型
+        //2018/12/11 位置类型
         if (mLocationTypeList.size() > 0) {
             HeaderId++;
             ArrayList<HashMap<Object,Object>> locationList = new ArrayList<HashMap<Object,Object>>();
@@ -2801,7 +2803,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                             }
 
                         }
-                        // FIXME: 2018/12/11 位置类型
+                        //2018/12/11 位置类型
                         else if (data_new_temp.get(i).get("type").toString().equals("location_types")) {
                             if (apiResourcesModel.getLocation_type_ids() != null) {
                                 if (apiResourcesModel.getLocation_type_ids().size() > 0) {
@@ -2982,7 +2984,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                 paramsMap.put("label_ids",ids);
             }
         }
-        // FIXME: 2018/12/11 浏览记录位置类型
+        //2018/12/11 浏览记录位置类型
         if (apiResourcesModel.getLocation_type_ids() != null &&
                 apiResourcesModel.getLocation_type_ids().size() > 0) {
             String ids = "";

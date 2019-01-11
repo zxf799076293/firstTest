@@ -64,7 +64,7 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
     private MyCouponsAdapter[] mCouponsAdapters = new MyCouponsAdapter[mViewSize];
     public CouponsMvpPresenter mCouponsMvpPresenter;
     private Timer[] mTimers = new Timer[2];
-    // FIXME: 2018/12/7 日历提醒
+    //2018/12/7 日历提醒
     private static final int CALENDAR_REQUEST_INT = 11;//权限 日历选项
     private String mCouponRemindTitleStr = "";
     private String mCouponRemindTime = "";
@@ -110,7 +110,7 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
         ButterKnife.inject(this);
         mCouponsMvpPresenter = new CouponsMvpPresenter();
         mCouponsMvpPresenter.attachView(this);
-        TitleBarUtils.setTitleImg(this,R.drawable.ic_linquanzhongxin_three_nine);
+        TitleBarUtils.setTitleText(this,getResources().getString(R.string.module_comment_centre_title));
         TitleBarUtils.showBackImg(this,true);
         mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         mListViews = new ArrayList<View>();
@@ -254,33 +254,8 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
         } else {
             mLists[mCurrIndex].addAll(data);
         }
-        // FIXME: 2018/12/12 测试数据要删除
-//        mLists[mCurrIndex].get(0).setStatus(3);
-//        Calendar calendat = Calendar.getInstance();
-//        calendat.add(Calendar.MINUTE, 5);
-//        mLists[mCurrIndex].get(0).setShelf_time(mSimpleDateFormat.format(calendat.getTime()));
-//        mLists[mCurrIndex].get(7).setStatus(3);
-//        calendat.add(Calendar.MINUTE, 5);
-//        mLists[mCurrIndex].get(7).setShelf_time(mSimpleDateFormat.format(calendat.getTime()));
-
         if (mLists[mCurrIndex] != null &&
                 mLists[mCurrIndex].size() > 0) {
-            // FIXME: 2018/12/18 测试数据要删除
-//            if (mCurrIndex == 0 || mCurrIndex == 3) {
-//                for (int i = 0; i < mLists[mCurrIndex].size(); i++) {
-//                    if (mLists[mCurrIndex].get(i).getStatus() == 3 &&
-//                            mLists[mCurrIndex].get(i).getShelf_time() != null &&
-//                            mLists[mCurrIndex].get(i).getShelf_time().length() > 0) {
-//                        Calendar cal = Calendar.getInstance();
-//                        try {
-//                            cal.setTime(mSimpleDateFormat.parse(mLists[mCurrIndex].get(i).getShelf_time()));
-//                            mLists[mCurrIndex].get(i).setRemind_time((cal.getTimeInMillis() - System.currentTimeMillis()));
-//                        } catch (ParseException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//            }
             mNullDataRL[mCurrIndex].setVisibility(View.GONE);
             if (mCouponsAdapters[mCurrIndex] == null) {
                 mCouponsAdapters[mCurrIndex] = new MyCouponsAdapter(R.layout.module_recycle_item_coupons,mLists[mCurrIndex],CouponReceiveCentreActivity.this,
@@ -306,7 +281,7 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
                 mCouponsAdapters[mCurrIndex].notifyDataSetChanged();
             }
             mCouponsAdapters[mCurrIndex].loadMoreEnd();
-            // FIXME: 2018/12/12 倒计时
+            //2018/12/12 倒计时
             if (mCurrIndex == 0 || mCurrIndex == 3) {
                 int timeSize;
                 if (mCurrIndex == 0) {
@@ -317,7 +292,6 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
                 if (mTimers[timeSize] == null) {
                     mTimers[timeSize] = new Timer();
                 }
-                // FIXME: 2018/12/24 测试数据
                 mLists[mCurrIndex].get(0).setRemind_time(180);
                 mTimers[timeSize].schedule(new OnCouponTimerTask(mLists[mCurrIndex],mCouponsAdapters[mCurrIndex],
                         CouponReceiveCentreActivity.this,0),0,1000);
@@ -337,7 +311,7 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
                 mLists[mCurrIndex].add(mList.get(i));
             }
             mCouponsAdapters[mCurrIndex].notifyDataSetChanged();
-            // FIXME: 2018/12/12 倒计时
+            //2018/12/12 倒计时
             if (mCurrIndex == 0 || mCurrIndex == 3) {
                 int timeSize;
                 if (mCurrIndex == 0) {
@@ -387,7 +361,7 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
         @Override
         public void onSucceed(int requestCode, List<String> grantedPermissions) {
             // Successfully.
-            // FIXME: 2018/12/7 日历提醒
+            //2018/12/7 日历提醒
             if (requestCode == CALENDAR_REQUEST_INT) {
                 if (mCouponRemindTitleStr.length() > 0 &&
                 mCouponRemindTime.length() > 0)
@@ -406,7 +380,7 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
         }
     };
     public void setRemindClick(int couponId, String title, String reminderTime) {
-        // FIXME: 2018/12/7 日历功能
+        //2018/12/7 日历功能
         mCouponRemindTitleStr = title;
         mCouponRemindTime = reminderTime;
         mClickCouponId = couponId;
@@ -432,7 +406,7 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
         }
     }
     public void cancelRemind(String title) {
-        // FIXME: 2018/12/7 日历功能
+        //2018/12/7 日历功能
         CalendarReminderUtils.deleteCalendarEvent(CouponReceiveCentreActivity.this,title);
     }
     @OnClick({

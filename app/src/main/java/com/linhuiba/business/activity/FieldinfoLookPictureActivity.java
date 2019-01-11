@@ -163,7 +163,7 @@ public class FieldinfoLookPictureActivity extends BaseMvpActivity {
             mAdapters[mCurrIndex].setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    // FIXME: 2018/12/17 预览大图
+                    //2018/12/17 预览大图
                     if (mCurrIndex == 0) {
                         showZoomPicDialog(position);
                     } else {
@@ -208,7 +208,7 @@ public class FieldinfoLookPictureActivity extends BaseMvpActivity {
         View myView = FieldinfoLookPictureActivity.this.getLayoutInflater().inflate(R.layout.module_dialog_fieldinfo_look_price, null);
         zoom_picture_dialog = new AlertDialog.Builder(FieldinfoLookPictureActivity.this).create();
         Constants.show_dialog(myView,zoom_picture_dialog);
-        // FIXME: 2018/12/17 预览图片
+        //2018/12/17 预览图片
         TextView mshowpicture_back = (TextView)myView.findViewById(R.id.fieldinfo_look_pic_back_tv);
         TextView mShowPictureTitleTV = (TextView)myView.findViewById(R.id.fieldinfo_look_pic_title_tv);
         ViewPager mzoom_viewpage = (ViewPager)myView.findViewById(R.id.fieldinfo_look_pic_zoom_dialog_viewpage);

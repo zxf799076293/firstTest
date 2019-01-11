@@ -19,8 +19,15 @@ public class FieldinfoMvpModel {
     public static void getResInfoReviewData(String fieldid,String page,String pageSize,
                                       final LinhuiAsyncHttpResponseHandler
                                               fieldidHandler) {
-        FieldApi.get_resources_commentslist(MyAsyncHttpClient.MyAsyncHttpClient3(), fieldidHandler, fieldid,page,pageSize);
+        FieldApi.get_resources_commentslist(MyAsyncHttpClient.MyAsyncHttpClient4(), fieldidHandler, fieldid,page,pageSize);
     }
+    public static void getSellResInfoCpmments(String fieldid,String page,String pageSize,
+                                            final LinhuiAsyncHttpResponseHandler
+                                                    fieldidHandler) {
+        FieldApi.getSellResCpmments(MyAsyncHttpClient.MyAsyncHttpClient3(), fieldidHandler, fieldid,page,pageSize);
+    }
+
+
     public static void getGroupResInfoData(String id,
                                       final LinhuiAsyncHttpResponseHandler
                                               fieldidHandler) {

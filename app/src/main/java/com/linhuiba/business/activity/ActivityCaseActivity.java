@@ -246,21 +246,11 @@ public class ActivityCaseActivity extends BaseMvpActivity implements SwipeRefres
                 mCityId = Integer.parseInt(LoginManager.getInstance().getTrackcityid());
             }
         }
-        //浏览记录
-        if (LoginManager.isLogin()) {
-            try {
-                String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl(
-                        0,mFieldTypeIds,mIndustriesIds,mSpreadWaysIds,mPromotionPurposesIds,mCityIds,mCaseLabelTypeIds,page,mCityId
-                ));
-                LoginMvpModel.sendBrowseHistories("case_list",parameter,LoginManager.getTrackcityid());
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
     }
     private void initData() {
         mCaseMvpPresenter.getCaseListData(0,mFieldTypeIds,mIndustriesIds,mSpreadWaysIds,mPromotionPurposesIds,mCityIds
                 ,mCaseLabelTypeIds,page,mCityId);
+        browseHistories();
     }
     private void listPopupWindow (final ArrayList<CaseThemeModel> list, final int type) {
         if (list == null || list.size() == 0) {
@@ -307,7 +297,7 @@ public class ActivityCaseActivity extends BaseMvpActivity implements SwipeRefres
         svll.setVisibility(View.VISIBLE);
         ll.setVisibility(View.VISIBLE);
         final ActivityCaseSearchAdapter mActivityCaseSearchAdapter = new ActivityCaseSearchAdapter(list,this,this);
-        // FIXME: 2018/12/8 案例筛选项选中赋值
+        //2018/12/8 案例筛选项选中赋值
         for (int i = 0; i < list.size(); i++) {
             if (type == 0) {
                 if (mFieldTypeIds.contains(Integer.parseInt(String.valueOf(list.get(i).getId())))) {
@@ -422,13 +412,14 @@ public class ActivityCaseActivity extends BaseMvpActivity implements SwipeRefres
                         }
                     }
                 }
-                // FIXME: 2018/12/8 案例筛选项选中确定操作
+                //2018/12/8 案例筛选项选中确定操作
                 mSearchSortPw.dismiss();
                 refreshSearchView(false,type);
                 showProgressDialog();
                 page = 1;
                 mCaseMvpPresenter.getCaseListData(0,mFieldTypeIds,mIndustriesIds,mSpreadWaysIds,mPromotionPurposesIds,mCityIds
                         ,mCaseLabelTypeIds,page,mCityId);
+                browseHistories();
             }
         });
     }
@@ -936,42 +927,105 @@ public class ActivityCaseActivity extends BaseMvpActivity implements SwipeRefres
             paramsMap.put("is_home_page",String.valueOf(is_home));
         }
         if (community_type_ids != null && community_type_ids.size() > 0) {
+            String ids = "";
             for (int i = 0; i < community_type_ids.size(); i++) {
-                paramsMap.put("community_type_ids["+String.valueOf(i)+"]",String.valueOf(community_type_ids.get(i)));
+                if (ids.length() > 0) {
+                    ids = ids + "," + String.valueOf(community_type_ids.get(i));
+                } else {
+                    ids = String.valueOf(community_type_ids.get(i));
+                }
+            }
+            if (ids.length() > 0) {
+                paramsMap.put("community_type_ids",ids);
             }
         }
         if (industry_ids != null && industry_ids.size() > 0) {
+            String ids = "";
             for (int i = 0; i < industry_ids.size(); i++) {
-                paramsMap.put("industry_ids["+String.valueOf(i)+"]",String.valueOf(industry_ids.get(i)));
+                if (ids.length() > 0) {
+                    ids = ids + "," + String.valueOf(industry_ids.get(i));
+                } else {
+                    ids = String.valueOf(industry_ids.get(i));
+                }
+            }
+            if (ids.length() > 0) {
+                paramsMap.put("industry_ids",ids);
             }
         }
         if (spread_way_ids != null && spread_way_ids.size() > 0) {
+            String ids = "";
             for (int i = 0; i < spread_way_ids.size(); i++) {
-                paramsMap.put("spread_way_ids["+String.valueOf(i)+"]",String.valueOf(spread_way_ids.get(i)));
+                if (ids.length() > 0) {
+                    ids = ids + "," + String.valueOf(spread_way_ids.get(i));
+                } else {
+                    ids = String.valueOf(spread_way_ids.get(i));
+                }
+            }
+            if (ids.length() > 0) {
+                paramsMap.put("spread_way_ids",ids);
             }
         }
         if (promotion_purpose_ids != null && promotion_purpose_ids.size() > 0) {
+            String ids = "";
             for (int i = 0; i < promotion_purpose_ids.size(); i++) {
-                paramsMap.put("promotion_purpose_ids["+String.valueOf(i)+"]",String.valueOf(promotion_purpose_ids.get(i)));
+                if (ids.length() > 0) {
+                    ids = ids + "," + String.valueOf(promotion_purpose_ids.get(i));
+                } else {
+                    ids = String.valueOf(promotion_purpose_ids.get(i));
+                }
+            }
+            if (ids.length() > 0) {
+                paramsMap.put("promotion_purpose_ids",ids);
             }
         }
 
         if (city_ids != null && city_ids.size() > 0) {
+            String ids = "";
             for (int i = 0; i < city_ids.size(); i++) {
-                paramsMap.put("city_ids["+String.valueOf(i)+"]",String.valueOf(city_ids.get(i)));
+                if (ids.length() > 0) {
+                    ids = ids + "," + String.valueOf(city_ids.get(i));
+                } else {
+                    ids = String.valueOf(city_ids.get(i));
+                }
+            }
+            if (ids.length() > 0) {
+                paramsMap.put("city_ids",ids);
             }
         }
         if (label_ids != null && label_ids.size() > 0) {
+            String ids = "";
             for (int i = 0; i < label_ids.size(); i++) {
-                paramsMap.put("label_ids["+String.valueOf(i)+"]",String.valueOf(label_ids.get(i)));
+                if (ids.length() > 0) {
+                    ids = ids + "," + String.valueOf(label_ids.get(i));
+                } else {
+                    ids = String.valueOf(label_ids.get(i));
+                }
+            }
+            if (ids.length() > 0) {
+                paramsMap.put("label_ids",ids);
             }
         }
         if (city_id > 0) {
             paramsMap.put("city_id", String.valueOf(city_id));
+            paramsMap.put("cur_city_id", String.valueOf(city_id));
         } else {
             paramsMap.put("city_id", LoginManager.getInstance().getTrackcityid());
+            paramsMap.put("cur_city_id", LoginManager.getInstance().getTrackcityid());
         }
         return paramsMap;
+    }
+    private void browseHistories() {
+        //浏览记录
+        if (LoginManager.isLogin()) {
+            try {
+                String parameter = "?"+ Request.urlEncode(getBrowseHistoriesUrl(
+                        0,mFieldTypeIds,mIndustriesIds,mSpreadWaysIds,mPromotionPurposesIds,mCityIds,mCaseLabelTypeIds,page,mCityId
+                ));
+                LoginMvpModel.sendBrowseHistories("case_list",parameter,LoginManager.getTrackcityid());
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
