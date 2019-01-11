@@ -9,6 +9,7 @@ public class FieldAddfieldSellResDimensionsModel {
     private String lease_term_type;
     private Integer id;
     private String deposit;
+    private String type;
 
     public String getSize() {
         return size;
@@ -72,5 +73,13 @@ public class FieldAddfieldSellResDimensionsModel {
 
     public void setDeposit(String deposit) {
         this.deposit = deposit;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

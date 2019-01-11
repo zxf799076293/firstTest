@@ -5,6 +5,7 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.linhuiba.linhuifield.BuildConfig;
 import com.linhuiba.linhuifield.config.Config;
 import com.linhuiba.linhuifield.fieldactivity.FieldAddFieldSearchResActivity;
 import com.linhuiba.linhuifield.fieldmodel.Field_AddResourcesModel;
@@ -318,6 +319,7 @@ public class Field_FieldApi {
     public static void version(OkHttpClient client,
                                LinhuiAsyncHttpResponseHandler handler) {
         HashMap<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("vid",String.valueOf(BuildConfig.VERSION_CODE));
         Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
                 "config/app_latest_version/android",
                 paramsMap,1));

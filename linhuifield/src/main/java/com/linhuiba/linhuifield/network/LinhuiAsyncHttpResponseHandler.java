@@ -47,9 +47,9 @@ public abstract class LinhuiAsyncHttpResponseHandler implements Callback {
         byte[] responseBody = responses.body().bytes();
         if (statusCode == 200) {
             try {
-                String resourcemsg = new String(responseBody,"UTF-8");
-                if (resourcemsg != null) {
-                    JSONObject json = JSONObject.parseObject(resourcemsg);
+//                String resourcemsg = new String(responseBody,"UTF-8");
+//                if (resourcemsg != null) {
+//                    JSONObject json = JSONObject.parseObject(resourcemsg);
 //                    Object result = json.get("result");
 //                    if (result != null) {
 //                        if (result instanceof JSONArray) {
@@ -58,7 +58,7 @@ public abstract class LinhuiAsyncHttpResponseHandler implements Callback {
 //                            }
 //                        }
 //                    }
-                }
+//                }
                 Response response = Response.parseResponse(responseBody, isArray);
                 if (response != null && response.code > 0 && clazz != null && response.data != null
                         && (response.data instanceof JSONObject

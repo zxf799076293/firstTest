@@ -231,7 +231,8 @@ public class Field_PropertyMyselfFragment extends FieldBaseMvpFragment implement
         public void onSuccess(int statusCode, okhttp3.internal.http2.Header[] headers, Response response, Object data) {
             if (data != null && data instanceof VersionModel) {
                 final VersionModel version = (VersionModel) data;
-                if (version != null && version.getVid() > BuildConfig.VERSION_CODE){
+                if ((version != null && version.getVid() > BuildConfig.VERSION_CODE) ||
+                        (version != null && version.getForce_update() == 1)) {
                     if (mCustomDialog == null || !mCustomDialog.isShowing()) {
                         View.OnClickListener uploadListener = new View.OnClickListener() {
                             @Override
@@ -278,9 +279,10 @@ public class Field_PropertyMyselfFragment extends FieldBaseMvpFragment implement
                         com.linhuiba.linhuifield.connector.Constants.hideUploadPictureLine(Field_PropertyMyselfFragment.this.getContext(),mCustomDialog);
                         mCustomDialog.show();
                     }
-                } else if (version != null && version.getVid() == BuildConfig.VERSION_CODE) {
+                } else if ((version != null && version.getVid() == BuildConfig.VERSION_CODE) ||
+                        (version != null && version.getVid() < BuildConfig.VERSION_CODE)) {
                     BaseMessageUtils.showToast(getContext(), getContext().getResources().getString(R.string.txt_version));
-                } else if (version.getVid() == 0) {
+                } else if (version != null && version.getVid() == 0) {
                     BaseMessageUtils.showToast(getContext(), getContext().getResources().getString(R.string.txt_version));
                 } else {
                     BaseMessageUtils.showToast(getContext(), getContext().getResources().getString(R.string.txt_version));

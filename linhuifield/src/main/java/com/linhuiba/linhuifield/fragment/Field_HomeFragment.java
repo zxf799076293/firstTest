@@ -433,7 +433,8 @@ public class Field_HomeFragment extends FieldBaseMvpFragment implements Field_Ad
         public void onSuccess(int statusCode, okhttp3.internal.http2.Header[] headers, Response response, Object data) {
             if (data != null && data instanceof VersionModel) {
                 final VersionModel version = (VersionModel) data;
-                if (version != null && version.getVid() > BuildConfig.VERSION_CODE) {
+                if ((version != null && version.getVid() > BuildConfig.VERSION_CODE) ||
+                        (version != null && version.getForce_update() == 1)) {
                     if (mCustomDialog == null || !mCustomDialog.isShowing()) {
                         View.OnClickListener uploadListener = new View.OnClickListener() {
                             @Override

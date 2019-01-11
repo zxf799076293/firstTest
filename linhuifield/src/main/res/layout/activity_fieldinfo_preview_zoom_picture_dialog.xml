@@ -76,11 +76,16 @@
             android:gravity="center"
             android:background="@color/title_bar_txtcolor"
             android:clickable="true"
-            android:paddingBottom="@dimen/small_title_height"
             android:visibility="gone"
-            android:id="@+id/sticker_ll">
+            android:id="@+id/sticker_ll"
+            android:layout_above="@+id/sticker_operate_ll">
+            <FrameLayout
+                android:id="@+id/doodle_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
             <com.xiaopo.flying.sticker.StickerView
                 android:id="@+id/sticker_view"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:showBorder="true"
@@ -98,7 +103,7 @@
             android:orientation="horizontal"
             android:background="@color/addfield_show_picture_color"
             android:layout_alignParentBottom="true"
-            android:visibility="gone"
+            android:visibility="visible"
             android:gravity="center_vertical"
             android:id="@+id/sticker_operate_ll">
             <LinearLayout
@@ -118,16 +123,85 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginLeft="@dimen/app_backbtn_marginleft">
-                <TextView
+                <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:textColor="@color/white"
-                    android:gravity="center_vertical"
-                    android:drawableLeft="@drawable/ic_tuodong"
-                    android:drawablePadding="@dimen/txt_padding"
-                    android:textSize="@dimen/search_lisritem_pricetxt_size"
-                    android:text="@string/addfield_upload_sticker_tv_str"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:button="@null"
+                        android:id="@+id/doodle_pic"
+                        android:drawableTop="@drawable/activity_invoiceinfo_content_checkbox_bg"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/module_addfield_upload_pic_add_red_flag"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/register_codebtn_txt_size"/>
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:button="@null"
+                        android:id="@+id/doodle_line"
+                        android:drawableTop="@drawable/activity_invoiceinfo_content_checkbox_bg"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/module_addfield_upload_pic_add_line"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/register_codebtn_txt_size"/>
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:button="@null"
+                        android:id="@+id/doodle_dot"
+                        android:drawableTop="@drawable/activity_invoiceinfo_content_checkbox_bg"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/module_addfield_upload_pic_add_point"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/register_codebtn_txt_size"/>
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:button="@null"
+                        android:id="@+id/doodle_text"
+                        android:drawableTop="@drawable/activity_invoiceinfo_content_checkbox_bg"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:text="@string/module_addfield_upload_pic_add_text"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/register_codebtn_txt_size"/>
+
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:textSize="@dimen/fieldinfo_subsidy_textsize"
+                        android:text="描点连线"
+                        android:id="@+id/doodle_dot_confirm"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:textSize="@dimen/fieldinfo_subsidy_textsize"
+                        android:text="编辑涂鸦"
+                        android:id="@+id/doodle_edit"/>
+
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -26,9 +26,12 @@ public class Config {
     private static final String BASE_API_URL_PHP_DE = "http://192.168.0.110:8009/api/";
     private static final String Domain_Name_DE = "http://m.lanhanba.net";
     private static final String BASE_API_URL_PHP_DETEST = "http://192.168.0.109/api/";
+    private static final String BASE_API_URL_PHP_DETESTLL = "http://192.168.0.109:8039/api/";
+    private static final String BASE_API_URL_PHP_DETESTZR = "http://gitlhbzxr.vaiwan.com:8081/api/";
+    private static final String BASE_API_URL_PHP_DETESTJLP = "http://192.168.0.123/api/";
     //api请求网络头url 和 web加载网络头url
-    public static final String BASE_API_URL_PHP = !com.linhuiba.linhuipublic.config.Config.DEBUG?BASE_API_URL_PHP_SE:BASE_API_URL_PHP_PE;
-    public static final String Domain_Name = !com.linhuiba.linhuipublic.config.Config.DEBUG?Domain_Name_SE:Domain_Name_PE;
+    public static final String BASE_API_URL_PHP = com.linhuiba.linhuipublic.config.Config.DEBUG?BASE_API_URL_PHP_SE:BASE_API_URL_PHP_PE;
+    public static final String Domain_Name = com.linhuiba.linhuipublic.config.Config.DEBUG?Domain_Name_SE:Domain_Name_PE;
     public static final String INVITE_WEBVIEW_URL = Domain_Name+"/admin/profile/invite?&is_mobile=1&is_app=1&invite_code=";
     public static final String INVITE_SHARE_URL = Domain_Name+"/admin/profile/invited?&is_mobile=1&is_app=1&invite_code=";
     public static final String FIELDINFO_FIELD_URL =Domain_Name+ "/fields/view/";

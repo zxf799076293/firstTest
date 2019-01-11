@@ -216,4 +216,6 @@
     <color name="module_coupons_first_register_coupons_price_color">#734007</color>
     <!-- coupons -->
     <color name="module_coupon_centre_tab_color">#282831</color>
+    <!-- comment -->
+    <color name="module_publish_review_grade_color">#FDCC91</color>
 </resources>

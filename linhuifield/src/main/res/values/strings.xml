@@ -1192,6 +1192,10 @@
     <string name="module_addfield_activity_info_description">活动描述</string>
     <string name="module_addfield_activity_info_description_hint">请输入活动相关描述</string>
     <string name="module_addfield_activity_info_picture_hint">请上传活动图片</string>
+    <string name="module_addfield_upload_pic_add_red_flag">插小红旗</string>
+    <string name="module_addfield_upload_pic_add_line">绘画形状</string>
+    <string name="module_addfield_upload_pic_add_point">描点连线</string>
+    <string name="module_addfield_upload_pic_add_text">输入文字</string>
     <!-- coupons -->
     <string name="module_my_coupons_no_data">很抱歉 ≥-≤\n您暂时没有优惠券哦！</string>
     <string name="module_my_coupons_no_data_goto_centre">去领券中心看看</string>
