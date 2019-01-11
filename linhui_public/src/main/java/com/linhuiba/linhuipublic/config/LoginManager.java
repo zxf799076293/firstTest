@@ -49,7 +49,7 @@ public class LoginManager {
     public static String is_outdoor = "[{\"display_name\":\"室外\",\"tag\":0},{\"display_name\":\"室内\",\"tag\":1}]";
     public static String activity_types = "[{\"code\":3,\"type\":\"峰会\"},{\"code\":2,\"type\":\"公益\"},{\"code\":1,\"type\":\"市集\"}]";
     public static String hotCotyList = "[{\"domain_name\":\"bj.lanhanba.net\",\"en_name\":\"beijingshi\",\"id\":1,\"name\":\"北京市\",\"province_id\":1,\"province_name\":\"北京市\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"sh.lanhanba.net\",\"en_name\":\"shanghaishi\",\"id\":75,\"name\":\"上海市\",\"province_id\":9,\"province_name\":\"上海市\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"nj.lanhanba.net\",\"en_name\":\"nanjingshi\",\"id\":77,\"name\":\"南京市\",\"province_id\":10,\"province_name\":\"江苏省\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"su.lanhanba.net\",\"en_name\":\"suzhoushi\",\"id\":81,\"name\":\"苏州市\",\"province_id\":10,\"province_name\":\"江苏省\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"hz.lanhanba.net\",\"en_name\":\"hangzhoushi\",\"id\":90,\"name\":\"杭州市\",\"province_id\":11,\"province_name\":\"浙江省\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"gz.lanhanba.net\",\"en_name\":\"guangzhoushi\",\"id\":200,\"name\":\"广州市\",\"province_id\":19,\"province_name\":\"广东省\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"sz.lanhanba.net\",\"en_name\":\"shenzhenshi\",\"id\":202,\"name\":\"深圳市\",\"province_id\":19,\"province_name\":\"广东省\",\"service_phone\":[\"4001028028\"]},{\"domain_name\":\"cd.lanhanba.net\",\"en_name\":\"chengdushi\",\"id\":240,\"name\":\"成都市\",\"province_id\":23,\"province_name\":\"四川省\",\"service_phone\":[\"4001028028\"]}]";
-    // FIXME: 2018/12/10 位置类型配置文件增加
+    //2018/12/10 位置类型配置文件增加
     public static String LOCATION_TYPES = "[{\"display_name\":\"出入口\",\"id\":1},{\"display_name\":\"扶梯口\",\"id\":2},{\"display_name\":\"电梯口\",\"id\":3},{\"display_name\":\"过道/走廊\",\"id\":4},{\"display_name\":\"中庭\",\"id\":5},{\"display_name\":\"连廊\",\"id\":6},{\"display_name\":\"大厅/大堂\",\"id\":7},{\"display_name\":\"外广场\",\"id\":8},{\"display_name\":\"下沉式广场\",\"id\":9},{\"display_name\":\"中心广场/花园\",\"id\":10},{\"display_name\":\"公告栏旁边\",\"id\":11},{\"display_name\":\"机器点位\",\"id\":12},{\"display_name\":\"停车位处\",\"id\":13},{\"display_name\":\"物业管理处\",\"id\":14},{\"display_name\":\"收银台旁边\",\"id\":15},{\"display_name\":\"服务中心旁边\",\"id\":16},{\"display_name\":\"售票大厅\",\"id\":17},{\"display_name\":\"其他\",\"id\":18},{\"display_name\":\"错错错册数\",\"id\":19},{\"display_name\":\"错错错123\",\"id\":21},{\"display_name\":\"错错错246\",\"id\":22},{\"display_name\":\"错错错3\",\"id\":23},{\"display_name\":\"错错错4\",\"id\":24},{\"display_name\":\"错错错12\",\"id\":25},{\"display_name\":\"错错错13\",\"id\":26},{\"display_name\":\"测试的\",\"id\":28},{\"display_name\":\"测试二测试的\",\"id\":29},{\"display_name\":\"过道\",\"id\":30}]";
     LoginManager() {}
     public static void init(Context appContext) {
@@ -84,7 +84,7 @@ public class LoginManager {
                     .putString("currentcity", "")
                     .putLong("Config_updatetime", 0)
                     .apply();
-            // FIXME: 2018/12/10 app2.0需要增加初始化配置
+            //2018/12/10 app2.0需要增加初始化配置
         }
     }
 

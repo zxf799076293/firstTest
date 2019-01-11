@@ -1,6 +1,8 @@
 package com.linhuiba.linhuipublic.config;
 
 
+import com.linhuiba.linhui_public.BuildConfig;
+
 /**
  * Created by snowd on 15/3/27.
  */
