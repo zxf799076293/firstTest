@@ -15,7 +15,6 @@ import java.util.Map;
 public class ResourceInfoFieldInfoModel {
     private int min_price;
     private int max_price;
-    private int average_score;
     private String number_of_order;
     private String count_of_reviews;
     private ArrayList<HashMap<String,String>> calendars;
@@ -224,15 +223,6 @@ public class ResourceInfoFieldInfoModel {
     public void setNumber_of_order(String number_of_order) {
         this.number_of_order = number_of_order;
     }
-
-    public int getAverage_score() {
-        return average_score;
-    }
-
-    public void setAverage_score(int average_score) {
-        this.average_score = average_score;
-    }
-
     public ArrayList<String> getCustom_dimension_list() {
         return custom_dimension_list;
     }

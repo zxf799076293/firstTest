@@ -50,7 +50,7 @@ public class MyWalletActivity extends BaseMvpActivity {
             this.finish();
         } else {
             showProgressDialog();
-            UserApi.getwalletsinfo(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),WalletInfoHandler);
+            UserApi.getwalletsinfo(MyAsyncHttpClient.MyAsyncHttpClient2(),WalletInfoHandler);
         }
         super.onResume();
     }

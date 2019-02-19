@@ -1,7 +1,4 @@
 package com.linhuiba.business.model;
-
-import com.linhuiba.linhuifield.fieldmodel.Field_AddResourceCreateItemModel;
-
 /**
  * Created by Administrator on 2018/7/5.
  */
@@ -11,7 +8,7 @@ public class CaseInfoPhysicalResources {
     private String name = "";
     private Integer number_of_people;
     private Integer number_of_order;
-    private Integer average_score;
+    private String average_score;
     private Double price;
     private String physical_resource_first_img = "";
     private int res_type_id;
@@ -48,11 +45,11 @@ public class CaseInfoPhysicalResources {
         this.number_of_order = number_of_order;
     }
 
-    public Integer getAverage_score() {
+    public String getAverage_score() {
         return average_score;
     }
 
-    public void setAverage_score(Integer average_score) {
+    public void setAverage_score(String average_score) {
         this.average_score = average_score;
     }
 

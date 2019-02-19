@@ -13,35 +13,34 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/myself_order_layout_width"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingTop="@dimen/home_area_drop_marginleft"
                 android:paddingBottom="@dimen/field_list_item_img_padding">
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         style="@style/app_linearlayoutrighttxt_style"
                         android:id="@+id/managecontact_name"
-                        android:text="@string/fieldinfo_no_parameter_message"
-                        android:layout_centerVertical="true"/>
+                        android:text="" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/app_backbtn_marginleft"
                         android:layout_marginRight="@dimen/app_backbtn_marginleft"
-                        android:layout_alignParentRight="true"
                         style="@style/app_linearlayoutrighttxt_style"
-                        android:id="@+id/managecontact_mobile"                        android:text="@string/fieldinfo_no_parameter_message"
-                        android:layout_centerVertical="true"/>
-                </RelativeLayout>
+                        android:id="@+id/managecontact_mobile"
+                        android:text="" />
+                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.5"
+                    android:layout_height="wrap_content"
                     style="@style/app_linearlayoutrighttxt_style"
                     android:layout_marginRight="@dimen/app_backbtn_marginleft"
                     android:lineSpacingExtra="@dimen/search_item_margintop"

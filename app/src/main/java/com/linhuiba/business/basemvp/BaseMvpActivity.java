@@ -106,8 +106,6 @@ public class BaseMvpActivity extends ActionBarActivity implements BaseView {
 //            this.registerReceiver(receiver, filter);
 
         }
-        //判断是debug还是release
-        Config.DEBUG = BuildConfig.DEBUG?true:false;
         // 注册美洽接收即时消息广播
         IntentFilter intentFilter = new IntentFilter(MQMessageManager.ACTION_NEW_MESSAGE_RECEIVED);
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, intentFilter);
@@ -211,11 +209,9 @@ public class BaseMvpActivity extends ActionBarActivity implements BaseView {
         //2017/12/13 魔窗
         Session.onResume(this);
         super.onResume();
-        if (getContext() instanceof SplashScreenActivity || getContext() instanceof MainTabActivity) {
-            if (getContext() instanceof SplashScreenActivity) {
-                Constants constants = new Constants(getContext());
-                constants.getConfig();
-            }
+        if (getContext() instanceof SplashScreenActivity) {
+            Constants constants = new Constants(getContext());
+            constants.getConfig();
         } else {
             if ((System.currentTimeMillis() - LoginManager.getConfig_updatetime()) > 24 * 3600 * 1000 && LoginManager.getConfig_updatetime() > 0) {
                 Constants constants = new Constants(getContext());
@@ -698,6 +694,4 @@ public class BaseMvpActivity extends ActionBarActivity implements BaseView {
        }
        return height;
     }
-
-
 }

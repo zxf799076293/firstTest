@@ -26,7 +26,7 @@ public class InvoiceInfoMvpModel {
                                   int is_paper, int invoice_content_id,
                                   int consignee_addresses_id,
                                   String email, String remark, LinhuiAsyncHttpResponseHandler handler) {
-        FieldApi.addInvoice(MyAsyncHttpClient.MyAsyncHttpClient_version_three(),
+        FieldApi.addInvoice(MyAsyncHttpClient.MyAsyncHttpClient3(),
                 handler, content, invoice_title_id, is_paper,invoice_content_id,
                 consignee_addresses_id,
                 email,remark);

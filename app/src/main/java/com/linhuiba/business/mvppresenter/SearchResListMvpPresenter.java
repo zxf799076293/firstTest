@@ -194,5 +194,70 @@ public class SearchResListMvpPresenter extends BasePresenter<SearchResListMvpVie
             }
         });
     }
+    public void getPhyReslistCount(final ApiResourcesModel apiResourcesModel) {
+        if (!isViewAttached()) {
+            return;
+        }
+        SearchResListMvpModel.getPhyReslistCount(apiResourcesModel,new LinhuiAsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, Response response, Object data) {
+                if (isViewAttached()) {
+                    getView().hideLoading();
+                    if (data != null && data.toString().length() > 0) {
+                        getView().onSearchResListCountSuccess(Integer.parseInt(data.toString()));
+                    } else {
+                        getView().showToast(getView().getContext().getResources().getString(R.string.review_error_text));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(boolean superresult, int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (isViewAttached()) {
+                    getView().hideLoading();
+                    getView().onSearchResListFailure(superresult, error);
+                }
+            }
+        });
+    }
+    public void getPhyRecommendedList(final ApiResourcesModel apiResourcesModel) {
+        if (!isViewAttached()) {
+            return;
+        }
+        SearchResListMvpModel.getPhyRecommendedList(apiResourcesModel,new LinhuiAsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, Response response, Object data) {
+                if (isViewAttached()) {
+                    getView().hideLoading();
+                    if (data != null) {
+                        JSONObject jsonObject = JSONObject.parseObject(data.toString());
+                        if (jsonObject.get("data") != null) {
+                            ArrayList<ResourceSearchItemModel> list = (ArrayList<ResourceSearchItemModel>) JSONArray.parseArray(jsonObject.get("data").toString(),
+                                    ResourceSearchItemModel.class);
+
+                            if (Integer.parseInt(apiResourcesModel.getPage()) > 1) {
+                                getView().onSearchResListMoreSuccess(list,response);
+                            } else {
+                                getView().onSearchResListSuccess(list,response);
+                            }
+
+                        } else {
+                            getView().showToast(getView().getContext().getResources().getString(R.string.review_error_text));
+                        }
+                    } else {
+                        getView().showToast(getView().getContext().getResources().getString(R.string.review_error_text));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(boolean superresult, int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (isViewAttached()) {
+                    getView().hideLoading();
+                    getView().onSearchResListFailure(superresult, error);
+                }
+            }
+        });
+    }
 
 }

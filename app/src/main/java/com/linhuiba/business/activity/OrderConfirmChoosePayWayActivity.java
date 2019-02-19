@@ -276,7 +276,7 @@ public class OrderConfirmChoosePayWayActivity extends BaseMvpActivity {
         if (LoginManager.getInstance().getWallet_stauts() == 1) {
             morder_balance_payment_layout.setVisibility(View.VISIBLE);
             morder_balance_payment_checkbox.setEnabled(false);
-            UserApi.getwalletsinfo(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),WalletInfoHandler);
+            UserApi.getwalletsinfo(MyAsyncHttpClient.MyAsyncHttpClient2(),WalletInfoHandler);
         } else {
             morder_balance_payment_layout.setVisibility(View.GONE);
         }
@@ -347,9 +347,9 @@ public class OrderConfirmChoosePayWayActivity extends BaseMvpActivity {
                 if (pay_way_type != -1 && pay_way_type != wallet_pay_int) {
                     showProgressDialog();
                     if (payment_option == payment_option_order ||payment_option == payment_option_group_order) {
-                        FieldApi.payorder(MyAsyncHttpClient.MyAsyncHttpClient_version_four(), payOrderHandler,order_id,pay_way_type,-1);
+                        FieldApi.payorder(MyAsyncHttpClient.MyAsyncHttpClient4(), payOrderHandler,order_id,pay_way_type,-1);
                     } else if (payment_option == payment_option_invoice) {
-                        FieldApi.pay_invoice_order(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), payOrderHandler,order_id,pay_way_type,-1);
+                        FieldApi.pay_invoice_order(MyAsyncHttpClient.MyAsyncHttpClient3(), payOrderHandler,order_id,pay_way_type,-1);
                     }
                 }
                 break;
@@ -647,9 +647,9 @@ public class OrderConfirmChoosePayWayActivity extends BaseMvpActivity {
                     }
                     showProgressDialog();
                     if (payment_option == payment_option_order || payment_option == payment_option_group_order) {
-                        FieldApi.payorder(MyAsyncHttpClient.MyAsyncHttpClient_version_four(), payOrderHandler,order_id,pay_way_type,Integer.parseInt(strConfirmPassword));
+                        FieldApi.payorder(MyAsyncHttpClient.MyAsyncHttpClient4(), payOrderHandler,order_id,pay_way_type,Integer.parseInt(strConfirmPassword));
                     } else if (payment_option == payment_option_invoice) {
-                        FieldApi.pay_invoice_order(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), payOrderHandler,order_id,pay_way_type,Integer.parseInt(strConfirmPassword));
+                        FieldApi.pay_invoice_order(MyAsyncHttpClient.MyAsyncHttpClient3(), payOrderHandler,order_id,pay_way_type,Integer.parseInt(strConfirmPassword));
                     }
                 }
             }
@@ -729,9 +729,9 @@ public class OrderConfirmChoosePayWayActivity extends BaseMvpActivity {
                         fingerprint_pw = Constants.get_fingerprint_pw();
                         if (fingerprint_pw.length() == 6) {
                             if (payment_option == payment_option_order || payment_option == payment_option_group_order) {
-                                FieldApi.payorder(MyAsyncHttpClient.MyAsyncHttpClient_version_four(), payOrderHandler,order_id,pay_way_type,Integer.parseInt(fingerprint_pw));
+                                FieldApi.payorder(MyAsyncHttpClient.MyAsyncHttpClient4(), payOrderHandler,order_id,pay_way_type,Integer.parseInt(fingerprint_pw));
                             } else if (payment_option == payment_option_invoice) {
-                                FieldApi.pay_invoice_order(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), payOrderHandler,order_id,pay_way_type,Integer.parseInt(fingerprint_pw));
+                                FieldApi.pay_invoice_order(MyAsyncHttpClient.MyAsyncHttpClient3(), payOrderHandler,order_id,pay_way_type,Integer.parseInt(fingerprint_pw));
                             }
                         } else {
                             show_walletpay_doalog(true);
@@ -809,8 +809,14 @@ public class OrderConfirmChoosePayWayActivity extends BaseMvpActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == 1) {
-            FieldApi.getpurchased_resourceslist(mOrderReviewCall,MyAsyncHttpClient.MyAsyncHttpClient2(), getReviewOrderListHandler,
-                    "finished", "1", String.valueOf(Integer.MAX_VALUE));
+            Intent orderpayintent = new Intent(OrderConfirmChoosePayWayActivity.this, OrderListNewActivity.class);
+            Bundle bundle_ordertype1 = new Bundle();
+            bundle_ordertype1.putInt("order_type", 0);
+            orderpayintent.putExtras(bundle_ordertype1);
+            orderpayintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            orderpayintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(orderpayintent);
+            finish();
         }
         if (requestCode == 2) {
             if (resultCode == 2) {
@@ -928,7 +934,7 @@ public class OrderConfirmChoosePayWayActivity extends BaseMvpActivity {
         } else if (payment_option == payment_option_order) {
             isResourcePaidSuccess = true;
             mconfirmorder_success_order_review_alllayout.setVisibility(View.VISIBLE);
-            FieldApi.getpurchased_resourceslist(mOrderReviewCall,MyAsyncHttpClient.MyAsyncHttpClient2(), getReviewOrderListHandler,
+            FieldApi.getpurchased_resourceslist(mOrderReviewCall,MyAsyncHttpClient.MyAsyncHttpClient3(), getReviewOrderListHandler,
                     "finished", "1", String.valueOf(Integer.MAX_VALUE));
             mtxt_back_top.setOnClickListener(new View.OnClickListener() {
                 @Override

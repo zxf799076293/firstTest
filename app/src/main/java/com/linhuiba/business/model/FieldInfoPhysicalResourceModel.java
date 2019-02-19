@@ -53,7 +53,7 @@ public class FieldInfoPhysicalResourceModel implements Serializable {
     private String company_comment;//邻汇评价
     //广告
     private Field_AddResourceCreateItemModel ad_type;
-    private Integer average_score;
+    private Double average_score;
     //拼团 //或场地
     private Field_AddResourceCreateItemModel field_type;
     private Field_AddResourceCreateItemModel activity_type;
@@ -364,11 +364,11 @@ public class FieldInfoPhysicalResourceModel implements Serializable {
         this.ad_type = ad_type;
     }
 
-    public Integer getAverage_score() {
+    public Double getAverage_score() {
         return average_score;
     }
 
-    public void setAverage_score(Integer average_score) {
+    public void setAverage_score(Double average_score) {
         this.average_score = average_score;
     }
 

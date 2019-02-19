@@ -184,7 +184,8 @@ public class TheFirstRegisterCouponsActivity extends BaseMvpActivity implements 
             View myView = TheFirstRegisterCouponsActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
             com.linhuiba.business.connector.Constants constants = new com.linhuiba.business.connector.Constants(TheFirstRegisterCouponsActivity.this,
                     Config.COUPONS_SHARE_URL);
-            constants.shareWXMiniPopupWindow(TheFirstRegisterCouponsActivity.this,myView,mShareDialog,mIWXAPI, com.linhuiba.business.config.Config.WX_SHARE_GIFT_URL,
+            constants.shareWXMiniPopupWindow(TheFirstRegisterCouponsActivity.this,myView,mShareDialog,mIWXAPI, com.linhuiba.business.config.Config.Domain_Name +
+                            com.linhuiba.business.config.Config.WX_SHARE_GIFT_URL,
                     getResources().getString(R.string.module_coupons_first_register_share_title),
                     getResources().getString(R.string.module_coupons_first_register_share_description),
                     mShareBitmap,com.linhuiba.business.config.Config.WX_MINI_SHARE_GIFT_URL,
@@ -204,7 +205,8 @@ public class TheFirstRegisterCouponsActivity extends BaseMvpActivity implements 
                     View myView = TheFirstRegisterCouponsActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
                     com.linhuiba.business.connector.Constants constants = new com.linhuiba.business.connector.Constants(TheFirstRegisterCouponsActivity.this,
                             Config.COUPONS_SHARE_URL);
-                    constants.shareWXMiniPopupWindow(TheFirstRegisterCouponsActivity.this,myView,mShareDialog,mIWXAPI, com.linhuiba.business.config.Config.WX_SHARE_GIFT_URL,
+                    constants.shareWXMiniPopupWindow(TheFirstRegisterCouponsActivity.this,myView,mShareDialog,mIWXAPI, com.linhuiba.business.config.Config.Domain_Name +
+                                    com.linhuiba.business.config.Config.WX_SHARE_GIFT_URL,
                             getResources().getString(R.string.module_coupons_first_register_share_title),
                             getResources().getString(R.string.module_coupons_first_register_share_description),
                             mShareBitmap, com.linhuiba.business.config.Config.WX_MINI_SHARE_GIFT_URL,

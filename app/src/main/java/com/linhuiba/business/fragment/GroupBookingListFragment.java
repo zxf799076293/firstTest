@@ -137,6 +137,7 @@ public class GroupBookingListFragment extends BaseMvpFragment implements SwipeRe
         mNoDataImg = (ImageView) mNoDataRL.findViewById(R.id.no_data_img);
         mNoDataTV = (TextView) mNoDataRL.findViewById(R.id.no_data_tv);
         mNoDataBtn = (Button) mNoDataRL.findViewById(R.id.no_data_btn);
+        mNoDataBtn.setVisibility(View.VISIBLE);
         mNoDataImg.setImageResource(R.drawable.emptystates_grouppurchase);
         mNoDataTV.setText(getResources().getString(R.string.groupbooking_list_no_data_tv_str));
         mNoDataBtn.setText(getResources().getString(R.string.confirmorder_back_homepage));
@@ -314,7 +315,7 @@ public class GroupBookingListFragment extends BaseMvpFragment implements SwipeRe
             View myView = GroupBookingListFragment.this.getActivity().getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
             mShareDialog = new AlertDialog.Builder(GroupBookingListFragment.this.getActivity()).create();
             sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_GROUP_LIST_URL+ "?city_id=" + mCityIdStr;
-            share_linkurl = Config.SHARE_GROUP_LIST_URL + "?city_id=" + mCityIdStr;
+            share_linkurl = Config.Domain_Name + Config.SHARE_GROUP_LIST_URL + "?city_id=" + mCityIdStr;
             Constants constants = new Constants(GroupBookingListFragment.this.getActivity(),
                     ShareIconStr);
             constants.shareWXMiniPopupWindow(GroupBookingListFragment.this.getActivity(),myView,mShareDialog,api,share_linkurl,
@@ -331,7 +332,7 @@ public class GroupBookingListFragment extends BaseMvpFragment implements SwipeRe
                     final View myView = GroupBookingListFragment.this.getActivity().getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
                     mShareDialog = new AlertDialog.Builder(GroupBookingListFragment.this.getActivity()).create();
 
-                    share_linkurl =  Config.SHARE_GROUP_LIST_URL + "?city_id=" + mCityIdStr;
+                    share_linkurl = Config.Domain_Name + Config.SHARE_GROUP_LIST_URL + "?city_id=" + mCityIdStr;
                     sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_GROUP_LIST_URL+ "?city_id=" + mCityIdStr;
                     if (mShareDialog!= null && mShareDialog.isShowing()) {
                         mShareDialog.dismiss();

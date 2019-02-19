@@ -247,7 +247,7 @@ public class RegisterActivity extends BaseMvpActivity {
         mRegisterWV.getSettings().setAppCacheEnabled(false);//是否使用缓存
         mRegisterWV.getSettings().setDomStorageEnabled(true);//DOM Storage
         mRegisterWV.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        mRegisterWV.loadUrl(Config.REGISTER_URL);
+        mRegisterWV.loadUrl(Config.Domain_Name + Config.REGISTER_URL);
         AndPermission.with(RegisterActivity.this)
                 .requestCode(com.linhuiba.business.connector.Constants.PermissionRequestCode)
                 .permission(Manifest.permission.CAMERA,

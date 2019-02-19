@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class PublishReviewMvpModel {
     public static void getReviewInfo(String field_order_item_id,
                                     LinhuiAsyncHttpResponseHandler handler) {
-        FieldApi.getreview_fieldinfo(MyAsyncHttpClient.MyAsyncHttpClient2(),handler,field_order_item_id);
+        FieldApi.getreview_fieldinfo(MyAsyncHttpClient.MyAsyncHttpClient3(),handler,field_order_item_id);
     }
     public static void confirmReview( String fieldid,int score,int score_of_visitorsflowrate,int score_of_propertymatching,
                                        int score_of_goalcompletion , String content,int anonymity,
@@ -25,7 +25,7 @@ public class PublishReviewMvpModel {
     }
     public static void getCommentCentre(final LinhuiAsyncHttpResponseHandler
                                                     fieldidHandler) {
-        FieldApi.getCommentCentreOrders(MyAsyncHttpClient.MyAsyncHttpClient4(), fieldidHandler);
+        FieldApi.getCommentCentreOrders(MyAsyncHttpClient.MyAsyncHttpClient(), fieldidHandler);
     }
     public static void getPhyResComments(String fieldid,String page,String pageSize,
                                         final LinhuiAsyncHttpResponseHandler

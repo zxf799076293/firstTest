@@ -129,7 +129,7 @@ public class InviteActivity extends BaseMvpActivity {
         minvitewebview.getSettings().setDomStorageEnabled(true);//DOM Storage
         String RandomStr = com.linhuiba.linhuifield.connector.Constants.getRandomString(10);
         syncCookie(Config.Domain_Name,RandomStr.substring(0, 2) + LoginManager.getAccessToken() + RandomStr.substring(2));
-        minvitewebview.loadUrl(Config.INVITE_URL+
+        minvitewebview.loadUrl(Config.Domain_Name + Config.INVITE_URL+
                 "?invite_code=" + LoginManager.getinvitecode());
     }
 
@@ -144,7 +144,7 @@ public class InviteActivity extends BaseMvpActivity {
             View myView = InviteActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
             com.linhuiba.business.connector.Constants constants = new com.linhuiba.business.connector.Constants(InviteActivity.this,
                     "");
-            constants.shareWXMiniPopupWindow(InviteActivity.this,myView,mShareDialog,api, Config.SHARE_INVITE_CODE_URL + LoginManager.getinvitecode()+"&userid="+LoginManager.getUid(),
+            constants.shareWXMiniPopupWindow(InviteActivity.this,myView,mShareDialog,api, Config.Domain_Name + Config.SHARE_INVITE_CODE_URL + LoginManager.getinvitecode()+"&userid="+LoginManager.getUid(),
                     getResources().getString(R.string.invite_share_title_text),
                     getResources().getString(R.string.invite_share_description_text),
                     ShareBitmap,Config.WX_MINI_SHARE_INVITE_CODE_URL+ LoginManager.getinvitecode()+"&userid="+LoginManager.getUid(),
@@ -161,7 +161,7 @@ public class InviteActivity extends BaseMvpActivity {
                     View myView = InviteActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
                     com.linhuiba.business.connector.Constants constants = new com.linhuiba.business.connector.Constants(InviteActivity.this,
                             "");
-                    constants.shareWXMiniPopupWindow(InviteActivity.this,myView,mShareDialog,api, Config.SHARE_INVITE_CODE_URL + LoginManager.getinvitecode()+"&userid="+LoginManager.getUid(),
+                    constants.shareWXMiniPopupWindow(InviteActivity.this,myView,mShareDialog,api, Config.Domain_Name + Config.SHARE_INVITE_CODE_URL + LoginManager.getinvitecode()+"&userid="+LoginManager.getUid(),
                             getResources().getString(R.string.invite_share_title_text),
                             getResources().getString(R.string.invite_share_description_text),
                             ShareBitmap,Config.WX_MINI_SHARE_INVITE_CODE_URL+ LoginManager.getinvitecode()+"&userid="+LoginManager.getUid(),

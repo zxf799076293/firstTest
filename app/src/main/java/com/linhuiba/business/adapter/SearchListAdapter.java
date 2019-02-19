@@ -124,6 +124,7 @@ public class SearchListAdapter extends BaseAdapter {
             holder.mSearchListPriceUnitTV = (TextView) convertView.findViewById(R.id.searchlist_item_price_first_tv);
             holder.mSearchListDemandLL = (LinearLayout) convertView.findViewById(R.id.searchlist_item_demand_ll);
             holder.mSearchlistPriceLL = (LinearLayout) convertView.findViewById(R.id.searchlist_item_price_ll);
+            holder.mSearchListPanoramaImgv = (ImageView) convertView.findViewById(R.id.searchlist_panorama_imgv);
 
             //将设置好的布局保存到缓存中，并将其设置在Tag里，以便后面方便取出Tag
             convertView.setTag(holder);
@@ -227,6 +228,13 @@ public class SearchListAdapter extends BaseAdapter {
                 }
             } else {
                 holder.msearchlist_txt_fieldtitle_layout.setVisibility(View.GONE);
+            }
+            //2019/1/17 全景显示
+            if (mFeildList.get(position).getPanorama() != null &&
+                    mFeildList.get(position).getPanorama().length() > 0) {
+                holder.mSearchListPanoramaImgv.setVisibility(View.VISIBLE);
+            } else {
+                holder.mSearchListPanoramaImgv.setVisibility(View.GONE);
             }
         } else {
             if (position == 0 && isSelfSupportShop) {
@@ -359,7 +367,7 @@ public class SearchListAdapter extends BaseAdapter {
                 holder.mSearchListDemandLL.setOnClickListener(new OnMultiClickListener() {
                     @Override
                     public void onMultiClick(View v) {
-                        // FIXME: 2018/12/8 我有需求点击事件
+                        //2018/12/8 我有需求点击事件
                     }
                 });
                 holder.mSearchListEnquiryLL.setVisibility(View.VISIBLE);
@@ -439,5 +447,6 @@ public class SearchListAdapter extends BaseAdapter {
         public TextView mSearchListPriceUnitTV;
         public LinearLayout mSearchListDemandLL;
         public LinearLayout mSearchlistPriceLL;
+        public ImageView mSearchListPanoramaImgv;
     }
 }

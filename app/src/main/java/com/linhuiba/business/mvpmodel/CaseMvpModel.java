@@ -14,7 +14,7 @@ public class CaseMvpModel {
     public static void getCaseList(int is_home, ArrayList<Integer> community_type_ids, ArrayList<Integer> industry_ids,
                                    ArrayList<Integer> spread_way_ids,ArrayList<Integer> promotion_purpose_ids,
                                    ArrayList<Integer> city_ids, ArrayList<Integer> label_ids,final int page,int city_id, LinhuiAsyncHttpResponseHandler handler) {
-        FieldApi.getCaseList(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), handler,
+        FieldApi.getCaseList(MyAsyncHttpClient.MyAsyncHttpClient2(), handler,
                 is_home, community_type_ids, industry_ids,spread_way_ids,promotion_purpose_ids,city_ids
                 ,label_ids, page,city_id);
     }
@@ -23,11 +23,11 @@ public class CaseMvpModel {
                                    ArrayList<Integer> city_ids,
                                    ArrayList<Integer> label_ids,int city_id,
                                    LinhuiAsyncHttpResponseHandler handler) {
-        FieldApi.getCaseInfo(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), handler,
+        FieldApi.getCaseInfo(MyAsyncHttpClient.MyAsyncHttpClient2(), handler,
                 id,community_type_ids,industry_ids,spread_way_ids,promotion_purpose_ids,city_ids,label_ids,city_id);
     }
     public static void getOterCaseList(int id, int page, int city_id, LinhuiAsyncHttpResponseHandler handler) {
-        FieldApi.getOtherCaseList(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), handler,
+        FieldApi.getOtherCaseList(MyAsyncHttpClient.MyAsyncHttpClient2(), handler,
                 id, page,city_id);
     }
     public static void getCaseSelection(LinhuiAsyncHttpResponseHandler handler) {

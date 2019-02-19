@@ -29,4 +29,6 @@ public interface FieldinfoMvpView extends BaseView {
     void onRecommendResMoreSuccess(ArrayList<ResourceSearchItemModel> list);
     void onFeedbacksSuccess();
     void onFeedbacksFailure(boolean superresult, Throwable error);
+    void onEnquirySuccess(String id);
+    void onEnquiryFailure(boolean superresult, Throwable error);
 }

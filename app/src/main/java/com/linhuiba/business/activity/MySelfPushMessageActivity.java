@@ -162,6 +162,7 @@ public class MySelfPushMessageActivity extends BaseMvpActivity implements MyPush
                     TitleBarUtils.setNextViewText(MySelfPushMessageActivity.this,
                             getResources().getString(R.string.invoiceinfo_editor_address_txt));
                 }
+                mPushMsgAdapters[mCurrIndex].notifyDataSetChanged();
             }
         });
 
@@ -210,6 +211,13 @@ public class MySelfPushMessageActivity extends BaseMvpActivity implements MyPush
                         com.linhuiba.linhuifield.connector.Constants.Dp2Px(MySelfPushMessageActivity.this,15));
             }
         });
+        Intent intent = getIntent();
+        if (intent.getExtras() != null &&
+                intent.getExtras().get("linhui_msg") != null &&
+                intent.getExtras().getInt("linhui_msg") == 1) {
+            mCurrIndex = 1;
+            mPushMsgVP.setCurrentItem(mCurrIndex);
+        }
     }
     private void initData() {
         if (mPushMsgAdapters[mCurrIndex] == null) {
@@ -308,6 +316,7 @@ public class MySelfPushMessageActivity extends BaseMvpActivity implements MyPush
             if (mPushMsgAdapters[mCurrIndex] == null) {
                 mPushMsgAdapters[mCurrIndex] = new MyPushMsgAdapter(R.layout.module_recycle_item_push_msg,mLists[mCurrIndex],MySelfPushMessageActivity.this,
                         MySelfPushMessageActivity.this);
+                mPushMsgAdapters[mCurrIndex].setPreLoadNumber(4);//预加载倒数第几个就实现onLoadMoreRequested
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 mRecyclerViews[mCurrIndex].setLayoutManager(linearLayoutManager);
@@ -431,26 +440,13 @@ public class MySelfPushMessageActivity extends BaseMvpActivity implements MyPush
         @Override
         public void onPageSelected(int position) {
             mCurrIndex = position;
-            switch (position) {
-                case 0:
-                    if (mPushMsgAdapters[mCurrIndex] == null) {
-                        showProgressDialog();
-                        mPage[mCurrIndex] = 1;
-                        initData();
-                    }
-                    break;
-                case 1:
-                    if (mPushMsgAdapters[mCurrIndex] == null) {
-                        showProgressDialog();
-                        mPage[mCurrIndex] = 1;
-                        initData();
-                    }
-
-                    break;
-                default:
-                    break;
+            if (mPushMsgAdapters[mCurrIndex] == null) {
+                showProgressDialog();
+                mPage[mCurrIndex] = 1;
+                initData();
+            } else {
+                mPushMsgAdapters[mCurrIndex].notifyDataSetChanged();
             }
-
         }
         @Override
         public void onPageScrollStateChanged(int state) {

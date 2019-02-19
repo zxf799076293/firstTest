@@ -123,6 +123,8 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
     TextView medit_search;
     @InjectView(R.id.lay_no_searchlist)
     LinearLayout mlay_no_searchlist;
+    @InjectView(R.id.searchlist_recommend_ll)
+    LinearLayout mRecommedLL;
     @InjectView(R.id.search_jump_map_img)
     ImageButton msearch_jump_map_img;
     @InjectView(R.id.screening_txt)
@@ -231,6 +233,9 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
     private ArrayList<HashMap<Object,Object>> data_new;//筛选的list
     private boolean isShowScreenAttributes;
     private MainTabActivity mMainTabActivity;
+    private Button mSearchConfirmBtn;
+    private ApiResourcesModel mApiResourcesModel;//确定按钮数量需要用到
+    private boolean isGetCategory;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mMainContent == null) {
             mMainContent = inflater.inflate(R.layout.activity_searchlist, container , false);
@@ -438,6 +443,12 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                     e.printStackTrace();
                 }
             }
+            // FIXME: 2019/1/16 切换环境后刷新
+            if (mMainTabActivity != null &&
+                    mMainTabActivity.isSearchListRefresh) {
+                mMainTabActivity.isSearchListRefresh = false;
+                searchinitdata();
+            }
         }
         isOnResume = true;
     }
@@ -602,6 +613,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
         apiResourcesModel.setPage_size(10);
         apiResourcesModel.setLat(lat);
         apiResourcesModel.setLng(lng);
+        mlay_no_searchlist.setVisibility(View.GONE);
         mSearchResListMvpPresenter.getPhyReslist(apiResourcesModel);
     }
     private void searchinitdata() {
@@ -617,6 +629,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
         if (medit_search.getText().toString().length() > 0) {
             apiResourcesModel.setKeywords(medit_search.getText().toString());
         }
+        mlay_no_searchlist.setVisibility(View.GONE);
         mSearchResListMvpPresenter.getPhyReslist(apiResourcesModel);
     }
     @Override
@@ -631,7 +644,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
             R.id.search_area_backimg,
             R.id.edit_search_search,
             R.id.search_jump_map_img,
-            R.id.search_add_demand_textview,
+            R.id.searchlist_nodata_adda_demand_ll,
             R.id.search_list_share_imgv,
             R.id.searchlist_screening_ll
     })
@@ -672,7 +685,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                 baiduintent.putExtras(mBundle);
                 startActivity(baiduintent);
                 break;
-            case R.id.search_add_demand_textview:
+            case R.id.searchlist_nodata_adda_demand_ll:
                 Intent AddDemand = new Intent(SearchListFragment.this.getActivity(),AboutUsActivity.class);
                 AddDemand.putExtra("type", Config.ADD_DEMAND_WEB_INT);
                 startActivity(AddDemand);
@@ -724,7 +737,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                     if (mSearchShareDialog!= null && mSearchShareDialog.isShowing()) {
                         mSearchShareDialog.dismiss();
                     }
-                    shareurl = Config.SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
+                    shareurl = Config.Domain_Name + Config.SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
                     sharewxMinShareLinkUrl = Config.WX_MINI_SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
                     Constants constants = new Constants(SearchListFragment.this.getActivity(),
                             ShareIconStr);
@@ -1745,7 +1758,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
         View myView = SearchListFragment.this.getActivity().getLayoutInflater().inflate(R.layout.activity_resourcesscreening, null);
         mresourcesscreening_stickygridview_new  = (ListView)myView.findViewById(R.id.resourcesscreening_stickygridview_new);
         Button mresetbtn = (Button)myView.findViewById(R.id.resetbtn);
-        Button mconfirmbtn = (Button)myView.findViewById(R.id.confirmbtn);
+        mSearchConfirmBtn = (Button)myView.findViewById(R.id.confirmbtn);
         DisplayMetrics metric = new DisplayMetrics();
         SearchListFragment.this.getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
         int width = metric.widthPixels;     // 屏幕宽度（像素）
@@ -1758,7 +1771,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
             GridviewNumColumns = 3;
         }
         setResScreeningAdapter();
-        mconfirmbtn.setOnClickListener(new View.OnClickListener() {
+        mSearchConfirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //关闭软键盘
@@ -1981,6 +1994,9 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                 data_new.clear();
                 data_new.addAll(copyData);
                 resourcesScreeningNewAdapter.notifyDataSetChanged();
+                mSearchConfirmBtn.setEnabled(true);
+                mSearchConfirmBtn.setBackgroundColor(getResources().getColor(R.color.default_bluebg));
+                mSearchConfirmBtn.setText(getResources().getString(R.string.confirm));
             }
         });
         //通过view 和宽·高，构造PopopWindow
@@ -2510,39 +2526,53 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
             mSearchInfoList.addAll(list);
         }
 
-        if( mSearchInfoList == null ||  mSearchInfoList.isEmpty()) {
-            mlay_no_searchlist.setVisibility(View.VISIBLE);
+        if(mSearchInfoList == null || mSearchInfoList.isEmpty()) {
+            if (mlay_no_searchlist.getVisibility() == View.GONE) {
+                mlay_no_searchlist.setVisibility(View.VISIBLE);
+                mRecommedLL.setVisibility(View.GONE);
+                if (apiResourcesModel.getCity_ids() != null &&
+                        apiResourcesModel.getCity_ids().size() > 0) {
+                    apiResourcesModel.setCity_id(String.valueOf(apiResourcesModel.getCity_ids().get(0)));
+                } else {
+                    apiResourcesModel.setCity_id(LoginManager.getInstance().getTrackcityid());
+                }
+                mSearchResListMvpPresenter.getPhyRecommendedList(apiResourcesModel);
+            }
             if (SearchListswipList.isShown()) {
                 SearchListswipList.setRefreshing(false);
             }
             return;
         }
-        if (screening_result_boolean ||
-                ((apiResourcesModel.getSubway_station_ids() != null &&
-                        apiResourcesModel.getSubway_station_ids().size() > 0) ||
-                        (apiResourcesModel.getDistrict_ids() != null &&
-                                apiResourcesModel.getDistrict_ids().size() > 0) ||
-                        (apiResourcesModel.getTrading_area_ids() != null &&
-                                apiResourcesModel.getTrading_area_ids().size() > 0))) {
-            mSearchSizeLL.setVisibility(View.VISIBLE);
-            if (isAdded()) {
-                msearchlist_itemsize_text.setText(getResources().getString(R.string.search_fieldlist_results_one_text)+
-                        SharedescriptionStr +getResources().getString(R.string.search_fieldlist_results_two_text));
-            }
-            new Handler().postDelayed(new Runnable() {
-                public void run() {
-                    if (mSearchSizeLL.getVisibility() == View.VISIBLE) {
-                        mSearchSizeLL.setVisibility(View.GONE);
-                    }
+        if (mlay_no_searchlist.getVisibility() == View.GONE) {
+            if (screening_result_boolean ||
+                    ((apiResourcesModel.getSubway_station_ids() != null &&
+                            apiResourcesModel.getSubway_station_ids().size() > 0) ||
+                            (apiResourcesModel.getDistrict_ids() != null &&
+                                    apiResourcesModel.getDistrict_ids().size() > 0) ||
+                            (apiResourcesModel.getTrading_area_ids() != null &&
+                                    apiResourcesModel.getTrading_area_ids().size() > 0))) {
+                mSearchSizeLL.setVisibility(View.VISIBLE);
+                if (isAdded()) {
+                    msearchlist_itemsize_text.setText(getResources().getString(R.string.search_fieldlist_results_one_text)+
+                            SharedescriptionStr +getResources().getString(R.string.search_fieldlist_results_two_text));
                 }
-            }, 3000);
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        if (mSearchSizeLL.getVisibility() == View.VISIBLE) {
+                            mSearchSizeLL.setVisibility(View.GONE);
+                        }
+                    }
+                }, 3000);
+            }
+            isShare = true;
+        } else {
+            mRecommedLL.setVisibility(View.VISIBLE);
         }
-        isShare = true;
-        mlay_no_searchlist.setVisibility(View.GONE);
         if (mSearchListAdapter == null) {
             mSearchListAdapter = new SearchCommunityListAdapter(
                     R.layout.searchlistactivity_listview_item,mSearchInfoList,
                     SearchListFragment.this.getActivity(),SearchListFragment.this);
+            mSearchListAdapter.setPreLoadNumber(4);//预加载倒数第几个就实现onLoadMoreRequested
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SearchListFragment.this.getContext());
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             mSearchListRV.setLayoutManager(linearLayoutManager);
@@ -2553,7 +2583,11 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                     fieldlistpagesize  = fieldlistpagesize + 1;
                     apiResourcesModel.setPage(String.valueOf(fieldlistpagesize));
                     apiResourcesModel.setPage_size(10);
-                    mSearchResListMvpPresenter.getPhyReslist(apiResourcesModel);
+                    if (mlay_no_searchlist.getVisibility() == View.GONE) {
+                        mSearchResListMvpPresenter.getPhyReslist(apiResourcesModel);
+                    } else {
+                        mSearchResListMvpPresenter.getPhyRecommendedList(apiResourcesModel);
+                    }
                 }
             });
         } else {
@@ -2637,6 +2671,34 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
 
     }
 
+    @Override
+    public void onSearchResListCountSuccess(int count) {
+        if (count > 0) {
+            mSearchConfirmBtn.setEnabled(true);
+            mSearchConfirmBtn.setBackgroundColor(getResources().getColor(R.color.default_bluebg));
+            if (mApiResourcesModel.getMin_area() != null || mApiResourcesModel.getMax_area() != null||
+                    mApiResourcesModel.getMin_person_flow() != null  || mApiResourcesModel.getMax_person_flow() != null
+                    || mApiResourcesModel.getLabel_ids().size() > 0
+                    || mApiResourcesModel.getLocation_type_ids().size() > 0 //2018/12/11 位置类型
+                    || mApiResourcesModel.getCommunity_type_ids().size() > 0
+                    || mApiResourcesModel.getAttributes().size() > 0) {
+                mSearchConfirmBtn.setText(getResources().getString(R.string.confirm) + "(" +
+                        String.valueOf(count) + getResources().getString(R.string.module_searchlist_confirm_text) +
+                        ")"
+                );
+            } else {
+                mSearchConfirmBtn.setText(getResources().getString(R.string.confirm));
+            }
+        } else {
+            mSearchConfirmBtn.setEnabled(false);
+            mSearchConfirmBtn.setBackgroundColor(getResources().getColor(R.color.module_searchlist_screen_btn_no_data_color));
+            mSearchConfirmBtn.setText(getResources().getString(R.string.confirm) + "(" +
+                    String.valueOf(0) + getResources().getString(R.string.module_searchlist_confirm_text) +
+                    ")"
+            );
+        }
+    }
+
     public class MyLocationListener implements BDLocationListener {
 
         @Override
@@ -2647,8 +2709,6 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                 lng = location.getLongitude();
                 apiResourcesModel.setLat(lat);
                 apiResourcesModel.setLng(lng);
-                Log.i("lat",String.valueOf(lat));
-                Log.i("lng",String.valueOf(lng));
                 searchinitdata();
             }
             mLocationClient.stop();
@@ -2656,6 +2716,7 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
         }
     }
     public void getAttributesList() {
+        isGetCategory = true;
         ArrayList<Integer> Category = new ArrayList<>();
         for (int i = 0; i < mCategoryAdapterList.size(); i++) {
             if (ResourcesScreeningItemAdapter.getresourcescreeninglist().get("category" + mCategoryAdapterList.get(i).get("category").toString()) != null &&
@@ -2780,7 +2841,9 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
         pepple_map.put("itemtype",1);
         data_new.add(pepple_map);
         //修改后的adapter
-        ResourcesScreeningItemAdapter.clear_resourcescreeninglist();
+        if (!isGetCategory) {
+            ResourcesScreeningItemAdapter.clear_resourcescreeninglist();
+        }
         //是否选中的标志
         for (int j = 0; j < data_new.size(); j++ ) {
             if (data_new.get(j).get("datalist") != null && ((ArrayList<HashMap<Object,Object>>)data_new.get(j).get("datalist")).size() > 0) {
@@ -2791,7 +2854,13 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                             (Integer)data_new_temp.get(i).get("itemtype") == 2)) {
 
                     } else {
-                        ResourcesScreeningItemAdapter.getresourcescreeninglist().put(data_new_temp.get(i).get("type").toString() + data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString(), false);
+                        if (!isGetCategory || ResourcesScreeningItemAdapter.getresourcescreeninglist().get(data_new_temp.get(i).get("type").toString() + data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString()) == null) {
+                            ResourcesScreeningItemAdapter.getresourcescreeninglist().put(data_new_temp.get(i).get("type").toString() + data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString(), false);
+                        } else {
+                            if (data_new_temp.get(i).get("type").toString().indexOf("attributes") != -1) {
+                                ResourcesScreeningItemAdapter.getresourcescreeninglist().put(data_new_temp.get(i).get("type").toString() + data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString(), false);
+                            }
+                        }
                         if (data_new_temp.get(i).get("type").toString().equals("field_labels")) {
                             if (apiResourcesModel.getLabel_ids() != null) {
                                 if (apiResourcesModel.getLabel_ids().size() > 0) {
@@ -2882,6 +2951,9 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
                     }
                 }
             }
+        }
+        if (isGetCategory) {
+            isGetCategory = false;
         }
         resourcesScreeningNewAdapter = new ResourcesScreeningNewAdapter(SearchListFragment.this.getActivity(),SearchListFragment.this,data_new,0);
         if (resourcesScreeningNewAdapter != null) {
@@ -3169,5 +3241,171 @@ public class SearchListFragment extends BaseMvpFragment implements SwipeRefreshL
             }
         }
         return paramsMap;
+    }
+    public void getListCount() {
+        String json = JSON.toJSONString(apiResourcesModel);
+        mApiResourcesModel = (ApiResourcesModel) JSONObject.parseObject(json,ApiResourcesModel.class);
+        mresourcesscreening_stickygridview_new.clearFocus();
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                String mminimum_yearedit = "";
+                String mmaximum_yearedit = "";
+                String area_edit = "";
+                String area_max_edit = "";
+                String min_person_flow_edit = "";
+                String max_person_flow_edit = "";
+                ArrayList<Integer> fieldlabel_list = new ArrayList<>();
+                ArrayList<Integer> locationTypeIdsList = new ArrayList<>();//2018/12/11 位置类型确认按钮操作
+                ArrayList<Integer> communityTypeList = new ArrayList<>();
+                ArrayList<SearchListAttributesModel> attributesList = new ArrayList<>();
+                for (int j = 0;j < data_new.size(); j++ ) {
+                    if (data_new.get(j).get("datalist") != null && ((ArrayList<HashMap<Object,Object>>)data_new.get(j).get("datalist")).size() > 0) {
+                        ArrayList<HashMap<Object,Object>> data_new_temp = new ArrayList<>();
+                        data_new_temp.addAll(((ArrayList<HashMap<Object,Object>>) (data_new.get(j).get("datalist"))));
+                        for (int i = 0; i <data_new_temp.size(); i++) {
+                            if (data_new_temp.get(i).get("itemtype") != null && ((Integer)data_new_temp.get(i).get("itemtype") == 1 ||
+                                    (Integer)data_new_temp.get(i).get("itemtype") == 2)) {
+
+                            } else {
+                                if ((boolean)ResourcesScreeningItemAdapter.getresourcescreeninglist().get(data_new_temp.get(i).get("type").toString()+data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString())) {
+                                    if (data_new_temp.get(i).get("type").toString().equals("field_labels")) {
+                                        fieldlabel_list.add(Integer.parseInt(data_new_temp.get(i).get("id").toString()));
+                                    } else if (data_new_temp.get(i).get("type").toString().equals("location_types")) {//2018/12/11 位置类型
+                                        locationTypeIdsList.add(Integer.parseInt(data_new_temp.get(i).get("id").toString()));
+                                    } else if (data_new_temp.get(i).get("type").toString().equals("category")) {
+                                        communityTypeList.add(Integer.parseInt(mCategoryMap.get(data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString())));
+                                    } else if (data_new_temp.get(i).get("type").toString().indexOf("attributes") != -1) {
+                                        if (attributesList.size() > 0) {
+                                            boolean isHasAttribute = false;
+                                            for (int l = 0; l <attributesList.size(); l++) {
+                                                if (attributesList.get(l).getId() ==
+                                                        Integer.parseInt(data_new_temp.get(i).get("attribute_id").toString())) {
+                                                    isHasAttribute = true;
+                                                    attributesList.get(l).getOption_ids().add(Integer.parseInt(data_new_temp.get(i).get("id").toString()));
+                                                }
+                                            }
+                                            if (!isHasAttribute) {
+                                                SearchListAttributesModel searchListAttributesModel =  new SearchListAttributesModel();
+                                                searchListAttributesModel.setId(Integer.parseInt(data_new_temp.get(i).get("attribute_id").toString()));
+                                                ArrayList<Integer> option_ids = new ArrayList<>();
+                                                option_ids.add(Integer.parseInt(data_new_temp.get(i).get("id").toString()));
+                                                searchListAttributesModel.setOption_ids(option_ids);
+                                                attributesList.add(searchListAttributesModel);
+                                            }
+                                        } else {
+                                            SearchListAttributesModel searchListAttributesModel =  new SearchListAttributesModel();
+                                            searchListAttributesModel.setId(Integer.parseInt(data_new_temp.get(i).get("attribute_id").toString()));
+                                            ArrayList<Integer> option_ids = new ArrayList<>();
+                                            option_ids.add(Integer.parseInt(data_new_temp.get(i).get("id").toString()));
+                                            searchListAttributesModel.setOption_ids(option_ids);
+                                            attributesList.add(searchListAttributesModel);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if (data_new.get(j).get("type").toString().equals("year")) {
+                            if (ResourcesScreeningNewAdapter.getedittextmap().get("yearmin").toString().length() > 0) {
+                                if (Integer.parseInt(ResourcesScreeningNewAdapter.getedittextmap().get("yearmin").toString()) < 1900 ||
+                                        Integer.parseInt(ResourcesScreeningNewAdapter.getedittextmap().get("yearmin").toString()) > 2099) {
+                                    MessageUtils.showToast(getResources().getString(R.string.module_searchlist_buile_year_error_msg));
+                                    ResourcesScreeningNewAdapter.getedittextmap().put("yearmin","");
+                                    resourcesScreeningNewAdapter.notifyDataSetChanged();
+                                    return;
+                                }
+                            }
+                            if (ResourcesScreeningNewAdapter.getedittextmap().get("yearmax").toString().length() > 0) {
+                                if (Integer.parseInt(ResourcesScreeningNewAdapter.getedittextmap().get("yearmax").toString()) < 1900 ||
+                                        Integer.parseInt(ResourcesScreeningNewAdapter.getedittextmap().get("yearmax").toString()) > 2099) {
+                                    MessageUtils.showToast(getResources().getString(R.string.module_searchlist_buile_year_error_msg));
+                                    ResourcesScreeningNewAdapter.getedittextmap().put("yearmax","");
+                                    resourcesScreeningNewAdapter.notifyDataSetChanged();
+                                    return;
+                                }
+                            }
+                            if (ResourcesScreeningNewAdapter.getedittextmap().get("yearmin").toString().length() > 0 &&
+                                    ResourcesScreeningNewAdapter.getedittextmap().get("yearmax").toString().length() > 0) {
+                                if (Double.parseDouble(Constants.getpricestring(Constants.getpricestring(ResourcesScreeningNewAdapter.getedittextmap().get("yearmin").toString(), 1),1)) >
+                                        Double.parseDouble(Constants.getpricestring(Constants.getpricestring(ResourcesScreeningNewAdapter.getedittextmap().get("yearmax").toString(), 1),1))) {
+                                    ResourcesScreeningNewAdapter.getedittextmap().put("yearmin","");
+                                    ResourcesScreeningNewAdapter.getedittextmap().put("yearmax","");
+                                    MessageUtils.showToast(getResources().getString(R.string.module_searchlist_buile_year_error_hind));
+                                    resourcesScreeningNewAdapter.notifyDataSetChanged();
+                                    return;
+                                }
+                            }
+                            mminimum_yearedit = ResourcesScreeningNewAdapter.getedittextmap().get("yearmin").toString();
+                            mmaximum_yearedit = ResourcesScreeningNewAdapter.getedittextmap().get("yearmax").toString();
+                        } else if (data_new.get(j).get("type").toString().equals("area")) {
+                            if (ResourcesScreeningNewAdapter.getedittextmap().get("areamin").toString().length() > 0 &&
+                                    ResourcesScreeningNewAdapter.getedittextmap().get("areamax").toString().length() > 0) {
+                                if (Double.parseDouble(Constants.getpricestring(Constants.getpricestring(ResourcesScreeningNewAdapter.getedittextmap().get("areamin").toString(), 1),1)) >
+                                        Double.parseDouble(Constants.getpricestring(Constants.getpricestring(ResourcesScreeningNewAdapter.getedittextmap().get("areamax").toString(), 1),1))) {
+                                    ResourcesScreeningNewAdapter.getedittextmap().put("areamin","");
+                                    ResourcesScreeningNewAdapter.getedittextmap().put("areamax","");
+                                    MessageUtils.showToast(getResources().getString(R.string.module_searchlist_area_error_hind));
+                                    resourcesScreeningNewAdapter.notifyDataSetChanged();
+                                    return;
+                                }
+                            }
+                            area_edit = ResourcesScreeningNewAdapter.getedittextmap().get("areamin").toString();
+                            area_max_edit = ResourcesScreeningNewAdapter.getedittextmap().get("areamax").toString();
+                        } else if (data_new.get(j).get("type").toString().equals("numper_of_people")) {
+                            if (ResourcesScreeningNewAdapter.getedittextmap().get("numper_of_peoplemin").toString().length() > 0 &&
+                                    ResourcesScreeningNewAdapter.getedittextmap().get("numper_of_peoplemax").toString().length() > 0) {
+                                if (Double.parseDouble(Constants.getpricestring(Constants.getpricestring(ResourcesScreeningNewAdapter.getedittextmap().get("numper_of_peoplemin").toString(), 1),1)) >
+                                        Double.parseDouble(Constants.getpricestring(Constants.getpricestring(ResourcesScreeningNewAdapter.getedittextmap().get("numper_of_peoplemax").toString(), 1),1))) {
+                                    ResourcesScreeningNewAdapter.getedittextmap().put("numper_of_peoplemin","");
+                                    ResourcesScreeningNewAdapter.getedittextmap().put("numper_of_peoplemax","");
+                                    MessageUtils.showToast(getResources().getString(R.string.module_searchlist_area_error_hind));
+                                    resourcesScreeningNewAdapter.notifyDataSetChanged();
+                                    return;
+                                }
+                            }
+                            min_person_flow_edit = ResourcesScreeningNewAdapter.getedittextmap().get("numper_of_peoplemin").toString();
+                            max_person_flow_edit = ResourcesScreeningNewAdapter.getedittextmap().get("numper_of_peoplemax").toString();
+                        }
+                    }
+                }
+                mApiResourcesModel.setLabel_ids(fieldlabel_list);
+                mApiResourcesModel.setLocation_type_ids(locationTypeIdsList);//2018/12/11 赋值位置类型到筛选
+                mApiResourcesModel.setCommunity_type_ids(communityTypeList);
+                mApiResourcesModel.setAttributes(attributesList);
+                if (mminimum_yearedit.length() > 0) {
+                    mApiResourcesModel.setMin_year(Integer.parseInt(mminimum_yearedit));
+                } else {
+                    mApiResourcesModel.setMin_year(null);
+                }
+                if (mmaximum_yearedit.length() > 0) {
+                    mApiResourcesModel.setMax_year(Integer.parseInt(mmaximum_yearedit));
+                } else {
+                    mApiResourcesModel.setMax_year(null);
+                }
+                if (area_edit.length() > 0) {
+                    mApiResourcesModel.setMin_area(Constants.getpricestring(area_edit,1));
+                } else {
+                    mApiResourcesModel.setMin_area(null);
+                }
+                if (area_max_edit.length() > 0) {
+                    mApiResourcesModel.setMax_area(Constants.getpricestring(area_max_edit,1));
+                } else {
+                    mApiResourcesModel.setMax_area(null);
+                }
+                if (min_person_flow_edit.length() > 0) {
+                    mApiResourcesModel.setMin_person_flow(Constants.getpricestring(min_person_flow_edit,1));
+                } else {
+                    mApiResourcesModel.setMin_person_flow(null);
+                }
+                if (max_person_flow_edit.length() > 0) {
+                    mApiResourcesModel.setMax_person_flow(Constants.getpricestring(max_person_flow_edit,1));
+                } else {
+                    mApiResourcesModel.setMax_person_flow(null);
+                }
+                showProgressDialog();
+                mlay_no_searchlist.setVisibility(View.GONE);
+                mSearchResListMvpPresenter.getPhyReslistCount(mApiResourcesModel);
+            }
+        }, 100);
     }
 }

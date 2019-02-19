@@ -295,35 +295,59 @@
         <LinearLayout
             android:id="@+id/lay_no_searchlist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
             android:visibility="gone"
-            android:background="@color/app_linearlayout_bg">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_search_two_six"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/fieldinfo_fieldtitle_height"
-                android:text="@string/search_fieldlist_no_data_text"
-                android:lineSpacingExtra="@dimen/tab_item_img_margintop"
-                android:textSize="@dimen/login_leftright_txt_size"
-                android:textColor="@color/register_edit_color"/>
-            <TextView
-                android:layout_width="@dimen/review_button_width"
-                android:layout_height="@dimen/title_bar_layout_width_height"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/fieldinfo_fieldtitle_height"
-                android:text="@string/search_fieldlist_post_demand_text"
-                android:textSize="@dimen/text_title_size_next"
-                android:id="@+id/search_add_demand_textview"
-                android:textColor="@color/top_title_center_txt_color"
-                android:background="@drawable/activity_searchfieldaarea_delete_history_bg"/>
+            android:background="@color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/order_list_item_paybtn_height"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:id="@+id/searchlist_nodata_adda_demand_ll">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:drawableLeft="@drawable/ic_list_tishi_three_onezero"
+                    android:drawablePadding="@dimen/txt_margin"
+                    android:text="@string/module_searchlist_no_data"
+                    android:lineSpacingExtra="@dimen/tab_item_img_margintop"
+                    android:textSize="@dimen/login_leftright_txt_size"
+                    android:textColor="@color/headline_tv_color"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/module_searchlist_no_data_second"
+                    android:textSize="@dimen/login_leftright_txt_size"
+                    android:textColor="@color/default_bluebg" />
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/searchlist_recommend_ll">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/txt_padding_left"
+                    android:background="@color/app_linearlayout_bg">
+                </View>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingLeft="@dimen/app_backbtn_marginleft"
+                    android:paddingTop="@dimen/paddingleft"
+                    android:paddingBottom="@dimen/field_info_marginleft"
+                    android:textColor="@color/headline_tv_color"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/search_lisritem_pricetxt_size"
+                    android:text="@string/home_recommend_title_text"/>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

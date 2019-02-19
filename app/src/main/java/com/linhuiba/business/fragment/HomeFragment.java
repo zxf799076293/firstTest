@@ -121,6 +121,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import static com.linhuiba.business.config.Config.BASE_API_URL_PHP;
+
 /**
  * Created by Administrator on 2016/3/1.
  */
@@ -306,6 +308,11 @@ public class HomeFragment extends BaseMvpFragment implements MySwipeRefreshLayou
         if (LoginManager.isLogin() && mMainTabActivity.isClickTab) {
             mMainTabActivity.isClickTab = false;
             LoginMvpModel.sendBrowseHistories("home_page",null,mCityIdStr);
+        }
+        // FIXME: 2019/1/16 切换环境后刷新
+        if (mMainTabActivity.isHomeRefresh) {
+            mMainTabActivity.isHomeRefresh = false;
+            initData();
         }
     }
     @Override
@@ -1066,6 +1073,11 @@ public class HomeFragment extends BaseMvpFragment implements MySwipeRefreshLayou
 
     }
 
+    @Override
+    public void onSearchResListCountSuccess(int count) {
+
+    }
+
     public class MyLocationListener implements BDLocationListener {
 
         @Override
@@ -1609,11 +1621,8 @@ public class HomeFragment extends BaseMvpFragment implements MySwipeRefreshLayou
                     public void onClick(View view) {
                         switch (view.getId()) {
                             case R.id.upgrade_version_btn:
-                                if (homeMessageModels.get(0).getUrl() != null &&
-                                        homeMessageModels.get(0).getUrl().length() > 0) {
-                                    //2018/11/23 推送跳转
-                                    Constants.pushUrlJumpActivity(homeMessageModels.get(0).getUrl(),HomeFragment.this.getContext(),false);
-                                }
+                                //2018/11/23 推送跳转
+                                Constants.pushUrlJumpActivity(homeMessageModels.get(0).getUrl(),HomeFragment.this.getContext(),false);
                                 mMessageDialog.dismiss();
                                 mHomeMvpPresenter.deleteMessageNotices(String.valueOf(homeMessageModels.get(0).getId()));
                                 break;

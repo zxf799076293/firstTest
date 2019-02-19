@@ -52,7 +52,6 @@ public class PhysicalResourceModel implements Serializable {
     private ArrayList<CaseListModel> activity_cases;
     //广告
     private Field_AddResourceCreateItemModel ad_type;
-    private Double average_score;
     //拼团 //或场地
     private Field_AddResourceCreateItemModel field_type;
     private Field_AddResourceCreateItemModel activity_type;
@@ -63,6 +62,7 @@ public class PhysicalResourceModel implements Serializable {
     private int is_activity;
     //图文详情
     private String img_description;
+    private String panorama;//全景图url
     public Integer getId() {
         return id;
     }
@@ -390,14 +390,6 @@ public class PhysicalResourceModel implements Serializable {
         this.ad_type = ad_type;
     }
 
-    public Double getAverage_score() {
-        return average_score;
-    }
-
-    public void setAverage_score(Double average_score) {
-        this.average_score = average_score;
-    }
-
     public Field_AddResourceCreateItemModel getField_type() {
         return field_type;
     }
@@ -452,6 +444,14 @@ public class PhysicalResourceModel implements Serializable {
 
     public void setImg_description(String img_description) {
         this.img_description = img_description;
+    }
+
+    public String getPanorama() {
+        return panorama;
+    }
+
+    public void setPanorama(String panorama) {
+        this.panorama = panorama;
     }
 }
 

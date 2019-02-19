@@ -49,19 +49,28 @@
             <View
                 style="@style/DefaultLongViewStyle">
             </View>
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:layout_height="match_parent">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_centerInParent="true"
                     android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
                     android:textSize="@dimen/login_leftright_txt_size"
-                    android:text="@string/module_my_coupons_goto_centre"/>
-            </LinearLayout>
+                    android:text="@string/module_my_coupons_goto_centre"
+                    android:id="@+id/my_coupons_goto_centre_tv"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@+id/my_coupons_goto_centre_tv"
+                    android:layout_marginTop="@dimen/txt_margin"
+                    android:src="@drawable/ci_shangxin_three_onezero"
+                    android:id="@+id/my_coupons_goto_centre_imgv"/>
+
+            </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

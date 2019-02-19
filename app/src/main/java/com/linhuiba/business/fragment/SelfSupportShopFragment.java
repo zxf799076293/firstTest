@@ -129,6 +129,7 @@ public class SelfSupportShopFragment extends BaseMvpFragment implements SwipeRef
         ImageView mNoDataImg= (ImageView) mNoDataRL.findViewById(R.id.no_data_img);
         TextView mNoDataTV= (TextView) mNoDataRL.findViewById(R.id.no_data_tv);
         Button mNoDataBtn= (Button) mNoDataRL.findViewById(R.id.no_data_btn);
+        mNoDataBtn.setVisibility(View.VISIBLE);
         mNoDataImg.setImageResource(R.drawable.emptystates_shopself);
         mNoDataTV.setText(getResources().getString(R.string.selfsupportshop_no_data_tv_str));
         mNoDataBtn.setText(getResources().getString(R.string.confirmorder_back_homepage));
@@ -205,7 +206,7 @@ public class SelfSupportShopFragment extends BaseMvpFragment implements SwipeRef
         mWXApi = WXAPIFactory.createWXAPI(SelfSupportShopFragment.this.getContext(), Constants.APP_ID);
         mWXApi.registerApp(Constants.APP_ID);
         mShareTitleStr = getResources().getString(R.string.module_searchlist_activity_share_title);
-        mWxShareLinkUrl = Config.SHARE_ACTIVITIES_LIST_URL + mCity_Id;
+        mWxShareLinkUrl = Config.Domain_Name + Config.SHARE_ACTIVITIES_LIST_URL + mCity_Id;
         mWxMiniShareShareLinkUrl = Config.WX_MINI_SHARE_ACTIVITIES_LIST_URL + mCity_Id;
     }
 
@@ -370,6 +371,11 @@ public class SelfSupportShopFragment extends BaseMvpFragment implements SwipeRef
         if (tmp.size() < 10) {
             mSelfSupportShopListLV.set_loaded();
         }
+    }
+
+    @Override
+    public void onSearchResListCountSuccess(int count) {
+
     }
 
     @Override

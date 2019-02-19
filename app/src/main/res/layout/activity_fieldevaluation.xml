@@ -17,23 +17,14 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/order_nodata_toast"
-            android:id="@+id/textView2"
-            android:textSize="20sp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="fill_horizontal|center_vertical" />
+        <include
+            layout="@layout/app_no_data_layout">
+        </include>
     </RelativeLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        >
-
+        android:layout_height="fill_parent">
         <com.linhuiba.business.view.LoadMoreListView
             android:id="@+id/order_list"
             android:layout_width="fill_parent"

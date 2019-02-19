@@ -89,17 +89,13 @@ public class Fieldinfo_ReviewAdapter extends BaseAdapter{
             convertView = mInflater.inflate(R.layout.activity_fieldevaluation_item, null);
             holder.mfield_user = (TextView)convertView.findViewById(R.id.field_user_txt);
             holder.mfieldtime = (TextView)convertView.findViewById(R.id.txt_time);
-            holder.mtxt_number_of_people = (TextView)convertView.findViewById(R.id.txt_number_of_people);
-            holder.mNumberOfPeopleLL = (LinearLayout)convertView.findViewById(R.id.txt_number_of_people_ll);
+            holder.mtxt_number_of_people = (TextView)convertView.findViewById(R.id.comment_number_of_people);
             holder.mevaluation_txt = (TextView)convertView.findViewById(R.id.evaluation_txt);
             holder.mreview_imggridview = (MyGridview)convertView.findViewById(R.id.review_imggridview);
             holder.mreview_label_relativelayout = (RelativeLayout)convertView.findViewById(R.id.review_label_relativelayout);
             holder.mfield_review_layout = (LinearLayout)convertView.findViewById(R.id.field_review_layout);
             holder.mfield_review_alllayout = (LinearLayout)convertView.findViewById(R.id.field_review_alllayout);
             holder.mSizeTV = (TextView) convertView.findViewById(R.id.review_res_size_tv);
-            holder.mIndustryTV = (TextView) convertView.findViewById(R.id.review_res_industry_tv);
-            holder.mPromotionPurposeTV = (TextView) convertView.findViewById(R.id.comment_item_promotion_purpose_tv);
-            holder.mSpreadWayTV = (TextView) convertView.findViewById(R.id.comment_item_spread_way_tv);
             //将设置好的布局保存到缓存中，并将其设置在Tag里，以便后面方便取出Tag
             convertView.setTag(holder);
         }else
@@ -115,7 +111,7 @@ public class Fieldinfo_ReviewAdapter extends BaseAdapter{
             if (mFeildList != null) {
                 if (mFeildList.size() != 0) {
                     if (mFeildList.get(position).getField_order_item_id() != null) {
-                        LinearLayout.LayoutParams paramgroups= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (widthview/3-56));
+                        LinearLayout.LayoutParams paramgroups= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (widthview/4-56));
                         if (mFeildList.get(position).getImages() != null &&
                                 mFeildList.get(position).getImages().size() > 0) {
                             Mygridviewadapter mygridviewadapter = null;
@@ -168,23 +164,15 @@ public class Fieldinfo_ReviewAdapter extends BaseAdapter{
                         } else {
                             holder.mreview_label_relativelayout.setVisibility(View.GONE);
                         }
-                        holder.mfield_user.setText((String)mFeildList.get(position).getName());
-                        holder.mfieldtime.setText((String)mFeildList.get(position).getReviewed_at());
-                        holder.mevaluation_txt.setText((String)mFeildList.get(position).getContent());
-                        if (mFeildList.get(position).getPeople_flow() != null) {
-                            if (mFeildList.get(position).getPeople_flow().length() > 0 &&
-                                    Integer.parseInt(mFeildList.get(position).getPeople_flow()) > 0) {
-                                holder.mNumberOfPeopleLL.setVisibility(View.VISIBLE);
-                                holder.mtxt_number_of_people.setVisibility(View.VISIBLE);
-                                holder.mtxt_number_of_people.setText(mFeildList.get(position).getPeople_flow()+"左右");
-                            } else {
-                                holder.mNumberOfPeopleLL.setVisibility(View.GONE);
-                            }
+                        holder.mfield_user.setText(mFeildList.get(position).getName());
+                        holder.mfieldtime.setText(mFeildList.get(position).getReviewed_at());
+                        if (mFeildList.get(position).getContent() != null &&
+                                mFeildList.get(position).getContent().length() > 0) {
+                            holder.mevaluation_txt.setVisibility(View.VISIBLE);
+                            holder.mevaluation_txt.setText(mFeildList.get(position).getContent());
                         } else {
-                            holder.mNumberOfPeopleLL.setVisibility(View.GONE);
-                        }
-
-                        int pic_light[] = new int[5];
+                            holder.mevaluation_txt.setVisibility(View.GONE);
+                        }                        int pic_light[] = new int[5];
                         int pic_dark[] = new int[5];
                         ImageView img[] = new ImageView[5];
                         img[0] = (ImageView)convertView.findViewById(R.id.score_img_one);
@@ -204,24 +192,113 @@ public class Fieldinfo_ReviewAdapter extends BaseAdapter{
                             }
                         }
                         //2018/12/14 size 和 industry
+                        String sizeStr = "";
                         if (mFeildList.get(position).getSize() != null &&
                                 mFeildList.get(position).getSize().length() > 0) {
-                            holder.mSizeTV.setText(context.getResources().getString(R.string.order_listitem_sizetxt) +
+                            sizeStr = (context.getResources().getString(R.string.module_comment_centre_item_size) +
                                     mFeildList.get(position).getSize());
-                            holder.mSizeTV.setVisibility(View.VISIBLE);
-                        } else {
-                            holder.mSizeTV.setVisibility(View.GONE);
                         }
                         if (mFeildList.get(position).getIndustry() != null &&
                                 mFeildList.get(position).getIndustry().length() > 0) {
-                            holder.mIndustryTV.setText(context.getResources().getString(R.string.module_reviewed_industry) +
+                            if (sizeStr.length() > 0) {
+                                sizeStr = sizeStr + "    ";
+                            }
+                            sizeStr = sizeStr + (context.getResources().getString(R.string.module_reviewed_industry) +
                                     mFeildList.get(position).getIndustry());
-                            holder.mIndustryTV.setVisibility(View.VISIBLE);
-                        } else {
-                            holder.mIndustryTV.setVisibility(View.GONE);
                         }
-                        // FIXME: 2019/1/10 推广目的推广形式
+                        if (sizeStr.length() > 0) {
+                            holder.mSizeTV.setVisibility(View.VISIBLE);
+                            holder.mSizeTV.setText(sizeStr);
+                        } else {
+                            holder.mSizeTV.setVisibility(View.GONE);
+                        }
+                        //2019/1/10 推广目的推广形式
+                        String promotion_purposes = "";
+                        if (mFeildList.get(position).getPromotion_purposes() != null &&
+                                mFeildList.get(position).getPromotion_purposes().size() > 0) {
+                            for (int i = 0; i < mFeildList.get(position).getPromotion_purposes().size(); i++) {
+                                if (mFeildList.get(position).getPromotion_purposes().get(i).getDisplay_name() != null &&
+                                        mFeildList.get(position).getPromotion_purposes().get(i).getDisplay_name().length() > 0) {
+                                    if (promotion_purposes.length() > 0) {
+                                        promotion_purposes = promotion_purposes + "、";
+                                    }
+                                    promotion_purposes = promotion_purposes + mFeildList.get(position).getPromotion_purposes().get(i).getDisplay_name();
+                                }
 
+                            }
+                        }
+                        if (promotion_purposes.length() > 0) {
+                            promotion_purposes = (context.getResources().getString(R.string.module_comment_promotion_purpose) +
+                                    promotion_purposes);
+                        }
+                        String spread_ways = "";
+                        if (mFeildList.get(position).getSpread_ways() != null &&
+                                mFeildList.get(position).getSpread_ways().size() > 0) {
+                            for (int i = 0; i < mFeildList.get(position).getSpread_ways().size(); i++) {
+                                if (mFeildList.get(position).getSpread_ways().get(i).getSpread_way() != null &&
+                                        mFeildList.get(position).getSpread_ways().get(i).getSpread_way().length() > 0) {
+                                    if (spread_ways.length() > 0) {
+                                        spread_ways = spread_ways + "、";
+                                    }
+                                    spread_ways = spread_ways + mFeildList.get(position).getSpread_ways().get(i).getSpread_way();
+                                }
+
+                            }
+                        }
+                        if (spread_ways.length() > 0) {
+                            spread_ways  = (context.getResources().getString(R.string.module_comment_spread_way) +
+                                    spread_ways);
+                        }
+                        String people_flow = "";
+                        if (mFeildList.get(position).getPeople_flow() != null) {
+                            if (mFeildList.get(position).getPeople_flow().length() > 0 &&
+                                    Integer.parseInt(mFeildList.get(position).getPeople_flow()) > 0) {
+                                if (mFeildList.get(position).getType() == 2) {
+                                    people_flow = context.getResources().getString(R.string.fieldinfo_number_of_people_text) +
+                                            (mFeildList.get(position).getPeople_flow());
+                                } else {
+                                    if (mFeildList.get(position).getScore_of_visitorsflowrate() != null &&
+                                            mFeildList.get(position).getScore_of_visitorsflowrate() >= 4) {
+                                        people_flow = context.getResources().getString(R.string.fieldinfo_number_of_people_text) +
+                                                (context.getResources().getString(R.string.module_publish_review_number_of_people_greater_than) +
+                                                        mFeildList.get(position).getPeople_flow());
+                                    } else if (mFeildList.get(position).getScore_of_visitorsflowrate() != null &&
+                                            mFeildList.get(position).getScore_of_visitorsflowrate() > 1) {
+                                        people_flow = context.getResources().getString(R.string.fieldinfo_number_of_people_text) +
+                                                (context.getResources().getString(R.string.module_publish_review_number_of_people_equality) +
+                                                        mFeildList.get(position).getPeople_flow());
+                                    } else if (mFeildList.get(position).getScore_of_visitorsflowrate() != null &&
+                                            mFeildList.get(position).getScore_of_visitorsflowrate() > 0) {
+                                        people_flow = context.getResources().getString(R.string.fieldinfo_number_of_people_text) +
+                                                (context.getResources().getString(R.string.module_publish_review_number_of_people_less_than) +
+                                                        mFeildList.get(position).getPeople_flow());
+                                    } else {
+                                        people_flow = context.getResources().getString(R.string.fieldinfo_number_of_people_text) +
+                                                (mFeildList.get(position).getPeople_flow() +
+                                                        context.getResources().getString(R.string.numberofpeople_righttxt));
+                                    }
+                                }
+                            }
+                        }
+                        String str = promotion_purposes;
+                        if (spread_ways.length() > 0)  {
+                            if (str.length() > 0) {
+                                str = str + "    ";
+                            }
+                            str = str + spread_ways;
+                        }
+                        if (people_flow.length() > 0)  {
+                            if (str.length() > 0) {
+                                str = str + "    ";
+                            }
+                            str = str + people_flow;
+                        }
+                        if (str.length() > 0) {
+                            holder.mtxt_number_of_people.setVisibility(View.VISIBLE);
+                            holder.mtxt_number_of_people.setText(str);
+                        } else {
+                            holder.mtxt_number_of_people.setVisibility(View.GONE);
+                        }
                     } else {
                         convertView.setVisibility(View.GONE);
                     }
@@ -237,15 +314,11 @@ public class Fieldinfo_ReviewAdapter extends BaseAdapter{
         public TextView mfieldtime;
         public TextView mevaluation_txt;
         public MyGridview mreview_imggridview;
-        public LinearLayout mNumberOfPeopleLL;
         public TextView mtxt_number_of_people;
         public RelativeLayout mreview_label_relativelayout;
         public LinearLayout mfield_review_layout;
         public LinearLayout mfield_review_alllayout;
         public TextView mSizeTV;
-        public TextView mIndustryTV;
-        public TextView mPromotionPurposeTV;
-        public TextView mSpreadWayTV;
     }
     /** 列表适配器 */
     private class Mygridviewadapter extends BaseAdapter {

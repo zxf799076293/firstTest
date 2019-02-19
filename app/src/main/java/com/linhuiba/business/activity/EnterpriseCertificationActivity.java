@@ -201,7 +201,7 @@ public class EnterpriseCertificationActivity extends BaseMvpActivity implements 
                 btn_certification_btn.setVisibility(View.VISIBLE);
                 mcertification_check_layout.setVisibility(View.GONE);
                 if (myself.getExtras().getInt("enterprise_authorize_status") == 2) {
-                    UserApi.getenterprise_info(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),enterprise_infoHandler);
+                    UserApi.getenterprise_info(MyAsyncHttpClient.MyAsyncHttpClient2(),enterprise_infoHandler);
                 }
             }
         } else {
@@ -633,7 +633,7 @@ public class EnterpriseCertificationActivity extends BaseMvpActivity implements 
             }
             showProgressDialog();
             //进行认证
-            UserApi.auth_enterprise(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),auth_enterprise,edit_enterprise_certification_company_code.getText().toString(),
+            UserApi.auth_enterprise(MyAsyncHttpClient.MyAsyncHttpClient2(),auth_enterprise,edit_enterprise_certification_company_code.getText().toString(),
                     edit_enterprise_companyname.getText().toString(),edit_enterprise_certification_representative.getText().toString(),
                     edit_enterprise_certification_idcard.getText().toString(),addfieldimg_str.get(0),
                     province_id,city_id,district_id,edit_enterprise_certification_choose_address.getText().toString(),
@@ -685,7 +685,7 @@ public class EnterpriseCertificationActivity extends BaseMvpActivity implements 
                             addfieldimg_str.add(choose_filepicture_url.get(i));
                         }
                         //进行认证
-                        UserApi.auth_enterprise(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),auth_enterprise,edit_enterprise_certification_company_code.getText().toString(),
+                        UserApi.auth_enterprise(MyAsyncHttpClient.MyAsyncHttpClient2(),auth_enterprise,edit_enterprise_certification_company_code.getText().toString(),
                                 edit_enterprise_companyname.getText().toString(),edit_enterprise_certification_representative.getText().toString(),
                                 edit_enterprise_certification_idcard.getText().toString(),addfieldimg_str.get(0),
                                 province_id,city_id,district_id,edit_enterprise_certification_choose_address.getText().toString(),

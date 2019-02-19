@@ -77,6 +77,7 @@ public class SplashScreenActivity extends BaseMvpActivity {
     private Constants constants;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        com.linhuiba.business.config.Config.setDefaultConfigUrl();
         super.onCreate(savedInstanceState);
         if (com.linhuiba.linhuifield.connector.Constants.hasNavBar(this)) {
             hideBottomUIMenu();

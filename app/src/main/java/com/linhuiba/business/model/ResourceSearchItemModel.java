@@ -13,7 +13,6 @@ public class ResourceSearchItemModel {
     private int resource_id;
     private String resource_name;
     private String address;
-    private int score;
     private String price;//分
     private String price_unit;
     private int reviewed_count;
@@ -100,7 +99,8 @@ public class ResourceSearchItemModel {
     //详情页的展位下的活动
     private String custom_name;//活动名称
     private String selling_resource_img;//活动图片 （默认为 null）
-
+    private String panorama;//全景图url
+    private String icon;//标签图url
     public int getResource_id() {
         return resource_id;
     }
@@ -122,14 +122,6 @@ public class ResourceSearchItemModel {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public String getPrice() {
@@ -746,5 +738,21 @@ public class ResourceSearchItemModel {
 
     public void setMin_price(String min_price) {
         this.min_price = min_price;
+    }
+
+    public String getPanorama() {
+        return panorama;
+    }
+
+    public void setPanorama(String panorama) {
+        this.panorama = panorama;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

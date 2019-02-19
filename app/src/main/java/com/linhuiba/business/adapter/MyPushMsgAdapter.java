@@ -100,10 +100,15 @@ public class MyPushMsgAdapter extends BaseQuickAdapter<MyPushMsgModel, BaseViewH
         } else {
             pushMsgTimeTV.setText("");
         }
-        if (isSelected.get(item.getId())) {
-            pushMsgCB.setChecked(true);
+        if (mMySelfPushMessageActivity.isRedact) {
+            pushMsgCB.setVisibility(View.VISIBLE);
+            if (isSelected.get(item.getId())) {
+                pushMsgCB.setChecked(true);
+            } else {
+                pushMsgCB.setChecked(false);
+            }
         } else {
-            pushMsgCB.setChecked(false);
+            pushMsgCB.setVisibility(View.GONE);
         }
         if (item.getUrl() != null && item.getUrl().length() > 0) {
             if (com.linhuiba.business.connector.Constants.getpush_msg_type(item.getUrl()) == com.linhuiba.business.connector.Constants.RELEASE_PERMISSIONS) {
@@ -117,17 +122,18 @@ public class MyPushMsgAdapter extends BaseQuickAdapter<MyPushMsgModel, BaseViewH
                         mMySelfPushMessageActivity.onInfoClick(item.getUrl(),item.getId(),helper.getLayoutPosition());
                     }
                 });
-                pushClickLL.setOnClickListener(new OnMultiClickListener() {
-                    @Override
-                    public void onMultiClick(View v) {
-                        //2018/11/5 msg info 点击
-                        mMySelfPushMessageActivity.onInfoClick(item.getUrl(),item.getId(),helper.getLayoutPosition());
-                    }
-                });
             }
         } else {
             pushMsgShowInfoTV.setVisibility(View.GONE);
         }
+        pushClickLL.setOnClickListener(new OnMultiClickListener() {
+            @Override
+            public void onMultiClick(View v) {
+                //2018/11/5 msg info 点击
+                mMySelfPushMessageActivity.onInfoClick(item.getUrl(),item.getId(),helper.getLayoutPosition());
+            }
+        });
+
         pushMsgCB.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {

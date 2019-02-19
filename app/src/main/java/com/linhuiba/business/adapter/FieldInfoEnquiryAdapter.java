@@ -68,7 +68,7 @@ public class FieldInfoEnquiryAdapter extends BaseAdapter {
             holder.mSizeResourcesRL = (RelativeLayout)convertView.findViewById(R.id.fieldinfo_size_rl);
             holder.mFieldinfoEnquiryPriceTV = (TextView)convertView.findViewById(R.id.enquiry_price_tv);
             holder.mFieldinfoEnquiryBtn = (TextView) convertView.findViewById(R.id.enquiry_btn);
-
+            holder.mSpecoficationOneSizeServiceLL = (LinearLayout) convertView.findViewById(R.id.fieldinfo_specifications_one_size_service_layout);
             holder.mSpecoficationNotProvidServiceedLL = (LinearLayout) convertView.findViewById(R.id.specification_item_not_provided_service_ll);
             holder.mSpecoficationProvidServiceedLL = (LinearLayout) convertView.findViewById(R.id.specification_item_service_ll);
             holder.mFieldinfoServiceTV = (TextView) convertView.findViewById(R.id.fieldinfo_sizelist_service_tv);
@@ -138,9 +138,11 @@ public class FieldInfoEnquiryAdapter extends BaseAdapter {
         if (serviceStr.trim().length() == 0) {
             holder.mSpecoficationNotProvidServiceedLL.setVisibility(View.GONE);
             holder.mSpecoficationProvidServiceedLL.setVisibility(View.GONE);
+            holder.mSpecoficationOneSizeServiceLL.setVisibility(View.GONE);
         } else {
             holder.mSpecoficationNotProvidServiceedLL.setVisibility(View.GONE);
             holder.mSpecoficationProvidServiceedLL.setVisibility(View.VISIBLE);
+            holder.mSpecoficationOneSizeServiceLL.setVisibility(View.VISIBLE);
             holder.mFieldinfoServiceTV.setText(serviceStr);
         }
         // : 2017/10/23 认证的预定背景
@@ -182,5 +184,6 @@ public class FieldInfoEnquiryAdapter extends BaseAdapter {
         public LinearLayout mSpecoficationNotProvidServiceedLL;
         public LinearLayout mSpecoficationProvidServiceedLL;
         public TextView mFieldinfoServiceTV;
+        public LinearLayout mSpecoficationOneSizeServiceLL;
     }
 }

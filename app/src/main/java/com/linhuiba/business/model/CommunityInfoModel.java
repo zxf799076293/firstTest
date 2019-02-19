@@ -46,6 +46,7 @@ public class CommunityInfoModel implements Serializable {
     private FieldinfoCounselorModel service_representative;
     private int physical_resource_count;
     private String img_description;//图文详情
+    private String panorama;//全景图url
     public int getId() {
         return id;
     }
@@ -356,5 +357,13 @@ public class CommunityInfoModel implements Serializable {
 
     public void setImg_description(String img_description) {
         this.img_description = img_description;
+    }
+
+    public String getPanorama() {
+        return panorama;
+    }
+
+    public void setPanorama(String panorama) {
+        this.panorama = panorama;
     }
 }

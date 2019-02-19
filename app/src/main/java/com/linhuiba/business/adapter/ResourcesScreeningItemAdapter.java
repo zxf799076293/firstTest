@@ -18,6 +18,7 @@ import com.linhuiba.business.activity.FieldInfoActivity;
 import com.linhuiba.business.activity.SearchListActivity;
 import com.linhuiba.business.fragment.SearchAdvListFragment;
 import com.linhuiba.business.fragment.SearchListFragment;
+import com.linhuiba.business.model.ApiResourcesModel;
 import com.linhuiba.linhuifield.connector.Constants;
 
 import java.util.ArrayList;
@@ -216,6 +217,8 @@ public class ResourcesScreeningItemAdapter extends BaseAdapter{
                                             itemdata.get(position).get(itemdata.get(position).get("type")).toString());
                                 }
                             }
+                            setresourcescreeninglist(resourcescreeninglist);
+                            notifyDataSetChanged();
                             if (type == 0) {
                                 if (baiduMapActivity == null && mactivity != null &&
                                         itemdata.get(position).get("type") != null &&
@@ -228,8 +231,9 @@ public class ResourcesScreeningItemAdapter extends BaseAdapter{
                                 }
                             }
                         }
-                        setresourcescreeninglist(resourcescreeninglist);
-                        notifyDataSetChanged();
+                        if (mactivity != null) {
+                            mactivity.getListCount();
+                        }
                     }
                 });
             }

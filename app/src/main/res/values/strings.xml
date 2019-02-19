@@ -544,6 +544,8 @@
     <string name="module_fieldinfo_call">呼叫</string>
     <string name="module_fieldinfo_other_res_show">查看该场地所有展位</string>
     <string name="module_fieldinfo_other_res_pack_up">收起展位</string>
+    <string name="module_fieldinfo_enquiry_remind">询价成功后，邻汇吧将提供报价，具体价格报价为准。</string>
+    <string name="module_fieldinfo_panorama">全景图片</string>
     <!-- order -->
     <string name="all_order_txt">全部</string>
     <string name="order_exclusiver_txt">自营</string>
@@ -608,6 +610,10 @@
     <string name="module_order_list_diaable_time_second">，请及时付款，以免错过档期；</string>
     <string name="module_order_list_refuse_first">抱歉！您的订单因</string>
     <string name="module_order_list_refuse_second">，审核不通过，请选择其他场地。</string>
+    <string name="module_order_canceled_status_pay_overtime">付款超时</string>
+    <string name="module_order_pay_overtime_remind_title">支付提醒</string>
+    <string name="module_order_pay_overtime_remind_content">您付款的时间距离物业要求时间过近，审核通过率将降低，是否继续付款</string>
+    <string name="module_order_pay_overtime_remind_keep_apy">继续付款</string>
     <!-- orderconfirm -->
     <string name="orderconfirm_consumption_allpoint_firstremind_text">剩余</string>
     <string name="orderconfirm_consumption_allpoint_tworemind_text">积分</string>
@@ -731,7 +737,7 @@
     <string name="complete_target_score_three_txt">一般</string>
     <string name="complete_target_score_four_txt">高</string>
     <string name="complete_target_score_five_txt">很高</string>
-    <string name="publishreview_hint_text">上传图片并写下不少于10字评价可获得2元无门槛券</string>
+    <string name="publishreview_hint_text">场地大小、人流量情况，有没有满足您的推广要求？</string>
     <string name="publishreview_review_no_message_text">请对场地评价</string>
     <string name="module_publish_reviewed_btn_str">已评论</string>
     <string name="module_reviewed_industry">所在行业：</string>
@@ -750,6 +756,17 @@
     <string name="module_publish_review_general">一般</string>
     <string name="module_publish_review_dissatisfied">不满意</string>
     <string name="module_publish_review_goalcompletion">推广效果</string>
+    <string name="module_publish_review_score_hint">请做出星级评价</string>
+    <string name="module_publish_review_score_of_propertymatching_hint">请做出物业服务评价</string>
+    <string name="module_publish_review_score_of_goalcompletion_hint">请做出推广效果评价</string>
+    <string name="module_publish_review_score_of_visitorsflowrate_hint">请反馈人流量情况</string>
+    <string name="module_publish_review_fast_dialog_remind">
+        使用快速评价？</string>
+    <string name="module_publish_review_fast_dialog_content">使用快速评价后，订购了该场地的所有日期都将使用该评价。若您需针对某天进行单独评价，请取消使用快速评价~</string>
+    <string name="module_publish_review_fast_dialog_cancel">返回修改</string>
+    <string name="module_publish_review_fast_dialog_confirm">确定提交</string>
+    <string name="module_publish_review_fast_dialog_one_btn_confirm">好的，我知道了</string>
+    <string name="module_publish_review_fast_explanation_content">使用快速评价后，订购了该场地的所有日期都将使用该评价。若您需针对某天进行单独评价，请取消使用快速评价~</string>
     <!-- aboutus -->
     <string name="aboutus_text">邻汇吧，是目前国内首家提供地推场地在线预订查询的社区资源平台。汇聚全杭城多样地推场地，小区、园区、写字楼多方位覆盖。为需要推广的商家提供场地预订，地推打包，整合推广等一站式服务。</string>
     <string name="aboutus_area">杭州总部</string>
@@ -847,6 +864,9 @@
     <string name="module_searchlist_screen_area_tv_str">展位面积：</string>
     <string name="module_searchlist_community_name">场地：</string>
     <string name="module_searchlist_demand">发起需求</string>
+    <string name="module_searchlist_confirm_text">个结果</string>
+    <string name="module_searchlist_no_data">暂无搜索结果，您可以前往</string>
+    <string name="module_searchlist_no_data_second">提需求></string>
     <!-- 筛选 -->
     <string name="resourcesscreening_resourcetype">选择类型</string>
     <string name="resourcesscreening_fieldtype">小区类型</string>
@@ -1661,6 +1681,8 @@
     <string name="module_case_info_statement">本案例信息来源于线下收集，如有版权或其他冲突，请联系我们</string>
     <string name="module_case_pic_save_title">保存案例图片</string>
     <string name="module_case_pic_save_btn_text">保存到相册</string>
+    <string name="module_case_pic_choose_remind">请选择案例图片</string>
+    <string name="module_case_pic_unchoosed">取消全选</string>
     <!-- community_info -->
     <string name="module_community_info_business_district">所在商圈：</string>
     <string name="module_community_info_year">建筑年份：</string>
@@ -1778,4 +1800,16 @@
     <string name="module_comment_promotion_purpose">推广目的：</string>
     <string name="module_comment_spread_way">推广形式：</string>
     <string name="module_comment_centre_title">评价中心</string>
+    <string name="module_comment_field_no_data_msg">很抱歉 ≥-≤\n暂时没有任何评价！</string>
+    <string name="module_comment_centre_no_data_msg">很抱歉 ≥-≤\n暂时没有任何需要评价的订单！</string>
+    <!-- 环境配置 -->
+    <string name="module_setting_environment_title">环境设置</string>
+    <string name="module_setting_environment_pe">PE</string>
+    <string name="module_setting_environment_petest">PETEST</string>
+    <string name="module_setting_environment_se">SE</string>
+    <string name="module_setting_environment_ie">IE</string>
+    <string name="module_setting_environment_dell">DELL</string>
+    <string name="module_setting_environment_dezr">DEZR</string>
+    <string name="module_setting_environment_dejlp">DEJLP</string>
+    <string name="module_setting_environment_dewap">DEWAP</string>
 </resources>

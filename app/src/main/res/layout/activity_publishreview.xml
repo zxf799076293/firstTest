@@ -27,7 +27,9 @@
         android:layout_above="@+id/review_confirm_btn_ll"
         android:layout_below="@+id/review_margintop_layout"
         android:background="@color/app_linearlayout_bg"
-        android:paddingBottom="@dimen/txt_padding_left">
+        android:paddingBottom="@dimen/txt_padding_left"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -127,31 +129,31 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/review_img_0"
-                            android:background="@drawable/publish_review_img"/>
+                            android:background="@drawable/publish_review_grey_img"/>
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/txt_padding_left"
                             android:id="@+id/review_img_1"
-                            android:background="@drawable/publish_review_img"/>
+                            android:background="@drawable/publish_review_grey_img"/>
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/txt_padding_left"
                             android:id="@+id/review_img_2"
-                            android:background="@drawable/publish_review_img"/>
+                            android:background="@drawable/publish_review_grey_img"/>
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/txt_padding_left"
                             android:id="@+id/review_img_3"
-                            android:background="@drawable/publish_review_img"/>
+                            android:background="@drawable/publish_review_grey_img"/>
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/txt_padding_left"
                             android:id="@+id/review_img_4"
-                            android:background="@drawable/publish_review_img"/>
+                            android:background="@drawable/publish_review_grey_img"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -210,7 +212,7 @@
                             android:drawableLeft="@drawable/module_bg_publish_review_dissatisfied"
                             style="@style/PublishReviewGradeStyle"
                             android:button="@null"
-                            android:checked="true"
+                            android:checked="false"
                             android:layout_marginLeft="@dimen/app_backbtn_marginleft"
                             android:text="@string/module_publish_review_dissatisfied"
                             android:textSize="@dimen/txt_title_size_info"/>
@@ -273,7 +275,7 @@
                             style="@style/PublishReviewGradeStyle"
                             android:id="@+id/publish_review_goalcompletion3"
                             android:button="@null"
-                            android:checked="true"
+                            android:checked="false"
                             android:layout_marginLeft="@dimen/app_backbtn_marginleft"
                             android:text="@string/module_publish_review_dissatisfied"
                             android:textSize="@dimen/txt_title_size_info"/>
@@ -313,7 +315,7 @@
                 </LinearLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/review_layout_height"
+                    android:layout_height="@dimen/add_lab_width"
                     android:background="@color/app_linearlayout_bg"
                     android:layout_marginTop="@dimen/app_backbtn_marginleft"
                     android:layout_marginRight="@dimen/app_backbtn_marginleft"
@@ -326,23 +328,26 @@
                         android:id="@+id/review_edittext"
                         android:paddingRight="@dimen/app_backbtn_marginleft"
                         android:paddingBottom="@dimen/app_backbtn_marginleft"
-                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textColor="@color/headline_tv_color"
                         android:textColorHint="@color/field_chair_textcolor"
                         android:textSize="@dimen/login_leftright_txt_size"
                         android:layout_marginTop="@dimen/app_backbtn_marginleft"
                         android:layout_marginLeft="@dimen/app_backbtn_marginleft"
                         android:background="@null"
-                        android:maxLength="1000"/>
+                        android:lineSpacingMultiplier="1.5"
+                        android:maxLength="200"/>
                 </RelativeLayout>
                 <com.linhuiba.business.fieldview.Field_MyGridView
                     android:id="@+id/remarks_addpicture"
                     android:background="@color/app_linearlayout_bg"
                     android:layout_marginLeft="@dimen/app_backbtn_marginleft"
                     android:layout_marginRight="@dimen/app_backbtn_marginleft"
+                    android:paddingLeft="@dimen/txt_padding_left"
+                    android:paddingRight="@dimen/txt_padding_left"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/title_bar_back_marginLeft"
-                    android:numColumns="3"
+                    android:numColumns="4"
                     android:scrollbars="none"
                     android:verticalSpacing="@dimen/txt_padding_left"
                     android:horizontalSpacing="@dimen/txt_padding_left"
@@ -362,29 +367,38 @@
                         android:id="@+id/ToggleButton_review_Competence"
                         android:visibility="visible"
                         android:paddingLeft="@dimen/txt_margin"
-                        android:text="@string/review_Competence_text"
-                        android:textColor="@color/headline_tv_color"
-                        android:textSize="@dimen/register_codebtn_txt_size"
-                        style="@style/MyInvoiceCheckBox"
-                        />
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/myself_order_img_width"
-                        android:id="@+id/publish_review_fast_cb"
-                        android:visibility="visible"
-                        android:paddingLeft="@dimen/txt_margin"
                         android:checked="true"
-                        android:text="@string/module_publish_review_fast"
-                        android:textColor="@color/headline_tv_color"
-                        android:textSize="@dimen/register_codebtn_txt_size"
-                        style="@style/MyInvoiceCheckBox"
-                        />
-                    <ImageView
+                        android:text="@string/review_Competence_text"
+                        android:button="@drawable/module_bg_publish_review_checkbox"
+                        android:textColor="@drawable/applyforinvoice_listitem_checkedtxtbg"
+                        android:background="@null"
+                        android:textSize="@dimen/register_codebtn_txt_size" />
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:src="@drawable/_three_sevenic_youhuiquan_jieshi"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/publish_review_fast_ll">
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/myself_order_img_width"
+                            android:id="@+id/publish_review_fast_cb"
+                            android:visibility="visible"
+                            android:paddingLeft="@dimen/txt_margin"
+                            android:checked="true"
+                            android:text="@string/module_publish_review_fast"
+                            android:button="@drawable/module_bg_publish_review_checkbox"
+                            android:textColor="@drawable/applyforinvoice_listitem_checkedtxtbg"
+                            android:background="@null"
+                            android:textSize="@dimen/register_codebtn_txt_size" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:id="@+id/fast_comment_remind_imgv"
+                            android:src="@drawable/_three_sevenic_youhuiquan_jieshi"/>
+                    </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -415,7 +429,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="500"
+                                android:text=""
+                                android:textStyle="bold"
                                 android:id="@+id/publist_review_people_tv"
                                 android:textColor="@color/module_map_deposit_color"
                                 android:textSize="@dimen/text_title_size_next" />
@@ -465,7 +480,7 @@
                                 android:id="@+id/publish_people_btn_3"
                                 style="@style/PublishReviewCheckBoxStyle"
                                 android:button="@null"
-                                android:checked="true"
+                                android:checked="false"
                                 android:layout_marginLeft="@dimen/txt_padding_left"
                                 android:text="@string/module_publish_review_number_of_people_greater_than"
                                 android:textSize="@dimen/txt_title_size_info"/>

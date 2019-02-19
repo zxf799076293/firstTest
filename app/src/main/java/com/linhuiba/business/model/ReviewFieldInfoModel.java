@@ -1,5 +1,7 @@
 package com.linhuiba.business.model;
 
+import com.linhuiba.linhuifield.fieldmodel.FieldAddfieldSellResDimensionsModel;
+
 import java.util.ArrayList;
 
 /**
@@ -16,12 +18,18 @@ public class ReviewFieldInfoModel {
     private int anonymity;//是否匿名
     private String content = "";
     private int score;//整体评分
-    private int score_of_visitorsflowrate;//人流量评分
-    private int score_of_userparticipation;//用户参与度评分
-    private int score_of_propertymatching;//物业配合度评分
-    private int score_of_goalcompletion;//目标完成度评分
+    private Integer score_of_visitorsflowrate;//人流量评分
+    private Integer score_of_userparticipation;//用户参与度评分
+    private Integer score_of_propertymatching;//物业配合度评分
+    private Integer score_of_goalcompletion;//目标完成度评分
     private ArrayList<String> review_images = new ArrayList<>();
     private int number_of_people;
+    private String size;
+    private String type;//规格 - 日期
+    private String execute_time;
+    private ArrayList<Integer> field_order_item_ids;
+    private String custom_dimension;
+    private ArrayList<FieldAddfieldSellResDimensionsModel> sizes;
 
     public String getName() {
         return name;
@@ -95,35 +103,35 @@ public class ReviewFieldInfoModel {
         this.score = score;
     }
 
-    public int getScore_of_visitorsflowrate() {
+    public Integer getScore_of_visitorsflowrate() {
         return score_of_visitorsflowrate;
     }
 
-    public void setScore_of_visitorsflowrate(int score_of_visitorsflowrate) {
+    public void setScore_of_visitorsflowrate(Integer score_of_visitorsflowrate) {
         this.score_of_visitorsflowrate = score_of_visitorsflowrate;
     }
 
-    public int getScore_of_userparticipation() {
+    public Integer getScore_of_userparticipation() {
         return score_of_userparticipation;
     }
 
-    public void setScore_of_userparticipation(int score_of_userparticipation) {
+    public void setScore_of_userparticipation(Integer score_of_userparticipation) {
         this.score_of_userparticipation = score_of_userparticipation;
     }
 
-    public int getScore_of_propertymatching() {
+    public Integer getScore_of_propertymatching() {
         return score_of_propertymatching;
     }
 
-    public void setScore_of_propertymatching(int score_of_propertymatching) {
+    public void setScore_of_propertymatching(Integer score_of_propertymatching) {
         this.score_of_propertymatching = score_of_propertymatching;
     }
 
-    public int getScore_of_goalcompletion() {
+    public Integer getScore_of_goalcompletion() {
         return score_of_goalcompletion;
     }
 
-    public void setScore_of_goalcompletion(int score_of_goalcompletion) {
+    public void setScore_of_goalcompletion(Integer score_of_goalcompletion) {
         this.score_of_goalcompletion = score_of_goalcompletion;
     }
 
@@ -141,5 +149,53 @@ public class ReviewFieldInfoModel {
 
     public void setNumber_of_people(int number_of_people) {
         this.number_of_people = number_of_people;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getExecute_time() {
+        return execute_time;
+    }
+
+    public void setExecute_time(String execute_time) {
+        this.execute_time = execute_time;
+    }
+
+    public ArrayList<Integer> getField_order_item_ids() {
+        return field_order_item_ids;
+    }
+
+    public void setField_order_item_ids(ArrayList<Integer> field_order_item_ids) {
+        this.field_order_item_ids = field_order_item_ids;
+    }
+
+    public String getCustom_dimension() {
+        return custom_dimension;
+    }
+
+    public void setCustom_dimension(String custom_dimension) {
+        this.custom_dimension = custom_dimension;
+    }
+
+    public ArrayList<FieldAddfieldSellResDimensionsModel> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(ArrayList<FieldAddfieldSellResDimensionsModel> sizes) {
+        this.sizes = sizes;
     }
 }

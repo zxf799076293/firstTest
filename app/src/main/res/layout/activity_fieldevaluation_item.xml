@@ -124,7 +124,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/app_backbtn_marginleft">
+            android:paddingBottom="@dimen/searchlist_item_txt_margintop">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,6 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_time"
+                    android:layout_marginRight="@dimen/app_backbtn_marginleft"
                     android:text="2016-6-6"
                     android:textColor="@color/register_edit_color"
                     android:textSize="@dimen/register_codebtn_txt_size" />
@@ -198,8 +199,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -219,14 +218,14 @@
             android:paddingRight="@dimen/txt_padding"
             android:scrollbars="none"
             android:gravity="center"
-            android:layout_marginTop="@dimen/orderlist_item_linearlayout_marginleft"
+            android:layout_marginTop="@dimen/advertising_margintop"
+            android:layout_marginBottom="@dimen/app_backbtn_marginleft"
             android:id="@+id/review_imggridview">
         </com.linhuiba.business.view.MyGridview>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/app_backbtn_marginleft"
             android:layout_marginLeft="@dimen/app_backbtn_marginleft"
             android:layout_marginRight="@dimen/app_backbtn_marginleft"
             android:paddingTop="@dimen/field_list_item_padding"
@@ -240,48 +239,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/comment_item_promotion_purpose_tv"
-                    android:singleLine="true"
-                    android:text="@string/module_comment_promotion_purpose"
-                    android:textColor="@color/register_edit_color"
-                    android:layout_marginRight="@dimen/myself_red_prompt_width"
-                    android:textSize="@dimen/txt_title_size_info" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/comment_item_spread_way_tv"
-                    android:singleLine="true"
-                    android:layout_marginRight="@dimen/myself_red_prompt_width"
-                    android:text="@string/module_comment_spread_way"
+                    android:id="@+id/comment_number_of_people"
+                    android:text=""
                     android:textColor="@color/register_edit_color"
                     android:textSize="@dimen/txt_title_size_info" />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginRight="@dimen/txt_margin"
-                    android:id="@+id/txt_number_of_people_ll">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fieldinfo_number_of_people_text"
-                        android:textColor="@color/register_edit_color"
-                        android:textSize="@dimen/txt_title_size_info" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/txt_number_of_people"
-                        android:singleLine="true"
-                        android:text=""
-                        android:textColor="@color/register_edit_color"
-                        android:textSize="@dimen/txt_title_size_info" />
-                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:layout_marginTop="@dimen/home_gridview_textone_marginleft">
                 <TextView
                     android:layout_width="wrap_content"
@@ -291,15 +258,6 @@
                     android:text="@string/review_people_number_tv_str"
                     android:textColor="@color/register_edit_color"
                     android:layout_marginRight="@dimen/txt_margin"
-                    android:textSize="@dimen/txt_title_size_info" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/review_res_industry_tv"
-                    android:layout_marginTop="@dimen/home_gridview_textone_marginleft"
-                    android:singleLine="true"
-                    android:text="@string/review_people_number_tv_str"
-                    android:textColor="@color/register_edit_color"
                     android:textSize="@dimen/txt_title_size_info" />
             </LinearLayout>
         </LinearLayout>

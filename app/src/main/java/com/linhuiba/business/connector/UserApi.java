@@ -383,7 +383,7 @@ public class UserApi {
             paramsMap.put("user_id", uid);
         }
         Call call = client.newCall(Request.RequestPost(Config.BASE_API_URL_PHP,
-                "/devices",
+                "devices",
                 paramsMap,1));
         call.enqueue(handler);
     }

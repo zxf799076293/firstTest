@@ -687,20 +687,16 @@
                                     android:layout_height="wrap_content"
                                     android:background="@color/white"
                                     android:divider="@null"
-                                    android:scrollbars="none"></com.linhuiba.business.view.MyListView>
-
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/txt_padding_line"
-                                    android:background="@color/new_viewbg"></View>
-
+                                    android:scrollbars="none">
+                                </com.linhuiba.business.view.MyListView>
                                 <com.linhuiba.business.view.MyLoadMoreExpandablelistView
                                     android:id="@+id/fieldinfo_size_lv"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@color/app_linearlayout_bg"
                                     android:divider="@null"
-                                    android:scrollbars="none"></com.linhuiba.business.view.MyLoadMoreExpandablelistView>
+                                    android:scrollbars="none">
+                                </com.linhuiba.business.view.MyLoadMoreExpandablelistView>
 
                                 <TextView
                                     android:id="@+id/fieldinfo_size_no_tv"

@@ -40,6 +40,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -100,6 +101,7 @@ import com.linhuiba.business.fieldcallback.Field_MyAllCallBack;
 import com.linhuiba.business.fragment.HomeFragment;
 import com.linhuiba.business.fragment.MyselfFragment;
 import com.linhuiba.business.fragment.SearchListFragment;
+import com.linhuiba.business.model.AddressContactModel;
 import com.linhuiba.business.model.ApiResourcesModel;
 import com.linhuiba.business.model.CommunityInfoModel;
 import com.linhuiba.business.model.FieldInfoModel;
@@ -115,10 +117,13 @@ import com.linhuiba.business.mvpmodel.LoginMvpModel;
 import com.linhuiba.business.mvppresenter.CouponsMvpPresenter;
 import com.linhuiba.business.mvppresenter.FieldinfoMvpPresenter;
 import com.linhuiba.business.mvppresenter.LoginMvpPresenter;
+import com.linhuiba.business.mvppresenter.OrderConfirmMvpPresenter;
 import com.linhuiba.business.mvpview.CouponsMvpView;
 import com.linhuiba.business.mvpview.FieldinfoMvpView;
+import com.linhuiba.business.mvpview.OrderConfirmMvpView;
 import com.linhuiba.business.network.LinhuiAsyncHttpResponseHandler;
 import com.linhuiba.business.network.Response;
+import com.linhuiba.business.util.CommonTool;
 import com.linhuiba.business.util.TitleBarUtils;
 import com.linhuiba.business.view.HorizontalListView;
 import com.linhuiba.business.view.MyGridview;
@@ -177,7 +182,8 @@ import q.rorbin.badgeview.QBadgeView;
  */
 @MLinkRouter(keys={"resourceDetail"})
 public class FieldInfoActivity extends BaseMvpActivity implements Field_AddFieldChoosePictureCallBack.FieldreviewCall, Field_AddFieldChoosePictureCallBack.Fieldsize_PriceunitCall,
-        Field_MyScrollview.OnScrollListener,Field_AddFieldChoosePictureCallBack.AddfieldFourCall, FieldinfoMvpView, CouponsMvpView {
+        Field_MyScrollview.OnScrollListener,Field_AddFieldChoosePictureCallBack.AddfieldFourCall, FieldinfoMvpView, CouponsMvpView,
+        OrderConfirmMvpView {
     @InjectView(R.id.txt_fieldtitle)
     TextView mtxt_fieldtitle;
     @InjectView(R.id.txt_field_description)
@@ -437,6 +443,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
     private ImageView mFieldInfoTitleBackImg;
     private ImageView mFieldInfoTitleShareImg;
     private ImageView mFieldInfoTitleCardImg;
+    private ImageView mFieldInfoTitlePanoramaImgv;
     private RelativeLayout mFieldinfoTitleCardRL;
     private QBadgeView mCardSizeBv;
     private TextView mFieldInfoTitleTV;
@@ -596,6 +603,9 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
     private int mCityId;
     private int mCategoryId;
     private boolean isRefreshSize;//刷新规格使用
+    private OrderConfirmMvpPresenter mAddressPresenter;
+    private String mDefaultName;
+    private String mDefaultMobile;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field_info_new);
@@ -612,6 +622,8 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         mFieldinfoMvpPresenter.attachView(this);
         mCouponsMvpPresenter = new CouponsMvpPresenter();
         mCouponsMvpPresenter.attachView(this);
+        mAddressPresenter = new OrderConfirmMvpPresenter();
+        mAddressPresenter.attachView(this);
         setSteepStatusBar();
         int stausBarHeight = getSteepStatusBarHeight();
         if (stausBarHeight > 0) {
@@ -632,6 +644,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         mFieldInfoTitleShareImg = (ImageView)findViewById(R.id.common_title_bar).findViewById(R.id.action_img_top);
         mFieldInfoTitleBackImg = (ImageView)findViewById(R.id.common_title_bar).findViewById(R.id.back_button_top);
         mFieldInfoTitleCardImg = (ImageView)findViewById(R.id.common_title_bar).findViewById(R.id.business_titlebar_right_card_img);
+        mFieldInfoTitlePanoramaImgv = (ImageView)findViewById(R.id.common_title_bar).findViewById(R.id.business_titlebar_right_three_img);
         mFieldinfoTitleCardRL = (RelativeLayout)findViewById(R.id.business_titlebar_right_rl);
         mFieldInfoTitleTV = (TextView)findViewById(R.id.common_title_bar).findViewById(R.id.title);
         mFieldInfoTitleTV.setTextColor(getResources().getColor(R.color.white));
@@ -811,6 +824,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         mFieldinfoOtherResLL.setVisibility(View.GONE);
         mFieldinfoActivityLL.setVisibility(View.GONE);
         mFieldinfoRecommendTypeLL.setVisibility(View.GONE);
+        mAddressPresenter.getDefaultAddress();
         if (isSellResource) {
             if (mSellResId != null && mSellResId.length() > 0) {
                 //2018/11/14 供给详情接口调用
@@ -880,6 +894,9 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         if (mCouponsMvpPresenter != null) {
             mCouponsMvpPresenter.detachView();
         }
+        if (mAddressPresenter != null) {
+            mAddressPresenter.detachView();
+        }
     }
 
     private LinhuiAsyncHttpResponseHandler FavoriteslistitemHandler = new LinhuiAsyncHttpResponseHandler() {
@@ -940,9 +957,6 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 if (LoginManager.isLogin()) {
                     Intent review = new Intent(FieldInfoActivity.this, FieldEvaluationActivity.class);
                     review.putExtra("fieldid", getfieldid);
-                    if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
-                        review.putExtra("is_sell_res", 1);
-                    }
                     startActivity(review);
                 } else {
                     new AlertDialog.Builder(FieldInfoActivity.this)
@@ -1051,7 +1065,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
             case R.id.fieldinfo_mobile_tv:
                 if (resourceinfolist.getService_phone() != null &&
                         resourceinfolist.getService_phone().length() > 0) {
-                    showCounselorDialog(0,true,CALL_SERVICE_PHONE_CODE);
+                    showCounselorDialog(0,true,CALL_SERVICE_PHONE_CODE,1);
                 }
                 break;
             case R.id.fieldinfo_change_explain_ll:
@@ -1084,7 +1098,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 if (LoginManager.isLogin()) {
                     if (resourceinfolist.getSize().size() > 0 && resourceinfolist.getSize().get(0).getResource().size() > 0) {
                         if (mFavoriteStatus == 0) {
-                            FieldApi.addfavoriteslistitem(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), FavoriteslistitemHandler,
+                            FieldApi.addfavoriteslistitem(MyAsyncHttpClient.MyAsyncHttpClient2(), FavoriteslistitemHandler,
                                     String.valueOf(resourceinfolist.getSize().get(0).getResource().get(0).getId()));
                         } else {
                             FieldApi.deletefavoriteslistitem(FieldInfoActivity.this, MyAsyncHttpClient.MyAsyncHttpClient(), FavoriteslistitemHandler,
@@ -1193,7 +1207,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 if (resourceinfolist.getService_representative() != null &&
                         resourceinfolist.getService_representative().getTel() != null &&
                         resourceinfolist.getService_representative().getTel().length() > 0) {
-                    showCounselorDialog(0,true,CALL_PHONE_CODE);
+                    showCounselorDialog(0,true,CALL_PHONE_CODE,1);
                 }
                 break;
             case R.id.fieldinfo_counselor_wx_tv:
@@ -1201,7 +1215,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 if (resourceinfolist.getService_representative() != null &&
                         resourceinfolist.getService_representative().getQrcode() != null &&
                         resourceinfolist.getService_representative().getQrcode().length() > 0) {
-                    showCounselorDialog(1,false,0);
+                    showCounselorDialog(1,false,0,1);
                 } else {
                     MessageUtils.showToast(getResources().getString(R.string.review_error_text));
                 }
@@ -1221,7 +1235,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 //2018/12/20 顾问
                 if (resourceinfolist.getService_representative() != null &&
                         resourceinfolist.getService_representative().getId() > 0) {
-                    showCounselorDialog(0,false,0);
+                    showCounselorDialog(0,false,0,1);
                 } else {
                     MessageUtils.showToast(getResources().getString(R.string.order_nodata_toast));
                 }
@@ -1235,7 +1249,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         if (requestCode == ADD_CARTS_REQUESTCODE) {
             if (LoginManager.isLogin()) {
                 showProgressDialog();
-                FieldApi.addshopcart_items(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), addToShoppingCartHandler, getsubmitjsonstr());
+                FieldApi.addshopcart_items(MyAsyncHttpClient.MyAsyncHttpClient2(), addToShoppingCartHandler, getsubmitjsonstr());
                 if (mFieldinfoChooseSizeDialog != null &&
                         mFieldinfoChooseSizeDialog.isShowing()) {
                     mFieldinfoChooseSizeDialog.dismiss();
@@ -1736,6 +1750,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 mFieldInfoTitleBackImg.setImageResource(R.drawable.nav_ic_back_white);
                 mFieldInfoTitleShareImg.setImageResource(R.drawable.ic_share_white);
                 mFieldInfoTitleCardImg.setImageResource(R.drawable.nav_ic_shopping_white);
+                mFieldInfoTitlePanoramaImgv.setImageResource(R.drawable.ic_quanjing_thr_ten);
                 mFieldInfoTitleTV.setTextColor(getResources().getColor(R.color.white));
                 mFieldInfoSecondLevelLL.setVisibility(View.GONE);
                 mFieldInfoStatusBarLL.setBackgroundColor(getResources().getColor(R.color.color_null));
@@ -1744,6 +1759,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 mFieldInfoTitleBackImg.setImageResource(R.drawable.ic_back_black);
                 mFieldInfoTitleShareImg.setImageResource(R.drawable.popup_ic_share);
                 mFieldInfoTitleCardImg.setImageResource(R.drawable.nav_ic_shopping_black);
+                mFieldInfoTitlePanoramaImgv.setImageResource(R.drawable.ic_quanjing_balck_thr_ten);
                 mFieldInfoTitleTV.setTextColor(getResources().getColor(R.color.title_bar_txtcolor));
                 mFieldInfoSecondLevelLL.setVisibility(View.VISIBLE);
                 mFieldInfoStatusBarLL.setBackgroundColor(getResources().getColor(R.color.checked_tv_color));
@@ -2293,7 +2309,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                         if ((mLeaseTermTypeId > 0 && size.length() > 0 && datelist.size() > 0) ||
                                 (mLeaseTermTypeId == -1 && size.length() > 0 && datelist.size() > 0)) {
                             showProgressDialog();
-                            FieldApi.addshopcart_items(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), addToShoppingCartHandler, getsubmitjsonstr());
+                            FieldApi.addshopcart_items(MyAsyncHttpClient.MyAsyncHttpClient2(), addToShoppingCartHandler, getsubmitjsonstr());
                             mFieldinfoChooseSizeDialog.dismiss();
                         } else {
                             MessageUtils.showToast(FieldInfoActivity.this, getResources().getString(R.string.fieldinfo_diolog_choosespecifications_no_size_msg));
@@ -2481,6 +2497,63 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         } else {
             MessageUtils.showToast(response.msg);
         }
+    }
+
+    @Override
+    public void onDefaultAddressSuccess(AddressContactModel addressContactModel) {
+        //2019/1/22 默认联系人
+        if (addressContactModel != null) {
+            if (addressContactModel.getName() != null &&
+                    addressContactModel.getName().length() > 0) {
+                mDefaultName = addressContactModel.getName();
+            }
+            if (addressContactModel.getMobile() != null &&
+                    addressContactModel.getMobile().length() > 0) {
+                mDefaultMobile = addressContactModel.getMobile();
+            }
+
+        }
+
+    }
+
+    @Override
+    public void onDefaultAddressFailure(boolean superresult, Throwable error) {
+
+    }
+
+    @Override
+    public void onUserProfileSuccess(Object data) {
+
+    }
+
+    @Override
+    public void onUserProfileFailure(boolean superresult, Throwable error) {
+
+    }
+
+    @Override
+    public void onCreateOrderPaySuccess(Object data) {
+
+    }
+
+    @Override
+    public void onCreateOrderPayFailure(boolean superresult, Throwable error) {
+
+    }
+
+    @Override
+    public void onOrderCouponsListSuccess(ArrayList<MyCouponsModel> data) {
+
+    }
+
+    @Override
+    public void onOrderCouponsListFailure(boolean superresult, Throwable error) {
+
+    }
+
+    @Override
+    public void onOrderNoticedSuccess() {
+
     }
 
     public class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -4740,10 +4813,10 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                 //2018/11/14 分享供给详情
                 if (resourceinfolist.getPhysical_resource().getIs_activity() == 0) {
                     sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_FIELDS_INFO_URL + getfieldid + shareUrl;
-                    share_linkurl = Config.SHARE_FIELDS_INFO_URL + getfieldid + "?BackKey=1&is_app=1" + shareUrl;
+                    share_linkurl = Config.Domain_Name + Config.SHARE_FIELDS_INFO_URL + getfieldid + "?BackKey=1&is_app=1" + shareUrl;
                 } else if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
                     sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_ACTIVITY_INFO_URL + mSellResId + shareUrl;
-                    share_linkurl = Config.SHARE_ACTIVITIES_INFO_URL + mSellResId + "?res_type_id=3&BackKey=1&is_app=1" + shareUrl;
+                    share_linkurl = Config.Domain_Name + Config.SHARE_ACTIVITIES_INFO_URL + mSellResId + "?res_type_id=3&BackKey=1&is_app=1" + shareUrl;
                 }
                 if (resourceinfolist.getPhysical_resource().getNumber_of_people() != null &&
                         resourceinfolist.getPhysical_resource().getNumber_of_people() > 0) {
@@ -5071,7 +5144,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
 
                 //评论列表
                 if (resourceinfolist.getPhysical_resource().getIs_activity() == 1) {
-                    mFieldinfoMvpPresenter.getResInfoReview(getfieldid, "1", "2",true);
+                    mFieldinfoMvpPresenter.getResInfoReview(getfieldid, "1", "2",false);
                 } else {
                     mFieldinfoMvpPresenter.getResInfoReview(getfieldid, "1", "2",false);
                 }
@@ -5190,7 +5263,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                         mFieldinfoPicWordWebview.getSettings().setAppCacheEnabled(false);//是否使用缓存
                         mFieldinfoPicWordWebview.getSettings().setDomStorageEnabled(true);//DOM Storage
                         mFieldinfoPicWordWebview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-                        mFieldinfoPicWordWebview.loadUrl(Config.FIELDINFO_PIC_WORD_URL + "?type=3&id=" + mSellResId);
+                        mFieldinfoPicWordWebview.loadUrl(Config.Domain_Name + Config.FIELDINFO_PIC_WORD_URL + "?type=3&id=" + mSellResId);
                     }
                 } else {
                     if (resourceinfolist.getPhysical_resource().getImg_description() != null &&
@@ -5205,8 +5278,22 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                         mFieldinfoPicWordWebview.getSettings().setAppCacheEnabled(false);//是否使用缓存
                         mFieldinfoPicWordWebview.getSettings().setDomStorageEnabled(true);//DOM Storage
                         mFieldinfoPicWordWebview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-                        mFieldinfoPicWordWebview.loadUrl(Config.FIELDINFO_PIC_WORD_URL + "?type=2&id=" + getfieldid);
+                        mFieldinfoPicWordWebview.loadUrl(Config.Domain_Name + Config.FIELDINFO_PIC_WORD_URL + "?type=2&id=" + getfieldid);
                     }
+                }
+                //2019/1/17 全景
+                if (resourceinfolist.getPhysical_resource().getPanorama() != null &&
+                        resourceinfolist.getPhysical_resource().getPanorama().length() > 0) {
+                    TitleBarUtils.showTitleBarRightThreeImg(this, true, R.drawable.ic_quanjing_thr_ten, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent commonIntent = new Intent(FieldInfoActivity.this, AboutUsActivity.class);
+                            commonIntent.putExtra("type", com.linhuiba.business.config.Config.PANORAMA_WEB_INT);
+                            commonIntent.putExtra("web_url",resourceinfolist.getPhysical_resource().getPanorama());
+                            startActivity(commonIntent);
+                        }
+                    });
+
                 }
             }
         }
@@ -5223,10 +5310,8 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         mFieldinfoChooseSizeDialog.dismiss();
     }
     private void startEnquiryIntent(int position) {
-        Intent enquiryIntent = new Intent(FieldInfoActivity.this, AboutUsActivity.class);
-        enquiryIntent.putExtra("type",Config.ENQUIRY_WEB_INT);
-        enquiryIntent.putExtra("id",resourceinfolist.getEnquiry_resource().get(position).getId());
-        startActivity(enquiryIntent);
+        //2019/1/16 询价
+        showCounselorDialog(resourceinfolist.getEnquiry_resource().get(position).getId(),true,CALL_SERVICE_PHONE_CODE,2);
     }
     @Override
     public void onResReviewSuccess(ArrayList<ReviewModel> list) {
@@ -5235,35 +5320,6 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
             mreview_listview.setVisibility(View.GONE);
         } else {
             mreview_listview.setVisibility(View.VISIBLE);
-            if (mReviewList.size() == 2) {
-                ArrayList<ReviewModel> mtmpReviewList = new ArrayList<>();
-                mtmpReviewList.addAll(mReviewList);
-                int oneitemsize = 0;int twoitemsize = 0;
-                for (int i = 0; i < mtmpReviewList.size(); i++) {
-                    int itemsize = 0;
-                    if (mReviewList.get(i).getContent() != null && mReviewList.get(i).getContent().length() > 0) {
-                        itemsize = itemsize + mReviewList.get(i).getContent().length();
-                    }
-                    if (mReviewList.get(i).getImages() != null && mReviewList.get(i).getImages().size() > 0) {
-                        itemsize = itemsize + mReviewList.get(i).getImages().size();
-                    }
-                    if (mReviewList.get(i).getTags() != null && mReviewList.get(i).getTags().size() > 0) {
-                        itemsize = itemsize + mReviewList.get(i).getTags().size();
-                    }
-                    if (i == 0) {
-                        oneitemsize = itemsize;
-                    } else if (i == 1) {
-                        twoitemsize = itemsize;
-                    }
-                }
-                if (twoitemsize > oneitemsize) {
-                    if (mReviewList != null) {
-                        mReviewList.clear();
-                    }
-                    mReviewList.add(mtmpReviewList.get(1));
-                    mReviewList.add(mtmpReviewList.get(0));
-                }
-            }
             mFieldEvaluationAdapter = new Fieldinfo_ReviewAdapter(FieldInfoActivity.this, mReviewList,FieldInfoActivity.this);
             mreview_listview.setAdapter(mFieldEvaluationAdapter);
         }
@@ -5494,6 +5550,23 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
             MessageUtils.showToast(getContext(), error.getMessage());
         }
         checkAccess_new(error);
+    }
+
+    @Override
+    public void onEnquirySuccess(String id) {
+        //2019/1/16 询价成功
+        Intent enquiryIntent = new Intent(FieldInfoActivity.this, AboutUsActivity.class);
+        enquiryIntent.putExtra("type",Config.ENQUIRY_SUCCESS_WEB_INT);
+        enquiryIntent.putExtra("id",id);
+        startActivity(enquiryIntent);
+    }
+
+    @Override
+    public void onEnquiryFailure(boolean superresult, Throwable error) {
+        //询价失败
+        if (!superresult) {
+            MessageUtils.showToast(getContext(), error.getMessage());
+        }
     }
 
     @Override
@@ -5857,7 +5930,7 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
         demandIntent.putExtra("community_type_ids", (Serializable) communityTypeIds);
         startActivityForResult(demandIntent,DEMAND_RESULTCODE);
     }
-    private void showCounselorDialog(int showWxcode, boolean isCall, final int callPhoneCode) {
+    private void showCounselorDialog(final int showWxcode, boolean isCall, final int callPhoneCode, int type) {
         if (mIntegralDialog == null || !mIntegralDialog.isShowing()) {
             View.OnClickListener uploadListener = new View.OnClickListener() {
                 @Override
@@ -5923,92 +5996,142 @@ public class FieldInfoActivity extends BaseMvpActivity implements Field_AddField
                                     .callback(listener)
                                     .start();
                             break;
+                        case R.id.app_defaylt_dialog_close_imgv:
+                            mIntegralDialog.dismiss();
+                            break;
+                        case R.id.app_defaylt_dialog_save_btn:
+                            EditText mobileET = (EditText) mIntegralDialog.getView().findViewById(R.id.app_defaylt_dialog_mobile_et);
+                            EditText contactET = (EditText) mIntegralDialog.getView().findViewById(R.id.app_defaylt_dialog_contact_et);
+                            if (contactET.getText().toString().trim().length() == 0) {
+                                MessageUtils.showToast(getResources().getString(R.string.fieldinfo_diolog_contactname));
+                                return;
+                            }
+                            if (mobileET.getText().toString().trim().length() == 0) {
+                                MessageUtils.showToast(getResources().getString(R.string.txt_phonenumber_newhint_text));
+                                return;
+                            }
+                            if (!CommonTool.isMobileNO(mobileET.getText().toString())) {
+                                MessageUtils.showToast(getContext(), getResources().getString(R.string.mTxt_mobile_prompt));
+                                return;
+                            }
+                            showProgressDialog();
+                            mFieldinfoMvpPresenter.enquiry(String.valueOf(showWxcode),contactET.getText().toString(),mobileET.getText().toString());
+                            mIntegralDialog.dismiss();
+                            break;
                         default:
                             break;
                     }
                 }
             };
-            if (isCall) {
-                String phone = "";
-                if (callPhoneCode == 111) {
-                    phone = resourceinfolist.getService_phone();
+            if (type == 1) {
+                if (isCall) {
+                    String phone = "";
+                    if (callPhoneCode == 111) {
+                        phone = resourceinfolist.getService_phone();
+                    } else {
+                        phone = resourceinfolist.getService_representative().getTel();
+                    }
+                    CustomDialog.Builder builder = new CustomDialog.Builder(FieldInfoActivity.this);
+                    mIntegralDialog = builder
+                            .cancelTouchout(true)
+                            .view(R.layout.activity_fieldinfo_refund_price_popuwindow)
+                            .addViewOnclick(R.id.app_defaylt_cancel_tv,uploadListener)
+                            .addViewOnclick(R.id.app_defaylt_confirm_tv,uploadListener)
+                            .setText(R.id.app_defaylt_title_tv,phone)
+                            .setText(R.id.app_defaylt_confirm_tv,getResources().getString(R.string.module_fieldinfo_call))
+                            .showView(R.id.app_defaylt_dialog_ll,View.VISIBLE)
+                            .showView(R.id.app_defaylt_dialog_remind_ll,View.VISIBLE)
+                            .showView(R.id.app_defaylt_content_tv,View.GONE)
+                            .build();
                 } else {
-                    phone = resourceinfolist.getService_representative().getTel();
-                }
-                CustomDialog.Builder builder = new CustomDialog.Builder(FieldInfoActivity.this);
-                mIntegralDialog = builder
-                        .cancelTouchout(true)
-                        .view(R.layout.activity_fieldinfo_refund_price_popuwindow)
-                        .addViewOnclick(R.id.app_defaylt_cancel_tv,uploadListener)
-                        .addViewOnclick(R.id.app_defaylt_confirm_tv,uploadListener)
-                        .setText(R.id.app_defaylt_title_tv,phone)
-                        .setText(R.id.app_defaylt_confirm_tv,getResources().getString(R.string.module_fieldinfo_call))
-                        .showView(R.id.app_defaylt_dialog_ll,View.VISIBLE)
-                        .showView(R.id.app_defaylt_dialog_remind_ll,View.VISIBLE)
-                        .showView(R.id.app_defaylt_content_tv,View.GONE)
-                        .build();
-            } else {
-                String name = "";
-                String call = "";
-                String profile = "";
-                String imgUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;
-                String qrcodeUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;
-                if (resourceinfolist.getService_representative().getName() != null) {
-                    name = resourceinfolist.getService_representative().getName();
-                }
-                if (resourceinfolist.getService_representative().getTel() != null) {
-                    call = resourceinfolist.getService_representative().getTel();
-                }
-                if (resourceinfolist.getService_representative().getProfile() != null) {
-                    profile = resourceinfolist.getService_representative().getProfile();
-                }
-                if (resourceinfolist.getService_representative().getAvatar() != null) {
-                    imgUrl = resourceinfolist.getService_representative().getAvatar();
-                }
-                if (resourceinfolist.getService_representative().getQrcode() != null) {
-                    qrcodeUrl = resourceinfolist.getService_representative().getQrcode();
-                }
+                    String name = "";
+                    String call = "";
+                    String profile = "";
+                    String imgUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;
+                    String qrcodeUrl = com.linhuiba.linhuipublic.config.Config.LINHUIBA_LOGO_URL;
+                    if (resourceinfolist.getService_representative().getName() != null) {
+                        name = resourceinfolist.getService_representative().getName();
+                    }
+                    if (resourceinfolist.getService_representative().getTel() != null) {
+                        call = resourceinfolist.getService_representative().getTel();
+                    }
+                    if (resourceinfolist.getService_representative().getProfile() != null) {
+                        profile = resourceinfolist.getService_representative().getProfile();
+                    }
+                    if (resourceinfolist.getService_representative().getAvatar() != null) {
+                        imgUrl = resourceinfolist.getService_representative().getAvatar();
+                    }
+                    if (resourceinfolist.getService_representative().getQrcode() != null) {
+                        qrcodeUrl = resourceinfolist.getService_representative().getQrcode();
+                    }
 
+                    CustomDialog.Builder builder = new CustomDialog.Builder(FieldInfoActivity.this);
+                    mIntegralDialog = builder
+                            .cancelTouchout(true)
+                            .view(R.layout.activity_fieldinfo_refund_price_popuwindow)
+                            .addViewOnclick(R.id.app_defaylt_dialog_counselor_save_ll,uploadListener)
+                            .addViewOnclick(R.id.app_defaylt_dialog_counselor_call_ll,uploadListener)
+                            .addViewOnclick(R.id.app_defaylt_close_img_btn,uploadListener)
+                            .addViewOnclick(R.id.fieldinfo_counselor_save_wx_code_btn_ll,uploadListener)
+                            .setText(R.id.fieldinfo_counselor_name_tv,name)
+                            .setText(R.id.app_defaylt_dialog_counselor_call_tv,
+                                    getResources().getString(R.string.module_fieldinfo_counselor_call) +call)
+                            .setText(R.id.fieldinfo_counselor_description_tv,profile)
+                            .setOvalImgvUrl(FieldInfoActivity.this,R.id.fieldinfo_counselor_imgv,imgUrl,
+                                    com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,80),
+                                    com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,80))
+                            .setImgvUrl(FieldInfoActivity.this,R.id.app_defaylt_dialog_counselor_qrcode_imgv,qrcodeUrl,
+                                    com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40),
+                                    com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40))
+                            .setImgvUrl(FieldInfoActivity.this,R.id.app_defaylt_dialog_counselor_avatar_imgv,imgUrl,
+                                    com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40),
+                                    com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40))
+                            .showView(R.id.app_defaylt_dialog_ll,View.VISIBLE)
+                            .showView(R.id.app_defaylt_dialog_counselor_ll,View.VISIBLE)
+                            .showView(R.id.app_defaylt_close_img_btn,View.VISIBLE)
+                            .showView(R.id.fieldinfo_counselor_contact_ll,View.GONE)
+                            .build();
+                }
+                com.linhuiba.linhuifield.connector.Constants.hideUploadPictureLine(FieldInfoActivity.this,mIntegralDialog);
+                mIntegralDialog.show();
+                if (showWxcode == 1) {
+                    LinearLayout counselorLL = (LinearLayout) mIntegralDialog.getView().findViewById(R.id.app_defaylt_dialog_counselor_ll);
+                    LinearLayout counselorWXLL = (LinearLayout) mIntegralDialog.getView().findViewById(R.id.fieldinfo_counselor_save_wx_code_ll);
+                    ImageView counselorWXCodeImgv = (ImageView) mIntegralDialog.getView().findViewById(R.id.fieldinfo_counselor_save_wx_code_imgv);
+                    counselorLL.setVisibility(View.GONE);
+                    counselorWXLL.setVisibility(View.VISIBLE);
+                    Picasso.with(FieldInfoActivity.this).load(resourceinfolist.getService_representative().getQrcode()
+                            + com.linhuiba.linhuipublic.config.Config.Linhui_Min_Watermark).resize(
+                            mDisplayMetrics.widthPixels - com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,164),
+                            mDisplayMetrics.widthPixels - com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,164)).into(counselorWXCodeImgv);
+                }
+            } else if (type == 2) {
                 CustomDialog.Builder builder = new CustomDialog.Builder(FieldInfoActivity.this);
                 mIntegralDialog = builder
                         .cancelTouchout(true)
                         .view(R.layout.activity_fieldinfo_refund_price_popuwindow)
-                        .addViewOnclick(R.id.app_defaylt_dialog_counselor_save_ll,uploadListener)
-                        .addViewOnclick(R.id.app_defaylt_dialog_counselor_call_ll,uploadListener)
-                        .addViewOnclick(R.id.app_defaylt_close_img_btn,uploadListener)
-                        .addViewOnclick(R.id.fieldinfo_counselor_save_wx_code_btn_ll,uploadListener)
-                        .setText(R.id.fieldinfo_counselor_name_tv,name)
-                        .setText(R.id.app_defaylt_dialog_counselor_call_tv,
-                                getResources().getString(R.string.module_fieldinfo_counselor_call) +call)
-                        .setText(R.id.fieldinfo_counselor_description_tv,profile)
-                        .setOvalImgvUrl(FieldInfoActivity.this,R.id.fieldinfo_counselor_imgv,imgUrl,
-                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,80),
-                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,80))
-                        .setImgvUrl(FieldInfoActivity.this,R.id.app_defaylt_dialog_counselor_qrcode_imgv,qrcodeUrl,
-                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40),
-                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40))
-                        .setImgvUrl(FieldInfoActivity.this,R.id.app_defaylt_dialog_counselor_avatar_imgv,imgUrl,
-                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40),
-                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,40))
+                        .addViewOnclick(R.id.app_defaylt_dialog_close_imgv,uploadListener)
+                        .addViewOnclick(R.id.app_defaylt_dialog_save_btn,uploadListener)
                         .showView(R.id.app_defaylt_dialog_ll,View.VISIBLE)
-                        .showView(R.id.app_defaylt_dialog_counselor_ll,View.VISIBLE)
-                        .showView(R.id.app_defaylt_close_img_btn,View.VISIBLE)
-                        .showView(R.id.fieldinfo_counselor_contact_ll,View.GONE)
+                        .showView(R.id.app_defaylt_dialog_enquiry_ll,View.VISIBLE)
                         .build();
+                com.linhuiba.linhuifield.connector.Constants.hideUploadPictureLine(FieldInfoActivity.this,mIntegralDialog);
+                mIntegralDialog.show();
+                Window window = mIntegralDialog.getWindow();
+                window.setWindowAnimations(R.style.ShareDialogStyle); // 添加动画
+                window.setLayout((ViewGroup.LayoutParams.MATCH_PARENT), ViewGroup.LayoutParams.MATCH_PARENT);
+                EditText mobileET = (EditText) mIntegralDialog.getView().findViewById(R.id.app_defaylt_dialog_mobile_et);
+                EditText contactET = (EditText) mIntegralDialog.getView().findViewById(R.id.app_defaylt_dialog_contact_et);
+                if (mDefaultName != null &&
+                        mDefaultName.length() > 0) {
+                    contactET.setText(mDefaultName);
+                }
+                if (mDefaultMobile != null &&
+                        mDefaultMobile.length() > 0) {
+                    mobileET.setText(mDefaultMobile);
+                }
             }
-            com.linhuiba.linhuifield.connector.Constants.hideUploadPictureLine(FieldInfoActivity.this,mIntegralDialog);
-            mIntegralDialog.show();
-            if (showWxcode == 1) {
-                LinearLayout counselorLL = (LinearLayout) mIntegralDialog.getView().findViewById(R.id.app_defaylt_dialog_counselor_ll);
-                LinearLayout counselorWXLL = (LinearLayout) mIntegralDialog.getView().findViewById(R.id.fieldinfo_counselor_save_wx_code_ll);
-                ImageView counselorWXCodeImgv = (ImageView) mIntegralDialog.getView().findViewById(R.id.fieldinfo_counselor_save_wx_code_imgv);
-                counselorLL.setVisibility(View.GONE);
-                counselorWXLL.setVisibility(View.VISIBLE);
-                Picasso.with(FieldInfoActivity.this).load(resourceinfolist.getService_representative().getQrcode()
-                        + com.linhuiba.linhuipublic.config.Config.Linhui_Min_Watermark).resize(
-                        mDisplayMetrics.widthPixels - com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,164),
-                        mDisplayMetrics.widthPixels - com.linhuiba.linhuifield.connector.Constants.Dp2Px(FieldInfoActivity.this,164)).into(counselorWXCodeImgv);
-            }
+
         }
     }
 }

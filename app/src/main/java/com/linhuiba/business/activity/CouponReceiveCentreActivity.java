@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,6 +51,8 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
     TabLayout mCouponsTL;
     @InjectView(R.id.coupon_centre_vp)
     ViewPager mCouponsVP;
+    @InjectView(R.id.coupons_centre_goto_my_coupons_imgv)
+    ImageView mMyCouponNewImgv;
     private ArrayList<View> mListViews;
     private int mViewSize = 4;
     private SwipeRefreshLayout[] mSwipeRL= new SwipeRefreshLayout[mViewSize];
@@ -90,6 +93,7 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
                 mCouponsAdapters[mCurrIndex].getCouponRemindMap();
             }
         }
+        com.linhuiba.business.connector.Constants.showCouponNew(1,mMyCouponNewImgv);
     }
 
     @Override
@@ -110,7 +114,7 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
         ButterKnife.inject(this);
         mCouponsMvpPresenter = new CouponsMvpPresenter();
         mCouponsMvpPresenter.attachView(this);
-        TitleBarUtils.setTitleText(this,getResources().getString(R.string.module_comment_centre_title));
+        TitleBarUtils.setTitleText(this,getResources().getString(R.string.module_myself_coupon_centre));
         TitleBarUtils.showBackImg(this,true);
         mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         mListViews = new ArrayList<View>();
@@ -419,6 +423,7 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
                     if (Constants.isFastClick()) {
                         Intent couponsIntent = new Intent(CouponReceiveCentreActivity.this, MyCouponsActivity.class);
                         startActivity(couponsIntent);
+                        com.linhuiba.business.connector.Constants.setCouponNewShow(1,mMyCouponNewImgv);
                     }
                 } else {
                     Intent demand_intent = new Intent(CouponReceiveCentreActivity.this, LoginActivity.class);
@@ -436,6 +441,7 @@ public class CouponReceiveCentreActivity extends BaseMvpActivity implements Coup
             if (LoginManager.isLogin()) {
                 Intent couponsIntent = new Intent(CouponReceiveCentreActivity.this, MyCouponsActivity.class);
                 startActivity(couponsIntent);
+                com.linhuiba.business.connector.Constants.setCouponNewShow(1,mMyCouponNewImgv);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

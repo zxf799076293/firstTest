@@ -83,7 +83,7 @@ public class FavoritesActivity extends BaseMvpActivity implements SwipeRefreshLa
         if (favoriteslistdata != null) {
             if (favoriteslistdata.size() != 0) {
                 reviewlistpagesize = reviewlistpagesize + 1;
-                FieldApi.getfavoriteslistitem(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), GetfavoriteslistitemMoreHandler, String.valueOf(reviewlistpagesize), "10");
+                FieldApi.getfavoriteslistitem(MyAsyncHttpClient.MyAsyncHttpClient2(), GetfavoriteslistitemMoreHandler, String.valueOf(reviewlistpagesize), "10");
             } else {
                 mfavorites_listview.onLoadComplete();
             }

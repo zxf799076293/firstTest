@@ -80,7 +80,7 @@ public class ChildAccountActivity extends BaseMvpActivity implements SwipeRefres
             childAccountlist.clear();
         }
         pagesize = 1;
-        UserApi.getchild_accounts(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),child_accountsHandler,String.valueOf(pagesize));
+        UserApi.getchild_accounts(MyAsyncHttpClient.MyAsyncHttpClient2(),child_accountsHandler,String.valueOf(pagesize));
     }
     private void OnClick() {
         mchildaccount_lay_no_review.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +99,7 @@ public class ChildAccountActivity extends BaseMvpActivity implements SwipeRefres
     @Override
     public void loadMore() {
         pagesize = pagesize + 1;
-        UserApi.getchild_accounts(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),child_accountsMoreHandler,String.valueOf(pagesize));
+        UserApi.getchild_accounts(MyAsyncHttpClient.MyAsyncHttpClient2(),child_accountsMoreHandler,String.valueOf(pagesize));
     }
     private LinhuiAsyncHttpResponseHandler child_accountsHandler = new LinhuiAsyncHttpResponseHandler() {
         @Override
@@ -184,7 +184,7 @@ public class ChildAccountActivity extends BaseMvpActivity implements SwipeRefres
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         showProgressDialog();
-                        UserApi.deletechild_accounts(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), deletechildaccount, delete_id);
+                        UserApi.deletechild_accounts(MyAsyncHttpClient.MyAsyncHttpClient2(), deletechildaccount, delete_id);
                     }
                 },
                 new DialogInterface.OnClickListener() {

@@ -340,4 +340,32 @@ public class FieldinfoMvpPresenter extends BasePresenter<FieldinfoMvpView> {
                     }
                 });
     }
+    public void enquiry(String sid, String name, String mobile) {
+        if (!isViewAttached()){
+            //如果没有View引用就不加载数据
+            return;
+        }
+        FieldinfoMvpModel.enquiry(sid, name, mobile,
+                new LinhuiAsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, Response response, Object data) {
+                        if(isViewAttached()){
+                            getView().hideLoading();
+                            if (response.code  == 1 && data != null && data.toString().length() > 0) {
+                                getView().onEnquirySuccess(data.toString());
+                            } else {
+                                getView().showToast(getView().getContext().getResources().getString(R.string.review_error_text));
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(boolean superresult, int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        if(isViewAttached()){
+                            getView().hideLoading();
+                            getView().onEnquiryFailure(superresult, error);
+                        }
+                    }
+                });
+    }
+
 }

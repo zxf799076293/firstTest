@@ -18,6 +18,6 @@ public interface SearchResListMvpView extends BaseView {
     void onAttributesFailure(boolean superresult, Throwable error);
     void onSearchSellResListSuccess(ArrayList<SearchSellResModel> list, Response response);
     void onSearchSellResListMoreSuccess(ArrayList<SearchSellResModel> list,Response response);
-
+    void onSearchResListCountSuccess(int count);
 
 }

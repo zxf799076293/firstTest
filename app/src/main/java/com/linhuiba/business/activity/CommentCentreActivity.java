@@ -1,11 +1,14 @@
 package com.linhuiba.business.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.baselib.app.util.MessageUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -20,6 +23,7 @@ import com.linhuiba.business.util.TitleBarUtils;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class CommentCentreActivity extends BaseMvpActivity implements SwipeRefreshLayout.OnRefreshListener,PublishReviewMvpView {
@@ -29,7 +33,10 @@ public class CommentCentreActivity extends BaseMvpActivity implements SwipeRefre
     RecyclerView mRecyclerView;
     @InjectView(R.id.coment_centre_no_data_rl)
     RelativeLayout mCommentNoDataRL;
-
+    @InjectView(R.id.no_data_tv)
+    TextView mNoDataTV;
+    @InjectView(R.id.no_data_img)
+    ImageView mNoDataImage;
     private PublishReviewMvpPresenter mPresenter;
     private CommentCentreAdapter mCommentCentreAdapter;
     private ArrayList<ReviewModel> mDatas = new ArrayList<>();
@@ -38,6 +45,7 @@ public class CommentCentreActivity extends BaseMvpActivity implements SwipeRefre
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.module_activity_comment_centre);
+        ButterKnife.inject(this);
         initView();
         showProgressDialog();
         initData();
@@ -55,8 +63,10 @@ public class CommentCentreActivity extends BaseMvpActivity implements SwipeRefre
         mCommentSwipeRefresh.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light,
                 android.R.color.holo_green_light);
         mCommentSwipeRefresh.setOnRefreshListener(this);
-        TitleBarUtils.setTitleText(this,getResources().getString(R.string.module_case_title));
+        TitleBarUtils.setTitleText(this,getResources().getString(R.string.module_comment_centre_title));
         TitleBarUtils.showBackImg(this,true);
+        mNoDataTV.setText(getResources().getString(R.string.module_comment_centre_no_data_msg));
+        mNoDataImage.setImageResource(R.drawable.ic_invoice_title_no);
     }
     private void initData() {
         mPresenter.getCommentCentre("1125",1,10);
@@ -106,32 +116,8 @@ public class CommentCentreActivity extends BaseMvpActivity implements SwipeRefre
                 //设置为垂直布局，这也是默认的
                 //设置Adapter
                 mRecyclerView.setAdapter(mCommentCentreAdapter);
-                mCommentCentreAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                if (view.getId() == R.id.iv_img) {
-//
-//                } else if (view.getId() == R.id.tv_title) {
-//
-//                }
-                        //滚动到第几个
-//                mRecyclerView.smoothScrollToPosition(0);
-
-                    }
-                });
-                mCommentCentreAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-                    @Override
-                    public void onLoadMoreRequested() {
-                        page = page + 1;
-                        initData();
-                    }
-                });
             } else {
                 mCommentCentreAdapter.notifyDataSetChanged();
-            }
-            mCommentCentreAdapter.loadMoreComplete();
-            if (mDatas.size() < 10) {
-                mCommentCentreAdapter.loadMoreEnd();
             }
             mCommentNoDataRL.setVisibility(View.GONE);
         } else {
@@ -171,5 +157,14 @@ public class CommentCentreActivity extends BaseMvpActivity implements SwipeRefre
             MessageUtils.showToast(error.getMessage());
         mCommentCentreAdapter.loadMoreFail();
         page --;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == 1) {
+            page = 1;
+            initData();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

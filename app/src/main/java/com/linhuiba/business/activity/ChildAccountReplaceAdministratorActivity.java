@@ -93,7 +93,7 @@ public class ChildAccountReplaceAdministratorActivity extends BaseMvpActivity {
                     return;
                 }
                 showProgressDialog();
-                UserApi.child_accounts_change_admin(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),change_adminHandler,
+                UserApi.child_accounts_change_admin(MyAsyncHttpClient.MyAsyncHttpClient2(),change_adminHandler,
                         mreplaceadministrator_mobile_edit.getText().toString(),mreplaceadministrator_captcha_edit.getText().toString(),account_id);
             }
         });

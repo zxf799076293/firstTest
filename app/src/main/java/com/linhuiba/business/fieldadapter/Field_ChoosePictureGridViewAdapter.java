@@ -2,6 +2,7 @@ package com.linhuiba.business.fieldadapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.linhuiba.business.activity.MyselfInfo_CompanyActivity;
 import com.linhuiba.business.activity.PublishReviewActivity;
 import com.linhuiba.business.activity.TrackRemarksActivity;
 import com.linhuiba.business.network.Request;
+import com.linhuiba.linhuifield.connector.Constants;
 
 import java.util.ArrayList;
 
@@ -43,6 +45,8 @@ public class Field_ChoosePictureGridViewAdapter extends BaseAdapter {
     private InvoiceTitleEditActivity mInvoiceTitleEditActivity;
     private int type;
     private int myself_company_upload_type;
+    private int width;
+    private int height;
     public Field_ChoosePictureGridViewAdapter(Context context, TrackRemarksActivity activity, ArrayList<String> pathlist,int type) {
         this.context = context;
         mLayoutInflater = LayoutInflater.from(context);
@@ -56,6 +60,10 @@ public class Field_ChoosePictureGridViewAdapter extends BaseAdapter {
         this.publishReviewActivity = activity;
         this.result = pathlist;
         this.type = type;
+        DisplayMetrics metric = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metric);
+        width = metric.widthPixels;     // 屏幕宽度（像素）
+        height = metric.heightPixels;
     }
     public Field_ChoosePictureGridViewAdapter(Context context, MyselfInfo_CompanyActivity activity, ArrayList<String> pathlist,int type,int upload_type) {
         this.context = context;
@@ -140,6 +148,13 @@ public class Field_ChoosePictureGridViewAdapter extends BaseAdapter {
             holder = (ViewHolder)convertView.getTag();
         }
         holder.mChooseInvoiceProveLL.setVisibility(View.GONE);
+        if (type == 2) {
+            RelativeLayout.LayoutParams layoutParams= new RelativeLayout.LayoutParams((width -
+                    Constants.Dp2Px(context,70))/4,
+                    (width -
+                            Constants.Dp2Px(context,70))/4);
+            holder.gridview_img.setLayoutParams(layoutParams);
+        }
         if (result != null) {
             if (result.size() > 0) {
                 if (result.get(position).toString().equals("firstgridviewitem")) {
@@ -155,6 +170,11 @@ public class Field_ChoosePictureGridViewAdapter extends BaseAdapter {
                             holder.mChooseInvoiceProveLL.setBackgroundColor(context.getResources().getColor(R.color.white));
                         }
 
+                    } else if (type == 2) {
+                        Glide.with(context)
+                                .load(R.drawable.ic_sahngchuangtupian)
+                                .centerCrop()
+                                .into(holder.gridview_img);
                     } else {
                         Glide.with(context)
                                 .load(R.drawable.ic_add_upload_pictures)

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,6 +43,8 @@ public class MyCouponsActivity extends BaseMvpActivity implements CouponsMvpView
     TabLayout mCouponsTL;
     @InjectView(R.id.my_coupons_vp)
     ViewPager mCouponsVP;
+    @InjectView(R.id.my_coupons_goto_centre_imgv)
+    ImageView mCouponCentreNewImgv;
     private ArrayList<View> mListViews;
     private SwipeRefreshLayout[] mSwipeRL= new SwipeRefreshLayout[3];
     private RecyclerView[] mRecyclerViews = new RecyclerView[3];
@@ -72,6 +75,12 @@ public class MyCouponsActivity extends BaseMvpActivity implements CouponsMvpView
         if (mCouponsMvpPresenter != null) {
             mCouponsMvpPresenter.detachView();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        com.linhuiba.business.connector.Constants.showCouponNew(2,mCouponCentreNewImgv);
     }
 
     private void initView() {
@@ -189,6 +198,7 @@ public class MyCouponsActivity extends BaseMvpActivity implements CouponsMvpView
             if (mCouponsAdapters[mCurrIndex] == null) {
                 mCouponsAdapters[mCurrIndex] = new MyCouponsAdapter(R.layout.module_recycle_item_coupons,mLists[mCurrIndex],MyCouponsActivity.this,
                         1,expired,used,MyCouponsActivity.this);
+                mCouponsAdapters[mCurrIndex].setPreLoadNumber(4);//预加载倒数第几个就实现onLoadMoreRequested
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 mRecyclerViews[mCurrIndex].setLayoutManager(linearLayoutManager);
@@ -328,6 +338,7 @@ public class MyCouponsActivity extends BaseMvpActivity implements CouponsMvpView
             case R.id.my_coupons_goto_centre_ll:
                 Intent centreIntent = new Intent(MyCouponsActivity.this, CouponReceiveCentreActivity.class);
                 startActivity(centreIntent);
+                com.linhuiba.business.connector.Constants.setCouponNewShow(2,mCouponCentreNewImgv);
                 break;
             default:
                 break;

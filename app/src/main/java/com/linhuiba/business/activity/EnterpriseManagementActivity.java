@@ -56,7 +56,7 @@ public class EnterpriseManagementActivity extends BaseMvpActivity {
     }
 
     private void initview() {
-        UserApi.getbusiness_report(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),business_reportHandler);
+        UserApi.getbusiness_report(MyAsyncHttpClient.MyAsyncHttpClient2(),business_reportHandler);
     }
     @OnClick({
             R.id.childaccount_chagemanage_relativelayout,

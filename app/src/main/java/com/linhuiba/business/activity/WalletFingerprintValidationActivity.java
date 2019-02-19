@@ -105,7 +105,7 @@ public class WalletFingerprintValidationActivity extends BaseMvpActivity {
                         }
                         if (strConfirmPassword.length() == 6) {
                             showPopupWindow();
-                            UserApi.validate_password(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),validate_passwordHandler,
+                            UserApi.validate_password(MyAsyncHttpClient.MyAsyncHttpClient2(),validate_passwordHandler,
                                     strConfirmPassword);
                         } else {
                             MessageUtils.showToast(getResources().getString(R.string.review_error_text));

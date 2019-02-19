@@ -127,6 +127,7 @@ public class InvoiceTitleListActivity extends BaseMvpActivity implements SwipeRe
             mNoDataImg[i] = (ImageView) mNoDataRL[i].findViewById(R.id.no_data_img);
             mNoDataTV[i] = (TextView) mNoDataRL[i].findViewById(R.id.no_data_tv);
             mNoDataBtn[i] = (Button) mNoDataRL[i].findViewById(R.id.no_data_btn);
+            mNoDataBtn[i].setVisibility(View.VISIBLE);
             mNoDataImg[i].setImageResource(R.drawable.ic_invoice_title_no);
             mNoDataTV[i].setText(getResources().getString(R.string.module_invoice_title_nodata_tv_str));
             mNoDataBtn[i].setText(getResources().getString(R.string.module_invoice_title_nodata_btn_str));
@@ -194,6 +195,7 @@ public class InvoiceTitleListActivity extends BaseMvpActivity implements SwipeRe
             if (mInvoiceTitleAdapters[mCurrIndex] == null) {
                 mInvoiceTitleAdapters[mCurrIndex] = new InvoiceTitleAdapter(R.layout.module_recycle_item_activity_invoice_title,mLists[mCurrIndex],InvoiceTitleListActivity.this,
                         InvoiceTitleListActivity.this);
+                mInvoiceTitleAdapters[mCurrIndex].setPreLoadNumber(4);//预加载倒数第几个就实现onLoadMoreRequested
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 mRecyclerViews[mCurrIndex].setLayoutManager(linearLayoutManager);

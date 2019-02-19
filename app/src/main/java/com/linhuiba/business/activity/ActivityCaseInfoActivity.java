@@ -60,6 +60,7 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerClickListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -136,6 +137,7 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
     private ImageView mCaseInfoTitleBackImg;
     private ImageView mCaseInfoTitleShareImg;
     private ImageView mCaseInfoTitleCardImg;
+    private ImageView mCaseInfoTitleDownloadImgv;
     private TextView mCaseInfoTitleTV;
     private RelativeLayout mCaseInfoTitleRL;
     private DisplayMetrics mDisplayMetrics;
@@ -204,6 +206,7 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
         mCaseInfoTitleShareImg = (ImageView) findViewById(R.id.common_title_bar).findViewById(R.id.action_img_top);
         mCaseInfoTitleBackImg = (ImageView) findViewById(R.id.common_title_bar).findViewById(R.id.back_button_top);
         mCaseInfoTitleCardImg = (ImageView) findViewById(R.id.common_title_bar).findViewById(R.id.business_titlebar_right_card_img);
+        mCaseInfoTitleDownloadImgv = (ImageView)findViewById(R.id.common_title_bar).findViewById(R.id.business_titlebar_right_three_img);
         mCaseInfoTitleTV = (TextView) findViewById(R.id.common_title_bar).findViewById(R.id.title);
         mCaseInfoTitleTV.setTextColor(getResources().getColor(R.color.white));
         mCaseInfoTitleRL = (RelativeLayout) findViewById(R.id.about_title);
@@ -362,6 +365,7 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
                 mCaseInfoTitleBackImg.setImageResource(R.drawable.nav_ic_back_white);
                 mCaseInfoTitleShareImg.setImageResource(R.drawable.ic_share_white);
                 mCaseInfoTitleCardImg.setImageResource(R.drawable.ic_service_white);
+                mCaseInfoTitleDownloadImgv.setImageResource(R.drawable.ic_download_thr_ten);
                 mCaseInfoTitleTV.setTextColor(getResources().getColor(R.color.white));
                 mCaseInfoStatusBarLL.setBackgroundColor(getResources().getColor(R.color.color_null));
             } else {
@@ -369,6 +373,8 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
                 mCaseInfoTitleBackImg.setImageResource(R.drawable.ic_back_black);
                 mCaseInfoTitleShareImg.setImageResource(R.drawable.popup_ic_share);
                 mCaseInfoTitleCardImg.setImageResource(R.drawable.popup_ic_service);
+                mCaseInfoTitleDownloadImgv.setImageResource(R.drawable.ic_download_black_thr_ten);
+
                 mCaseInfoTitleTV.setTextColor(getResources().getColor(R.color.title_bar_txtcolor));
                 mCaseInfoStatusBarLL.setBackgroundColor(getResources().getColor(R.color.checked_tv_color));
             }
@@ -796,6 +802,16 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
                     });
                     mCaseinfoBannerSizeTV.setText("/" + String.valueOf(mPicList.size()));
                     mBanner.start();
+                    TitleBarUtils.showTitleBarRightThreeImg(this, true, R.drawable.ic_download_thr_ten, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //2019/1/17 下载案例图
+                            Intent saveIntent = new Intent(ActivityCaseInfoActivity.this,ActivityCasePicSaveActivity.class);
+                            saveIntent.putExtra("pic_list", (Serializable) mPicList);
+                            startActivity(saveIntent);
+                        }
+                    });
+
                 }
                 new Thread(new Runnable() {
                     @Override
@@ -823,7 +839,7 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
                     "&city_ids="+JSON.toJSONString(mCityIds,true).trim() +
                     "&label_ids="+JSON.toJSONString(mCaseLabelTypeIds,true).trim() +
                     "&city_id="+String.valueOf(mCityId);
-            share_linkurl = com.linhuiba.business.config.Config.SHARE_CASE_INFO_PYQ_URL + mCaseId +
+            share_linkurl = com.linhuiba.business.config.Config.Domain_Name + com.linhuiba.business.config.Config.SHARE_CASE_INFO_PYQ_URL + mCaseId +
                     "&community_type_ids="+ JSON.toJSONString(mFieldTypeIds,true).trim() +
                     "&industry_ids="+JSON.toJSONString(mIndustriesIds,true).trim() +
                     "&spread_way_ids="+JSON.toJSONString(mSpreadWaysIds,true).trim() +
@@ -864,7 +880,7 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
                 mCaseInfoResNumOrderTV.setText(String.valueOf(mCaseInfoModel.getPhysical_resources().getNumber_of_order()));
             }
             if (mCaseInfoModel.getPhysical_resources().getAverage_score() != null) {
-                mCaseInfoResAverageScore.setText(String.valueOf(mCaseInfoModel.getPhysical_resources().getAverage_score()));
+                mCaseInfoResAverageScore.setText(mCaseInfoModel.getPhysical_resources().getAverage_score());
             }
             Picasso.with(this).load(R.drawable.ic_no_pic_big).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(150,120).into(mCaseInfoResourceImgv);
             if (mCaseInfoModel.getPhysical_resources().getPhysical_resource_first_img().length() > 0) {
@@ -878,7 +894,8 @@ public class ActivityCaseInfoActivity extends BaseMvpActivity implements Field_M
 
     @Override
     public void onCaseInfoFailure(boolean superresult, Throwable error) {
-
+        if (!superresult)
+            MessageUtils.showToast(error.getMessage());
     }
 
     @Override

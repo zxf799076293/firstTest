@@ -161,7 +161,7 @@ public class SearchFieldAreaActivity extends BaseMvpActivity implements SearchKe
     private void getHotwordlist() {
         msearch_hotsearch_alllayout.setVisibility(View.GONE);
         showProgressDialog();
-        UserApi.getHot_word(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),HotwordHandler,String.valueOf(cityname_code),String.valueOf(mResourceType));
+        UserApi.getHot_word(MyAsyncHttpClient.MyAsyncHttpClient2(),HotwordHandler,String.valueOf(cityname_code),String.valueOf(mResourceType));
     }
     @OnClick({
             R.id.search_cancel_txt_layout,

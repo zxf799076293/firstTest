@@ -69,7 +69,7 @@ public class WalletRechargeParticularsInfoActivity extends BaseMvpActivity {
         if (rechargeinfo.getExtras()!= null && rechargeinfo.getExtras().get("id") != null &&
                 rechargeinfo.getExtras().getInt("id") > 0) {
             showProgressDialog();
-            UserApi.gettransactionsinfo(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),TransactionsinfoHandler,
+            UserApi.gettransactionsinfo(MyAsyncHttpClient.MyAsyncHttpClient2(),TransactionsinfoHandler,
                     String.valueOf(rechargeinfo.getExtras().getInt("id")));
         }
     }

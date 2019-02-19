@@ -18,6 +18,117 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:gravity="bottom"
+                android:visibility="gone"
+                android:id="@+id/app_defaylt_dialog_enquiry_ll">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/activity_confirmorder_success_layout_bg"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/activity_confirmorder_success_layout_bg">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:paddingLeft="@dimen/user_info_photo_text_top"
+                            android:textColor="@color/headline_tv_color"
+                            android:textSize="@dimen/search_lisritem_pricetxt_size"
+                            android:text="@string/enquary_title_tv_str"
+                            android:layout_marginTop="@dimen/paddingleft"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/txt_margin"
+                            android:layout_marginRight="@dimen/txt_margin"
+                            android:src="@drawable/ic_closed_black_three_six"
+                            android:id="@+id/app_defaylt_dialog_close_imgv"/>
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/text_title_next_padding"
+                        android:layout_marginRight="@dimen/order_field_advertising_type_width"
+                        android:layout_marginLeft="@dimen/order_field_advertising_type_width"
+                        android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                        android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                        android:text="@string/module_fieldinfo_enquiry_remind"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/order_type_layoutwidth"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/field_list_item_label_samll"
+                        android:layout_marginRight="@dimen/order_title_height"
+                        android:layout_marginTop="@dimen/field_info_margintop">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/headline_tv_color"
+                            android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                            android:text="@string/myselfinfo_contactname"/>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/txt_padding_left"
+                            android:background="@drawable/activity_searchlist_item_edittext_bg"
+                            android:textColorHint="@color/register_edit_color"
+                            android:textColor="@color/headline_tv_color"
+                            android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                            android:paddingLeft="@dimen/txt_margin"
+                            android:maxLength="12"
+                            android:hint="@string/fieldinfo_diolog_contactname"
+                            android:id="@+id/app_defaylt_dialog_contact_et"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/order_type_layoutwidth"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/field_list_item_label_samll"
+                        android:layout_marginRight="@dimen/order_title_height"
+                        android:layout_marginTop="@dimen/app_backbtn_marginleft">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/headline_tv_color"
+                            android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                            android:text="@string/myselfinfo_phonenum_txt"/>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/txt_padding_left"
+                            android:background="@drawable/activity_searchlist_item_edittext_bg"
+                            android:textColorHint="@color/register_edit_color"
+                            android:textColor="@color/headline_tv_color"
+                            android:textSize="@dimen/fieldinfo_diogle_time_textsize"
+                            android:paddingLeft="@dimen/txt_margin"
+                            android:maxLength="11"
+                            android:numeric="integer"
+                            android:id="@+id/app_defaylt_dialog_mobile_et"
+                            android:hint="@string/txt_phonenumber_newhint_text"/>
+                    </LinearLayout>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/maintab_width"
+                        android:layout_marginTop="@dimen/myself_order_img_width"
+                        android:background="@color/default_bluebg"
+                        android:textColor="@color/white"
+                        android:text="@string/submit"
+                        android:textSize="@dimen/title_bar_title_center_txt_size"
+                        android:id="@+id/app_defaylt_dialog_save_btn"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:gravity="center">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -71,7 +182,7 @@
                             android:layout_marginBottom="@dimen/paddingleft"
                             android:gravity="center"
                             android:background="@drawable/loginbtn_bg"
-                            android:text="@string/wallet_open_cancel_btn_text"
+                            android:text="@string/confirm"
                             android:textColor="@color/white"
                             android:textSize="@dimen/txt_title_size_nor"
                             android:visibility="gone"

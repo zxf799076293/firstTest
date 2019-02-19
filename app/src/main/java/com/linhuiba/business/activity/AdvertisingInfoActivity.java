@@ -470,9 +470,9 @@ public class AdvertisingInfoActivity extends BaseMvpActivity implements Field_Ad
     private void initdata() {
         if (getfieldid != null) {
             if (getfieldid.equals("random")) {
-                FieldApi.getresourcesinfo(MyAsyncHttpClient.MyAsyncHttpClient_version_five(), getfieldidHandler, "random", LoginManager.getTrackcityid(),String.valueOf(good_type));
+                FieldApi.getSellResInfo(MyAsyncHttpClient.MyAsyncHttpClient7(), getfieldidHandler,"");
             } else {
-                FieldApi.getresourcesinfo(MyAsyncHttpClient.MyAsyncHttpClient_version_five(), getfieldidHandler, getfieldid,"","");
+                FieldApi.getSellResInfo(MyAsyncHttpClient.MyAsyncHttpClient7(), getfieldidHandler, getfieldid);
             }
         }
 
@@ -1374,7 +1374,7 @@ public class AdvertisingInfoActivity extends BaseMvpActivity implements Field_Ad
                 case 0:
                     final View myView = AdvertisingInfoActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
                     pw = new AlertDialog.Builder(AdvertisingInfoActivity.this).create();
-                    share_linkurl = Config.FIELDINFO_ADV_URL + getfieldid + Config.FIELDINFO_END_URL+"&city_id="+LoginManager.getTrackcityid();
+                    share_linkurl = Config.Domain_Name + Config.FIELDINFO_ADV_URL + getfieldid + Config.FIELDINFO_END_URL+"&city_id="+LoginManager.getTrackcityid();
                     if (pw!= null && pw.isShowing()) {
                         pw.dismiss();
                     }
@@ -1598,7 +1598,7 @@ public class AdvertisingInfoActivity extends BaseMvpActivity implements Field_Ad
                 if (merror_recovery_content_edit.getText().toString().trim().length() > 0) {
                     txt_error_correction_submit.setEnabled(false);
                     showProgressDialog();
-                    FieldApi.release_feedbacks(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), release_feedbacksHandler,
+                    FieldApi.release_feedbacks(MyAsyncHttpClient.MyAsyncHttpClient2(), release_feedbacksHandler,
                             resourceinfolist.getPhysical_resource().getCurrent_resource().getId(),0,
                             merror_recovery_content_edit.getText().toString());
                 } else {

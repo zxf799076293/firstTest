@@ -1,10 +1,12 @@
 package com.linhuiba.business.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/7/4.
  */
 
-public class CommentScoreModel {
+public class CommentScoreModel implements Serializable {
     private Double composite_score;
     private Double count_of_composite_score;
     private Double score_of_visitorsflowrate;

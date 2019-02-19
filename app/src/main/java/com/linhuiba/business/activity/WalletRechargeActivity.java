@@ -156,7 +156,7 @@ public class WalletRechargeActivity extends BaseMvpActivity {
                     return;
                 }
                 showProgressDialog();
-                UserApi.wallet_recharge(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),WalletRechargeHandler,
+                UserApi.wallet_recharge(MyAsyncHttpClient.MyAsyncHttpClient2(),WalletRechargeHandler,
                         Constants.getorderdoublepricestring(Double.parseDouble(mmywallet_recharge_price_edit.getText().toString().trim()),100),payment_mode,"");
             }
         });

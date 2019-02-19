@@ -714,25 +714,6 @@ public class FieldApi {
                 paramsMap,1));
         call.enqueue(handler);
     }
-    //获取资源详情 资源ID(如果ID为random_field或random_adv,则分别返回随机的场地和广告) 3.1
-    public static void getresourcesinfo(OkHttpClient client, LinhuiAsyncHttpResponseHandler handler,
-                                        String id,String city_id,String resource_type_id) {
-        HashMap<String, String> paramsMap = new HashMap<>();
-        if (city_id != null) {
-            if (city_id.length() > 0) {
-                paramsMap.put("city_id",city_id);
-            }
-        }
-        if (resource_type_id != null) {
-            if (resource_type_id.length() > 0) {
-                paramsMap.put("resource_type_id",resource_type_id);
-            }
-        }
-        Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
-                "resources/"+id,
-                paramsMap,5));
-        call.enqueue(handler);
-    }
     //展位评论列表 3.10
     public static void get_resources_commentslist(OkHttpClient client, LinhuiAsyncHttpResponseHandler handler,
                                               String fieldid,String page,String pageSize) {
@@ -838,7 +819,7 @@ public class FieldApi {
         paramsMap.put("pageSize", pageSize);
         call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
                 "purchased_resources",
-                paramsMap,2));
+                paramsMap,3));
         call.enqueue(handler);
     }
     //修改联系人
@@ -1612,7 +1593,7 @@ public class FieldApi {
         paramsMap.put("field_order_item_id",field_order_item_id);
         Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
                 "resource_info",
-                paramsMap,2));
+                paramsMap,3));
         call.enqueue(handler);
     }
     //获取分类列表 3.0
@@ -1897,7 +1878,7 @@ public class FieldApi {
         }
         Call call = client.newCall(Request.RequestJsonGet(Config.BASE_API_URL_PHP,
                 "activity_cases/" + String.valueOf(id),
-                paramsMap,1));
+                paramsMap,2));
         call.enqueue(handler);
     }
     //发票抬头信息列表 3.6
@@ -2450,7 +2431,6 @@ public class FieldApi {
                                   LinhuiAsyncHttpResponseHandler handler,
                                   String id) {
         HashMap<String, String> paramsMap = new HashMap<>();
-        paramsMap.put("res_type_id","3");
         Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
                 "resources/" + id,
                 paramsMap,7));//2018/12/20 版本号升级为7
@@ -2611,8 +2591,249 @@ public class FieldApi {
     public static void getCommentCentreOrders(OkHttpClient client, LinhuiAsyncHttpResponseHandler handler) {
         HashMap<String, String> paramsMap = new HashMap<>();
         Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
-                "orders",
-                paramsMap,4));
+                "orders/un-comments",
+                paramsMap,1));
         call.enqueue(handler);
     }
+
+    /**
+     * 展位列表数据数量
+     * @param client
+     * @param handler
+     * @param apiResourcesModel
+     */
+    public static void getPhyReslistCount(OkHttpClient client, LinhuiAsyncHttpResponseHandler handler,
+                                     ApiResourcesModel apiResourcesModel) {
+        HashMap<String, String> paramsMap = new HashMap<>();
+        if (apiResourcesModel.getCommunity_ids() != null &&
+                apiResourcesModel.getCommunity_ids().size() > 0) {//比场地列表增加的参数
+            for (int i = 0; i < apiResourcesModel.getCommunity_ids().size(); i++) {
+                paramsMap.put("community_ids[" + String.valueOf(i) + "]", String.valueOf(apiResourcesModel.getCommunity_ids().get(i)));
+            }
+        }
+        if (apiResourcesModel.getKeywords() != null && apiResourcesModel.getKeywords().length() > 0) {
+            paramsMap.put("keywords", apiResourcesModel.getKeywords());
+        }
+        if (apiResourcesModel.getHas_physical() == 1) {//没用到
+            paramsMap.put("has_physical", String.valueOf(apiResourcesModel.getHas_physical()));
+        }
+        if (apiResourcesModel.getCity_ids() != null &&
+                apiResourcesModel.getCity_ids().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getCity_ids().size(); i++) {
+                paramsMap.put("city_ids[" + String.valueOf(i) + "]", String.valueOf(apiResourcesModel.getCity_ids().get(i)));
+            }
+        }
+        if (apiResourcesModel.getDistrict_ids() != null &&
+                apiResourcesModel.getDistrict_ids().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getDistrict_ids().size(); i++) {
+                paramsMap.put("district_ids[" + String.valueOf(i) + "]", String.valueOf(apiResourcesModel.getDistrict_ids().get(i)));
+            }
+        }
+        if (apiResourcesModel.getTrading_area_ids() != null &&
+                apiResourcesModel.getTrading_area_ids().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getTrading_area_ids().size(); i++) {
+                paramsMap.put("trading_area_ids[" + String.valueOf(i) + "]", String.valueOf(apiResourcesModel.getTrading_area_ids().get(i)));
+            }
+        }
+        if (apiResourcesModel.getSubway_station_ids() != null &&
+                apiResourcesModel.getSubway_station_ids().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getSubway_station_ids().size(); i++) {
+                paramsMap.put("subway_station_ids[" + String.valueOf(i) + "]", String.valueOf(apiResourcesModel.getSubway_station_ids().get(i)));
+            }
+        }
+        if (apiResourcesModel.getIn_trading_area() != null && apiResourcesModel.getIn_trading_area().length() > 0) {
+            paramsMap.put("in_trading_area", apiResourcesModel.getIn_trading_area());
+        }
+        if (apiResourcesModel.getCommunity_type_ids() != null &&
+                apiResourcesModel.getCommunity_type_ids().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getCommunity_type_ids().size(); i++) {
+                paramsMap.put("community_type_ids[" + String.valueOf(i) + "]", String.valueOf(apiResourcesModel.getCommunity_type_ids().get(i)));
+            }
+        }
+        //属性
+        if (apiResourcesModel.getAttributes() != null &&
+                apiResourcesModel.getAttributes().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getAttributes().size(); i++) {
+                String attributes = "";
+                for (int j = 0; j < apiResourcesModel.getAttributes().get(i).getOption_ids().size(); j++) {
+                    if (attributes.length() == 0) {
+                        attributes = "[" + String.valueOf(apiResourcesModel.getAttributes().get(i).getOption_ids().get(j));
+                        if (j == apiResourcesModel.getAttributes().get(i).getOption_ids().size() - 1) {
+                            attributes = attributes + "]";
+                        }
+                    } else {
+                        attributes = attributes + "," + String.valueOf(apiResourcesModel.getAttributes().get(i).getOption_ids().get(j));
+                        if (j == apiResourcesModel.getAttributes().get(i).getOption_ids().size() - 1) {
+                            attributes = attributes + "]";
+                        }
+                    }
+                }
+                attributes = "{\"id\":" + String.valueOf(apiResourcesModel.getAttributes().get(i).getId()) +"," +
+                        "\"option_ids\":" + attributes + "}";
+                paramsMap.put("attributes[" + String.valueOf(i) + "]", attributes);
+            }
+        }
+        if (apiResourcesModel.getLabel_ids() != null &&
+                apiResourcesModel.getLabel_ids().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getLabel_ids().size(); i++) {
+                paramsMap.put("label_ids[" + String.valueOf(i) + "]", String.valueOf(apiResourcesModel.getLabel_ids().get(i)));
+            }
+        }
+        if (apiResourcesModel.getField_cooperation_type_ids() != null &&
+                apiResourcesModel.getField_cooperation_type_ids().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getField_cooperation_type_ids().size(); i++) {
+                paramsMap.put("field_cooperation_type_ids[" + String.valueOf(i) + "]", String.valueOf(apiResourcesModel.getField_cooperation_type_ids().get(i)));
+            }
+        }
+        if (apiResourcesModel.getActivity_type_ids() != null &&
+                apiResourcesModel.getActivity_type_ids().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getActivity_type_ids().size(); i++) {
+                paramsMap.put("activity_type_ids["+String.valueOf(i)+"]",String.valueOf(apiResourcesModel.getActivity_type_ids().get(i)));
+            }
+        }
+        if (apiResourcesModel.getAge_level_ids() != null &&
+                apiResourcesModel.getAge_level_ids().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getAge_level_ids().size(); i++) {
+                paramsMap.put("age_level_ids["+String.valueOf(i)+"]",String.valueOf(apiResourcesModel.getAge_level_ids().get(i)));
+            }
+        }
+        if (apiResourcesModel.getIndoor() != null &&
+                apiResourcesModel.getIndoor().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getIndoor().size(); i++) {
+                paramsMap.put("indoor["+String.valueOf(i)+"]",String.valueOf(apiResourcesModel.getIndoor().get(i)));
+            }
+        }
+        if (apiResourcesModel.getFacilities() != null &&
+                apiResourcesModel.getFacilities().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getFacilities().size(); i++) {
+                paramsMap.put("facilities["+String.valueOf(i)+"]",apiResourcesModel.getFacilities().get(i));
+            }
+        }
+        if (apiResourcesModel.getLocation_type_ids() != null &&
+                apiResourcesModel.getLocation_type_ids().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getLocation_type_ids().size(); i++) {
+                paramsMap.put("location_type_ids["+String.valueOf(i)+"]",String.valueOf(apiResourcesModel.getLocation_type_ids().get(i)));
+            }
+        }
+        if (apiResourcesModel.getNot_need_deposit() != null) {
+            paramsMap.put("not_need_deposit", String.valueOf(apiResourcesModel.getNot_need_deposit()));
+        }
+
+        if (apiResourcesModel.getMin_price() != null && apiResourcesModel.getMin_price().length() > 0) {
+            paramsMap.put("min_price", apiResourcesModel.getMin_price());
+        }
+        if (apiResourcesModel.getMax_price() != null && apiResourcesModel.getMax_price().length() > 0) {
+            paramsMap.put("max_price", apiResourcesModel.getMax_price());
+        }
+        if (apiResourcesModel.getMin_area() != null) {
+            paramsMap.put("min_area", String.valueOf(apiResourcesModel.getMin_area()));
+        }
+        if (apiResourcesModel.getMax_area() != null) {
+            paramsMap.put("max_area", String.valueOf(apiResourcesModel.getMax_area()));
+        }
+        if (apiResourcesModel.getMin_person_flow() != null) {
+            paramsMap.put("min_person_flow", apiResourcesModel.getMin_person_flow());
+        }
+        if (apiResourcesModel.getMax_person_flow() != null) {
+            paramsMap.put("max_person_flow", apiResourcesModel.getMax_person_flow());
+        }
+        if (apiResourcesModel.getLat() > 0) {
+            paramsMap.put("lat", String.valueOf(apiResourcesModel.getLat()));
+        }
+        if (apiResourcesModel.getLng() > 0) {
+            paramsMap.put("lng", String.valueOf(apiResourcesModel.getLng()));
+        }
+        if (apiResourcesModel.getLatitude() > 0) {
+            paramsMap.put("latitude", String.valueOf(apiResourcesModel.getLatitude()));
+        }
+        if (apiResourcesModel.getLongitude() > 0) {
+            paramsMap.put("longitude", String.valueOf(apiResourcesModel.getLongitude()));
+        }
+        if (apiResourcesModel.getLatitude_delta() > 0) {
+            paramsMap.put("latitude_delta", String.valueOf(apiResourcesModel.getLatitude_delta()));
+        }
+        if (apiResourcesModel.getLongitude_delta() > 0) {
+            paramsMap.put("longitude_delta", String.valueOf(apiResourcesModel.getLongitude_delta()));
+        }
+        if (apiResourcesModel.getNearby() > 0) {
+            paramsMap.put("nearby", String.valueOf(apiResourcesModel.getNearby()));
+        }
+        if (apiResourcesModel.getMin_year() != null) {
+            paramsMap.put("min_year", String.valueOf(apiResourcesModel.getMin_year()));
+        }
+        if (apiResourcesModel.getMax_year() != null) {
+            paramsMap.put("max_year", String.valueOf(apiResourcesModel.getMax_year()));
+        }
+        paramsMap.put("order", apiResourcesModel.getOrder());
+        paramsMap.put("order_by", apiResourcesModel.getOrder_by());
+        if (apiResourcesModel.getNavigation() != null) {
+            paramsMap.put("navigation", String.valueOf(apiResourcesModel.getNavigation()));
+        }
+        if (apiResourcesModel.getPage_size() > 0) {
+            paramsMap.put("page_size", String.valueOf(apiResourcesModel.getPage_size()));
+        } else {
+            paramsMap.put("page_size", "10");
+        }
+        paramsMap.put("page", apiResourcesModel.getPage());
+        if (apiResourcesModel.getDynamic_name() != null &&
+                apiResourcesModel.getDynamic_name().length() > 0 &&
+                apiResourcesModel.getDynamic_id() != null &&
+                apiResourcesModel.getDynamic_id().size() > 0) {
+            for (int i = 0; i < apiResourcesModel.getDynamic_id().size(); i++) {
+                paramsMap.put(apiResourcesModel.getDynamic_name() +
+                        "["+String.valueOf(i)+"]",String.valueOf(apiResourcesModel.getDynamic_id().get(i)));
+            }
+        }
+        //浏览记录
+        if (LoginManager.isLogin() && apiResourcesModel.getCity_ids() != null && apiResourcesModel.getCity_ids().size() > 0 &&
+                apiResourcesModel.getCity_ids().get(0) != null) {
+            try {
+                String parameter = "?"+ Request.urlEncode(paramsMap);
+                LoginMvpModel.sendBrowseHistories("field_list",parameter,String.valueOf(apiResourcesModel.getCity_ids().get(0)));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
+                "lists/count",
+                paramsMap,1));
+        call.enqueue(handler);
+    }
+    public static void getPhyRecommendedList(OkHttpClient client,LinhuiAsyncHttpResponseHandler handler,
+                                             ApiResourcesModel apiResourcesModel) {
+        HashMap<String, String> paramsMap = new HashMap<>();
+        if (apiResourcesModel.getLat() > 0) {
+            paramsMap.put("lat", String.valueOf(apiResourcesModel.getLat()));
+        }
+        if (apiResourcesModel.getLng() > 0) {
+            paramsMap.put("lng", String.valueOf(apiResourcesModel.getLng()));
+        }
+        if (apiResourcesModel.getPage_size() > 0) {
+            paramsMap.put("page_size", String.valueOf(apiResourcesModel.getPage_size()));
+        } else {
+            paramsMap.put("page_size", "10");
+        }
+        if (apiResourcesModel.getCity_id() != null && apiResourcesModel.getCity_id().length() > 0) {
+            paramsMap.put("city_id", apiResourcesModel.getCity_id());
+        } else {
+            paramsMap.put("city_id", LoginManager.getTrackcityid());
+        }
+        paramsMap.put("page", apiResourcesModel.getPage());
+        Call call = client.newCall(Request.RequestGet(Config.BASE_API_URL_PHP,
+                "lists/recommended",
+                paramsMap,1));
+        call.enqueue(handler);
+    }
+    public static void enquiry(OkHttpClient client,LinhuiAsyncHttpResponseHandler handler,
+                                             String sid, String name, String mobile) {
+        HashMap<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("sid", sid);
+        paramsMap.put("name", name);
+        paramsMap.put("mobile", mobile);
+        Call call = client.newCall(Request.RequestPost(Config.BASE_API_URL_PHP,
+                "enquiry_information",
+                paramsMap,2));
+        call.enqueue(handler);
+    }
+
 }

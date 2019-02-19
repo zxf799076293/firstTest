@@ -634,9 +634,9 @@ public class OrderConfirmUploadVoucherActivity extends BaseMvpActivity implement
             showProgressDialog();
             //保存按钮的操作功能
             if (remittance_type == IntentTypeOrderInt || remittance_type == IntentTypeGroupOrderInt) {
-                FieldApi.upload_voucher(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), upload_voucherHandler,order_id, addfieldimg_str.get(0));
+                FieldApi.upload_voucher(MyAsyncHttpClient.MyAsyncHttpClient2(), upload_voucherHandler,order_id, addfieldimg_str.get(0));
             } else if (remittance_type == IntentTypeWalletInt) {
-                FieldApi.transactions_upload_voucher(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), upload_voucherHandler,order_id, addfieldimg_str.get(0));
+                FieldApi.transactions_upload_voucher(MyAsyncHttpClient.MyAsyncHttpClient2(), upload_voucherHandler,order_id, addfieldimg_str.get(0));
             }
         }
     }
@@ -684,9 +684,9 @@ public class OrderConfirmUploadVoucherActivity extends BaseMvpActivity implement
                         }
                         //保存按钮的操作功能
                         if (remittance_type == IntentTypeOrderInt || remittance_type == IntentTypeGroupOrderInt) {
-                            FieldApi.upload_voucher(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), upload_voucherHandler,order_id, addfieldimg_str.get(0));
+                            FieldApi.upload_voucher(MyAsyncHttpClient.MyAsyncHttpClient2(), upload_voucherHandler,order_id, addfieldimg_str.get(0));
                         } else if (remittance_type == IntentTypeWalletInt) {
-                            FieldApi.transactions_upload_voucher(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), upload_voucherHandler,order_id, addfieldimg_str.get(0));
+                            FieldApi.transactions_upload_voucher(MyAsyncHttpClient.MyAsyncHttpClient2(), upload_voucherHandler,order_id, addfieldimg_str.get(0));
                         }                    } else if (addfieldimgsize < choose_filepicture_editor.size() && upload == true) {
                         uploadManager.put(choose_filepicture_editor.get(addfieldimgsize), null, uploadtoken,
                                 upCompletionHandler, null);

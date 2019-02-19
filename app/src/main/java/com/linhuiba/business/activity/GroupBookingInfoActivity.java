@@ -937,7 +937,7 @@ public class GroupBookingInfoActivity extends BaseMvpActivity implements Field_M
                 case 0:
                     final View myView = GroupBookingInfoActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
                     mShareDialog = new AlertDialog.Builder(GroupBookingInfoActivity.this).create();
-                    share_linkurl = Config.SHARE_GROUP_INFO_URL + mGroupBookingInfoModel.getGroup_purchase().getId() + "?city_id=" + mCityIdStr;
+                    share_linkurl = Config.Domain_Name + Config.SHARE_GROUP_INFO_URL + mGroupBookingInfoModel.getGroup_purchase().getId() + "?city_id=" + mCityIdStr;
                     sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_GROUP_INFO_URL+ "?city_id=" + mCityIdStr;
                     if(!isFinishing()) {
                         if (mShareDialog!= null && mShareDialog.isShowing()) {
@@ -1105,7 +1105,7 @@ public class GroupBookingInfoActivity extends BaseMvpActivity implements Field_M
         } else {
             View myView = GroupBookingInfoActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
             mShareDialog = new AlertDialog.Builder(GroupBookingInfoActivity.this).create();
-            share_linkurl = Config.SHARE_GROUP_INFO_URL + mGroupBookingInfoModel.getGroup_purchase().getId()
+            share_linkurl = Config.Domain_Name + Config.SHARE_GROUP_INFO_URL + mGroupBookingInfoModel.getGroup_purchase().getId()
                     + "?city_id=" + mCityIdStr;
             sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_GROUP_INFO_URL+ "?city_id=" + mCityIdStr;
             Constants constants = new Constants(GroupBookingInfoActivity.this,
@@ -1890,5 +1890,15 @@ public class GroupBookingInfoActivity extends BaseMvpActivity implements Field_M
             MessageUtils.showToast(getContext(), error.getMessage());
         }
         checkAccess_new(error);
+    }
+
+    @Override
+    public void onEnquirySuccess(String id) {
+
+    }
+
+    @Override
+    public void onEnquiryFailure(boolean superresult, Throwable error) {
+
     }
 }

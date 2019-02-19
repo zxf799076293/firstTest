@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.os.StrictMode;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -71,7 +73,7 @@ public class LinhuiApplication extends BaseApplication {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                UMConfigure.init(getApplicationContext(), UMConfigure.DEVICE_TYPE_PHONE, com.linhuiba.linhuipublic.config.Config.UMENG_MESSAGE_SECRET);
+                UMConfigure.init(getApplicationContext(), com.linhuiba.linhuipublic.config.Config.UMENG_APPKEY,"Umeng", UMConfigure.DEVICE_TYPE_PHONE, com.linhuiba.linhuipublic.config.Config.UMENG_MESSAGE_SECRET);
                 //友盟推送注册
                 mPushAgent = PushAgent.getInstance(getApplicationContext());
                 //注册推送服务，每次调用register方法都会回调该接口 识别设备id发送到后台
@@ -89,7 +91,6 @@ public class LinhuiApplication extends BaseApplication {
 
                     }
                 });
-                mPushAgent.setDisplayNotificationNumber(0);
                 UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler() {
                     @Override
                     public void launchApp(Context context, UMessage msg) {
@@ -108,6 +109,8 @@ public class LinhuiApplication extends BaseApplication {
                             //app没有启动状态
                             if (data != null && data.length() > 0) {
                                 LoginManager.getInstance().setUMmsg_start_app(data);
+                            } else {
+                                LoginManager.getInstance().setUMmsg_start_app("null_url");
                             }
                             Intent intent = new Intent(getApplicationContext(), SplashScreenActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -119,7 +122,7 @@ public class LinhuiApplication extends BaseApplication {
                     @Override
                     public Notification getNotification(Context context, UMessage msg) {
                         switch (msg.builder_id) {
-                            case 0:
+                            case 1:
                                 Notification.Builder builder = new Notification.Builder(context);
                                 RemoteViews myNotificationView = new RemoteViews(context.getPackageName(),
                                         R.layout.umeng_meaage_title_layout);
@@ -140,10 +143,11 @@ public class LinhuiApplication extends BaseApplication {
                         }
                     }
                 };
-                //打开动作
-                mPushAgent.setNotificationClickHandler(notificationClickHandler);
                 //自定义通知栏样式
                 mPushAgent.setMessageHandler(umengMessageHandler);
+                //打开动作
+                mPushAgent.setNotificationClickHandler(notificationClickHandler);
+                mPushAgent.setDisplayNotificationNumber(0);
             }
         }).start();
         //保存配置文件
@@ -163,6 +167,12 @@ public class LinhuiApplication extends BaseApplication {
                 }
             }
         }).start();
+        // android 7.0系统解决拍照的问题
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            builder.detectFileUriExposure();
+        }
     }
 
     private boolean isAppAlive() {

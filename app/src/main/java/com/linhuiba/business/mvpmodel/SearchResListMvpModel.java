@@ -30,5 +30,14 @@ public class SearchResListMvpModel {
     public static void getFastList(ApiAdvResourcesModel apiResourcesModel,
                                          LinhuiAsyncHttpResponseHandler handler) {
         FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient(), handler,apiResourcesModel);    }
+    public static void getPhyReslistCount(ApiResourcesModel apiResourcesModel,
+                                     LinhuiAsyncHttpResponseHandler handler) {
+        FieldApi.getPhyReslistCount(MyAsyncHttpClient.MyAsyncHttpClient(), handler,apiResourcesModel);
+    }
+    public static void getPhyRecommendedList(ApiResourcesModel apiResourcesModel,
+                                          LinhuiAsyncHttpResponseHandler handler) {
+        FieldApi.getPhyRecommendedList(MyAsyncHttpClient.MyAsyncHttpClient(), handler,apiResourcesModel);
+    }
+
 
 }

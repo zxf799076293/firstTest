@@ -8,11 +8,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.baselib.app.activity.BaseActivity;
+import com.baselib.app.util.MessageUtils;
 import com.linhuiba.business.BuildConfig;
 import com.linhuiba.business.R;
 import com.linhuiba.business.basemvp.BaseMvpActivity;
@@ -45,6 +47,8 @@ public class SettingActivity extends BaseMvpActivity {
     TextView mabout_version_textview;
     private Dialog mShareDialog;
     private Bitmap mShareBitmap;
+    // 数组长度代表点击次数
+    private long[] mHits = new long[7];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +78,8 @@ public class SettingActivity extends BaseMvpActivity {
             R.id.setting_push_msg_layout,
             R.id.helpcenter_layout,
             R.id.aboutus_layout,
-            R.id.setting_share_linhuiba_rl
+            R.id.setting_share_linhuiba_rl,
+            R.id.setting_config_url_ll
     })
     public void setting_click(View view) {
         switch (view.getId()) {
@@ -89,8 +94,6 @@ public class SettingActivity extends BaseMvpActivity {
                 LoginManager.getInstance().setNoticescount(0);
                 LoginManager.getInstance().setNoticesid(0);
                 LoginManager.getInstance().setNoticesTitle("");
-                //退出登录时清空保存的 评价提醒时间
-                LoginManager.getInstance().setHome_review_show_time(0);
                 //友盟退出登录统计
                 MobclickAgent.onProfileSignOff();
 
@@ -127,6 +130,17 @@ public class SettingActivity extends BaseMvpActivity {
                 break;
             case R.id.setting_share_linhuiba_rl:
                 shareLinhuiba();
+                break;
+            case R.id.setting_config_url_ll:
+                //每次点击时，数组向前移动一位
+                System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+                //为数组最后一位赋值
+                mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+                if (mHits[0] >= (mHits[mHits.length - 1] - 1500)) {
+                    mHits = new long[7];//重新初始化数组
+                    Intent setttingUrlIntent = new Intent(this,SettingEnvironmentConfigActivity.class);
+                    startActivity(setttingUrlIntent);
+                }
                 break;
             default:
                 break;

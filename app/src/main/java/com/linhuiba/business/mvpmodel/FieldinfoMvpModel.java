@@ -66,7 +66,12 @@ public class FieldinfoMvpModel {
     }
     public static void getSellResInfo(String id,
                                   LinhuiAsyncHttpResponseHandler Handler) {
-        FieldApi.getSellResInfo(MyAsyncHttpClient.MyAsyncHttpClient6(),Handler,id);
+        FieldApi.getSellResInfo(MyAsyncHttpClient.MyAsyncHttpClient7(),Handler,id);
     }
+    public static void enquiry(String sid, String name, String mobile,
+                                      LinhuiAsyncHttpResponseHandler Handler) {
+        FieldApi.enquiry(MyAsyncHttpClient.MyAsyncHttpClient6(),Handler,sid, name, mobile);
+    }
+
 
 }

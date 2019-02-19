@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.linhuiba.business.R;
+import com.linhuiba.business.activity.ActivityCasePicSaveActivity;
 import com.linhuiba.linhuifield.connector.Constants;
 import com.linhuiba.linhuifield.connector.OnMultiClickListener;
 import com.linhuiba.linhuifield.fieldview.OvalImageView;
@@ -22,12 +23,14 @@ import java.util.List;
 
 public class ActivityCasePicSaveAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     private Context mContext;
+    private ActivityCasePicSaveActivity mActivity;
     private int width;
     private int height;
     private static HashMap<Integer, Boolean> isChecked = new HashMap<Integer, Boolean>();
-    public ActivityCasePicSaveAdapter(int layoutResId, @Nullable List<String> data, Context context, Activity activity) {
+    public ActivityCasePicSaveAdapter(int layoutResId, @Nullable List<String> data, Context context, ActivityCasePicSaveActivity activity) {
         super(layoutResId, data);
         this.mContext = context;
+        this.mActivity = activity;
         DisplayMetrics metric = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metric);
         width = metric.widthPixels;     // 屏幕宽度（像素）
@@ -68,6 +71,7 @@ public class ActivityCasePicSaveAdapter extends BaseQuickAdapter<String, BaseVie
                     isChecked.put(helper.getLayoutPosition(),true);
                 }
                 notifyItemChanged(helper.getLayoutPosition());
+                mActivity.setSelectAllStatus();
             }
         });
     }

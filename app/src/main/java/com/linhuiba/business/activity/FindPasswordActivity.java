@@ -183,13 +183,10 @@ public class FindPasswordActivity extends BaseMvpActivity {
                     LoginManager.getInstance().setNoticescount(0);
                     LoginManager.getInstance().setNoticesid(0);
                     LoginManager.getInstance().setNoticesTitle("");
-                    //退出登录时清空保存的 评价提醒时间
-                    LoginManager.getInstance().setHome_review_show_time(0);
                     //友盟退出登录统计
                     MobclickAgent.onProfileSignOff();
                     Intent cartsIntent = new Intent(FindPasswordActivity.this, MainTabActivity.class);
                     cartsIntent.putExtra("new_tmpintent", "goto_myself");
-                    cartsIntent.putExtra("goto_login", 1);
                     cartsIntent.putExtra("goto_login", 1);
                     startActivity(cartsIntent);
                 } else {

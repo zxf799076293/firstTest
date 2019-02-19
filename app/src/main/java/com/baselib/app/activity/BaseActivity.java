@@ -109,8 +109,6 @@ public class BaseActivity extends ActionBarActivity {
 //            this.registerReceiver(receiver, filter);
 
         }
-        //判断是debug还是release
-        Config.DEBUG = BuildConfig.DEBUG?true:false;
     }
 
     @Override

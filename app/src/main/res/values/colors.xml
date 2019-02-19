@@ -188,6 +188,7 @@
     <color name="map_area_line_fill_bg">#33FFB800</color>
     <color name="module_searchlist_area_screen_list_bg">#f8f8f9</color>
     <color name="module_searchlist_item_coupons_tv_color">#E95A53</color>
+    <color name="module_searchlist_screen_btn_no_data_color">#AFD3FC</color>
     <!-- 切换效果-->
     <color name="switch_layout_bg_color">#484848</color>
     <!-- fieldinfo -->

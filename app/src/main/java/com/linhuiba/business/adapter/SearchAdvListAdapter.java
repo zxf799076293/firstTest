@@ -16,6 +16,7 @@ import com.linhuiba.business.R;
 import com.linhuiba.business.activity.SearchListActivity;
 import com.linhuiba.business.activity.SelfSupportShopActivity;
 import com.linhuiba.business.connector.Constants;
+import com.linhuiba.business.connector.OnMultiClickListener;
 import com.linhuiba.business.fragment.SelfSupportShopFragment;
 import com.linhuiba.business.model.SearchSellResModel;
 import com.linhuiba.linhuipublic.config.Config;
@@ -110,7 +111,7 @@ public class SearchAdvListAdapter extends BaseAdapter {
             holder.mSearchListDemandLL = (LinearLayout) convertView.findViewById(R.id.searchlist_item_demand_ll);
             holder.mSearchlistPriceLL = (LinearLayout) convertView.findViewById(R.id.searchlist_item_price_ll);
             holder.mSearchListOrderSizeTV = (TextView) convertView.findViewById(R.id.search_list_item_order_quantity);
-
+            holder.mSearchListPanoramaImgv = (ImageView) convertView.findViewById(R.id.searchlist_panorama_imgv);
             //将设置好的布局保存到缓存中，并将其设置在Tag里，以便后面方便取出Tag
             convertView.setTag(holder);
         } else {
@@ -256,6 +257,13 @@ public class SearchAdvListAdapter extends BaseAdapter {
                             holder.msearchlist_item_activity_data_title.setTextColor(mactivity.getResources().getColor(R.color.title_bar_txtcolor));
                             holder.msearchlist_item_activity_data_middle_text.setTextColor(mactivity.getResources().getColor(R.color.default_redbg));
                         }
+                    }
+                    //2019/1/17 全景显示
+                    if (mFeildList.get(position).getPanorama() != null &&
+                            mFeildList.get(position).getPanorama().length() > 0) {
+                        holder.mSearchListPanoramaImgv.setVisibility(View.VISIBLE);
+                    } else {
+                        holder.mSearchListPanoramaImgv.setVisibility(View.GONE);
                     }
                 } else {
                     holder.mSearchAdvListTimeLL.setVisibility(View.VISIBLE);
@@ -407,11 +415,11 @@ public class SearchAdvListAdapter extends BaseAdapter {
                     holder.mSearchListCommonPriceLL.setVisibility(View.VISIBLE);
                 }
                 if (mFeildList.get(position).getRes_type_id() == 3) {
-                    holder.mSearchLabelIV.setVisibility(View.VISIBLE);
+                    holder.mSearchLabelIV.setVisibility(View.GONE);
                     Picasso.with(mContext).load(R.drawable.ic_xianshi_three_two).into(holder.mSearchLabelIV);
                 } else {
                     if (mFeildList.get(position).getIs_hot() == 1) {
-                        holder.mSearchLabelIV.setVisibility(View.VISIBLE);
+                        holder.mSearchLabelIV.setVisibility(View.GONE);
                         Picasso.with(mContext).load(R.drawable.ic_remai_three_two).into(holder.mSearchLabelIV);
                     } else {
                         holder.mSearchLabelIV.setVisibility(View.GONE);
@@ -461,5 +469,6 @@ public class SearchAdvListAdapter extends BaseAdapter {
         public LinearLayout mSearchListDemandLL;
         public LinearLayout mSearchlistPriceLL;
         public TextView mSearchListOrderSizeTV;
+        public ImageView mSearchListPanoramaImgv;
     }
 }

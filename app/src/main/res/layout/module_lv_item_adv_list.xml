@@ -69,12 +69,24 @@
             android:id="@+id/searchlist_label_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/searchlist_item_img"
+            android:layout_alignLeft="@+id/searchlist_item_img"
             android:layout_alignTop="@+id/searchlist_item_img"
             android:gravity="center"
             android:src="@drawable/ic_xianshi_three_two"
             android:layout_marginTop="@dimen/txt_padding"
             android:layout_marginRight="@dimen/txt_padding"
+            android:visibility="gone">
+        </ImageView>
+        <ImageView
+            android:id="@+id/searchlist_panorama_imgv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/searchlist_item_img"
+            android:layout_alignTop="@+id/searchlist_item_img"
+            android:gravity="center"
+            android:src="@drawable/ic_quanjing_one_thr_ten"
+            android:layout_marginTop="@dimen/home_area_drop_marginleft"
+            android:layout_marginRight="@dimen/home_area_drop_marginleft"
             android:visibility="gone">
         </ImageView>
 

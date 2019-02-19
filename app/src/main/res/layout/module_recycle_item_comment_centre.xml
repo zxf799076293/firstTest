@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,6 +52,8 @@
                             android:textColor="@color/default_bluebg"
                             android:gravity="center"
                             android:textSize="@dimen/fieldinfo_chair_textsize"
+                            android:background="@drawable/module_bg_comment_centre_btn"
+                            android:id="@+id/comment_item_uncommented_tv"
                             android:text="@string/fieldinfo_second_level_review_str"/>
                         <TextView
                             android:layout_width="wrap_content"

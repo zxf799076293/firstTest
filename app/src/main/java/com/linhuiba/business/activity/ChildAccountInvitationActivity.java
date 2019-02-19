@@ -85,7 +85,7 @@ public class ChildAccountInvitationActivity extends BaseMvpActivity {
             @Override
             public void onClick(View v) {
                 showProgressDialog();
-                UserApi.child_accounts_share_link(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),share_linkHandler);
+                UserApi.child_accounts_share_link(MyAsyncHttpClient.MyAsyncHttpClient2(),share_linkHandler);
             }
         });
     }

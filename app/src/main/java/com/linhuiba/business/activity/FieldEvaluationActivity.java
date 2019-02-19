@@ -49,6 +49,10 @@ public class FieldEvaluationActivity extends BaseMvpActivity implements SwipeRef
     LoadMoreListView ReviewListloadmoreList;
     @InjectView(R.id.lay_no_review)
     RelativeLayout mlay_no_review;
+    @InjectView(R.id.no_data_tv)
+    TextView mNoDataTV;
+    @InjectView(R.id.no_data_img)
+    ImageView mNoDataImage;
     private FieldEvaluationAdapter mFieldEvaluationAdapter;
     private ArrayList<ReviewModel> mReviewList = new ArrayList<ReviewModel>();
     private String fieldid;
@@ -74,6 +78,8 @@ public class FieldEvaluationActivity extends BaseMvpActivity implements SwipeRef
         mPresenter.attachView(this);
         TitleBarUtils.showBackImg(this, true);
         TitleBarUtils.setTitleText(this, getResources().getString(R.string.review_title_first_str));
+        mNoDataTV.setText(getResources().getString(R.string.module_comment_field_no_data_msg));
+        mNoDataImage.setImageResource(R.drawable.ic_invoice_title_no);
         Intent fieldinfoIntent = getIntent();
         fieldid = fieldinfoIntent.getStringExtra("fieldid");
         if (fieldinfoIntent.getExtras().get("is_sell_res") != null &&
@@ -229,7 +235,7 @@ public class FieldEvaluationActivity extends BaseMvpActivity implements SwipeRef
             JSONObject jsonObject = JSONObject.parseObject(detailScore);
             if (jsonObject.get("detailScore") != null &&
                     jsonObject.get("detailScore").toString().length() > 0) {
-                CommentScoreModel commentScoreModel = com.alibaba.fastjson.JSONObject.parseObject(detailScore,CommentScoreModel.class);
+                CommentScoreModel commentScoreModel = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.get("detailScore").toString(),CommentScoreModel.class);
                 mReviewList.get(0).setDetailScore(commentScoreModel);
             } else {
                 mReviewList.get(0).setDetailScore(new CommentScoreModel());
@@ -258,9 +264,7 @@ public class FieldEvaluationActivity extends BaseMvpActivity implements SwipeRef
         if(ReviewListswipList.isShown()){
             ReviewListswipList.setRefreshing(false);
         }
-        if (!superresult) {
-            MessageUtils.showToast(getContext(), error.getMessage());
-        }
+        mlay_no_review.setVisibility(View.VISIBLE);
         if (error != null && error instanceof Response.LinhuiResponseException) {
             if (((Response.LinhuiResponseException) error).code == -99) {
                 LoginManager.getInstance().clearLoginInfo();

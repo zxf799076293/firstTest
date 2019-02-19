@@ -15,7 +15,7 @@ public class HomeMvpModel {
                                      String pagesize,
                                      LinhuiAsyncHttpResponseHandler
                                              Handler) {
-        FieldApi.getarticleslist(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), Handler,
+        FieldApi.getarticleslist(MyAsyncHttpClient.MyAsyncHttpClient2(), Handler,
                 article_type_id,pagesize);
     }
     //服务商列表
@@ -28,7 +28,7 @@ public class HomeMvpModel {
     }
     //获取公告列表
     public static void getNotices(LinhuiAsyncHttpResponseHandler handler) {
-        UserApi.get_notices(MyAsyncHttpClient.MyAsyncHttpClient_version_three(),handler);
+        UserApi.get_notices(MyAsyncHttpClient.MyAsyncHttpClient3(),handler);
     }
     //获取首页banner
     public static void getBanners(String city_id, LinhuiAsyncHttpResponseHandler handler) {
@@ -55,7 +55,7 @@ public class HomeMvpModel {
     }
     public static void getHomeLinhuiData(LinhuiAsyncHttpResponseHandler
                                                       Handler) {
-        FieldApi.getLinhuiData(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), Handler);
+        FieldApi.getLinhuiData(MyAsyncHttpClient.MyAsyncHttpClient2(), Handler);
     }
     public static void getAppHoverWindow(LinhuiAsyncHttpResponseHandler
                                                  Handler) {

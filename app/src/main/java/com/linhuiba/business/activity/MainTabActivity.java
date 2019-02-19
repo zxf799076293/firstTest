@@ -23,6 +23,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baselib.app.util.MessageUtils;
 import com.linhuiba.business.R;
 import com.linhuiba.business.basemvp.BaseMvpActivity;
+import com.linhuiba.business.config.Config;
 import com.linhuiba.business.connector.Constants;
 import com.linhuiba.business.connector.FieldApi;
 import com.linhuiba.business.connector.MyAsyncHttpClient;
@@ -80,6 +81,8 @@ public class MainTabActivity extends BaseMvpActivity implements TabHost.OnTabCha
     public QBadgeView[] MainBV = new QBadgeView[4];
     public boolean isClickTab;
     public int mNotchHeight;
+    public boolean isHomeRefresh;//切换环境后刷新
+    public boolean isSearchListRefresh;//切换环境后刷新
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,6 +221,9 @@ public class MainTabActivity extends BaseMvpActivity implements TabHost.OnTabCha
         LinearLayout tab_all_ll = (LinearLayout) view.findViewById(R.id.main_tab_item_all_ll);
         MainBV[index] = new QBadgeView(MainTabActivity.this.getContext());
         MainBV[index].bindTarget(tab_all_ll).setBadgeGravity(Gravity.END|Gravity.TOP).setBadgeTextSize(10,true).setGravityOffset(26,0,true).setBadgeBackgroundColor(getResources().getColor(R.color.price_tv_color)).setShowShadow(false);
+        if (index == 3) {
+            MainBV[index].setBadgeTextSize(5,true).setGravityOffset(32,0,true);
+        }
         return view;
     }
     @Override
@@ -244,6 +250,7 @@ public class MainTabActivity extends BaseMvpActivity implements TabHost.OnTabCha
         long time = System.currentTimeMillis();
         if (time - backtime < 2000) {
             if (!isFinishing()) {
+                Config.setDefaultConfigUrl();
                 super.onBackPressed();
             }
         }
@@ -342,10 +349,17 @@ public class MainTabActivity extends BaseMvpActivity implements TabHost.OnTabCha
                             Intent loginIntent = new Intent(this,LoginActivity.class);
                             loginIntent.putExtra("is_modity_pw",1);
                             startActivity(loginIntent);
+                        } else if (fieldintent.getExtras().get("goto_login") != null &&
+                                fieldintent.getExtras().getInt("goto_login") == 2) {//配置环境登录
+                            isHomeRefresh = true;
+                            isSearchListRefresh = true;
+                            Intent loginIntent = new Intent(this,LoginActivity.class);
+                            startActivity(loginIntent);
                         }
                     } else if (fieldintnetstr.equals("app_exit")) {
                         LoginManager.getInstance().setFieldexit(1);
                         finish();
+                        Config.setDefaultConfigUrl();
                     }
                 }
             }

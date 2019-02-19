@@ -25,22 +25,7 @@ public class MyAsyncHttpClient {
     public static OkHttpClient MyAsyncHttpClient6() {
         return getClient();
     }
-    public static OkHttpClient MyAsyncHttpClient_version_two() {
-        return getClient();
-    }
-    public static OkHttpClient MyAsyncHttpClient_version_three() {
-        return getClient();
-    }
-    public static OkHttpClient MyAsyncHttpClient_version_four() {
-        return getClient();
-    }
-    public static OkHttpClient MyAsyncHttpClient_version_five() {
-        return getClient();
-    }
-    public static OkHttpClient MyAsyncHttpClientVersionSix() {
-        return getClient();
-    }
-    public static OkHttpClient MyAsyncHttpClientVersionSeven() {
+    public static OkHttpClient MyAsyncHttpClient7() {
         return getClient();
     }
     public static OkHttpClient MyAsyncHttpClient8() {

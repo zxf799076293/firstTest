@@ -279,6 +279,7 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
     private Dialog mSearchShareDialog;
     private IWXAPI mIWXAPI;
     private Bitmap mShareBitmap;
+    private boolean isGetCategory;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -297,7 +298,7 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
                     break;
                 case 0:
                     View myView = BaiduMapActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
-                    String shareurl = com.linhuiba.business.config.Config.SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
+                    String shareurl = com.linhuiba.business.config.Config.Domain_Name + com.linhuiba.business.config.Config.SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
                     String sharewxMinShareLinkUrl = com.linhuiba.business.config.Config.WX_MINI_SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
                     String ShareIconStr = "";//分享列表图片的url
                     Constants constants = new Constants(BaiduMapActivity.this,
@@ -3146,6 +3147,7 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
         return false;
     }
     public void getAttributesList() {
+        isGetCategory = true;
         ArrayList<Integer> Category = new ArrayList<>();
         for (int i = 0; i < mCategoryAdapterList.size(); i++) {
             if (ResourcesScreeningItemAdapter.getresourcescreeninglist().get("category" + mCategoryAdapterList.get(i).get("category").toString()) != null &&
@@ -3258,7 +3260,9 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
         pepple_map.put("itemtype",1);
         data_new.add(pepple_map);
         //修改后的adapter
-        ResourcesScreeningItemAdapter.clear_resourcescreeninglist();
+        if (!isGetCategory) {
+            ResourcesScreeningItemAdapter.clear_resourcescreeninglist();
+        }
         //是否选中的标志
         for (int j = 0; j < data_new.size(); j++ ) {
             if (data_new.get(j).get("datalist") != null && ((ArrayList<HashMap<Object,Object>>)data_new.get(j).get("datalist")).size() > 0) {
@@ -3269,7 +3273,13 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
                             (Integer)data_new_temp.get(i).get("itemtype") == 2)) {
 
                     } else {
-                        ResourcesScreeningItemAdapter.getresourcescreeninglist().put(data_new_temp.get(i).get("type").toString() + data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString(), false);
+                        if (!isGetCategory || ResourcesScreeningItemAdapter.getresourcescreeninglist().get(data_new_temp.get(i).get("type").toString() + data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString()) == null) {
+                            ResourcesScreeningItemAdapter.getresourcescreeninglist().put(data_new_temp.get(i).get("type").toString() + data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString(), false);
+                        } else {
+                            if (data_new_temp.get(i).get("type").toString().indexOf("attributes") != -1) {
+                                ResourcesScreeningItemAdapter.getresourcescreeninglist().put(data_new_temp.get(i).get("type").toString() + data_new_temp.get(i).get(data_new_temp.get(i).get("type").toString()).toString(), false);
+                            }
+                        }
                         if (data_new_temp.get(i).get("type").toString().equals("field_labels")) {
                             if (apiResourcesModel.getLabel_ids() != null) {
                                 if (apiResourcesModel.getLabel_ids().size() > 0) {
@@ -3361,6 +3371,9 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
                     }
                 }
             }
+        }
+        if (isGetCategory) {
+            isGetCategory = false;
         }
         resourcesScreeningNewAdapter = new ResourcesScreeningNewAdapter(BaiduMapActivity.this,BaiduMapActivity.this,data_new,0);
         mresourcesscreening_stickygridview_new.setAdapter(resourcesScreeningNewAdapter);
@@ -3609,7 +3622,7 @@ public class BaiduMapActivity extends BaseMvpActivity implements BaiduMap.OnMapL
             mHandler.sendEmptyMessage(0);
         } else {
             View myView = BaiduMapActivity.this.getLayoutInflater().inflate(R.layout.activity_fieldinfo_popupwindow, null);
-            String shareurl = com.linhuiba.business.config.Config.SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
+            String shareurl = com.linhuiba.business.config.Config.Domain_Name + com.linhuiba.business.config.Config.SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
             String sharewxMinShareLinkUrl = com.linhuiba.business.config.Config.WX_MINI_SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1&is_app=1";
             String ShareIconStr = "";//分享列表图片的url
             Constants constants = new Constants(BaiduMapActivity.this,

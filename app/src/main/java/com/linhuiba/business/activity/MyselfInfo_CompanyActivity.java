@@ -199,7 +199,7 @@ public class MyselfInfo_CompanyActivity extends BaseMvpActivity implements Field
     }
     private void initdata() {
         showProgressDialog();
-        UserApi.getcompany_info(MyAsyncHttpClient.MyAsyncHttpClient_version_three(),CompanyinfoHandler);
+        UserApi.getcompany_info(MyAsyncHttpClient.MyAsyncHttpClient3(),CompanyinfoHandler);
     }
     private void initview() {
         Constants.delete_picture_file();
@@ -860,7 +860,7 @@ public class MyselfInfo_CompanyActivity extends BaseMvpActivity implements Field
             showProgressDialog();
             //保存按钮的操作功能
             saveCompanyinfo();
-            UserApi.saveCompany_info(MyAsyncHttpClient.MyAsyncHttpClient_version_three(),Company_infoHandler,companyModel);
+            UserApi.saveCompany_info(MyAsyncHttpClient.MyAsyncHttpClient3(),Company_infoHandler,companyModel);
         }
     }
     private LinhuiAsyncHttpResponseHandler Up_license_tokenHandler = new LinhuiAsyncHttpResponseHandler() {
@@ -939,7 +939,7 @@ public class MyselfInfo_CompanyActivity extends BaseMvpActivity implements Field
                 try {
                     license_upload_img_url = (Config.qiniu_domain_creats + jsonObject.getString("key").toString());
                     saveCompanyinfo();
-                    UserApi.saveCompany_info(MyAsyncHttpClient.MyAsyncHttpClient_version_three(),Company_infoHandler,companyModel);
+                    UserApi.saveCompany_info(MyAsyncHttpClient.MyAsyncHttpClient3(),Company_infoHandler,companyModel);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -966,7 +966,7 @@ public class MyselfInfo_CompanyActivity extends BaseMvpActivity implements Field
                                     license_upCompletionHandler, null);
                         } else {
                             saveCompanyinfo();
-                            UserApi.saveCompany_info(MyAsyncHttpClient.MyAsyncHttpClient_version_three(),Company_infoHandler,companyModel);                        }
+                            UserApi.saveCompany_info(MyAsyncHttpClient.MyAsyncHttpClient3(),Company_infoHandler,companyModel);                        }
 
                         //保存按钮的操作功能
                     } else if (food_safety_license_addfieldimgsize < upload_food_safety_license_filepicture_editor.size() && food_safety_license_upload == true) {
@@ -1016,7 +1016,7 @@ public class MyselfInfo_CompanyActivity extends BaseMvpActivity implements Field
                             Field_FieldApi.getuptoken_certs(MyAsyncHttpClient.MyAsyncHttpClient(), Up_license_tokenHandler);
                         } else {
                             saveCompanyinfo();
-                            UserApi.saveCompany_info(MyAsyncHttpClient.MyAsyncHttpClient_version_three(),Company_infoHandler,companyModel);
+                            UserApi.saveCompany_info(MyAsyncHttpClient.MyAsyncHttpClient3(),Company_infoHandler,companyModel);
                         }
                     } else if (addfieldimgsize < choose_filepicture_editor.size() && upload == true) {
                         uploadManager.put(choose_filepicture_editor.get(addfieldimgsize), null, uploadtoken,

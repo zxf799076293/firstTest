@@ -65,7 +65,8 @@
     <application
         android:name=".LinhuiApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_new"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="${APP_NAME}"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -217,7 +218,8 @@
             android:theme="@style/Theme" />
         <activity
             android:name=".activity.BaiduMapActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".activity.InviteActivity"
             android:screenOrientation="portrait">
@@ -569,6 +571,10 @@
         </activity>
         <activity
             android:name=".activity.ActivityCasePicSaveActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.SettingEnvironmentConfigActivity"
             android:screenOrientation="portrait">
         </activity>
 

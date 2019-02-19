@@ -58,6 +58,7 @@ import com.linhuiba.business.connector.FieldApi;
 import com.linhuiba.business.connector.MyAsyncHttpClient;
 import com.linhuiba.business.fieldmodel.InvoiceInfomationModel;
 import com.linhuiba.business.fragment.SelfSupportShopFragment;
+import com.linhuiba.business.model.ApiResourcesModel;
 import com.linhuiba.business.network.LinhuiAsyncHttpResponseHandler;
 import com.linhuiba.business.network.Response;
 import com.linhuiba.business.util.TitleBarUtils;
@@ -184,7 +185,7 @@ public class AboutUsActivity extends BaseMvpActivity {
         mabout_WebView.getSettings().setAppCacheEnabled(false);//是否使用缓存
         mabout_WebView.getSettings().setDomStorageEnabled(true);//DOM Storage
         mabout_WebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-//        mabout_WebView.setWebViewClient(new WebViewClient() {
+        //        mabout_WebView.setWebViewClient(new WebViewClient() {
 //            public boolean shouldOverrideUrlLoading(WebView view, String url) {
 //                view.loadUrl(url);
 //                return true;
@@ -225,7 +226,8 @@ public class AboutUsActivity extends BaseMvpActivity {
 
             @Override
             public void handler(String data, CallBackFunction function) {
-                if (intentTypeInt == Config.ENQUIRY_WEB_INT) {
+                if (intentTypeInt == Config.ENQUIRY_WEB_INT ||
+                        intentTypeInt == Config.ENQUIRY_SUCCESS_WEB_INT) {
                     Intent maintabintent = new Intent(AboutUsActivity.this, MainTabActivity.class);
                     maintabintent.putExtra("new_tmpintent", "goto_homepage");
                     startActivity(maintabintent);
@@ -386,7 +388,7 @@ public class AboutUsActivity extends BaseMvpActivity {
                 } else {
                     if (json.get("id") != null &&
                             json.get("id").toString().length() > 0) {
-                        mShareUrl = Config.SHARE_THEMATIC_URL + json.get("id").toString();
+                        mShareUrl = Config.Domain_Name + Config.SHARE_THEMATIC_URL + json.get("id").toString();
                     }
                 }
                 showShareDialog(mShareUrl,
@@ -400,7 +402,7 @@ public class AboutUsActivity extends BaseMvpActivity {
             @Override
             public void handler(String data, CallBackFunction function) {
                 JSONObject json = JSONObject.parseObject(data.toString());
-                showShareDialog(Config.SHARE_FACILITATOR_URL + json.get("id").toString(),
+                showShareDialog(Config.Domain_Name + Config.SHARE_FACILITATOR_URL + json.get("id").toString(),
                         json.get("pic_url").toString(),
                         json.get("title").toString(),
                         json.get("desc").toString());
@@ -411,7 +413,7 @@ public class AboutUsActivity extends BaseMvpActivity {
             @Override
             public void handler(String data, CallBackFunction function) {
                 JSONObject json = JSONObject.parseObject(data.toString());
-                showShareDialog(Config.SHARE_FACILITATOR_CASE_URL + json.get("case_id").toString() +
+                showShareDialog(Config.Domain_Name + Config.SHARE_FACILITATOR_CASE_URL + json.get("case_id").toString() +
                                 "?city_id=" + cityId + mServiceUrl,
                         json.get("pic_url").toString(),
                         json.get("title").toString(),
@@ -422,7 +424,7 @@ public class AboutUsActivity extends BaseMvpActivity {
         mabout_WebView.registerHandler("shareDemand", new BridgeHandler() {
             @Override
             public void handler(String data, CallBackFunction function) {
-                showShareDialog(Config.SHARE_DEMAND_URL,
+                showShareDialog(Config.Domain_Name + Config.SHARE_DEMAND_URL,
                         "demand",
                         getResources().getString(R.string.about_demand_share_title_str),
                         getResources().getString(R.string.about_demand_share_desc_str));
@@ -538,19 +540,19 @@ public class AboutUsActivity extends BaseMvpActivity {
                         } else {
                             MessageUtils.showToast(getResources().getString(R.string.field_tupesize_errortoast));
                             if (orderItemId != null && orderItemId.length() > 0) {
-                                mabout_WebView.loadUrl(Config.ORDER_ITEM_INFO_URL + orderItemId);
+                                mabout_WebView.loadUrl(Config.Domain_Name + Config.ORDER_ITEM_INFO_URL + orderItemId);
                             }
                         }
                     } else {
                         MessageUtils.showToast(getResources().getString(R.string.field_tupesize_errortoast));
                         if (orderItemId != null && orderItemId.length() > 0) {
-                            mabout_WebView.loadUrl(Config.ORDER_ITEM_INFO_URL + orderItemId);
+                            mabout_WebView.loadUrl(Config.Domain_Name + Config.ORDER_ITEM_INFO_URL + orderItemId);
                         }
                     }
                 } else {
                     MessageUtils.showToast(getResources().getString(R.string.field_tupesize_errortoast));
                     if (orderItemId != null && orderItemId.length() > 0) {
-                        mabout_WebView.loadUrl(Config.ORDER_ITEM_INFO_URL + orderItemId);
+                        mabout_WebView.loadUrl(Config.Domain_Name + Config.ORDER_ITEM_INFO_URL + orderItemId);
                     }
                 }
 
@@ -837,8 +839,8 @@ public class AboutUsActivity extends BaseMvpActivity {
                                 TitleBarUtils.setTitleText(AboutUsActivity.this,mShareTitleStr);
                                 mShareDescriptionStr = jsonObject.get("description").toString();
                                 sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_THEME_URL + mThemeId;
-                                // FIXME: 2019/1/10 专题详情分享链接修改
-                                shareWXLinkurl = Config.WX_SHARE_THEME_URL + mThemeId+ "?is_app=1&BackKey=1";
+                                //专题详情分享链接修改
+                                shareWXLinkurl = Config.Domain_Name + Config.WX_SHARE_THEME_URL + mThemeId+ "?is_app=1&BackKey=1";
                                 TitleBarUtils.showActionImg(AboutUsActivity.this, true, getResources().getDrawable(R.drawable.popup_ic_share), new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -847,10 +849,7 @@ public class AboutUsActivity extends BaseMvpActivity {
                                 });
                             }
                         } else if (jsonObject.get("type").toString().equals("2")) {
-                            if (jsonObject.get("link") != null &&
-                                    jsonObject.get("link").toString().length() > 0) {
-                                Constants.pushUrlJumpActivity(jsonObject.get("link").toString(),AboutUsActivity.this,false);
-                            }
+                            Constants.pushUrlJumpActivity(jsonObject.get("link").toString(),AboutUsActivity.this,false);
                         } else if (jsonObject.get("type").toString().equals("3")) {
                             if (jsonObject.get("physical_resource_id") != null &&
                                     jsonObject.get("physical_resource_id").toString().length() > 0) {
@@ -861,6 +860,18 @@ public class AboutUsActivity extends BaseMvpActivity {
                         }
                     }
                 }
+            }
+        });
+        //上传图片事件
+        mabout_WebView.registerHandler("upload", new BridgeHandler() {
+            @Override
+            public void handler(String data, CallBackFunction function) {
+                AndPermission.with(AboutUsActivity.this)
+                        .requestCode(Constants.PermissionRequestCode)
+                        .permission(Manifest.permission.CAMERA,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .callback(listener)
+                        .start();
             }
         });
         Intent intent = getIntent();
@@ -882,20 +893,20 @@ public class AboutUsActivity extends BaseMvpActivity {
                     }
                 });
                 // 2017/11/8 上线修改
-                mabout_WebView.loadUrl(Config.ABOUT_US_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.ABOUT_US_URL);
             } else if (intent.getExtras().getInt("type") == Config.HELP_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.myselfinfo_helpcenter_txt));
-                mabout_WebView.loadUrl(Config.HELP_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.HELP_URL);
             } else if (intent.getExtras().getInt("type") == Config.BUSINESS_COMPANY_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.myselfinfo_business_info));
                 if (intent.getExtras().get("urlstr") != null && intent.getExtras().getString("urlstr").length() > 0) {
                     //2017/11/8 上线修改
-                    mabout_WebView.loadUrl(Config.BUSSINESS_COMPANY_URL + intent.getExtras().getString("urlstr"));
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.BUSSINESS_COMPANY_URL + intent.getExtras().getString("urlstr"));
                 }
             } else if (intent.getExtras().getInt("type") == Config.POINT_INFO_WEB_INT) {
                 if (LoginManager.isLogin()) {
                     TitleBarUtils.setTitleText(this, getResources().getString(R.string.myselfinfo_business_points_info));
-                    mabout_WebView.loadUrl(Config.INVITE_WEB_URL);
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.INVITE_WEB_URL);
 
                 } else {
                     LoginManager.getInstance().clearLoginInfo();
@@ -904,25 +915,25 @@ public class AboutUsActivity extends BaseMvpActivity {
                 }
             } else if (intent.getExtras().getInt("type") == Config.POINT_RULE_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.aboutactivity_integer_sule_text));
-                mabout_WebView.loadUrl(Config.INTEGRA_RULE_WEB_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.INTEGRA_RULE_WEB_URL);
             } else if (intent.getExtras().getInt("type") == Config.GUARD_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.aboutactivity_inform_guard_text));
-                mabout_WebView.loadUrl(Config.INFORM_GUARD_WEB_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.INFORM_GUARD_WEB_URL);
             } else if (intent.getExtras().getInt("type") == Config.RESOURCE_INFO_WEB_INT) {
                 if (intent.getExtras().getInt("resources_type") == 1) {
                     setTransparentStatusBar();
-                    mabout_WebView.loadUrl(Config.FIELD_INFO_URL + intent.getExtras().getInt("resourceid") + "?res_type_id=1");
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.FIELD_INFO_URL + intent.getExtras().getInt("resourceid") + "?res_type_id=1");
                 } else if (intent.getExtras().getInt("resources_type") == 2) {
                     TitleBarUtils.setTitleText(this, getResources().getString(R.string.fieldinfo_advertising_title_text));
-                    mabout_WebView.loadUrl(Config.FIELDINFO_ADV_URL + intent.getExtras().getInt("resourceid") + Config.RESOURCESINFO_END_URL);
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.FIELDINFO_ADV_URL + intent.getExtras().getInt("resourceid") + Config.RESOURCESINFO_END_URL);
                 } else if (intent.getExtras().getInt("resources_type") == 3) {
                     setTransparentStatusBar();
-                    mabout_WebView.loadUrl(Config.FIELD_INFO_URL + intent.getExtras().getInt("resourceid") + "?res_type_id=3");
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.FIELD_INFO_URL + intent.getExtras().getInt("resourceid") + "?res_type_id=3");
                 }
             } else if (intent.getExtras().getInt("type") == Config.REGISTER_AGREEMENT_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.register_agreement_title_text));
                 //2017/11/8 上线修改
-                mabout_WebView.loadUrl(Config.AGREEMENT_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.AGREEMENT_URL);
 
             } else if (intent.getExtras().getInt("type") == Config.REPORT_WEB_INT) {
                 setTransparentStatusBar();
@@ -933,9 +944,36 @@ public class AboutUsActivity extends BaseMvpActivity {
                     mabout_WebView.addJavascriptInterface(new AboutUsActivity.DemoJavaScriptInterface(AboutUsActivity.this), "app");
                     LoginManager.getInstance().setNoticescount(Integer.MAX_VALUE);
                 }
-            } else if (intent.getExtras().getInt("type") == Config.COMMON_WEB_INT) {
+            } else if (intent.getExtras().getInt("type") == Config.COMMON_WEB_INT ||
+                    intent.getExtras().getInt("type") == Config.PANORAMA_WEB_INT) {
                 if (intent.getExtras().get("web_url") != null && intent.getExtras().getString("web_url").length() > 0) {
                     mabout_WebView.loadUrl(intent.getExtras().getString("web_url"));
+                }
+                if (intent.getExtras().getInt("type") == Config.PANORAMA_WEB_INT) {
+                    TitleBarUtils.setTitleText(this, getResources().getString(R.string.module_fieldinfo_panorama));
+                    mabout_WebView.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public boolean shouldOverrideUrlLoading
+                                (WebView view, String url) {
+                            //判断用户单击的是哪个超连接
+                            if (url.contains("/fields/")) {
+                                String resourceid = Constants.getInfoid_url_jsonobject(url);
+                                Intent fieldinfo = new Intent(AboutUsActivity.this, FieldInfoActivity.class);
+                                fieldinfo.putExtra("fieldId", resourceid);
+                                startActivity(fieldinfo);
+                                //这个超连接,java已经处理了，webview不要处理了
+                                return true;
+                            } else if (url.contains("/activities/")) {
+                                String resourceid = Constants.getInfoid_url_jsonobject(url);
+                                Intent fieldinfo = new Intent(AboutUsActivity.this, FieldInfoActivity.class);
+                                fieldinfo.putExtra("sell_res_id", resourceid);
+                                fieldinfo.putExtra("is_sell_res", true);
+                                startActivity(fieldinfo);
+                                return true;
+                            }
+                            return super.shouldOverrideUrlLoading(view, url);
+                        }
+                    });
                 }
             } else if (intent.getExtras().getInt("type") == Config.INVOICE_INFO_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.invoiceinfomation_titletxt));
@@ -947,11 +985,11 @@ public class AboutUsActivity extends BaseMvpActivity {
                 mTitleImgV.setImageResource(R.drawable.whtie_back);
                 mAboutLineView.setVisibility(View.GONE);
                 if (intent.getExtras().get("id") != null && intent.getExtras().get("id").toString().length() > 0) {
-                    mabout_WebView.loadUrl(Config.INVOICE_INFO_URL + intent.getExtras().get("id").toString());
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.INVOICE_INFO_URL + intent.getExtras().get("id").toString());
                 }
             } else if (intent.getExtras().getInt("type") == Config.WALLET_PLAIN_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.wallet_mywallet_explain_text));
-                mabout_WebView.loadUrl(Config.WALLET_EXPLAIN_WEB_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.WALLET_EXPLAIN_WEB_URL);
             } else if (intent.getExtras().getInt("type") == Config.HOME_NEW_SIGN_INT) {
                 TitleBarUtils.setTitleText(this, intent.getExtras().getString("title"));
                 if (intent.getExtras().get("web_url") != null) {
@@ -960,19 +998,19 @@ public class AboutUsActivity extends BaseMvpActivity {
 //                    mabout_WebView.getSettings().setJavaScriptEnabled(true);
 //                    mabout_WebView.loadDataWithBaseURL("", Config.WEBVIEW_URL_CSS + intent.getExtras().getString("web_html_content"), "text/html", "UTF-8", "");
                     if (intent.getExtras().get("id") != null) {
-                        mabout_WebView.loadUrl(Config.APP_HTML_LOAD_URL+ intent.getExtras().get("id").toString());
+                        mabout_WebView.loadUrl(Config.Domain_Name + Config.APP_HTML_LOAD_URL+ intent.getExtras().get("id").toString());
                     }
                 }
             } else if (intent.getExtras().getInt("type") == Config.NUMBER_OF_PEOPLE_SHOW_DIRECTION_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.addfield_number_of_people_show_direction_text));
-                mabout_WebView.loadUrl(Config.NUMBER_OF_PEOPLE_WEB_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.NUMBER_OF_PEOPLE_WEB_URL);
             } else if (intent.getExtras().getInt("type") == Config.ADD_DEMAND_WEB_INT) {
                 //需求定制
                 if (LoginManager.isLogin()) {
                     isDemand = true;
                     isAddfile = true;
                     setTransparentStatusBar();
-                    mabout_WebView.loadUrl(Config.ADD_DEMAND_WEB_URL);
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.ADD_DEMAND_WEB_URL);
                     AndPermission.with(AboutUsActivity.this)
                             .requestCode(Constants.PermissionRequestCode)
                             .permission(Manifest.permission.CAMERA,
@@ -988,7 +1026,7 @@ public class AboutUsActivity extends BaseMvpActivity {
             } else if (intent.getExtras().getInt("type") == Config.DEMAND_LIST_WEB_INT) {
                 if (LoginManager.isLogin()) {
                     setTransparentStatusBar();
-                    mabout_WebView.loadUrl(Config.MY_DEMAND_URL);
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.MY_DEMAND_URL);
                 } else {
                     LoginManager.getInstance().clearLoginInfo();
                     LoginActivity.BaesActivityreloadLogin(this);
@@ -998,13 +1036,13 @@ public class AboutUsActivity extends BaseMvpActivity {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.about_title_transaction_voucher_str));
                 Map<String, String> extraHeaders = new HashMap<String, String>();
                 extraHeaders.put("authorization", "bearer" + LoginManager.getAccessToken());
-                mabout_WebView.loadUrl(Config.TRANSACTION_VOUCHER_URL + intent.getExtras().get("id") + Config.FIELDINFO_END_URL, extraHeaders);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.TRANSACTION_VOUCHER_URL + intent.getExtras().get("id") + Config.FIELDINFO_END_URL, extraHeaders);
             } else if (intent.getExtras().getInt("type") == Config.ORDER_INFO_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.about_title_order_info_str));
                 Map<String, String> extraHeaders = new HashMap<String, String>();
                 extraHeaders.put("authorization", "bearer" + LoginManager.getAccessToken());
                 //2017/11/8 上线修改
-                mabout_WebView.loadUrl(Config.ORDER_INFO_URL + intent.getExtras().get("id") + Config.FIELDINFO_END_URL, extraHeaders);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.ORDER_INFO_URL + intent.getExtras().get("id") + Config.FIELDINFO_END_URL, extraHeaders);
             } else if (intent.getExtras().getInt("type") == Config.FACILITATOR_INT) {
                 // 优质服务商
                 intentTypeInt = Config.FACILITATOR_INT;
@@ -1023,7 +1061,7 @@ public class AboutUsActivity extends BaseMvpActivity {
                 if (LoginManager.isLogin()) {
                     is_login = 1;
                 }
-                mabout_WebView.loadUrl(Config.FACILITATOR_LIST_URL + "?city_ids=" +
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.FACILITATOR_LIST_URL + "?city_ids=" +
                         cityId + "&is_login=" +
                         String.valueOf(is_login) + mServiceUrl);
 
@@ -1032,36 +1070,36 @@ public class AboutUsActivity extends BaseMvpActivity {
                 intentTypeInt = Config.FACILITATOR_INFO_INT;
                 if (intent.getExtras().get("resource_id") != null && intent.getExtras().get("resource_id").toString().length() > 0) {
                     setTransparentStatusBar();
-                    mabout_WebView.loadUrl(Config.FACILITATOR_INFO_URL +
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.FACILITATOR_INFO_URL +
                             intent.getExtras().get("resource_id").toString() + "?redirect_url=home" );
                 }
             } else if (intent.getExtras().getInt("type") == Config.FACILITATOR_CASE_INFO_INT) {
                 //优质服务商案例详情
                 if (intent.getExtras().get("resource_id") != null && intent.getExtras().get("resource_id").toString().length() > 0) {
                     setTransparentStatusBar();
-                    mabout_WebView.loadUrl(Config.FACILITATOR_CASE_INFO_URL +
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.FACILITATOR_CASE_INFO_URL +
                             intent.getExtras().get("resource_id").toString());
                 }
             } else if (intent.getExtras().getInt("type") == Config.THEMATIC_INT) {
                 //主题展
                 setTransparentStatusBar();
-                mabout_WebView.loadUrl(Config.THEMATIC_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.THEMATIC_URL);
             } else if (intent.getExtras().getInt("type") == Config.THEMATIC_INFO_INT) {
                 //主题展详情
                 if (intent.getExtras().get("resource_id") != null && intent.getExtras().get("resource_id").toString().length() > 0) {
                     setTransparentStatusBar();
-                    mabout_WebView.loadUrl(Config.THEMATIC_INFO_URL +
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.THEMATIC_INFO_URL +
                             intent.getExtras().get("resource_id").toString());
                 }
             } else if (intent.getExtras().getInt("type") == Config.GROUP_EDSC_INT) {
-                mabout_WebView.loadUrl(Config.GROUP_DESC_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.GROUP_DESC_URL);
             } else if (intent.getExtras().getInt("type") == Config.GRADE_INT) {
-                mabout_WebView.loadUrl(Config.UEER_GRADE_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.UEER_GRADE_URL);
             } else if (intent.getExtras().getInt("type") == Config.BIG_ORDER_INFO_INT) {
                 intentTypeInt = intent.getExtras().getInt("type");
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.about_title_order_info_str));
                 if (intent.getExtras().get("id") != null && intent.getExtras().get("id").toString().length() > 0) {
-                    mabout_WebView.loadUrl(Config.BIG_ORDER_INFO_URL + intent.getExtras().get("id").toString());
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.BIG_ORDER_INFO_URL + intent.getExtras().get("id").toString());
                 }
 
             } else if (intent.getExtras().getInt("type") == Config.SMALL_ORDER_INFO_INT) {
@@ -1069,12 +1107,12 @@ public class AboutUsActivity extends BaseMvpActivity {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.about_title_order_item_info_str));
                 if (intent.getExtras().get("id") != null && intent.getExtras().get("id").toString().length() > 0) {
                     orderItemId = intent.getExtras().get("id").toString();
-                    mabout_WebView.loadUrl(Config.ORDER_ITEM_INFO_URL + intent.getExtras().get("id").toString());
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.ORDER_ITEM_INFO_URL + intent.getExtras().get("id").toString());
                 }
             } else if (intent.getExtras().getInt("type") == Config.DEAL_VOUCHER_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.about_voucher_title_tv_str));
                 if (intent.getExtras().get("id") != null && intent.getExtras().get("id").toString().length() > 0) {
-                    mabout_WebView.loadUrl(Config.DEAL_VOUCHER_URL + intent.getExtras().get("id").toString());
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.DEAL_VOUCHER_URL + intent.getExtras().get("id").toString());
                 }
             } else if (intent.getExtras().getInt("type") == Config.SUBMITTED_BIG_ORDER_INFO_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.about_title_order_info_str));
@@ -1083,13 +1121,13 @@ public class AboutUsActivity extends BaseMvpActivity {
                     mGroupOrderInt =intent.getExtras().getInt("group_order");
                 }
                 if (intent.getExtras().get("id") != null && intent.getExtras().get("id").toString().length() > 0) {
-                    mabout_WebView.loadUrl(Config.SUBMITTED_ORDER_INFO_WEB_URL + intent.getExtras().get("id").toString());
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.SUBMITTED_ORDER_INFO_WEB_URL + intent.getExtras().get("id").toString());
                 }
 
             } else if (intent.getExtras().getInt("type") == Config.DEMAND_INFO_WEB_INT) {
                 setTransparentStatusBar();
                 if (intent.getExtras().get("id") != null && intent.getExtras().get("id").toString().length() > 0) {
-                    mabout_WebView.loadUrl(Config.MY_DEMAND_INFO_WEB_URL + intent.getExtras().get("id").toString() + "?is_back=1");
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.MY_DEMAND_INFO_WEB_URL + intent.getExtras().get("id").toString() + "?is_back=1");
                 }
             } else if (intent.getExtras().getInt("type") == Config.ENQUIRY_WEB_INT) {
                 setTransparentStatusBar();
@@ -1097,7 +1135,7 @@ public class AboutUsActivity extends BaseMvpActivity {
                         intent.getExtras().get("id").toString().length() > 0) {
                     intentTypeInt = intent.getExtras().getInt("type");
                     isAddfile = true;
-                    mabout_WebView.loadUrl(Config.ADD_ENQUIRY + intent.getExtras().get("id").toString());
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.ADD_ENQUIRY + intent.getExtras().get("id").toString());
                     AndPermission.with(AboutUsActivity.this)
                             .requestCode(Constants.PermissionRequestCode)
                             .permission(Manifest.permission.CAMERA,
@@ -1111,13 +1149,13 @@ public class AboutUsActivity extends BaseMvpActivity {
             } else if (intent.getExtras().getInt("type") == Config.ENQUIRY_LIST_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.about_enquiry_order_list_str));
                 intentTypeInt = intent.getExtras().getInt("type");
-                mabout_WebView.loadUrl(Config.ENQUIRY_LIST);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.ENQUIRY_LIST);
             } else if (intent.getExtras().getInt("type") == Config.ENQUIRY_INFO_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.about_enquiry_order_info_str));
                 if (intent.getExtras().get("id") != null &&
                         intent.getExtras().get("id").toString().length() > 0) {
                     intentTypeInt = intent.getExtras().getInt("type");
-                    mabout_WebView.loadUrl(Config.ENQUIRY_OINFO + intent.getExtras().get("id").toString());
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.ENQUIRY_OINFO + intent.getExtras().get("id").toString());
                 }
             } else if (intent.getExtras().getInt("type") == Config.RECEIVE_ACCOUNT_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.applyforrelease_payment_account_txt));
@@ -1137,23 +1175,23 @@ public class AboutUsActivity extends BaseMvpActivity {
                         });
 
                 intentTypeInt = intent.getExtras().getInt("type");
-                mabout_WebView.loadUrl(Config.RECEIVE_ACCOUNT_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.RECEIVE_ACCOUNT_URL);
             } else if (intent.getExtras().getInt("type") == Config.APPLY_FOR_RELEASE_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.myselfinfo_applyforrelease_txt));
                 intentTypeInt = intent.getExtras().getInt("type");
-                mabout_WebView.loadUrl(Config.APPLY_FOR_RELEASE_URL + LoginManager.getMobile());
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.APPLY_FOR_RELEASE_URL + LoginManager.getMobile());
             } else if (intent.getExtras().getInt("type") == Config.COMPANY_INFO_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.myselfinfo_enterprise_str));
                 intentTypeInt = intent.getExtras().getInt("type");
-                mabout_WebView.loadUrl(Config.COMPANY_INFO_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.COMPANY_INFO_URL);
             } else if (intent.getExtras().getInt("type") == Config.ADD_ACCOUNT_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.applyforrelease_add_payment_account_txt));
                 intentTypeInt = intent.getExtras().getInt("type");
-                mabout_WebView.loadUrl(Config.ADD_ACCOUNT_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.ADD_ACCOUNT_URL);
             } else if (intent.getExtras().getInt("type") == Config.MODIFY_MOBILE_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.myselfinfo_modifymobile_title_text));
                 intentTypeInt = intent.getExtras().getInt("type");
-                mabout_WebView.loadUrl(Config.MODIFY_MOBILE_URL + LoginManager.getMobile() + "&enterprise_role=" +
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.MODIFY_MOBILE_URL + LoginManager.getMobile() + "&enterprise_role=" +
                 String.valueOf(LoginManager.getEnterprise_role()));
                 isAddfile = true;
                 AndPermission.with(AboutUsActivity.this)
@@ -1165,7 +1203,7 @@ public class AboutUsActivity extends BaseMvpActivity {
             } else if (intent.getExtras().getInt("type") == Config.ENTERPRISE_CERTIFICATE_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.enterprise_certification_title_text));
                 intentTypeInt = intent.getExtras().getInt("type");
-                mabout_WebView.loadUrl(Config.ENTERPRISE_CERTIFICATE_URL + LoginManager.getId());
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.ENTERPRISE_CERTIFICATE_URL + LoginManager.getId());
                 isAddfile = true;
                 AndPermission.with(AboutUsActivity.this)
                         .requestCode(Constants.PermissionRequestCode)
@@ -1178,7 +1216,7 @@ public class AboutUsActivity extends BaseMvpActivity {
                 mabout_title_layout.setVisibility(View.GONE);
                 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE|WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
                 intentTypeInt = intent.getExtras().getInt("type");
-                mabout_WebView.loadUrl(Config.SITE_INTENNTION_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.SITE_INTENNTION_URL);
                 isAddfile = true;//判断是否是上传照片
                 AndPermission.with(AboutUsActivity.this)
                         .requestCode(Constants.PermissionRequestCode)
@@ -1189,24 +1227,42 @@ public class AboutUsActivity extends BaseMvpActivity {
             } else if (intent.getExtras().getInt("type") == Config.COUPON_REGULATION_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.module_coupons_first_register_activity_regulation));
                 //2017/11/8 上线修改
-                mabout_WebView.loadUrl(Config.COUPON_REGULATION_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.COUPON_REGULATION_URL);
             } else if (intent.getExtras().getInt("type") == Config.INTEGRAL_EXCHANGE_COUPON_REGULATION_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.module_coupons_first_register_activity_regulation));
                 //2017/11/8 上线修改
-                mabout_WebView.loadUrl(Config.INTEGRAL_EXCHANGE_COUPON_REGULATION_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.INTEGRAL_EXCHANGE_COUPON_REGULATION_URL);
 
             } else if (intent.getExtras().getInt("type") == Config.NEW_GIFT_BAG_REGULATION_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.module_coupons_first_register_activity_regulation));
                 //2017/11/8 上线修改
-                mabout_WebView.loadUrl(Config.NEW_GIFT_BAG_REGULATION_URL);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.NEW_GIFT_BAG_REGULATION_URL);
             } else if (intent.getExtras().getInt("type") == Config.THEME_WEB_INT) {
                 TitleBarUtils.setTitleText(this, getResources().getString(R.string.module_theme_title));
                 if (intent.getExtras().get("id") != null &&
                         intent.getExtras().get("id").toString().length() > 0) {
                     intentTypeInt = intent.getExtras().getInt("type");
                     mThemeId = intent.getExtras().get("id").toString();
-                    mabout_WebView.loadUrl(Config.THEME_INFO_URL + intent.getExtras().get("id").toString());
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.THEME_INFO_URL + intent.getExtras().get("id").toString());
                 }
+            } else if (intent.getExtras().getInt("type") == Config.ENQUIRY_SUCCESS_WEB_INT) {
+                setTransparentStatusBar();
+                if (intent.getExtras().get("id") != null &&
+                        intent.getExtras().get("id").toString().length() > 0) {
+                    intentTypeInt = intent.getExtras().getInt("type");
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.ENQUIRY_SUCCESS_URL + intent.getExtras().get("id").toString());
+                } else {
+                    finish();
+                    MessageUtils.showToast(getResources().getString(R.string.review_error_text));
+                }
+            } else if (intent.getExtras().getInt("type") == Config.DEMAND_HALL_WEB_INT) {
+                setTransparentStatusBar();
+                String parameter = "";
+                if (intent.getExtras().get("parameter") != null &&
+                        intent.getExtras().get("parameter").toString().length() > 0) {
+                    parameter = intent.getExtras().get("parameter").toString();
+                }
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.DEMAND_HALL_URL + parameter);
             }
         } else {
             MessageUtils.showToast(getResources().getString(R.string.field_tupesize_errortoast));
@@ -1442,7 +1498,7 @@ public class AboutUsActivity extends BaseMvpActivity {
         public void onSuccess(int statusCode, okhttp3.internal.http2.Header[] headers, Response response, Object data) {
             hideProgressDialog();
             if (intentTypeInt == Config.ENQUIRY_LIST_WEB_INT) {
-                mabout_WebView.loadUrl(Config.ENQUIRY_LIST);
+                mabout_WebView.loadUrl(Config.Domain_Name + Config.ENQUIRY_LIST);
             } else {
                 Intent  enquiryIntent = new Intent();
                 AboutUsActivity.this.setResult(Config.ENQUIRY_LIST_WEB_INT,enquiryIntent);
@@ -1724,14 +1780,14 @@ public class AboutUsActivity extends BaseMvpActivity {
                 int is_login = 0;
                 if (LoginManager.isLogin()) {
                     is_login = 1;
-                    mabout_WebView.loadUrl(Config.FACILITATOR_LIST_URL + "?city_id=" +
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.FACILITATOR_LIST_URL + "?city_id=" +
                             cityId + "&is_login=" +
                             String.valueOf(is_login) + mServiceUrl);
                 }
                 break;
             case Config.SMALL_ORDER_INFO_INT:
                 if (orderItemId != null && orderItemId.length() > 0) {
-                    mabout_WebView.loadUrl(Config.ORDER_ITEM_INFO_URL + orderItemId);
+                    mabout_WebView.loadUrl(Config.Domain_Name + Config.ORDER_ITEM_INFO_URL + orderItemId);
                 }
                 break;
         }
@@ -1741,7 +1797,7 @@ public class AboutUsActivity extends BaseMvpActivity {
             startActivity(enquiryIntent);
             finish();
         } else if (resultCode == Config.ADD_ACCOUNT_INT) {
-            mabout_WebView.loadUrl(Config.RECEIVE_ACCOUNT_URL);
+            mabout_WebView.loadUrl(Config.Domain_Name + Config.RECEIVE_ACCOUNT_URL);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

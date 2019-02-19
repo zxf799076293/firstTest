@@ -126,7 +126,7 @@ public class TrackActivity extends BaseMvpActivity implements Field_AddFieldChoo
         MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(latLng, 12);//设置缩放比例
         mBaiduMap.setMapStatus(u);
         showProgressDialog();
-        FieldApi.gettracklistitems(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), GettracklistitemHandler, cityid);
+        FieldApi.gettracklistitems(MyAsyncHttpClient.MyAsyncHttpClient2(), GettracklistitemHandler, cityid);
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {

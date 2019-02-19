@@ -80,7 +80,7 @@ public class WalletRechargeParticularsActivity extends BaseMvpActivity implement
         loading = true;
         datapagesize = 1;
         buttom_show = false;
-        UserApi.gettransactions(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),TransactionsHandler,adapter_type,datapagesize);
+        UserApi.gettransactions(MyAsyncHttpClient.MyAsyncHttpClient2(),TransactionsHandler,adapter_type,datapagesize);
     }
     @OnClick({
             R.id.lay_no_charge_data
@@ -99,7 +99,7 @@ public class WalletRechargeParticularsActivity extends BaseMvpActivity implement
     public void loadMore() {
         if (loading) {
             datapagesize = datapagesize + 1;
-            UserApi.gettransactions(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),TransactionsMoreHandler,adapter_type,datapagesize);
+            UserApi.gettransactions(MyAsyncHttpClient.MyAsyncHttpClient2(),TransactionsMoreHandler,adapter_type,datapagesize);
         } else {
             mparticulars_loadmorelistview.onLoadComplete();
         }
@@ -200,7 +200,7 @@ public class WalletRechargeParticularsActivity extends BaseMvpActivity implement
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         showProgressDialog();
-                        UserApi.cancel_transactions(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),CancelTransactuionsHandler,delete_item_id,
+                        UserApi.cancel_transactions(MyAsyncHttpClient.MyAsyncHttpClient2(),CancelTransactuionsHandler,delete_item_id,
                                 WalletRechargeParticularsActivity.this);
                     }
                 },

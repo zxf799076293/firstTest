@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_linearlayout_bg">
+    android:background="@color/app_linearlayout_bg"
+    android:id="@+id/setting_config_url_ll">
     <include
         layout="@layout/linhui_business_title_bar"
         android:layout_width="match_parent"

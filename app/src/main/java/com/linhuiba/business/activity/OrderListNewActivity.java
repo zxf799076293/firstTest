@@ -8,16 +8,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,7 +24,6 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.baselib.app.activity.BaseActivity;
 import com.baselib.app.util.MessageUtils;
 import com.linhuiba.business.R;
 import com.linhuiba.business.adapter.OrderExpandableListAdapter;
@@ -75,7 +73,6 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
     private LoadMoreExpandablelistView[] mOrderExpandableList = new LoadMoreExpandablelistView[6];
     private OrderExpandableListAdapter[] mOrderExpandableListAdapter = new OrderExpandableListAdapter[6];
     private RelativeLayout[] mLay_no_order = new RelativeLayout[6];
-    private TextView[] mTxt_no_order = new TextView[6];
     private int[] orderlistpagesize = new int[6];
 
     private List<Map<String, Object>>[] mData = new ArrayList[6];
@@ -85,7 +82,7 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
     private PopupWindow pw;
     private int deleteitem;
     private int mTabTextViewList[] = {R.string.all_order_txt, R.string.myselfinfo_pay, R.string.myselfinfo_check,
-            R.string.myselfinfo_waiting, R.string.myselfinfo_refused,
+            R.string.myselfinfo_waiting, R.string.order_cancel_toast,
             R.string.myselfinfo_review};
     private Call mOrderAllListCall;
     private Call mOrderPayListCall;
@@ -161,7 +158,7 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
                 mOrderPayListCall.cancel();
             }
             if (currIndex == 2 || currIndex == 3 || currIndex == 4 || currIndex == 5) {
-                FieldApi.getpurchased_resourceslist(mOrderPayListCall, MyAsyncHttpClient.MyAsyncHttpClient2(), getOrderListHandler,
+                FieldApi.getpurchased_resourceslist(mOrderPayListCall, MyAsyncHttpClient.MyAsyncHttpClient3(), getOrderListHandler,
                         status, String.valueOf(orderlistpagesize[currIndex]), "10");
 
             } else if (currIndex == 0 || currIndex == 1) {
@@ -208,7 +205,10 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
             mswipList[i].setOnRefreshListener(this);
             mOrderExpandableList[i].setLoadMoreListen(this);
             mLay_no_order[i] = (RelativeLayout) mListViews.get(i).findViewById(R.id.lay_no_order);
-            mTxt_no_order[i] = (TextView) mListViews.get(i).findViewById(R.id.textView2);
+            TextView noTV = (TextView) mListViews.get(i).findViewById(R.id.no_data_tv);
+            ImageView noImgv = (ImageView) mListViews.get(i).findViewById(R.id.no_data_img);
+            noTV.setText(getResources().getString(R.string.order_nodata_toast));
+            noImgv.setImageResource(R.drawable.ic_invoice_title_no);
             mLay_no_order[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -270,7 +270,7 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
         orderlistpagesize[currIndex] = 1;
         mOrderExpandableList[currIndex].set_refresh();
         if (currIndex == 2 || currIndex == 3 || currIndex == 4 || currIndex == 5) {
-            FieldApi.getpurchased_resourceslist(mOrderPayListCall, MyAsyncHttpClient.MyAsyncHttpClient2(), getOrderListHandler,
+            FieldApi.getpurchased_resourceslist(mOrderPayListCall, MyAsyncHttpClient.MyAsyncHttpClient3(), getOrderListHandler,
                     status, String.valueOf(orderlistpagesize[currIndex]), "10");
 
         } else if (currIndex == 0 || currIndex == 1) {
@@ -316,7 +316,7 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
                 mOrderPayListCall.cancel();
             }
             if (currIndex == 2 || currIndex == 3 || currIndex == 4 || currIndex == 5) {
-                FieldApi.getpurchased_resourceslist(mOrderPayListCall, MyAsyncHttpClient.MyAsyncHttpClient2(), getOrderListHandler,
+                FieldApi.getpurchased_resourceslist(mOrderPayListCall, MyAsyncHttpClient.MyAsyncHttpClient3(), getOrderListHandler,
                         status, String.valueOf(orderlistpagesize[currIndex]), "10");
 
             } else if (currIndex == 0 || currIndex == 1) {
@@ -375,7 +375,7 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
                 mOrderPayListCall.cancel();
             }
             if (currIndex == 2 || currIndex == 3 || currIndex == 4 || currIndex == 5) {
-                FieldApi.getpurchased_resourceslist(mOrderPayListCall, MyAsyncHttpClient.MyAsyncHttpClient2(), getMoreOrderListHandler,
+                FieldApi.getpurchased_resourceslist(mOrderPayListCall, MyAsyncHttpClient.MyAsyncHttpClient3(), getMoreOrderListHandler,
                         status, String.valueOf(orderlistpagesize[currIndex]), "10");
 
             } else if (currIndex == 0 || currIndex == 1) {
@@ -487,6 +487,10 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
                                 if (orderjsonobject.get("remind_time") != null && orderjsonobject.get("remind_time").toString().length() > 0) {
                                     groupmap.put("remind_time", orderjsonobject.getString("remind_time") + "000");
                                 }
+                                if (orderjsonobject.get("alter_notice") != null && orderjsonobject.get("alter_notice").toString().length() > 0) {
+                                    groupmap.put("alter_notice", orderjsonobject.getString("alter_notice"));//付款是否要弹窗提醒超时
+                                }
+
                                 mData[currIndex].add(groupmap);
                                 OrderChildList[currIndex].add(orderlist_tmp);
                             }
@@ -795,6 +799,9 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
                                     }
                                     if (orderjsonobject.get("remind_time") != null && orderjsonobject.get("remind_time").toString().length() > 0) {
                                         groupmap.put("remind_time", orderjsonobject.getString("remind_time") + "000");
+                                    }
+                                    if (orderjsonobject.get("alter_notice") != null && orderjsonobject.get("alter_notice").toString().length() > 0) {
+                                        groupmap.put("alter_notice", orderjsonobject.getString("alter_notice"));//付款是否要弹窗提醒超时
                                     }
                                 }
                                 mData[currIndex].add(groupmap);
@@ -1201,6 +1208,57 @@ public class OrderListNewActivity extends BaseMvpActivity implements SwipeRefres
             com.linhuiba.linhuifield.connector.Constants.hideUploadPictureLine(this, mShowFailureDialog);
             mShowFailureDialog.show();
         }
+    }
+    public void showPayOvertimeDialog(final String order_id, final String order_num, final String order_price) {
+        if ((mShowFailureDialog == null || !mShowFailureDialog.isShowing())) {
+            View.OnClickListener listener = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    switch (view.getId()) {
+                        case R.id.app_defaylt_cancel_tv:
+                            mShowFailureDialog.dismiss();
+                            break;
+                        case R.id.app_defaylt_confirm_tv:
+                            Intent choosepayway_intent = new Intent(OrderListNewActivity.this,OrderConfirmChoosePayWayActivity.class);
+                            choosepayway_intent.putExtra("payment_option",1);
+                            choosepayway_intent.putExtra("order_id",order_id);
+                            choosepayway_intent.putExtra("order_num",order_num);
+                            choosepayway_intent.putExtra("order_price",order_price);
+                            startActivity(choosepayway_intent);
+                            mShowFailureDialog.dismiss();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            };
+            CustomDialog.Builder builder = new CustomDialog.Builder(this);
+            mShowFailureDialog = builder
+                    .cancelTouchout(false)
+                    .view(R.layout.activity_fieldinfo_refund_price_popuwindow)
+                    .addViewOnclick(R.id.app_defaylt_cancel_tv, listener)
+                    .addViewOnclick(R.id.app_defaylt_confirm_tv, listener)
+                    .setText(R.id.app_defaylt_title_tv,
+                            getResources().getString(R.string.module_order_pay_overtime_remind_title))
+                    .setText(R.id.app_defaylt_content_tv,
+                            getResources().getString(R.string.module_order_pay_overtime_remind_content))
+                    .setText(R.id.app_defaylt_confirm_tv,
+                            getResources().getString(R.string.module_order_pay_overtime_remind_keep_apy))
+                    .showView(R.id.app_defaylt_dialog_ll,View.VISIBLE)
+                    .showView(R.id.app_defaylt_dialog_remind_ll, View.VISIBLE)
+                    .build();
+            com.linhuiba.linhuifield.connector.Constants.hideUploadPictureLine(this, mShowFailureDialog);
+            mShowFailureDialog.show();
+        }
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == 1) {
+            currIndex = 0;
+            setordertypeview(currIndex);
+            fPager.setCurrentItem(currIndex);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

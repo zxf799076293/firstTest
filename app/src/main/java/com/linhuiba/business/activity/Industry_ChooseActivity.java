@@ -82,7 +82,7 @@ public class Industry_ChooseActivity extends BaseMvpActivity {
     }
     private void initdata() {
         showProgressDialog();
-        UserApi.getindustries(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), IndustriesHandler);
+        UserApi.getindustries(MyAsyncHttpClient.MyAsyncHttpClient2(), IndustriesHandler);
     }
     private LinhuiAsyncHttpResponseHandler IndustriesHandler = new LinhuiAsyncHttpResponseHandler(IndustriesModel.class,true) {
         @Override

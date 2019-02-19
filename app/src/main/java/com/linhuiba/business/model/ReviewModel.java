@@ -4,13 +4,14 @@ import com.linhuiba.linhuifield.fieldmodel.FieldAddfieldSellResDimensionsModel;
 import com.linhuiba.linhuifield.fieldmodel.Field_AddResourceCreateItemModel;
 import com.linhuiba.linhuifield.fieldmvpview.FieldAddFieldContactMvpViewl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by Administrator on 2016/6/3.
  */
-public class ReviewModel {
+public class ReviewModel implements Serializable {
     private String field_order_item_id;
     private String score;
     private String content;
@@ -32,7 +33,10 @@ public class ReviewModel {
     private int reviewed;
     private String execute_time;
     private Field_AddResourceCreateItemModel physical_resource_first_img;
-
+    private ArrayList<Field_AddResourceCreateItemModel> promotion_purposes;
+    private ArrayList<Field_AddResourceCreateItemModel> spread_ways;
+    private Integer score_of_visitorsflowrate;
+    private int type;
     public String getField_order_item_id() {
         return field_order_item_id;
     }
@@ -191,5 +195,37 @@ public class ReviewModel {
 
     public void setPhysical_resource_first_img(Field_AddResourceCreateItemModel physical_resource_first_img) {
         this.physical_resource_first_img = physical_resource_first_img;
+    }
+
+    public ArrayList<Field_AddResourceCreateItemModel> getPromotion_purposes() {
+        return promotion_purposes;
+    }
+
+    public void setPromotion_purposes(ArrayList<Field_AddResourceCreateItemModel> promotion_purposes) {
+        this.promotion_purposes = promotion_purposes;
+    }
+
+    public ArrayList<Field_AddResourceCreateItemModel> getSpread_ways() {
+        return spread_ways;
+    }
+
+    public void setSpread_ways(ArrayList<Field_AddResourceCreateItemModel> spread_ways) {
+        this.spread_ways = spread_ways;
+    }
+
+    public Integer getScore_of_visitorsflowrate() {
+        return score_of_visitorsflowrate;
+    }
+
+    public void setScore_of_visitorsflowrate(Integer score_of_visitorsflowrate) {
+        this.score_of_visitorsflowrate = score_of_visitorsflowrate;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

@@ -329,6 +329,14 @@ public class OrderExpandableListAdapter extends BaseExpandableListAdapter {
                             if (mChildData.get(groupPosition).get(childPosition).getStatus().length()>0) {
                                 if (mChildData.get(groupPosition).get(childPosition).getStatus().toString().equals("canceled")) {
                                     holder.morderlist_item_cancel_img.setVisibility(View.VISIBLE);
+                                    holder.morderlist_item_cancel_img.setImageResource(R.drawable.ic_refuse_two_four_one);
+                                    if (mChildData.get(groupPosition).get(childPosition).getStatus_name().equals(
+                                            context.getResources().getString(R.string.order_cancel_toast))) {
+                                        holder.morderlist_item_cancel_img.setImageResource(R.drawable.ic_yiquxiao);
+                                    } else if (mChildData.get(groupPosition).get(childPosition).getStatus_name().equals(
+                                            context.getResources().getString(R.string.module_order_canceled_status_pay_overtime))) {
+                                        holder.morderlist_item_cancel_img.setImageResource(R.drawable.ic_fukuanchaoshi);
+                                    }
                                 } else {
                                     holder.morderlist_item_cancel_img.setVisibility(View.GONE);
                                 }
@@ -345,7 +353,9 @@ public class OrderExpandableListAdapter extends BaseExpandableListAdapter {
                                         holder.morder_status.setText(mactivity.getResources().getString(R.string.myselfinfo_pay));
                                     }
                                 } else if (mChildData.get(groupPosition).get(childPosition).getStatus().toString().equals("canceled")) {
-                                    holder.morder_status.setText(mactivity.getResources().getString(R.string.myselfinfo_refused));
+                                    if (mChildData.get(groupPosition).get(childPosition).getStatus_name() != null) {
+                                        holder.morder_status.setText(mChildData.get(groupPosition).get(childPosition).getStatus_name());
+                                    }
                                 } else if (mChildData.get(groupPosition).get(childPosition).getStatus().toString().equals("paid")) {
                                     holder.morder_status.setText(mactivity.getResources().getString(R.string.myselfinfo_check));
                                 } else if (mChildData.get(groupPosition).get(childPosition).getStatus().toString().equals("approved")) {
@@ -370,10 +380,8 @@ public class OrderExpandableListAdapter extends BaseExpandableListAdapter {
                                                         context.getResources().getString(R.string.module_order_list_refuse_first) +
                                                 mChildData.get(groupPosition).get(childPosition).getObjection().trim() +
                                                 context.getResources().getString(R.string.module_order_list_refuse_second));
-                                    } else {
-                                        holder.mrefused_textview.setText(mactivity.getResources().getString(R.string.order_refuse_ordertxtnull));
+                                        holder.mrefused_linearlayout.setVisibility(View.VISIBLE);
                                     }
-                                    holder.mrefused_linearlayout.setVisibility(View.VISIBLE);
                                 }
 
                                 if (mChildData.get(groupPosition).get(childPosition).getStatus().toString().equals("finished")) {
@@ -537,12 +545,20 @@ public class OrderExpandableListAdapter extends BaseExpandableListAdapter {
                                                     @Override
                                                     public void onClick(View v) {
                                                         if (groupPosition < mData.size()) {//友盟错误日志修改
-                                                            Intent choosepayway_intent = new Intent(mactivity,OrderConfirmChoosePayWayActivity.class);
-                                                            choosepayway_intent.putExtra("payment_option",1);
-                                                            choosepayway_intent.putExtra("order_id",mData.get(groupPosition).get("order_id").toString());
-                                                            choosepayway_intent.putExtra("order_num",mData.get(groupPosition).get("order_num").toString());
-                                                            choosepayway_intent.putExtra("order_price",mData.get(groupPosition).get("actual_fee").toString());
-                                                            mactivity.startActivity(choosepayway_intent);
+                                                            if (mData.get(groupPosition).get("alter_notice") != null &&
+                                                                    mData.get(groupPosition).get("alter_notice").toString().length() > 0 &&
+                                                                    Integer.parseInt(mData.get(groupPosition).get("alter_notice").toString()) == 1) {
+                                                                mactivity.showPayOvertimeDialog(mData.get(groupPosition).get("order_id").toString(),
+                                                                        mData.get(groupPosition).get("order_num").toString(),
+                                                                        mData.get(groupPosition).get("actual_fee").toString());
+                                                            } else {
+                                                                Intent choosepayway_intent = new Intent(mactivity,OrderConfirmChoosePayWayActivity.class);
+                                                                choosepayway_intent.putExtra("payment_option",1);
+                                                                choosepayway_intent.putExtra("order_id",mData.get(groupPosition).get("order_id").toString());
+                                                                choosepayway_intent.putExtra("order_num",mData.get(groupPosition).get("order_num").toString());
+                                                                choosepayway_intent.putExtra("order_price",mData.get(groupPosition).get("actual_fee").toString());
+                                                                mactivity.startActivity(choosepayway_intent);
+                                                            }
                                                         }
                                                     }
                                                 });

@@ -271,7 +271,7 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
                             apiResourcesModel.setPage(String.valueOf(fieldlistpagesize));
                             apiResourcesModel.setPageSize("10");
                             showProgressDialog();
-                            FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), getPublicFieldListHandler, apiResourcesModel);
+                            FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient3(), getPublicFieldListHandler, apiResourcesModel);
                             sendBrowseHistories();
                         } else {
                             getintentcity_code = LoginManager.getInstance().getTrackcityid();
@@ -295,7 +295,7 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
                             apiResourcesModel.setPage(String.valueOf(fieldlistpagesize));
                             apiResourcesModel.setPageSize("10");
                             showProgressDialog();
-                            FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), getPublicFieldListHandler, apiResourcesModel);
+                            FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient3(), getPublicFieldListHandler, apiResourcesModel);
                             sendBrowseHistories();
                         }
                     } else if (homeintent.getExtras().getInt("is_home_page") == HomePageTypeActivity) {
@@ -732,7 +732,7 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
         if (medit_search.getText().toString().length() > 0) {
             apiResourcesModel.setKeywords(medit_search.getText().toString());
         }
-        FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), getPublicFieldListHandler,apiResourcesModel);
+        FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient3(), getPublicFieldListHandler,apiResourcesModel);
         sendBrowseHistories();
     }
     private void loadmoresearchfielddata() {
@@ -741,7 +741,7 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
                 fieldlistpagesize = fieldlistpagesize + 1;
                 apiResourcesModel.setPage(String.valueOf(fieldlistpagesize));
                 apiResourcesModel.setPageSize("10");
-                FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), getMoreOrderListHandler,apiResourcesModel);
+                FieldApi.getAdvReslist(MyAsyncHttpClient.MyAsyncHttpClient3(), getMoreOrderListHandler,apiResourcesModel);
                 sendBrowseHistories();
             } else {
                 SearchListloadmoreList.onLoadComplete();
@@ -946,7 +946,7 @@ public class SearchAdvListFragment extends BaseMvpFragment implements SwipeRefre
                     if (good_type == HomePageTypeAdvertising) {
                         shareurl = Config.Domain_Name + "/advs/index?"+ getshareurl() + "&BackKey=1";
                     } else {
-                        shareurl = Config.SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1";
+                        shareurl = Config.Domain_Name + Config.SHARE_FIELDS_LIST_URL+ getshareurl() + "&BackKey=1";
                         sharewxMinShareLinkUrl = Config.WX_MINI_SHARE_FIELDS_LIST_URL+ getshareurl();
                     }
                     if (mSearchShareDialog!= null && mSearchShareDialog.isShowing()) {

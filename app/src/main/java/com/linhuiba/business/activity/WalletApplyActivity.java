@@ -275,10 +275,10 @@ public class WalletApplyActivity extends BaseMvpActivity {
                             }
                             showPopupWindow();
                             if (operation_type == ApplyWalletFunctionInt) {
-                                UserApi.dredgewallets(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),DredgeWalletsHandler,
+                                UserApi.dredgewallets(MyAsyncHttpClient.MyAsyncHttpClient2(),DredgeWalletsHandler,
                                         strSetPassword,strConfirmPassword,LoginManager.getMobile(),captcha_str);
                             } else if (operation_type == WalletPasswordResetFunctionInt) {
-                                UserApi.modifywallets_pw(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),DredgeWalletsHandler,
+                                UserApi.modifywallets_pw(MyAsyncHttpClient.MyAsyncHttpClient2(),DredgeWalletsHandler,
                                         strSetPassword,strConfirmPassword,LoginManager.getMobile(),captcha_str);
                             }
                         } else {

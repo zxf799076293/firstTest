@@ -10,7 +10,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/app_backbtn_marginleft">
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -18,7 +19,6 @@
                 android:checked="false"
                 android:visibility="visible"
                 android:paddingRight="@dimen/app_backbtn_marginleft"
-                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
                 style="@style/MyInvoiceCheckBox" />
             <LinearLayout
                 android:layout_width="match_parent"

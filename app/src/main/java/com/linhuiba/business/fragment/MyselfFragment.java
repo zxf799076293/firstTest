@@ -13,6 +13,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ import com.linhuiba.business.CalendarClass.ScheduleCalendarActivity;
 import com.linhuiba.business.R;
 import com.linhuiba.business.activity.AboutUsActivity;
 import com.linhuiba.business.activity.ApplyForInvoiceActivity;
+import com.linhuiba.business.activity.CommentCentreActivity;
 import com.linhuiba.business.activity.CouponReceiveCentreActivity;
 import com.linhuiba.business.activity.EnterpriseCertificationActivity;
 import com.linhuiba.business.activity.EnterpriseManagementActivity;
@@ -82,6 +84,7 @@ import com.yanzhenjie.permission.PermissionListener;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.LogManager;
 
 import javax.net.ssl.ManagerFactoryParameters;
 
@@ -141,6 +144,10 @@ public class MyselfFragment extends BaseMvpFragment implements MyDampViewScrollv
     RelativeLayout mReviewRL;
     @InjectView(R.id.myself_fragment_navbar_ll)
     LinearLayout mNavbarLL;
+    @InjectView(R.id.myself_my_coupons_new_imgv)
+    ImageView mCouponsNewImgv;
+    @InjectView(R.id.myself_coupon_centre_new_imgv)
+    ImageView mCouponCentreNewImgv;
     private View mMainContent;
     private int myselfdrestart = -1;
     private Badge_infoModel badge_infoModel;
@@ -248,6 +255,9 @@ public class MyselfFragment extends BaseMvpFragment implements MyDampViewScrollv
         } else {
             mmyselfinfo_notices_layout.setVisibility(View.GONE);
         }
+        // FIXME: 2019/1/16 上新显示
+        Constants.showCouponNew(1,mCouponsNewImgv);
+        Constants.showCouponNew(2,mCouponCentreNewImgv);
     }
 
     @Override
@@ -287,11 +297,15 @@ public class MyselfFragment extends BaseMvpFragment implements MyDampViewScrollv
             } else {
                 mFragmentMyselfGradeImgV.setVisibility(View.GONE);
             }
-            if (LoginManager.getEnterprise_authorize_status() == 1){
+            if (LoginManager.getEnterprise_authorize_status() == 1) {
                 if (LoginManager.getEnterprise_name() != null && LoginManager.getEnterprise_name().length() > 0) {
                     mmyname.setText(LoginManager.getEnterprise_name());
                 } else {
-                    mmyname.setText(LoginManager.getCompany_name());
+                    if (LoginManager.getCompany_name() != null && LoginManager.getCompany_name().length() > 0) {
+                        mmyname.setText(LoginManager.getCompany_name());
+                    } else {
+                        mmyname.setText(LoginManager.getMobile());
+                    }
                 }
             } else {
                 if (LoginManager.getCompany_name() != null && LoginManager.getCompany_name().length() > 0) {
@@ -524,13 +538,8 @@ public class MyselfFragment extends BaseMvpFragment implements MyDampViewScrollv
                 break;
             case R.id.order_review_relativelayout:
                 if (LoginManager.isLogin()) {
-                    Intent orderreviewintent = new Intent(MyselfFragment.this.getActivity(), OrderListNewActivity.class);
-                    Bundle bundle_ordertype4 = new Bundle();
-                    bundle_ordertype4.putInt("order_type", 5);
-                    orderreviewintent.putExtras(bundle_ordertype4);
-                    orderreviewintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivityForResult(orderreviewintent, 5);
-
+                    Intent comtentCentreIntent = new Intent(MyselfFragment.this.getActivity(),CommentCentreActivity.class);
+                    startActivity(comtentCentreIntent);
                 } else {
                     Intent myselfinfo_intent = new Intent(MyselfFragment.this.getActivity(), LoginActivity.class);
                     startActivityForResult(myselfinfo_intent, LoginIntent);
@@ -641,6 +650,8 @@ public class MyselfFragment extends BaseMvpFragment implements MyDampViewScrollv
                 //2018/12/12 test coupon centre
                 Intent couponsCentreIntent = new Intent(MyselfFragment.this.getActivity(), CouponReceiveCentreActivity.class);
                 startActivity(couponsCentreIntent);
+                // FIXME: 2019/1/16 设置上新
+                Constants.setCouponNewShow(2,mCouponCentreNewImgv);
                 break;
             case R.id.myself_customization_ll:
                 if (LoginManager.isLogin()) {
@@ -657,6 +668,8 @@ public class MyselfFragment extends BaseMvpFragment implements MyDampViewScrollv
                     if (Constants.isFastClick()) {
                         Intent couponsIntent = new Intent(MyselfFragment.this.getActivity(), MyCouponsActivity.class);
                         startActivity(couponsIntent);
+                        // FIXME: 2019/1/16 设置上新
+                        Constants.setCouponNewShow(1,mCouponsNewImgv);
                     }
                 } else {
                     Intent demand_intent = new Intent(MyselfFragment.this.getActivity(), LoginActivity.class);
@@ -934,13 +947,17 @@ public class MyselfFragment extends BaseMvpFragment implements MyDampViewScrollv
             }
             //保存钱包是否开通状态
             LoginManager.getInstance().setWallet_stauts(badge_infoModel.getWallet_stauts());
-            if (badge_infoModel.getEnterprise_role() == 1 || badge_infoModel.getEnterprise_role() == 2){
+            if (badge_infoModel.getEnterprise_role() == 1 || badge_infoModel.getEnterprise_role() == 2) {
                 if (badge_infoModel.getEnterprise_name() != null && badge_infoModel.getEnterprise_name().length() > 0) {
                     LoginManager.getInstance().setEnterprise_name(badge_infoModel.getEnterprise_name());
                     mmyname.setText(badge_infoModel.getEnterprise_name());
                 } else {
                     LoginManager.getInstance().setEnterprise_name("");
-                    mmyname.setText(LoginManager.getCompany_name());
+                    if (LoginManager.getCompany_name() != null && LoginManager.getCompany_name().length() > 0) {
+                        mmyname.setText(LoginManager.getCompany_name());
+                    } else {
+                        mmyname.setText(LoginManager.getMobile());
+                    }
                 }
                 if (badge_infoModel.getEnterprise_role() == 1) {
                     mmyselfinfo_account_certification_text.setText(getResources().getString(R.string.myselfinfo_account_certification_text));
@@ -952,10 +969,15 @@ public class MyselfFragment extends BaseMvpFragment implements MyDampViewScrollv
                     mmyselfinfo_account_certification_text.setText(getResources().getString(R.string.myself_enterprise_certification_tv_str));
                     myLelfPerfectTV.setText(getResources().getString(R.string.myselfinfo_personal_center));
                 }
+            } else {
+                if (LoginManager.getCompany_name() != null && LoginManager.getCompany_name().length() > 0) {
+                    mmyname.setText(LoginManager.getCompany_name());
+                } else {
+                    mmyname.setText(LoginManager.getMobile());
+                }
             }
             LoginManager.setEnterprise_role(badge_infoModel.getEnterprise_role());
             LoginManager.setEnterprise_authorize_status(badge_infoModel.getEnterprise_authorize_status());
-
             if (badge_infoModel.getSubmitted() > 0) {
                 mPayBV.setBadgeNumber(badge_infoModel.getSubmitted());
             } else {

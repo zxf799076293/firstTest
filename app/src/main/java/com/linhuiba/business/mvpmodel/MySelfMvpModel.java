@@ -10,10 +10,10 @@ import com.linhuiba.business.network.LinhuiAsyncHttpResponseHandler;
 
 public class MySelfMvpModel {
     public static void getBadgeInfo(LinhuiAsyncHttpResponseHandler handler) {
-        UserApi.getbadge_info(MyAsyncHttpClient.MyAsyncHttpClient_version_three(),handler);
+        UserApi.getbadge_info(MyAsyncHttpClient.MyAsyncHttpClient3(),handler);
     }
     public static void getUserProfile(LinhuiAsyncHttpResponseHandler handler) {
-        UserApi.getuserprofile(MyAsyncHttpClient.MyAsyncHttpClient_version_three(),handler);
+        UserApi.getuserprofile(MyAsyncHttpClient.MyAsyncHttpClient3(),handler);
     }
     public static void bindWechat(String code,LinhuiAsyncHttpResponseHandler handler) {
         UserApi.bind_wechat(MyAsyncHttpClient.MyAsyncHttpClient(),handler,code);

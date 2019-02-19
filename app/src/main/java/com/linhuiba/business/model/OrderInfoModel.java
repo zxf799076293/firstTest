@@ -34,6 +34,7 @@ public class OrderInfoModel {
     private String service_phone;
     private String order_item_id;
     private Integer days_in_advance;
+    private String status_name;
     public String getField_order_item_id() {
         return field_order_item_id;
     }
@@ -230,5 +231,13 @@ public class OrderInfoModel {
 
     public void setDays_in_advance(Integer days_in_advance) {
         this.days_in_advance = days_in_advance;
+    }
+
+    public String getStatus_name() {
+        return status_name;
+    }
+
+    public void setStatus_name(String status_name) {
+        this.status_name = status_name;
     }
 }

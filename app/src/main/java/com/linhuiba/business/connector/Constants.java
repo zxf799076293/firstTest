@@ -62,6 +62,7 @@ import com.linhuiba.business.activity.InviteActivity;
 import com.linhuiba.business.activity.LoginActivity;
 import com.linhuiba.business.activity.MainTabActivity;
 import com.linhuiba.business.activity.MyCouponsActivity;
+import com.linhuiba.business.activity.MySelfPushMessageActivity;
 import com.linhuiba.business.activity.MyWalletActivity;
 import com.linhuiba.business.activity.MyselfInfo_CompanyActivity;
 import com.linhuiba.business.activity.PublishReviewActivity;
@@ -73,8 +74,10 @@ import com.linhuiba.business.adapter.WalletApplyPasswordAdapter;
 import com.linhuiba.business.fieldmodel.WalletFingerprintPayModel;
 import com.linhuiba.business.fieldview.Field_NewGalleryView;
 import com.linhuiba.business.fragment.HomeFragment;
+import com.linhuiba.business.fragment.MyselfFragment;
 import com.linhuiba.business.model.ApiAdvResourcesModel;
 import com.linhuiba.business.model.ApiResourcesModel;
+import com.linhuiba.business.mvpmodel.LoginMvpModel;
 import com.linhuiba.business.network.LinhuiAsyncHttpResponseHandler;
 import com.linhuiba.business.network.Response;
 import com.linhuiba.business.view.NewGalleryView;
@@ -172,7 +175,7 @@ public class Constants {
     private static final int PROPERTY_ACTIVITIES = 13;//发布活动资源列表
     private static final int HELP_WEB = 14;//帮助中心
     private static final int CARTS = 15;//购物车
-    public static final int RELEASE_PERMISSIONS = 16;
+    public static final int RELEASE_PERMISSIONS = 16;//发布权限
     private static final int FIELD_INFO = 17;//展位详情
     private static final int FIELD_LIST = 18;//场地列表
     private static final int ADV_LIST = 19;//广告列表
@@ -183,6 +186,7 @@ public class Constants {
     private static final int THEME_INFO = 24;//专题详情 theme
     private static final int WEAL_LIST = 25;//新人礼包 weal
     private static final int SERVICE_INFO = 26;//服务商详情
+    private static final int DEMAND_HALL = 27;//需求大厅
 
     public static final String picture_file_str = Environment.getExternalStorageDirectory() + "/linhuiba/";
     public static final File picture_file = new File(Environment.getExternalStorageDirectory() + "/linhuiba/");
@@ -1486,22 +1490,9 @@ public class Constants {
     public void binding_devices() {
         if (LoginManager.getInstance().getDevice_token() != null &&
                 LoginManager.getInstance().getDevice_token().length() > 0) {
-            UserApi.binding_devices(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),
-                    devicesHandler, LoginManager.getUid(), LoginManager.getInstance().getDevice_token());
+            LoginMvpModel.bindingDevices();
         }
     }
-
-    private LinhuiAsyncHttpResponseHandler devicesHandler = new LinhuiAsyncHttpResponseHandler() {
-        @Override
-        public void onSuccess(int statusCode, okhttp3.internal.http2.Header[] headers, Response response, Object data) {
-//            Log.i("友盟上传token", LoginManager.getInstance().getDevice_token());
-        }
-        @Override
-        public void onFailure(boolean superresult, int statusCode, okhttp3.internal.http2.Header[] headers, byte[] responseBody, Throwable error) {
-
-        }
-    };
-
     //string中颜色和大小不同的设置
     public static SpannableString getSpannableAllStr(Context context, String pricestr, int textsize, int SizeStart, int SizeEnd,
                                                      boolean StrikeThrough, int StrikeThroughStart, int StrikeThroughEnd,
@@ -1556,6 +1547,10 @@ public class Constants {
     public static int getpush_msg_type(String url_link) {
         int banner_intetnt = -1;//1 列表；2 详情；3web
         String url = url_link;
+        String[] urlParts = url_link.split("\\?");
+        if (urlParts.length > 0) {
+            url = urlParts[0];
+        }
         if (url != null && url.length() > 0) {
             if (url.indexOf("admin/orders/view") != -1) {
                 banner_intetnt = OrderInfoInt;
@@ -1613,6 +1608,8 @@ public class Constants {
                 banner_intetnt = WEAL_LIST;//新人礼包
             } else if (url.indexOf("service/view") != -1) {
                 banner_intetnt = SERVICE_INFO;//服务商详情
+            } else if (url.indexOf("demand/hall") != -1) {
+                banner_intetnt = DEMAND_HALL;//服务商详情
             }
         }
         return banner_intetnt;
@@ -2041,7 +2038,7 @@ public class Constants {
      * @param isApplicationContext 是否是Application
      */
     public static void pushUrlJumpActivity(String data,Context context,boolean isApplicationContext) {
-        if (data != null && data.length() > 0) {
+        if (data != null && data.length() > 0 && !data.equals("null_url")) {
             if (!LoginManager.isLogin()) {
                 int type = getpush_msg_type(data);
                 if (type == OrderInfoInt || type == OrdersManageInt || type == WalletsInt ||
@@ -2220,7 +2217,7 @@ public class Constants {
                     cartsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
                 context.startActivity(cartsIntent);
-            } if (getpush_msg_type(data) == FIELD_LIST) {
+            } else if (getpush_msg_type(data) == FIELD_LIST) {
                 String link_jsonobject = getlisturl_jsonobject(data,1);
                 ApiResourcesModel apiResourcesModel = null;
                 if (link_jsonobject != null && link_jsonobject.length() > 0) {
@@ -2379,8 +2376,22 @@ public class Constants {
             } else if (getpush_msg_type(data) == SERVICE_INFO) {
                 String id = getInfoid_url_jsonobject(data);
                 Intent serviceInfoIntent = new Intent(context, AboutUsActivity.class);
+                if (isApplicationContext) {
+                    serviceInfoIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
                 serviceInfoIntent.putExtra("type", com.linhuiba.business.config.Config.FACILITATOR_INFO_INT);
                 serviceInfoIntent.putExtra("resource_id",id);
+                context.startActivity(serviceInfoIntent);
+            } else if (getpush_msg_type(data) == DEMAND_HALL) {
+                Intent serviceInfoIntent = new Intent(context, AboutUsActivity.class);
+                serviceInfoIntent.putExtra("type", com.linhuiba.business.config.Config.DEMAND_HALL_WEB_INT);
+                String[] urlParts = data.split("\\?");
+                if (urlParts.length > 1) {
+                    serviceInfoIntent.putExtra("parameter", urlParts[1]);
+                }
+                if (isApplicationContext) {
+                    serviceInfoIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
                 context.startActivity(serviceInfoIntent);
             } else {
                 if (Constants.getpush_msg_type(data) != RELEASE_PERMISSIONS) {
@@ -2392,6 +2403,48 @@ public class Constants {
                     }
                     context.startActivity(resources_web);
                 }
+            }
+        } else {
+            if (LoginManager.isLogin()) {
+                Intent mymessage = new Intent(context, MySelfPushMessageActivity.class);
+                if (isApplicationContext) {
+                    mymessage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
+                mymessage.putExtra("linhui_msg",1);
+                context.startActivity(mymessage);
+            }
+        }
+    }
+
+    /**
+     * 是否显示上新
+     * @param type 1 我的卡券 2 领券中心
+     * @param imageView 上新的imageview
+     * @return
+     */
+    public static void showCouponNew(int type,ImageView imageView) {
+        if (type == 1 && (System.currentTimeMillis() - LoginManager.getInstance().getMyCouponsLong() >
+                5 * 24 * 3600000 || LoginManager.getInstance().getMyCouponsLong() == 0)) {
+            imageView.setVisibility(View.VISIBLE);
+        } else if (type == 2 && (System.currentTimeMillis() - LoginManager.getInstance().getCouponCentreLong() >
+                5 * 24 * 3600000 || LoginManager.getInstance().getCouponCentreLong() == 0)) {
+            imageView.setVisibility(View.VISIBLE);
+        } else {
+            imageView.setVisibility(View.GONE);
+        }
+    }
+    /**
+     * 是否显示上新
+     * @param type 1 我的卡券 2 领券中心
+     * @param imageView 上新的imageview
+     * @return
+     */
+    public static void setCouponNewShow(int type,ImageView imageView) {
+        if (imageView.getVisibility() == View.VISIBLE) {
+            if (type == 1) {
+                LoginManager.getInstance().setMyCouponsLong();
+            } else if (type == 2) {
+                LoginManager.getInstance().setCouponCentreLong();
             }
         }
     }

@@ -8,7 +8,6 @@ public class SearchSellResModel {
     private int resource_id;
     private String resource_name;
     private String address;
-    private int score;
     private String price;//分
     private String price_unit;
     private int reviewed_count;
@@ -94,7 +93,7 @@ public class SearchSellResModel {
     //详情页的展位下的活动
     private String custom_name;//活动名称
     private String selling_resource_img;//活动图片 （默认为 null）
-
+    private String panorama;//全景图url
     public int getResource_id() {
         return resource_id;
     }
@@ -117,14 +116,6 @@ public class SearchSellResModel {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public String getPrice() {
@@ -733,5 +724,13 @@ public class SearchSellResModel {
 
     public void setSelling_resource_img(String selling_resource_img) {
         this.selling_resource_img = selling_resource_img;
+    }
+
+    public String getPanorama() {
+        return panorama;
+    }
+
+    public void setPanorama(String panorama) {
+        this.panorama = panorama;
     }
 }

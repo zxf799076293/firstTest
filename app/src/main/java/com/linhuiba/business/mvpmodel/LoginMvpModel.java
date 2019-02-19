@@ -1,9 +1,12 @@
 package com.linhuiba.business.mvpmodel;
 
+import com.baselib.app.util.MessageUtils;
+import com.linhuiba.business.config.Config;
 import com.linhuiba.business.connector.MyAsyncHttpClient;
 import com.linhuiba.business.connector.UserApi;
 import com.linhuiba.business.network.LinhuiAsyncHttpResponseHandler;
 import com.linhuiba.business.network.Response;
+import com.linhuiba.linhuipublic.config.LoginManager;
 
 import okhttp3.internal.http2.Header;
 
@@ -64,5 +67,20 @@ public class LoginMvpModel {
 
             }
         });
+    }
+    public static void bindingDevices() {
+        UserApi.binding_devices(MyAsyncHttpClient.MyAsyncHttpClient2(), new LinhuiAsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, Response response, Object data) {
+
+            }
+
+            @Override
+            public void onFailure(boolean superresult, int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (!Config.BASE_API_URL_PHP.equals(Config.BASE_API_URL_PHP_PE)) {//se弹出错误
+                    MessageUtils.showToast(error.getMessage());
+                }
+            }
+        },LoginManager.getUid(), LoginManager.getInstance().getDevice_token());
     }
 }

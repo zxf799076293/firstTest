@@ -661,7 +661,7 @@ public class ActivityCaseActivity extends BaseMvpActivity implements SwipeRefres
                     "&city_ids="+JSON.toJSONString(mCityIds,true).trim() +
                     "&label_ids="+JSON.toJSONString(mCaseLabelTypeIds,true).trim() +
                     "&city_id=" + String.valueOf(mCityId);
-            share_linkurl = Config.SHARE_CASE_LIST_PYQ_URL+"community_type_ids="+JSON.toJSONString(mFieldTypeIds,true).trim() +
+            share_linkurl = Config.Domain_Name + Config.SHARE_CASE_LIST_PYQ_URL+"community_type_ids="+JSON.toJSONString(mFieldTypeIds,true).trim() +
                     "&industry_ids="+JSON.toJSONString(mIndustriesIds,true).trim() +
                     "&spread_way_ids="+JSON.toJSONString(mSpreadWaysIds,true).trim() +
                     "&promotion_purpose_ids="+JSON.toJSONString(mPromotionPurposesIds,true).trim() +
@@ -697,7 +697,7 @@ public class ActivityCaseActivity extends BaseMvpActivity implements SwipeRefres
                             "&city_ids="+JSON.toJSONString(mCityIds,true).trim() +
                             "&label_ids="+JSON.toJSONString(mCaseLabelTypeIds,true).trim() +
                             "&city_id=" + String.valueOf(mCityId);
-                    share_linkurl = Config.SHARE_CASE_LIST_PYQ_URL+"community_type_ids="+JSON.toJSONString(mFieldTypeIds,true).trim() +
+                    share_linkurl = Config.Domain_Name + Config.SHARE_CASE_LIST_PYQ_URL+"community_type_ids="+JSON.toJSONString(mFieldTypeIds,true).trim() +
                             "&industry_ids="+JSON.toJSONString(mIndustriesIds,true).trim() +
                             "&spread_way_ids="+JSON.toJSONString(mSpreadWaysIds,true).trim() +
                             "&promotion_purpose_ids="+JSON.toJSONString(mPromotionPurposesIds,true).trim() +
@@ -762,7 +762,10 @@ public class ActivityCaseActivity extends BaseMvpActivity implements SwipeRefres
             }
             if (mActivityCaseAdapterTmp == null) {
                 mActivityCaseAdapterTmp = new ActivityCaseAdapterTmp(R.layout.module_recycle_item_activity_case,mDatas,ActivityCaseActivity.this,ActivityCaseActivity.this,0);
+                mActivityCaseAdapterTmp.setPreLoadNumber(4);//预加载
                 StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                //解决item跳动
+                staggeredGridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
                 //设置布局管理器
                 mRecyclerView.setLayoutManager(staggeredGridLayoutManager);
                 //设置为垂直布局，这也是默认的

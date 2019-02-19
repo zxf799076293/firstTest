@@ -206,6 +206,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
     private RelativeLayout mTitleBarRL;//taitlebar的layout
     private ImageView mCommunityInfoTitleBackImg;
     private ImageView mCommunityInfoTitleShareImg;
+    private ImageView mFieldInfoTitlePanoramaImgv;
     private TextView mCommunityInfoTitleTV;
     private RelativeLayout mCommunityInfoTitleRL;
     private FieldinfoMvpPresenter mPresenter;
@@ -292,6 +293,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
         mCouponsMvpPresenter.attachView(this);
         mTitleBarRL = (RelativeLayout) findViewById(R.id.common_title_bar).findViewById(R.id.action_layout_top);
         mCommunityInfoTitleShareImg = (ImageView) findViewById(R.id.common_title_bar).findViewById(R.id.action_img_top);
+        mFieldInfoTitlePanoramaImgv = (ImageView)findViewById(R.id.common_title_bar).findViewById(R.id.business_titlebar_right_three_img);
         mCommunityInfoTitleBackImg = (ImageView) findViewById(R.id.common_title_bar).findViewById(R.id.back_button_top);
         mCommunityInfoTitleTV = (TextView) findViewById(R.id.common_title_bar).findViewById(R.id.title);
         mCommunityInfoTitleTV.setTextColor(getResources().getColor(R.color.white));
@@ -360,7 +362,6 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 }
             }
         });
-
         mDisplayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(mDisplayMetrics);
         //设置预览图片控件的大小
@@ -970,7 +971,7 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
             } else {
                 mCommunityInfoName.setText(getResources().getString(R.string.fieldinfo_no_parameter_message));
             }
-            shareWXlinkurl = Config.SHARE_COMMUNITY_INFO_URL + String.valueOf(mCommunityId) + "?BackKey=1&is_app=1&"+
+            shareWXlinkurl = Config.Domain_Name + Config.SHARE_COMMUNITY_INFO_URL + String.valueOf(mCommunityId) + "?BackKey=1&is_app=1&"+
             "city_id="+String.valueOf(mCityId);
             sharewxMiniShareLinkUrl = Config.WX_MINI_SHARE_COMMUNITY_INFO_URL + String.valueOf(mCommunityId);
 
@@ -1387,7 +1388,20 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
             if (mCommunityInfoModel.getImg_description() != null &&
                     mCommunityInfoModel.getImg_description().length() > 0) {
                 mCommunityInfoPicWordLL.setVisibility(View.VISIBLE);
-                mCommunityInfoPicWordWebview.loadUrl(Config.FIELDINFO_PIC_WORD_URL + "?type=1&id=" + String.valueOf(mCommunityId));
+                mCommunityInfoPicWordWebview.loadUrl(Config.Domain_Name + Config.FIELDINFO_PIC_WORD_URL + "?type=1&id=" + String.valueOf(mCommunityId));
+            }
+            if (mCommunityInfoModel.getPanorama() != null &&
+                    mCommunityInfoModel.getPanorama().length() > 0) {
+                TitleBarUtils.showTitleBarRightThreeImg(this, true, R.drawable.ic_quanjing_thr_ten, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //2019/1/17 全景
+                        Intent commonIntent = new Intent(CommunityInfoActivity.this, AboutUsActivity.class);
+                        commonIntent.putExtra("type", com.linhuiba.business.config.Config.PANORAMA_WEB_INT);
+                        commonIntent.putExtra("web_url",mCommunityInfoModel.getPanorama());
+                        startActivity(commonIntent);
+                    }
+                });
             }
         }
     }
@@ -1421,6 +1435,16 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
     }
 
     @Override
+    public void onEnquirySuccess(String id) {
+
+    }
+
+    @Override
+    public void onEnquiryFailure(boolean superresult, Throwable error) {
+
+    }
+
+    @Override
     public void onScroll(int scrollY) {
         int width = mDisplayMetrics.widthPixels;     // 屏幕宽度（像素）
         mTitleBarInt = width *
@@ -1441,12 +1465,14 @@ public class CommunityInfoActivity extends BaseMvpActivity implements FieldinfoM
                 mCommunityInfoNavBarLL.getBackground().mutate().setAlpha(progress);
                 mCommunityInfoTitleBackImg.setImageResource(R.drawable.nav_ic_back_white);
                 mCommunityInfoTitleShareImg.setImageResource(R.drawable.ic_share_white);
+                mFieldInfoTitlePanoramaImgv.setImageResource(R.drawable.ic_quanjing_thr_ten);
                 mCommunityInfoTitleTV.setTextColor(getResources().getColor(R.color.white));
                 mCommunityInfoStatusBarLL.setBackgroundColor(getResources().getColor(R.color.color_null));
             } else {
                 mCommunityInfoNavBarLL.getBackground().mutate().setAlpha(255);
                 mCommunityInfoTitleBackImg.setImageResource(R.drawable.ic_back_black);
                 mCommunityInfoTitleShareImg.setImageResource(R.drawable.popup_ic_share);
+                mFieldInfoTitlePanoramaImgv.setImageResource(R.drawable.ic_quanjing_balck_thr_ten);
                 mCommunityInfoTitleTV.setTextColor(getResources().getColor(R.color.title_bar_txtcolor));
                 mCommunityInfoStatusBarLL.setBackgroundColor(getResources().getColor(R.color.checked_tv_color));
             }

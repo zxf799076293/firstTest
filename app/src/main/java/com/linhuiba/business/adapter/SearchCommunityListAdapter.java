@@ -68,7 +68,8 @@ public class SearchCommunityListAdapter extends BaseQuickAdapter<ResourceSearchI
         LinearLayout mSearchListDemandLL = helper.getView(R.id.searchlist_item_demand_ll);
         LinearLayout mSearchlistPriceLL = helper.getView(R.id.searchlist_item_price_ll);
         TextView mSearchListQuantityOrderSizeTV = (TextView) helper.getView(R.id.search_list_item_quantity_order_quantity);
-
+        ImageView mSearchListPanoramaImgv = (ImageView) helper.getView(R.id.searchlist_panorama_imgv);
+        ImageView mSearchListLableImgv = (ImageView) helper.getView(R.id.searchlist_label_iv);
         if (item.getCommunity_img() != null &&
                 item.getCommunity_img().getPic_url() != null &&
                 item.getCommunity_img().getPic_url().length() > 0) {
@@ -242,7 +243,28 @@ public class SearchCommunityListAdapter extends BaseQuickAdapter<ResourceSearchI
         } else {
             mPhyResCommunityNameLL.setVisibility(View.GONE);
         }
+        //2019/1/17 全景显示
+        if (item.getPanorama() != null &&
+                item.getPanorama().length() > 0) {
+            mSearchListPanoramaImgv.setVisibility(View.VISIBLE);
+        } else {
+            mSearchListPanoramaImgv.setVisibility(View.GONE);
+        }
+        //标签显示
+        mSearchListLableImgv.setVisibility(View.GONE);
+        if (item.getIcon() != null &&
+                item.getIcon().length() > 0) {
+            JSONObject jsonObject = JSONObject.parseObject(item.getIcon());
+            if (jsonObject.get("icon_url") != null &&
+                    jsonObject.get("icon_url").toString().length() > 0) {
+                mSearchListLableImgv.setVisibility(View.VISIBLE);
+                Picasso.with(mContext).load(jsonObject.get("icon_url").toString() + "?imageView2/0/w/76/h/40"
+                ).placeholder(R.drawable.ic_jiazai_small).error(R.drawable.ic_no_pic_small).
+                        resize(com.linhuiba.linhuifield.connector.Constants.Dp2Px(mContext,38),
+                                com.linhuiba.linhuifield.connector.Constants.Dp2Px(mContext,20)).into(mSearchListLableImgv);
 
+            }
+        }
         helper.setOnClickListener(R.id.search_field_item, new View.OnClickListener() {
             @Override
             public void onClick(View v) {

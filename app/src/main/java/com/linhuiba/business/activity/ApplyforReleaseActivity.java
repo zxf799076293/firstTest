@@ -140,7 +140,7 @@ public class ApplyforReleaseActivity extends BaseMvpActivity implements Field_Ad
         if (accountinfointent != null && accountinfointent.getExtras() != null && accountinfointent.getExtras().get("role_id") != null
                 && accountinfointent.getExtras().getInt("role_id") == 2) {
             showProgressDialog();
-            UserApi.getbeneficiary_info(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), Property_applicationsHandler, LoginManager.getUid());
+            UserApi.getbeneficiary_info(MyAsyncHttpClient.MyAsyncHttpClient2(), Property_applicationsHandler, LoginManager.getUid());
             mcomoany_contact_relativelayout.setVisibility(View.GONE);
             mApplyforreleaseMobileRL.setVisibility(View.GONE);
             mapplyforrelease_savebtn.setVisibility(View.GONE);
@@ -149,14 +149,14 @@ public class ApplyforReleaseActivity extends BaseMvpActivity implements Field_Ad
             TitleBarUtils.shownextTextView(this, getResources().getString(R.string.mTxt_save_fieldinfo), 17, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    UserApi.savebeneficiary_info(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),savebeneficiary_infoHandler,mapplyforrelease_bankname_edit.getText().toString(),
+                    UserApi.savebeneficiary_info(MyAsyncHttpClient.MyAsyncHttpClient2(),savebeneficiary_infoHandler,mapplyforrelease_bankname_edit.getText().toString(),
                             mapplyforrelease_name_edit.getText().toString(),mapplyforrelease_payment_account_edit.getText().toString(), LoginManager.getUid());
                 }
             });
 
         } else {
             showProgressDialog();
-            UserApi.getproperty_applications(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), Property_applicationsHandler);
+            UserApi.getproperty_applications(MyAsyncHttpClient.MyAsyncHttpClient2(), Property_applicationsHandler);
             mApplyforreleaseMobileET.addTextChangedListener(textWatcher);
             mapplyforrelease_payment_account_layout.setVisibility(View.GONE);
             mapplyforrelease_bankname_layout.setVisibility(View.GONE);
@@ -385,7 +385,7 @@ public class ApplyforReleaseActivity extends BaseMvpActivity implements Field_Ad
             Field_FieldApi.getuptoken_certs(MyAsyncHttpClient.MyAsyncHttpClient(), UptokenHandler);
         } else {
             showProgressDialog();
-//            FieldApi.applyreleasepermissions(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), applyreleasepermissionsHandler,
+//            FieldApi.applyreleasepermissions(MyAsyncHttpClient.MyAsyncHttpClient2(), applyreleasepermissionsHandler,
 //                    mapplyforrelease_companyneme_edit.getText().toString(), mapplyforrelease_contect_edit.getText().toString(),
 //                    mapplyforrelease_email_edit.getText().toString(), imgurl, mapplyforrelease_bankname_edit.getText().toString(),
 //                    mapplyforrelease_name_edit.getText().toString(), mapplyforrelease_payment_account_edit.getText().toString());
@@ -422,7 +422,7 @@ public class ApplyforReleaseActivity extends BaseMvpActivity implements Field_Ad
                 try {
                     imgurl = Config.qiniu_domain_creats + jsonObject.getString("key").toString();
                     showProgressDialog();
-//                    FieldApi.applyreleasepermissions(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),applyreleasepermissionsHandler,
+//                    FieldApi.applyreleasepermissions(MyAsyncHttpClient.MyAsyncHttpClient2(),applyreleasepermissionsHandler,
 //                            mapplyforrelease_companyneme_edit.getText().toString(),mapplyforrelease_contect_edit.getText().toString(),
 //                            mapplyforrelease_email_edit.getText().toString(),imgurl ,mapplyforrelease_bankname_edit.getText().toString(),
 //                            mapplyforrelease_name_edit.getText().toString(),mapplyforrelease_payment_account_edit.getText().toString());

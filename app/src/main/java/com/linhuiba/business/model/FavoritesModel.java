@@ -8,7 +8,6 @@ public class FavoritesModel {
     private String name;
     private int fixed_price;
     private String detail_address;
-    private int score;
     private Integer resource_type;
     private String field_type;
     private String activity_type;
@@ -46,14 +45,6 @@ public class FavoritesModel {
 
     public void setDetail_address(String detail_address) {
         this.detail_address = detail_address;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public Integer getResource_type() {

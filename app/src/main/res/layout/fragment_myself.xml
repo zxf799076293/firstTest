@@ -336,49 +336,75 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/myself_order_layout_width"
+                        android:layout_height="@dimen/diogle_view_edit_marginleft"
                         android:background="@color/white"
                         android:orientation="horizontal">
-                        <LinearLayout
+                        <RelativeLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:visibility="visible"
-                            android:id="@+id/myself_coupon_centre_ll">
+                            android:layout_weight="1">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:visibility="visible"
+                                android:id="@+id/myself_coupon_centre_ll">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_wodejifen_three_two"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/home_area_drop_marginleft"
+                                    android:text="@string/module_myself_coupon_centre"
+                                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                                    android:textSize="@dimen/txt_title_size_info"/>
+                            </LinearLayout>
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_wodejifen_three_two"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/home_area_drop_marginleft"
-                                android:text="@string/module_myself_coupon_centre"
-                                android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
-                                android:textSize="@dimen/txt_title_size_info"/>
-                        </LinearLayout>
-                        <LinearLayout
+                                android:layout_alignParentRight="true"
+                                android:visibility="gone"
+                                android:layout_marginRight="@dimen/txt_padding"
+                                android:layout_marginTop="@dimen/paddingleft"
+                                android:src="@drawable/ci_shangxin_three_onezero"
+                                android:id="@+id/myself_coupon_centre_new_imgv"/>
+                        </RelativeLayout>
+                        <RelativeLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:visibility="visible"
-                            android:orientation="vertical"
-                            android:id="@+id/myself_my_coupons">
+                            android:layout_weight="1">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:visibility="visible"
+                                android:orientation="vertical"
+                                android:id="@+id/myself_my_coupons">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/_three_sevenic_kaquan"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/home_area_drop_marginleft"
+                                    android:text="@string/module_myself_my_coupons"
+                                    android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
+                                    android:textSize="@dimen/txt_title_size_info"/>
+                            </LinearLayout>
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/_three_sevenic_kaquan"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/home_area_drop_marginleft"
-                                android:text="@string/module_myself_my_coupons"
-                                android:textColor="@color/orderconfirm_success_bottom_btntextcolor"
-                                android:textSize="@dimen/txt_title_size_info"/>
-                        </LinearLayout>
+                                android:layout_alignParentRight="true"
+                                android:visibility="gone"
+                                android:layout_marginRight="@dimen/txt_padding"
+                                android:layout_marginTop="@dimen/paddingleft"
+                                android:src="@drawable/ci_shangxin_three_onezero"
+                                android:id="@+id/myself_my_coupons_new_imgv"/>
+                        </RelativeLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -435,7 +461,7 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/myself_order_layout_width"
+                        android:layout_height="@dimen/diogle_view_edit_marginleft"
                         android:background="@color/white"
                         android:orientation="horizontal">
                         <LinearLayout
