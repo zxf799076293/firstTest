@@ -7,7 +7,6 @@ import com.linhuiba.linhui_public.BuildConfig;
  * Created by snowd on 15/3/27.
  */
 public class Config {
-    public static boolean DEBUG = false;
     public static final String MQAppkey = "95aca6be0aefa68d9607e7707e9c85ad";//美洽
     public static final int DESIGN_WIDTH = 750;
     public static final int DESIGN_HEIGHT = 1334;
@@ -23,4 +22,5 @@ public class Config {
     public static final String COUPONS_SHARE_URL = "https://cert.linhuiba.com/tmp/wx3e88978a85953fea.o6zAJs0EFf3rCjgkhbPaXQnhB8e8.zPnPkZ1dKh0we503f3cc3d644760c7674fd0b5ee7d5a.png";
     //UMeng Push推送业务的secret
     public static final String UMENG_MESSAGE_SECRET = "9623b0d05e587e1f9f6e0b0bb4b3a860";
+    public static final String UMENG_APPKEY = "57f9a8a267e58e826f000aac";
 }

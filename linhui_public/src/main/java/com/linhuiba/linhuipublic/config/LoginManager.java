@@ -971,6 +971,10 @@ public class LoginManager {
         sp.edit().putLong("Config_updatetime", System.currentTimeMillis())
                 .apply();
     }
+    public static void cleanConfig_updatetime() {
+        sp.edit().putLong("Config_updatetime", 1)
+                .apply();
+    }
     public static Long getConfig_updatetime() {
         return sp.getLong("Config_updatetime", 0L);
     }
@@ -1132,20 +1136,6 @@ public class LoginManager {
     public Long getuodatatime() {
         return sp.getLong("last_check", 0L);
     }
-
-    public void setHome_review_show_time(long home_review_show_time) {
-        if (home_review_show_time == 0) {
-            sp.edit().putLong("home_review_show_time", 0)
-                    .apply();
-
-        } else if (home_review_show_time == 1) {
-            sp.edit().putLong("home_review_show_time", System.currentTimeMillis())
-                    .apply();
-        }
-    }
-    public Long getHome_review_show_time() {
-        return sp.getLong("home_review_show_time", 0L);
-    }
     public static void setCertificate (int certificate) {
         sp.edit().putInt("certificate", certificate)
                 .apply();
@@ -1265,5 +1255,22 @@ public class LoginManager {
     }
     public static String getCoupon_remind() {
         return sp.getString("coupon_remind", "");
+    }
+
+    public long getMyCouponsLong() {
+        return sp.getLong("myCouponsLong", 0L);
+    }
+
+    public void setMyCouponsLong() {
+        sp.edit().putLong("myCouponsLong", System.currentTimeMillis())
+                .apply();
+    }
+    public long getCouponCentreLong() {
+        return sp.getLong("couponCentreLong", 0L);
+    }
+
+    public void setCouponCentreLong() {
+        sp.edit().putLong("couponCentreLong", System.currentTimeMillis())
+                .apply();
     }
 }
