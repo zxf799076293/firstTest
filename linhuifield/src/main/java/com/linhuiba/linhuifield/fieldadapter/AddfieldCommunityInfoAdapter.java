@@ -49,6 +49,7 @@ public class AddfieldCommunityInfoAdapter extends BaseQuickAdapter<FieldAddfield
             editText.setText(mActivity.attributeMultipleIsInputEditMap.get(attribute_id).get(item.getId()));
         }
         helper.setText(R.id.addfield_community_dynamic_tv, item.getName());
+        editText.setHint(item.getPlaceholder());
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

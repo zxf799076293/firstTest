@@ -11,7 +11,10 @@ import com.linhuiba.linhuifield.cn.hzw.doodle.core.IDoodle;
 import com.linhuiba.linhuifield.cn.hzw.doodle.core.IDoodleItem;
 import com.linhuiba.linhuifield.cn.hzw.doodle.core.IDoodlePen;
 import com.linhuiba.linhuifield.cn.hzw.doodle.core.IDoodleSelectableItem;
+import com.linhuiba.linhuifield.fieldactivity.Field_AddField_UploadingPictureActivity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import cn.forward.androids.ScaleGestureDetectorApi27;
@@ -93,6 +96,55 @@ public class DoodleOnTouchGestureListener extends TouchGestureDetector.OnTouchGe
         mTouchX = mTouchDownX = e.getX();
         mTouchY = mTouchDownY = e.getY();
         mSelectionListener.onDownXY(mTouchX,mTouchY);
+        // FIXME: 2019/1/17 测试选中
+        if (mDoodle.getPen().equals(DoodlePen.DOT)) {
+            boolean penEditable = isPenEditable(mDoodle.getPen());
+            if (mDoodle.isEditMode() || penEditable) {
+                boolean found = false;
+                IDoodleSelectableItem item;
+                List<IDoodleItem> items = mDoodle.getAllItem();
+                for (int i = items.size() - 1; i >= 0; i--) {
+                    IDoodleItem elem = items.get(i);
+                    if (!(elem instanceof IDoodleSelectableItem) || !elem.isDoodleEditable()) {
+                        continue;
+                    }
+                    item = (IDoodleSelectableItem) elem;
+                    if (mDoodle.isEditMode()
+                            || penEditable && isPenEditable(item.getPen())) { // 非编辑模式下必须保证画笔是可编辑的类型
+                        if (item.contains(mDoodle.toX(mTouchX), mDoodle.toY(mTouchY))) {
+                            found = true;
+                            setSelectedItem(item);
+                            PointF xy = item.getLocation();
+                            mSelectedItemX = xy.x;
+                            mSelectedItemY = xy.y;
+                            break;
+                        }
+                    }
+                }
+                if (!found) {
+                    if (mSelectedItem != null) { // 取消选定
+                        IDoodleSelectableItem old = mSelectedItem;
+                        setSelectedItem(null);
+                        if (mSelectionListener != null) {
+                            mSelectionListener.onSelectedItem(mDoodle, old, false);
+                        }
+                    } else {
+                        if (!mDoodle.isEditMode() // 编辑模式下不能添加item
+                                && mSelectionListener != null) {
+                            mSelectionListener.onCreateSelectableItem(mDoodle, mDoodle.toX(mTouchX), mDoodle.toY(mTouchY));
+                        }
+                    }
+                }
+            } else {
+                // 模拟一次滑动
+                onScrollBegin(e);
+                e.offsetLocation(VALUE, VALUE);
+                onScroll(e, e, VALUE, VALUE);
+                onScrollEnd(e);
+            }
+            mDoodle.refresh();
+        }
+
         return true;
     }
 
@@ -117,6 +169,11 @@ public class DoodleOnTouchGestureListener extends TouchGestureDetector.OnTouchGe
                     ((DoodleRotatableItemBase) mSelectedItem).setIsRotating(true);
                     mRotateDiff = mSelectedItem.getItemRotate() -
                             computeAngle(mSelectedItem.getPivotX(), mSelectedItem.getPivotY(), mDoodle.toX(mTouchX), mDoodle.toY(mTouchY));
+                } else {
+                    // FIXME: 2019/1/10 测试放大缩小
+                    if (mDoodle.getPen().equals(DoodlePen.BITMAP) || mDoodle.getPen().equals(DoodlePen.TEXT)) {
+                        ((DoodleRotatableItemBase) mSelectedItem).setZoom((((DoodleRotatableItemBase) mSelectedItem).canZoom(mDoodle.toX(mTouchX), mDoodle.toY(mTouchY))));
+                    }
                 }
             }
         } else {
@@ -179,25 +236,124 @@ public class DoodleOnTouchGestureListener extends TouchGestureDetector.OnTouchGe
 
         if (mDoodle.isEditMode() || isPenEditable(mDoodle.getPen())) { //画笔是否是可选择的
             if (mSelectedItem != null) {
-                if ((mSelectedItem instanceof DoodleRotatableItemBase) && (((DoodleRotatableItemBase) mSelectedItem).isRotating())) { // 旋转item
+                if (!(mSelectedItem.getPen().equals(DoodlePen.DOT) &&
+                        mSelectedItem.getShape().equals(DoodleShape.FILL_CIRCLE)) &&
+                        (mSelectedItem instanceof DoodleRotatableItemBase) && (((DoodleRotatableItemBase) mSelectedItem).isRotating())) { // 旋转item
                     PointF xy = mSelectedItem.getLocation();
                     mSelectedItem.setItemRotate(mRotateDiff + computeAngle(
                             mSelectedItem.getPivotX(), mSelectedItem.getPivotY(), mDoodle.toX(mTouchX), mDoodle.toY(mTouchY)
                     ));
+                } else if ((mDoodle.getPen().equals(DoodlePen.BITMAP) ||
+                        mDoodle.getPen().equals(DoodlePen.TEXT)) &&
+                        (mSelectedItem instanceof DoodleRotatableItemBase) && (((DoodleRotatableItemBase) mSelectedItem).isZoom())) { // FIXME: 2019/1/10 放大缩小
                     // FIXME: 2019/1/7 测试放大缩小
                     mSelectedItem.setSize(20);
                 } else { // 移动item
+                    float xx = 0;
+                    float yy = 0;
+                    float addX = 0;
+                    float addY = 0;
+                    if (mSelectedItem.getPen().equals(DoodlePen.DOT) &&
+                            mSelectedItem.getShape().equals(DoodleShape.LINE)) {
+                        xx = mSelectedItem.getLocation().x;
+                        yy = mSelectedItem.getLocation().y;
+                    }
                     mSelectedItem.setLocation(
                             mSelectedItemX + mDoodle.toX(mTouchX) - mDoodle.toX(mTouchDownX),
                             mSelectedItemY + mDoodle.toY(mTouchY) - mDoodle.toY(mTouchDownY));
+                    if (mSelectedItem.getPen().equals(DoodlePen.DOT) &&
+                            mSelectedItem.getShape().equals(DoodleShape.LINE)) {
+                        addX = mSelectedItem.getLocation().x - xx;
+                        addY = mSelectedItem.getLocation().y - yy;
+                    }
+                    // FIXME: 2019/1/17 重新画框
+                    if (mSelectedItem.getPen().equals(DoodlePen.DOT)) {
+                        List<IDoodleItem> items = mDoodle.getAllItem();
+                        if (items != null && items.size() > 0) {
+                            if (mSelectedItem.getShape().equals(DoodleShape.FILL_CIRCLE)) {
+                                for (int i = items.size() - 1; i >= 0; i--) {
+                                    IDoodleItem elem = items.get(i);
+                                    if (elem.getPen().equals(DoodlePen.DOT) &&
+                                            elem.getShape().equals(DoodleShape.LINE) &&
+                                            ((IDoodleSelectableItem)elem).getPosition() == mSelectedItem.getPosition()) {
+                                        mDoodle.removeItem(elem);
+                                    }
+                                }
+                                List<HashMap<String,Float>> mDotCoordinateList = new ArrayList<>();
+                                for (int i = 0; i < items.size(); i++) {
+                                    IDoodleItem elem = items.get(i);
+                                    if (elem.getPen().equals(DoodlePen.DOT) &&
+                                            elem.getShape().equals(DoodleShape.FILL_CIRCLE) &&
+                                            ((IDoodleSelectableItem)elem).getPosition() == mSelectedItem.getPosition()) {
+                                        HashMap<String,Float> map = new HashMap<>();
+                                        map.put("x",elem.getPivotX());
+                                        map.put("y",elem.getPivotY());
+                                        mDotCoordinateList.add(map);
+                                    }
+                                }
+                                mDoodle.setShape(DoodleShape.LINE);
+                                Path path1 = new Path();
+                                for (int i = 0; i < mDotCoordinateList.size(); i++) {
+                                    if (i == 0) {
+                                        path1.moveTo(mDotCoordinateList.get(i).get("x"),
+                                                mDotCoordinateList.get(i).get("y"));
+                                    } else {
+                                        path1.lineTo(mDotCoordinateList.get(i).get("x"),
+                                                mDotCoordinateList.get(i).get("y"));
+                                    }
+                                }
+                                path1.close();//封闭
+                                IDoodleSelectableItem iDoodleItem = DoodlePath.toShape(mDoodle,
+                                        path1,mContext);
+                                iDoodleItem.setPosition(mSelectedItem.getPosition());
+                                mDoodle.addItem(iDoodleItem);
+                            } else if (mSelectedItem.getShape().equals(DoodleShape.LINE)) {
+                                List<HashMap<String,Float>> mDotCoordinateList = new ArrayList<>();
+                                for (int i = 0; i < items.size(); i++) {
+                                    IDoodleItem elem = items.get(i);
+                                    if (elem.getPen().equals(DoodlePen.DOT) &&
+                                            elem.getShape().equals(DoodleShape.FILL_CIRCLE) &&
+                                    ((IDoodleSelectableItem)elem).getPosition() == mSelectedItem.getPosition()) {
+                                        HashMap<String,Float> map = new HashMap<>();
+                                        map.put("x",elem.getPivotX());
+                                        map.put("y",elem.getPivotY());
+                                        mDotCoordinateList.add(map);
+                                    }
+                                }
+                                for (int i = items.size() - 1; i >= 0; i--) {
+                                    IDoodleItem elem = items.get(i);
+                                    if (elem.getPen().equals(DoodlePen.DOT) &&
+                                            elem.getShape().equals(DoodleShape.FILL_CIRCLE) &&
+                                            ((IDoodleSelectableItem)elem).getPosition() == mSelectedItem.getPosition()) {
+                                        mDoodle.removeItem(elem);
+                                    }
+                                }
+                                mDoodle.setShape(DoodleShape.FILL_CIRCLE);
+                                if (mDotCoordinateList != null &&
+                                        mDotCoordinateList.size() > 0) {
+                                    for (int i = 0; i < mDotCoordinateList.size(); i++) {
+                                        IDoodleSelectableItem iDoodleItem =
+                                                DoodlePath.toShape(mDoodle,
+                                                        mDotCoordinateList.get(i).get("x") + addX,
+                                                        mDotCoordinateList.get(i).get("y") + addY,
+                                                        mDotCoordinateList.get(i).get("x") + addX,
+                                                        mDotCoordinateList.get(i).get("y") + addY, mContext);
+                                        iDoodleItem.setPosition(mSelectedItem.getPosition());
+                                        mDoodle.addItem(iDoodleItem);
+                                    }
+                                }
+                            }
+
+                        }
+                    }
                 }
             }
         } else {
-            if (mDoodle.getPen() != DoodlePen.DOT) {
-                if (mDoodle.getPen() == DoodlePen.COPY && mCopyLocation.isRelocating()) {
-                    // 正在定位location
-                    mCopyLocation.updateLocation(mDoodle.toX(mTouchX), mDoodle.toY(mTouchY));
-                } else {
+            if (mDoodle.getPen() == DoodlePen.COPY && mCopyLocation.isRelocating()) {
+                // 正在定位location
+                mCopyLocation.updateLocation(mDoodle.toX(mTouchX), mDoodle.toY(mTouchY));
+            } else {
+                if (mDoodle.getPen() != DoodlePen.NULL) {
                     if (mDoodle.getPen() == DoodlePen.COPY) {
                         mCopyLocation.updateLocation(mCopyLocation.getCopyStartX() + mDoodle.toX(mTouchX) - mCopyLocation.getTouchStartX(),
                                 mCopyLocation.getCopyStartY() + mDoodle.toY(mTouchY) - mCopyLocation.getTouchStartY());
@@ -222,7 +378,8 @@ public class DoodleOnTouchGestureListener extends TouchGestureDetector.OnTouchGe
     // 判断当前画笔是否可编辑，前提必须跟当前涂鸦框架选中的画笔相同，以此在非编辑模式下只有当前画笔类型的可编辑
     private boolean isPenEditable(IDoodlePen pen) {
         return (mDoodle.getPen() == DoodlePen.TEXT && pen == DoodlePen.TEXT)
-                || (mDoodle.getPen() == DoodlePen.BITMAP && pen == DoodlePen.BITMAP);
+                || (mDoodle.getPen() == DoodlePen.BITMAP && pen == DoodlePen.BITMAP
+                || (mDoodle.getPen() == DoodlePen.DOT && pen == DoodlePen.DOT));
     }
 
     @Override
@@ -247,13 +404,25 @@ public class DoodleOnTouchGestureListener extends TouchGestureDetector.OnTouchGe
 
                 if (mDoodle.isEditMode()
                         || penEditable && isPenEditable(item.getPen())) { // 非编辑模式下必须保证画笔是可编辑的类型
-                    if (item.contains(mDoodle.toX(mTouchX), mDoodle.toY(mTouchY))) {
-                        found = true;
-                        setSelectedItem(item);
-                        PointF xy = item.getLocation();
-                        mSelectedItemX = xy.x;
-                        mSelectedItemY = xy.y;
-                        break;
+                    if (item.getPen().equals(DoodlePen.DOT) &&
+                            item.getShape().equals(DoodleShape.FILL_CIRCLE)) {
+                        if (item.contains(mDoodle.toX(mTouchX), mDoodle.toY(mTouchY))) {
+                            found = true;
+                            setSelectedItem(item);
+                            PointF xy = item.getLocation();
+                            mSelectedItemX = xy.x;
+                            mSelectedItemY = xy.y;
+                            break;
+                        }
+                    } else {
+                        if (item.contains(mDoodle.toX(mTouchX), mDoodle.toY(mTouchY))) {
+                            found = true;
+                            setSelectedItem(item);
+                            PointF xy = item.getLocation();
+                            mSelectedItemX = xy.x;
+                            mSelectedItemY = xy.y;
+                            break;
+                        }
                     }
                 }
             }

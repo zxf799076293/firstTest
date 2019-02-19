@@ -95,7 +95,7 @@ public class FieldMainTabActivity extends FieldBaseMvpActivity implements TabHos
             if (fieldintent.getExtras().get("all_orders") != null && fieldintent.getExtras().getInt("all_orders") > 0) {
                 fieldMainBV[1].setBadgeNumber(fieldintent.getExtras().getInt("all_orders"));
             } else {
-                Field_FieldApi.getbadge_info(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),badge_infoHandler);
+                Field_FieldApi.getbadge_info(MyAsyncHttpClient.MyAsyncHttpClient2(),badge_infoHandler);
             }
             if (fieldintent.getExtras().get("OrderFragment_currIndex") != null && fieldintent.getExtras().getInt("OrderFragment_currIndex") > 0) {
                 OrderFragment_currIndex = fieldintent.getExtras().getInt("OrderFragment_currIndex");

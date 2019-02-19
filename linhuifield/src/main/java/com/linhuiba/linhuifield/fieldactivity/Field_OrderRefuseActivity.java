@@ -79,14 +79,14 @@ public class Field_OrderRefuseActivity extends FieldBaseMvpActivity {
                         if (datelist.get(i).get("reason").toString().equals("其他")) {
                             showProgressDialog();
                             if (mrefused_edit.getText().toString().trim().length() > 0) {
-                                Field_FieldApi.fieldorderlistitemRefused(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), OrderapprovedHandler, Field_OrderRefuseActivity.this, approvedid, mrefused_edit.getText().toString());
+                                Field_FieldApi.fieldorderlistitemRefused(MyAsyncHttpClient.MyAsyncHttpClient2(), OrderapprovedHandler, Field_OrderRefuseActivity.this, approvedid, mrefused_edit.getText().toString());
                             } else {
-                                Field_FieldApi.fieldorderlistitemRefused(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), OrderapprovedHandler, Field_OrderRefuseActivity.this, approvedid, datelist.get(i).get("reason").toString());
+                                Field_FieldApi.fieldorderlistitemRefused(MyAsyncHttpClient.MyAsyncHttpClient2(), OrderapprovedHandler, Field_OrderRefuseActivity.this, approvedid, datelist.get(i).get("reason").toString());
                             }
                             break;
                         } else {
                             showProgressDialog();
-                            Field_FieldApi.fieldorderlistitemRefused(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), OrderapprovedHandler, Field_OrderRefuseActivity.this, approvedid, datelist.get(i).get("reason").toString());
+                            Field_FieldApi.fieldorderlistitemRefused(MyAsyncHttpClient.MyAsyncHttpClient2(), OrderapprovedHandler, Field_OrderRefuseActivity.this, approvedid, datelist.get(i).get("reason").toString());
                             break;
                         }
 

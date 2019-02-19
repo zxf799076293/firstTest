@@ -6,48 +6,13 @@ package com.linhuiba.linhuifield.config;
 public class Config {
     /* 真实环境  PE*/
     private static final String Domain_Name_PE = "https://m.linhuiba.com";
-    private static final String BASE_API_URL_PHP_PE = "https://api.linhuiba.com/api/";
-
-    /* 预演环境  PE_TEST*/
-    private static final String Domain_Name_PE_TEST = "http://m.lanhanba.com";
-    private static final String BASE_API_URL_PHP_PE_TEST = "http://hz.lanhanba.com/api/";
-
-    /* SE测试环境 */
-    private static final String BASE_API_URL_PHP_SE = "https://hz.lanhanba.net/api/";
-    private static final String Domain_Name_SE = "https://m.lanhanba.net";
-    /* IE */
-//    private final String BASE_API_URL_PHP_IE = "https://192.168.0.196:443/api/";
-//    private final String Domain_Name_IE = "https://192.168.0.196";
-    private static final String BASE_API_URL_PHP_IE = "http://192.168.0.196:80/api/";
-    private static final String Domain_Name_IE = "https://m.lanhanba.net";
-    private static final String Domain_Name_IE_TEST = "http://wap.vaiwan.com:8081";
-    private static final String Domain_Name_COOKING_IE_TEST = "http://wap.vaiwan.com";
-    /* DE */
-    private static final String BASE_API_URL_PHP_DE = "http://192.168.0.110:8009/api/";
-    private static final String Domain_Name_DE = "http://m.lanhanba.net";
-    private static final String BASE_API_URL_PHP_DETEST = "http://192.168.0.109/api/";
-    private static final String BASE_API_URL_PHP_DETESTLL = "http://192.168.0.109:8039/api/";
-    private static final String BASE_API_URL_PHP_DETESTZR = "http://gitlhbzxr.vaiwan.com:8081/api/";
-    private static final String BASE_API_URL_PHP_DETESTJLP = "http://192.168.0.123/api/";
+    public static final String BASE_API_URL_PHP_PE = "https://api.linhuiba.com/api/";
     //api请求网络头url 和 web加载网络头url
-    public static final String BASE_API_URL_PHP = com.linhuiba.linhuipublic.config.Config.DEBUG?BASE_API_URL_PHP_SE:BASE_API_URL_PHP_PE;
-    public static final String Domain_Name = com.linhuiba.linhuipublic.config.Config.DEBUG?Domain_Name_SE:Domain_Name_PE;
-    public static final String INVITE_WEBVIEW_URL = Domain_Name+"/admin/profile/invite?&is_mobile=1&is_app=1&invite_code=";
-    public static final String INVITE_SHARE_URL = Domain_Name+"/admin/profile/invited?&is_mobile=1&is_app=1&invite_code=";
-    public static final String FIELDINFO_FIELD_URL =Domain_Name+ "/fields/view/";
-    public static final String FIELDINFO_ADV_URL = Domain_Name+"/advs/view/";
-    public static final String FIELDINFO_ACTIVITY_URL = Domain_Name+"/activities/view/";
-    public static final String FIELDINFO_END_URL = "?is_mobile=1&is_app=1";
-    public static final String COMMUNITY_SHARE_URL = Domain_Name+"/shop/index/";
-    public static final String COMMUNITY_RESOURCES_SHARE_URL = Domain_Name+"/communities/";
-    public static final String COMMUNITY_RESOURCES_SHARE_URL_OTHER ="/resources";
-    public static final String ABOUT_WEBVIEW_URL = Domain_Name+"/company/about?is_mobile=1&is_app=1";
-    public static final String HELP_WEBVIEW_URL = Domain_Name+"/company/help?is_mobile=1&is_app=1";
-    public static final String BUSSINESS_COMPANY_URL = Domain_Name+"/admin/users/view?";
+    public static String BASE_API_URL_PHP;
+    public static String Domain_Name;
     public static final String QINIU_TOKEN = "https://api.linhuiba.com/qiniu/app-token";
     public static final String qiniu_domain = "https://img.linhuiba.com/";
-    public static final String PropertyDataStatistical = Domain_Name + "/#/appStatistics";
-    public static final String PropertyDataStatisticalSignSuccess =Domain_Name + "/app_page/relation_success" + FIELDINFO_END_URL;
+    public static String PropertyDataStatistical = "/#/appStatistics";
 
 
     public static final int GUARD_WEB_INT = 5;

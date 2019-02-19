@@ -77,7 +77,7 @@ public class Field_Enterprise_CertificationActivity extends FieldBaseMvpActivity
         });
     }
     private void initData() {
-        Field_FieldApi.getproperty_report(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),property_reportHandler);
+        Field_FieldApi.getproperty_report(MyAsyncHttpClient.MyAsyncHttpClient2(),property_reportHandler);
     }
     private LinhuiAsyncHttpResponseHandler property_reportHandler = new LinhuiAsyncHttpResponseHandler(Property_reportModel.class,false) {
         @Override

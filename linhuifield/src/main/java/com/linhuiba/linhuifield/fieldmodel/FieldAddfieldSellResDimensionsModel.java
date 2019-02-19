@@ -1,6 +1,8 @@
 package com.linhuiba.linhuifield.fieldmodel;
 
-public class FieldAddfieldSellResDimensionsModel {
+import java.io.Serializable;
+
+public class FieldAddfieldSellResDimensionsModel implements Serializable {
     private String size;
     private String lease_term_type_id;
     private String price;

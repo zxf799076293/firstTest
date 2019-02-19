@@ -220,8 +220,8 @@ public class Field_PropertyMyselfFragment extends FieldBaseMvpFragment implement
         });
     }
     private void initData() {
-        Field_UserApi.getbadge_info(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),badge_infoHandler);
-        Field_UserApi.getuserprofile(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),userprofileHandler);//获取用户信息完整
+        Field_UserApi.getbadge_info(MyAsyncHttpClient.MyAsyncHttpClient2(),badge_infoHandler);
+        Field_UserApi.getuserprofile(MyAsyncHttpClient.MyAsyncHttpClient2(),userprofileHandler);//获取用户信息完整
     }
     public void checkUpdate_new() {
         Field_FieldApi.version(MyAsyncHttpClient.MyAsyncHttpClient(), mVersionHandler_new);

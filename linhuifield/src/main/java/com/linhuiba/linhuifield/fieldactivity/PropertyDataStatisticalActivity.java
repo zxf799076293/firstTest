@@ -86,7 +86,7 @@ public class PropertyDataStatisticalActivity extends FieldBaseMvpActivity {
         Map<String,String> extraHeaders = new HashMap<String, String>();
         extraHeaders.put("authorization", "bearer"+ LoginManager.getAccessToken());
         String RandomStr = com.linhuiba.linhuifield.connector.Constants.getRandomString(10);
-        mstatistical_WebView.loadUrl(Config.PropertyDataStatistical +
+        mstatistical_WebView.loadUrl(Config.Domain_Name + Config.PropertyDataStatistical +
                 "?key="+ RandomStr.substring(0, 2) + LoginManager.getAccessToken() + RandomStr.substring(2),extraHeaders);
         if (LoginManager.getRelation_id() > -1) {
             if (LoginManager.getRelation_id() != 2) {

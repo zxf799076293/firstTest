@@ -202,6 +202,11 @@
     <color name="module_addfield_main_finish_color">#33BE85</color>
     <color name="module_addfield_main_unfinish_color">#E79B20</color>
     <color name="module_addfield_main_success_color">#A9A9A9</color>
+    <color name="module_addfield_upload_pic_red_color">#ff053c</color>
+    <color name="module_addfield_upload_pic_yellow_color">#FFD400</color>
+    <color name="module_addfield_upload_pic_green_color">#00A927</color>
+    <color name="module_addfield_upload_pic_purple_color">#8E2BFE</color>
+
     <!-- community_info -->
     <color name="module_community_info_label_color">#7B99BB</color>
     <!-- map -->

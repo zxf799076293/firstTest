@@ -90,7 +90,7 @@ public class ChildAccountManagementEditorActivity extends FieldBaseMvpActivity {
                         BaseMessageUtils.showToast(getResources().getString(R.string.txt_childaccount_dutyfieldtxt_choose_remind));
                         return;
                     }
-                    Field_FieldApi.addmessageuser(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), addmessageuserHandler,
+                    Field_FieldApi.addmessageuser(MyAsyncHttpClient.MyAsyncHttpClient2(), addmessageuserHandler,
                             mchildaccount_mobileedit.getText().toString(), mchildaccount_nameedit.getText().toString(),
                             mchildaccount_emailedit.getText().toString(), JSON.toJSONString(checklistdata,true));
                 } else if (type == EditorInt) {
@@ -113,7 +113,7 @@ public class ChildAccountManagementEditorActivity extends FieldBaseMvpActivity {
                         return;
                     }
                     if (getintentdata.getId() != null && getintentdata.getId().length() > 0) {
-                        Field_FieldApi.editormessageuser(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), editormessageuserHandler, getintentdata.getId(),
+                        Field_FieldApi.editormessageuser(MyAsyncHttpClient.MyAsyncHttpClient2(), editormessageuserHandler, getintentdata.getId(),
                                 mchildaccount_mobileedit.getText().toString(), mchildaccount_nameedit.getText().toString(),
                                 mchildaccount_emailedit.getText().toString(), JSON.parseArray(JSON.toJSONString(checklistdata, true)));
                     } else {

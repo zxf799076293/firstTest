@@ -150,7 +150,7 @@ public class Field_ResourceCalendarFragment extends FieldBaseMvpFragment impleme
         parameter_year = year_c;
         parameter_month = month_c;
         mToggleButton.setVisibility(View.GONE);
-        Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), getscheduleHandler, "", 1,
+        Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient2(), getscheduleHandler, "", 1,
                 "all", Constants.getFirstDayOfMonth(year_c, month_c - 1), Constants.getLastDayOfMonth(year_c, month_c - 1));
         mToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -291,7 +291,7 @@ public class Field_ResourceCalendarFragment extends FieldBaseMvpFragment impleme
         parameter_year = stepYear;
         parameter_month = stepMonth;
         mToggleButton.setVisibility(View.GONE);
-        Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), getscheduleOtherHandler,res_id, 0,
+        Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient2(), getscheduleOtherHandler,res_id, 0,
                 "all", Constants.getFirstDayOfMonth(stepYear, stepMonth - 1), Constants.getLastDayOfMonth(stepYear, stepMonth - 1));
 
     }
@@ -327,7 +327,7 @@ public class Field_ResourceCalendarFragment extends FieldBaseMvpFragment impleme
         parameter_year = stepYear;
         parameter_month = stepMonth;
         mToggleButton.setVisibility(View.GONE);
-        Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), getscheduleOtherHandler, res_id, 0,
+        Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient2(), getscheduleOtherHandler, res_id, 0,
                 "all", Constants.getFirstDayOfMonth(stepYear, stepMonth - 1), Constants.getLastDayOfMonth(stepYear, stepMonth - 1));
     }
 
@@ -390,7 +390,7 @@ public class Field_ResourceCalendarFragment extends FieldBaseMvpFragment impleme
         public void onSuccess(int statusCode, okhttp3.internal.http2.Header[] headers, Response response, Object data) {
             datas.remove(ResourceCalendarMyListviewAdapter_position);
             resourceCalendarMyListviewAdapter.notifyDataSetChanged();
-            Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), getscheduleOther_new_Handler, res_id, 0,
+            Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient2(), getscheduleOther_new_Handler, res_id, 0,
                     "all", Constants.getFirstDayOfMonth(parameter_year, parameter_month - 1), Constants.getLastDayOfMonth(parameter_year, parameter_month - 1));
         }
 
@@ -836,7 +836,7 @@ public class Field_ResourceCalendarFragment extends FieldBaseMvpFragment impleme
                 if (maplistdata != null) {
                     maplistdata.clear();
                 }
-                Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), getscheduleHandler,res_id, 0,
+                Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient2(), getscheduleHandler,res_id, 0,
                         "all", Constants.getFirstDayOfMonth(parameter_year, parameter_month - 1), Constants.getLastDayOfMonth(parameter_year, parameter_month - 1));
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
@@ -856,7 +856,7 @@ public class Field_ResourceCalendarFragment extends FieldBaseMvpFragment impleme
                             datas.remove(ResourceCalendarMyListviewAdapter_position);
                             resourceCalendarMyListviewAdapter.notifyDataSetChanged();
                             showProgressDialog();
-                            Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), getscheduleOther_new_Handler, res_id, 0,
+                            Field_FieldApi.getresourcecalendar_order_items(MyAsyncHttpClient.MyAsyncHttpClient2(), getscheduleOther_new_Handler, res_id, 0,
                                     "all", Constants.getFirstDayOfMonth(parameter_year, parameter_month - 1), Constants.getLastDayOfMonth(parameter_year, parameter_month - 1));
                         }
                     }
@@ -894,7 +894,7 @@ public class Field_ResourceCalendarFragment extends FieldBaseMvpFragment impleme
                             startActivityForResult(orderrefused, 1);
                         } else if (type == 0) {
                             showProgressDialog();
-                            Field_FieldApi.fieldorderlistitemapproved(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), OrderapprovedHandler, orderid);
+                            Field_FieldApi.fieldorderlistitemapproved(MyAsyncHttpClient.MyAsyncHttpClient2(), OrderapprovedHandler, orderid);
                         }
                     } else if (i == R.id.btn_cancel) {
                         mOrderOperationDialog.dismiss();

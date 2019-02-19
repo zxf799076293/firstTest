@@ -270,7 +270,7 @@ public class Field_FieldListFragmentnew extends FieldBaseMvpFragment implements 
         mListPageSizeInt[mCurrIndex] = mListPageSizeInt[mCurrIndex] +1;
         if(!mDataList[mCurrIndex].isEmpty()){
             String fieldId = mDataList[mCurrIndex].get(mDataList[mCurrIndex].size()-1).getResource_id();
-            Field_FieldApi.getresourceslist(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), getMoreFieldListHandler,mResTypeId, status,
+            Field_FieldApi.getresourceslist(MyAsyncHttpClient.MyAsyncHttpClient3(), getMoreFieldListHandler,mResTypeId, status,
                     String.valueOf(mListPageSizeInt[mCurrIndex]), "10");
         }
 
@@ -413,7 +413,7 @@ public class Field_FieldListFragmentnew extends FieldBaseMvpFragment implements 
                             //编辑场地
                             Field_AddResourcesModel.getnewInstance();
                             showProgressDialog();
-                            Field_FieldApi.getresources(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),getresourcesHandler,mFeildList.get(position).getResource_id());
+                            Field_FieldApi.getresources(MyAsyncHttpClient.MyAsyncHttpClient2(),getresourcesHandler,mFeildList.get(position).getResource_id());
                         }
                     });
                     if (!mFeildList.get(position).getResource_type_id().equals("3")) {
@@ -440,7 +440,7 @@ public class Field_FieldListFragmentnew extends FieldBaseMvpFragment implements 
                                                     dialog.dismiss();
 
                                                     mCheckItemInt = position;
-                                                    Field_FieldApi.editFieldStatusthrough(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), editFieldStatus_addedHandler, mFeildList.get(position).getResource_id());
+                                                    Field_FieldApi.editFieldStatusthrough(MyAsyncHttpClient.MyAsyncHttpClient3(), editFieldStatus_addedHandler, mFeildList.get(position).getResource_id());
 
                                                 }
                                             })
@@ -502,7 +502,7 @@ public class Field_FieldListFragmentnew extends FieldBaseMvpFragment implements 
         }
         mListPageSizeInt[mCurrIndex] = 1;
         mOrderList[mCurrIndex].set_refresh();
-        Field_FieldApi.getresourceslist(MyAsyncHttpClient.MyAsyncHttpClient_version_three(),
+        Field_FieldApi.getresourceslist(MyAsyncHttpClient.MyAsyncHttpClient3(),
                 getFieldListHandler,mResTypeId,
                 status, String.valueOf(mListPageSizeInt[mCurrIndex]), "10");
     }

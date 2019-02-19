@@ -26,7 +26,7 @@ public abstract class DoodleSelectableItemBase extends DoodleItemBase implements
 
     private PointF mTemp = new PointF();
     private boolean mIsSelected = false;
-
+    private int position;
     public DoodleSelectableItemBase(IDoodle doodle, int itemRotate, float x, float y) {
         this(doodle, null, itemRotate, x, y);
     }
@@ -65,11 +65,25 @@ public abstract class DoodleSelectableItemBase extends DoodleItemBase implements
         mTemp = rotatePoint(mTemp, (int) -getItemRotate(), x, y, getPivotX() - getLocation().x, getPivotY() - getLocation().y);
         mRectTemp.set(mRect);
         float unit = getDoodle().getUnitSize();
-        mRectTemp.left -= ITEM_PADDING * unit;
-        mRectTemp.top -= ITEM_PADDING * unit;
-        mRectTemp.right += ITEM_PADDING * unit;
-        mRectTemp.bottom += ITEM_PADDING * unit;
-        return mRectTemp.contains((int) mTemp.x, (int) mTemp.y);
+//        mRectTemp.left -= ITEM_PADDING * unit;
+        boolean is_contains = false;
+        if (getPen().equals(DoodlePen.DOT) &&
+                getShape().equals(DoodleShape.LINE)) {// FIXME: 2019/1/17 描点时框中心确认选中
+//            Rect rect = new Rect(((int)(getPivotX() - 40)), ((int)(getPivotY() - 40)), ((int)(getPivotX() + 40)), ((int)(getPivotY() + 40)));
+            int xx = mRectTemp.left + ((mRectTemp.right - mRectTemp.left) / 2);
+            int yy = mRectTemp.top + ((mRectTemp.bottom - mRectTemp.top) / 2);
+            Rect rect = new Rect((int) (xx - (40 * unit)), (int) (yy - (40 * unit)),
+                    (int) (xx + (40 * unit)), (int) (yy + (40 * unit)));
+            is_contains = rect.contains((int) mTemp.x, (int) mTemp.y);
+        } else {
+            // FIXME: 2019/1/15 扩大热区选择区域
+            mRectTemp.left -= 20 * unit;
+            mRectTemp.top -= 20 * unit;
+            mRectTemp.right += 20 * unit;
+            mRectTemp.bottom += 20 * unit;
+            is_contains = mRectTemp.contains((int) mTemp.x, (int) mTemp.y);
+        }
+        return is_contains;
     }
 
     @Override
@@ -137,5 +151,15 @@ public abstract class DoodleSelectableItemBase extends DoodleItemBase implements
     @Override
     public boolean isDoodleEditable() {
         return true;
+    }
+
+    @Override
+    public int getPosition() {
+        return position;
+    }
+
+    @Override
+    public void setPosition(int position) {
+        this.position = position;
     }
 }

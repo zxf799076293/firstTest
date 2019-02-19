@@ -56,6 +56,13 @@ public class DoodlePath extends DoodleRotatableItemBase {
         setPivotX(mBound.left + mBound.width() / 2);
         setPivotY(mBound.top + mBound.height() / 2);
     }
+    public void updateXY(Path path1) {
+        mPath = path1;
+        // 改变中心点位置
+        mPath.computeBounds(mBound, false);
+        setPivotX(mBound.left + mBound.width() / 2);
+        setPivotY(mBound.top + mBound.height() / 2);
+    }
 
     public void updatePath(Path path) {
         this.mPath = path;
@@ -103,6 +110,16 @@ public class DoodlePath extends DoodleRotatableItemBase {
                 path.mCopyLocation = DoodlePen.COPY.getCopyLocation().copy();
             }
         }
+        return path;
+    }
+    public static DoodlePath toShape(IDoodle doodle, Path path1, Context context) {
+        DoodlePath path = new DoodlePath(doodle,context);
+        path.setPen(doodle.getPen().copy());
+        path.setShape(doodle.getShape().copy());
+        path.setSize(doodle.getSize());
+        path.setColor(doodle.getColor().copy());
+
+        path.updateXY(path1);
         return path;
     }
 
@@ -223,6 +240,14 @@ public class DoodlePath extends DoodleRotatableItemBase {
         path.addCircle(sx, sy, radius, Path.Direction.CCW);
 
     }
+
+    // FIXME: 2019/1/11 描点
+    private void updateDotCirclePath(Path path, float sx, float sy, float dx, float dy, float size) {
+        float radius = 8;
+        path.addCircle(sx, sy, radius, Path.Direction.CCW);
+
+    }
+
 
     private void updateRectPath(Path path, float sx, float sy, float dx, float dy, float size) {
         // 保证　左上角　与　右下角　的对应关系

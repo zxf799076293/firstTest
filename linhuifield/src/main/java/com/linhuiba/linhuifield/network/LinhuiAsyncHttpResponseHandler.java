@@ -8,6 +8,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.linhuiba.linhuifield.config.Config;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -103,17 +104,19 @@ public abstract class LinhuiAsyncHttpResponseHandler implements Callback {
                 sendFailedStringCallback(false, statusCode, headers, responseBody, new NullPointerException("出错(405)"));
             } else if (statusCode == 500) {
                 String errormsg = "";
-//            try {
-//                errormsg = new String(responseBody,"UTF-8");
-//                JSONObject jsonObject = JSONObject.parseObject(errormsg);
-//                String showerrormsg = "";
-//                if (jsonObject.get("message") != null) {
-//                    showerrormsg = jsonObject.get("message").toString();
-//                    Log.i("errer500",showerrormsg);
-//                }
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
+                if (!Config.BASE_API_URL_PHP.equals(Config.BASE_API_URL_PHP_PE)) {//se弹出错误
+                    try {
+                        errormsg = new String(responseBody,"UTF-8");
+                        JSONObject jsonObject = JSONObject.parseObject(errormsg);
+                        String showerrormsg = "";
+                        if (jsonObject.get("message") != null) {
+                            showerrormsg = jsonObject.get("message").toString();
+                            Log.i("errer500",showerrormsg);
+                        }
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
                 sendFailedStringCallback(false, statusCode, headers, responseBody, new NullPointerException("服务器内部出错(500)" +
                         errormsg));
             } else {

@@ -29,6 +29,7 @@
         android:background="@drawable/activity_splash_screen_tv_pressed_bg"
         android:textSize="@dimen/title_bar_title_txt_size"
         android:id="@+id/no_data_btn"
+        android:visibility="gone"
         android:gravity="center"
         android:textColor="@drawable/activity_splash_screen_tv_textcolor_bg"/>
 </RelativeLayout>

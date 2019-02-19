@@ -60,6 +60,7 @@ import com.bumptech.glide.Glide;
 import com.linhuiba.linhuifield.R;
 import com.linhuiba.linhuifield.fieldactivity.FieldAddFieldChooseResOptionsActivity;
 import com.linhuiba.linhuifield.fieldactivity.FieldAddfieldCommunityInfoActivity;
+import com.linhuiba.linhuifield.fieldactivity.Field_AddField_UploadingPictureActivity;
 import com.linhuiba.linhuifield.fieldactivity.Field_FieldListActivity;
 import com.linhuiba.linhuifield.fieldmodel.AddfieldCommunityCategoriesModel;
 import com.linhuiba.linhuifield.fieldmodel.Field_AddResourceCreateItemModel;
@@ -619,36 +620,36 @@ public class Constants {
         int width = mDisplayMetrics.widthPixels;     // 屏幕宽度（像素）
         int height = width * pixel_height / pixel_width;
         Constants.show_dialog(myView, zoom_picture_dialog);
-        final TextView mshowpicture_back = (TextView) myView.findViewById(R.id.showpicture_dialog_back);
-        mshowpicture_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                zoom_picture_dialog.dismiss();
-            }
-        });
+        if (mactivity != null && mactivity instanceof Field_AddField_UploadingPictureActivity) {
+
+        } else {
+            final TextView mshowpicture_back = (TextView) myView.findViewById(R.id.showpicture_dialog_back);
+            mshowpicture_back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    zoom_picture_dialog.dismiss();
+                }
+            });
+        }
         if (mIsRefreshZoomImageview) {
             if (mImageViewList != null) {
                 mImageViewList.clear();
             }
             for (int i = 0; i < mPicList.size(); i++) {
                 ZoomImageView imageView = new ZoomImageView(
-                        mactivity);
+                        mcontext);
                 if (mPicList.get(i).indexOf("http") != -1) {
                     if (mPicList.get(i).indexOf(Config.Linhui_Max_Watermark) != -1) {
-                        Picasso.with(mactivity).load(mPicList.get(i)).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width, height).into(imageView);
+                        Picasso.with(mcontext).load(mPicList.get(i)).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width, height).into(imageView);
                     } else {
                         if (isWaterMark) {
-                            Picasso.with(mactivity).load(mPicList.get(i) + Config.Linhui_Max_Watermark).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width, height).into(imageView);
+                            Picasso.with(mcontext).load(mPicList.get(i) + Config.Linhui_Max_Watermark).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width, height).into(imageView);
                         } else {
-                            Picasso.with(mactivity).load(mPicList.get(i)).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width, height).into(imageView);
+                            Picasso.with(mcontext).load(mPicList.get(i)).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width, height).into(imageView);
                         }
                     }
                 } else {
-                    Glide.with(mactivity)
-                            .load(mPicList.get(i))
-                            .placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big)
-                            .override(width, height).centerCrop()
-                            .into(imageView);
+                    Picasso.with(mcontext).load(new File(mPicList.get(i))).placeholder(R.drawable.ic_jiazai_big).error(R.drawable.ic_no_pic_big).resize(width, height).into(imageView);
                 }
                 mImageViewList.add(imageView);
             }

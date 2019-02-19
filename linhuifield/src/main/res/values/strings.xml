@@ -883,6 +883,10 @@
     <string name="mTxt_addfield_actitity_finishdate">活动结束时间</string>
     <string name="mTxt_addfield_choose_add_type">选择添加类型</string>
     <string name="module_field_list_no_authority">您没有操作权限, 请先完成企业认证</string>
+    <string name="module_upload_pic_wireframe_size">线框粗细</string>
+    <string name="module_upload_pic_ligature">添加节点</string>
+    <string name="module_upload_pic_ligature_cancel">取消连线</string>
+    <string name="module_upload_pic_doodle_text_remind">最多12个字</string>
     <!-- Strings order_info -->
     <string name="field_name">场地名称：</string>
     <string name="field_order_item_resourcesname">预订场地：</string>
@@ -1192,10 +1196,15 @@
     <string name="module_addfield_activity_info_description">活动描述</string>
     <string name="module_addfield_activity_info_description_hint">请输入活动相关描述</string>
     <string name="module_addfield_activity_info_picture_hint">请上传活动图片</string>
-    <string name="module_addfield_upload_pic_add_red_flag">插小红旗</string>
+    <string name="module_addfield_upload_pic_add_red_flag">插入小红旗</string>
     <string name="module_addfield_upload_pic_add_line">绘画形状</string>
-    <string name="module_addfield_upload_pic_add_point">描点连线</string>
+    <string name="module_addfield_upload_pic_add_point">插入形状</string>
     <string name="module_addfield_upload_pic_add_text">输入文字</string>
+    <string name="module_addfield_upload_pic_delete_pic">删除图片</string>
+    <string name="module_addfield_upload_pic_confirm">确认</string>
+    <string name="module_addfield_upload_pic_doodle_edit_hint">点击输入文字，最多12个字</string>
+    <string name="module_addfield_upload_pic_abandon_save_pic">是否放弃保存？</string>
+    <string name="module_addfield_upload_pic_dot_remind">1.点击图中任意位置“描点”\n2.点击选中“描点”，拖动“描点”移动位置\n3.点击连线将图中描点连成线</string>
     <!-- coupons -->
     <string name="module_my_coupons_no_data">很抱歉 ≥-≤\n您暂时没有优惠券哦！</string>
     <string name="module_my_coupons_no_data_goto_centre">去领券中心看看</string>

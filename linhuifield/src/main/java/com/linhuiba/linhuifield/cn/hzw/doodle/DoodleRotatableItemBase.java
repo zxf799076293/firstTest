@@ -4,12 +4,15 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.PointF;
 import android.graphics.Rect;
 
 import com.linhuiba.linhuifield.R;
 import com.linhuiba.linhuifield.cn.hzw.doodle.core.IDoodle;
+import com.linhuiba.linhuifield.connector.Constants;
 
 import cn.forward.androids.utils.ImageUtils;
 
@@ -51,7 +54,7 @@ public abstract class DoodleRotatableItemBase extends DoodleSelectableItemBase {
             canvas.drawRect(mRectTemp, mPaint);
 
             // border
-            if (isRotating()) {
+            if (isRotating() || isZoom()) {
                 mPaint.setColor(0x88ffd700);
             } else {
                 mPaint.setColor(0x88ffffff);
@@ -72,36 +75,80 @@ public abstract class DoodleRotatableItemBase extends DoodleSelectableItemBase {
             }
             mPaint.setStyle(Paint.Style.STROKE);
             mPaint.setStrokeWidth(2 * unit);
-            canvas.drawLine(mRectTemp.right, mRectTemp.top + mRectTemp.height() / 2,
-                    mRectTemp.right + (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 16) * unit, mRectTemp.top + mRectTemp.height() / 2, mPaint);
-            canvas.drawCircle(mRectTemp.right + (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 8) * unit, mRectTemp.top + mRectTemp.height() / 2, 8 * unit, mPaint);
-            // rotation line
-            mPaint.setColor(0x44888888);
-            mPaint.setStrokeWidth(0.8f * unit);
-            canvas.drawLine(mRectTemp.right, mRectTemp.top + mRectTemp.height() / 2,
-                    mRectTemp.right + (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 16) * unit, mRectTemp.top + mRectTemp.height() / 2, mPaint);
-            canvas.drawCircle(mRectTemp.right + (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 8) * unit, mRectTemp.top + mRectTemp.height() / 2, 8 * unit, mPaint);
-// FIXME: 2019/1/7 测试旋转线
-            // rotation
-            if (isRotating()) {
-                mPaint.setColor(0x88ffd700);
-            } else {
-                mPaint.setColor(0x88ffffff);
+//            canvas.drawLine(mRectTemp.right, mRectTemp.top + mRectTemp.height() / 2,
+//                    mRectTemp.right + (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 16) * unit, mRectTemp.top + mRectTemp.height() / 2, mPaint);
+//            canvas.drawCircle(mRectTemp.right + (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 8) * unit, mRectTemp.top + mRectTemp.height() / 2, 8 * unit, mPaint);
+            if (getPen().equals(DoodlePen.TEXT) ||
+                    getPen().equals(DoodlePen.BITMAP)) {
+                Bitmap rotatBitmap =  BitmapFactory.decodeResource(mContext.getResources(),R.drawable.ic_rotate_thr_ten);
+                int originalWidth = rotatBitmap.getWidth();
+                int originalHeight = rotatBitmap.getHeight();
+                int newWidth = 22;
+                int newHeight =  22; // 自定义 高度 暂时没用
+
+
+                float scale = ((float) newHeight * getDoodle().getUnitSize()) / originalHeight;
+                Matrix matrix = new Matrix();
+                matrix.postScale(scale, scale);
+                Bitmap changedBitmap = Bitmap.createBitmap(rotatBitmap, 0, 0,
+                        originalWidth, originalHeight, matrix, true);
+                canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG));
+                canvas.drawBitmap(changedBitmap,mRectTemp.right - 10 * unit , mRectTemp.bottom - 10 * unit,new Paint());
+                if (rotatBitmap != null) {
+                    rotatBitmap.recycle();
+                }
+                if (changedBitmap != null) {
+                    changedBitmap.recycle();
+                }
+                // rotation line
+//                mPaint.setColor(0x44888888);
+//                mPaint.setStrokeWidth(0.8f * unit);
+//                canvas.drawLine(mRectTemp.right, mRectTemp.top + mRectTemp.height() / 2,
+//                        mRectTemp.right + (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 16) * unit, mRectTemp.top + mRectTemp.height() / 2, mPaint);
+//                canvas.drawCircle(mRectTemp.right + (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 8) * unit, mRectTemp.top + mRectTemp.height() / 2, 8 * unit, mPaint);
             }
-            mPaint.setStyle(Paint.Style.STROKE);
-            mPaint.setStrokeWidth(2 * unit);
-            canvas.drawLine(mRectTemp.left, mRectTemp.top + mRectTemp.height() / 2,
-                    mRectTemp.left - (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 16) * unit, mRectTemp.top + mRectTemp.height() / 2, mPaint);
+// FIXME: 2019/1/7 测试放大缩小线
+            // ZOOM
+            if (getPen().equals(DoodlePen.BITMAP) ||
+                    getPen().equals(DoodlePen.TEXT)) {
+                if (isZoom()) {
+                    mPaint.setColor(0x88ffd700);
+                } else {
+                    mPaint.setColor(0x88ffffff);
+                }
+                mPaint.setStyle(Paint.Style.STROKE);
+                mPaint.setStrokeWidth(2 * unit);
+//                canvas.drawLine(mRectTemp.left, mRectTemp.top + mRectTemp.height() / 2,
+//                        mRectTemp.left - (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 16) * unit, mRectTemp.top + mRectTemp.height() / 2, mPaint);
 //            canvas.drawCircle(mRectTemp.left - (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 8) * unit, mRectTemp.top + mRectTemp.height() / 2, 8 * unit, mPaint);
-            Bitmap bitmap =  BitmapFactory.decodeResource(mContext.getResources(),R.drawable.ic_fangdasuoxiao);
-            canvas.drawBitmap(bitmap,mRectTemp.left - (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 8) * unit,mRectTemp.top + mRectTemp.height() / 2,new Paint());
-            // rotation line
-            mPaint.setColor(0x44888888);
-            mPaint.setStrokeWidth(0.8f * unit);
-            canvas.drawLine(mRectTemp.left, mRectTemp.top + mRectTemp.height() / 2,
-                    mRectTemp.left - (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 16) * unit, mRectTemp.top + mRectTemp.height() / 2, mPaint);
-            canvas.drawCircle(mRectTemp.left - (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 8) * unit, mRectTemp.top + mRectTemp.height() / 2, 8 * unit, mPaint);
-// FIXME: 2019/1/7 测试旋转线
+                Bitmap bitmap =  BitmapFactory.decodeResource(mContext.getResources(),R.drawable.ic_fangdasuoxiao_thr_ten);
+                int originalWidth = bitmap.getWidth();
+                int originalHeight = bitmap.getHeight();
+                int newWidth = 22;
+                int newHeight =  22; // 自定义 高度 暂时没用
+                //计算压缩的比率
+                float scale = ((float) newWidth * getDoodle().getUnitSize()) / originalWidth;
+                Matrix matrix = new Matrix();
+                matrix.postScale(scale, scale);
+                Bitmap changedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
+                        originalWidth, originalHeight, matrix, true);
+                canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG));
+                canvas.drawBitmap(changedBitmap,mRectTemp.left - 10 * unit,mRectTemp.top - 10 * unit,new Paint());
+                if (bitmap != null) {
+                    bitmap.recycle();
+                }
+                if (changedBitmap != null) {
+                    changedBitmap.recycle();
+                }
+
+                // rotation line
+//                mPaint.setColor(0x44888888);
+//                mPaint.setStrokeWidth(0.8f * unit);
+//                canvas.drawLine(mRectTemp.left, mRectTemp.top + mRectTemp.height() / 2,
+//                        mRectTemp.left - (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 16) * unit, mRectTemp.top + mRectTemp.height() / 2, mPaint);
+//                canvas.drawCircle(mRectTemp.left - (DoodleSelectableItemBase.ITEM_CAN_ROTATE_BOUND - 8) * unit, mRectTemp.top + mRectTemp.height() / 2, 8 * unit, mPaint);
+            }
+// FIXME: 2019/1/7 测试放大缩小线
             // pivot
             mPaint.setColor(0xffffffff);
             mPaint.setStrokeWidth(1f * unit);
@@ -140,10 +187,24 @@ public abstract class DoodleRotatableItemBase extends DoodleSelectableItemBase {
         mRectTemp.top -= 13 * unit;
         mRectTemp.right += 13 * unit;
         mRectTemp.bottom += 13 * unit;
-        return xy.x >= mRectTemp.right && xy.x <= mRectTemp.right + ITEM_CAN_ROTATE_BOUND * doodle.getUnitSize()
-                && xy.y >= mRectTemp.top && xy.y <= mRectTemp.bottom;
+        return xy.x <= mRectTemp.right + (ITEM_CAN_ROTATE_BOUND + 10) * doodle.getUnitSize()
+                && xy.x >= mRectTemp.right - (ITEM_CAN_ROTATE_BOUND) * doodle.getUnitSize()
+                && xy.y >= mRectTemp.bottom - ITEM_CAN_ROTATE_BOUND * doodle.getUnitSize()
+                && xy.y <= mRectTemp.bottom + (ITEM_CAN_ROTATE_BOUND + 10) * doodle.getUnitSize();
+
     }
 
+        mRectTemp.set(getBounds());
+        float unit = doodle.getUnitSize();
+        mRectTemp.left -= 13 * unit;
+        mRectTemp.top -= 13 * unit;
+        mRectTemp.right += 13 * unit;
+        mRectTemp.bottom += 13 * unit;
+        return xy.x <= mRectTemp.left + ITEM_CAN_ROTATE_BOUND * doodle.getUnitSize()
+                && xy.x >= mRectTemp.left - (ITEM_CAN_ROTATE_BOUND + 10) * doodle.getUnitSize()
+                && xy.y >= mRectTemp.top - ITEM_CAN_ROTATE_BOUND * doodle.getUnitSize()
+                && xy.y <= mRectTemp.top + (ITEM_CAN_ROTATE_BOUND + 10) * doodle.getUnitSize();
+    }
     public boolean isRotating() {
         return mIsRotating;
     }

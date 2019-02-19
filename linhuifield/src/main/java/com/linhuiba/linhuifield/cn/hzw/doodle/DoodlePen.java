@@ -18,7 +18,8 @@ public enum DoodlePen implements IDoodlePen {
     ERASER, // 橡皮擦
     TEXT, // 文本
     BITMAP, // 贴图
-    DOT; // 圆点 多点采集然后连线
+    DOT, // 圆点 多点采集然后连线
+    NULL; //什么都没有
     private CopyLocation mCopyLocation;
     private Matrix mMatrix;
 

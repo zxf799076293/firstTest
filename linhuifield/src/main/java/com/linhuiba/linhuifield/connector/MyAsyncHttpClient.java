@@ -13,12 +13,6 @@ public class MyAsyncHttpClient {
     public static OkHttpClient MyAsyncHttpClient() {
         return getClient();
     }
-    public static OkHttpClient MyAsyncHttpClient_version_two() {
-        return getClient();
-    }
-    public static OkHttpClient MyAsyncHttpClient_version_three() {
-        return getClient();
-    }
     public static OkHttpClient MyAsyncHttpClient2() {
         return getClient();
     }

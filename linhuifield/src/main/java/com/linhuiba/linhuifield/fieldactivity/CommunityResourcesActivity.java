@@ -195,7 +195,7 @@ public class CommunityResourcesActivity extends FieldBaseMvpActivity implements 
                     if (mcommunityresources_loadmore_nulldata_text.getVisibility() != View.VISIBLE && mcommumity_esclusive_loadmore_layout.getVisibility() == View.GONE) {
                         page[currIndex] = page[currIndex] + 1;
                         mcommumity_esclusive_loadmore_layout.setVisibility(View.VISIBLE);
-                        Field_FieldApi.getexclusive_resources(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),getusershopMoreHandler,resource_type,page[currIndex]);
+                        Field_FieldApi.getexclusive_resources(MyAsyncHttpClient.MyAsyncHttpClient2(),getusershopMoreHandler,resource_type,page[currIndex]);
                     }
                 }
             }
@@ -241,7 +241,7 @@ public class CommunityResourcesActivity extends FieldBaseMvpActivity implements 
         if (mcommunity_resources_type_layout_height > 0) {
             myscrollview.fullScroll(ScrollView.FOCUS_UP);
         }
-        Field_FieldApi.getexclusive_resources(MyAsyncHttpClient.MyAsyncHttpClient_version_two(),getusershopHandler,resource_type,page[currIndex]);
+        Field_FieldApi.getexclusive_resources(MyAsyncHttpClient.MyAsyncHttpClient2(),getusershopHandler,resource_type,page[currIndex]);
     }
     @Override
     public void onRefresh() {

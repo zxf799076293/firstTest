@@ -14,7 +14,7 @@ public class FieldFieldListMvpModel {
         Field_FieldApi.getresources(MyAsyncHttpClient.MyAsyncHttpClient(), handler, fieldId);
     }
     public static void editStatusThrough(String fieldId, LinhuiAsyncHttpResponseHandler handler) {
-        Field_FieldApi.editFieldStatusthrough(MyAsyncHttpClient.MyAsyncHttpClient_version_three(), handler,
+        Field_FieldApi.editFieldStatusthrough(MyAsyncHttpClient.MyAsyncHttpClient3(), handler,
                 fieldId);
     }
     public static void getFieldResCreate(LinhuiAsyncHttpResponseHandler handler) {

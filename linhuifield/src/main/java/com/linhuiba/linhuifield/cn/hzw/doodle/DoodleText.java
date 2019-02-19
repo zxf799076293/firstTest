@@ -64,6 +64,7 @@ public class DoodleText extends DoodleRotatableItemBase {
         getColor().config(this, mPaint);
         mPaint.setTextSize(getSize());
         mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setFakeBoldText(true);
         canvas.drawText(mText, 0, 0, mPaint);
     }
 

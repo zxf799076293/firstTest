@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/gallerytitle"
+            android:layout_above="@+id/sticker_ll"
             android:orientation="vertical">
             <android.support.v4.view.ViewPager
                 android:layout_width="match_parent"
@@ -33,7 +34,6 @@
                 android:layout_width="@dimen/order_title_height"
                 android:layout_height="match_parent"
                 android:id="@+id/showpicture_dialog_back"
-                android:onClick="click"
                 android:drawableLeft="@drawable/addfieldthree_backimg"
                 android:paddingLeft="@dimen/userinfo_layout_margin"/>
             <TextView
@@ -58,6 +58,20 @@
                 android:visibility="gone"
                 android:textColor="@color/white"
                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingRight="@dimen/app_backbtn_marginleft"
+                android:paddingLeft="@dimen/app_backbtn_marginleft"
+                android:text="@string/mq_save"
+                android:textColor="@color/white"
+                android:id="@+id/sticker_save_btn"
+                android:textSize="@dimen/title_bar_title_txt_size"
+                android:visibility="gone"
+                android:layout_alignParentRight="true" />
+
             <ImageButton
                 android:layout_width="@dimen/field_info_width"
                 android:layout_height="match_parent"
@@ -82,163 +96,333 @@
             <FrameLayout
                 android:id="@+id/doodle_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <com.xiaopo.flying.sticker.StickerView
-                android:id="@+id/sticker_view"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:showBorder="true"
-                app:showIcons="true">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:id="@+id/sticker_image_view"/>
-            </com.xiaopo.flying.sticker.StickerView>
+                android:layout_height="match_parent"
+                android:gravity="center"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/service_relative_layout_height"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:background="@color/addfield_show_picture_color"
             android:layout_alignParentBottom="true"
-            android:visibility="visible"
+            android:visibility="gone"
             android:gravity="center_vertical"
             android:id="@+id/sticker_operate_ll">
             <LinearLayout
-                android:layout_width="@dimen/diogle_view_edit_marginleft"
-                android:layout_height="@dimen/diogle_view_edit_marginleft"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/addshoppingcard_width"
                 android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                android:background="@drawable/field_activity_addfield_upload_sticker_ll_bg">
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:id="@+id/doodle_bitmap_type_ll">
                 <ImageView
+                    android:layout_width="@dimen/small_title_height"
+                    android:layout_height="@dimen/small_title_height"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/addfield_show_picture_sticker_btn_color"
+                    android:src="@drawable/ic_xiaohongqi"
+                    android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                    android:id="@+id/doodle_pic_add_img"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="@dimen/maintab_red_point_text_width"
+                    android:textSize="@dimen/search_lisritem_pricetxt_size"
+                    android:textStyle="bold"
+                    android:text="@string/addfield_upload_sticker_tv_str"
+                    android:drawableLeft="@drawable/ic_tuodong"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/advertising_margintop"/>
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/sticker_show_imgv"
-                    android:src="@drawable/ic_xiaohongqi"/>
+                    android:background="@null"
+                    android:padding="@dimen/searchlist_item_txtont_marginright"
+                    android:src="@drawable/ic_unnext_thr_ten"
+                    android:id="@+id/doodle_revocation_bitmap"/>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/addshoppingcard_width"
                 android:orientation="vertical"
-                android:layout_marginLeft="@dimen/app_backbtn_marginleft">
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:button="@null"
-                        android:id="@+id/doodle_pic"
-                        android:drawableTop="@drawable/activity_invoiceinfo_content_checkbox_bg"
-                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                        android:text="@string/module_addfield_upload_pic_add_red_flag"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/register_codebtn_txt_size"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:button="@null"
-                        android:id="@+id/doodle_line"
-                        android:drawableTop="@drawable/activity_invoiceinfo_content_checkbox_bg"
-                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                        android:text="@string/module_addfield_upload_pic_add_line"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/register_codebtn_txt_size"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:button="@null"
-                        android:id="@+id/doodle_dot"
-                        android:drawableTop="@drawable/activity_invoiceinfo_content_checkbox_bg"
-                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                        android:text="@string/module_addfield_upload_pic_add_point"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/register_codebtn_txt_size"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:button="@null"
-                        android:id="@+id/doodle_text"
-                        android:drawableTop="@drawable/activity_invoiceinfo_content_checkbox_bg"
-                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                        android:text="@string/module_addfield_upload_pic_add_text"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/register_codebtn_txt_size"/>
-
-                </RadioGroup>
-
+                android:id="@+id/doodle_text_or_dot_type_ll"
+                android:visibility="gone">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/doodle_text_type_ll"
+                    android:paddingTop="@dimen/myself_order_img_width"
+                    android:paddingBottom="@dimen/txt_padding_left"
                     android:gravity="center_vertical">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                        android:orientation="horizontal"
+                        android:background="@drawable/searchlist_search_tv_bg"
+                        android:gravity="center_vertical"
+                        android:layout_marginRight="@dimen/app_backbtn_marginleft">
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/home_area_drop_height"
+                            android:layout_weight="1"
+                            android:background="@drawable/searchlist_search_tv_bg"
+                            android:drawableLeft="@drawable/img_search"
+                            android:drawablePadding="@dimen/maintab_paddingtop"
+                            android:paddingLeft="@dimen/maintab_paddingtop"
+                            android:id="@+id/doodle_text_edit"
+                            android:singleLine="true"
+                            android:gravity="center_vertical"
+                            android:hint="@string/module_addfield_upload_pic_doodle_edit_hint"
+                            android:textSize="@dimen/txt_title_size_info"
+                            android:textColorHint="@color/home_searchtxt_newcolor"
+                            android:textColor="@color/headline_tv_color" />
+                        <RelativeLayout
+                            android:layout_width="@dimen/btn_margin_width"
+                            android:layout_height="@dimen/home_area_drop_height"
+                            android:background="@drawable/activity_search_field_area_tv_bg">
+                            <TextView
+                                android:layout_width="@dimen/maintab_red_point_text_width"
+                                android:layout_height="@dimen/maintab_red_point_text_width"
+                                android:visibility="visible"
+                                android:id="@+id/doodle_text_delete_tv"
+                                android:background="@drawable/ic_close_blue"
+                                android:layout_centerInParent="true"
+                                android:gravity="center"
+                                />
+                        </RelativeLayout>
+                    </LinearLayout>
                     <TextView
+                        android:layout_width="@dimen/searchlist_item_evaluation_width"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/loginbtn_bg"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/login_leftright_txt_size"
+                        android:id="@+id/doodle_text_confirm"
+                        android:text="@string/module_addfield_upload_pic_confirm"/>
+                    <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                        android:textSize="@dimen/fieldinfo_subsidy_textsize"
-                        android:text="描点连线"
-                        android:id="@+id/doodle_dot_confirm"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                        android:textSize="@dimen/fieldinfo_subsidy_textsize"
-                        android:text="编辑涂鸦"
-                        android:id="@+id/doodle_edit"/>
+                        android:padding="@dimen/app_backbtn_marginleft"
+                        android:background="@null"
+                        android:src="@drawable/ic_unnext_thr_ten"
+                        android:id="@+id/doodle_revocation_text"/>
 
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:id="@+id/doodle_line_type_ll"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/app_backbtn_marginleft">
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/advertising_box_width"
-                        android:layout_weight="1"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/btnregister_txt_size"
-                        android:text="@string/cancel"
-                        android:id="@+id/sticker_cancel_btn"
-                        android:background="@drawable/field_activity_addfield_upload_sticker_btn_bg"/>
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/advertising_box_width"
-                        android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/btnregister_txt_size"
-                        android:text="@string/mq_save"
-                        android:id="@+id/sticker_save_btn"
+                        android:textSize="@dimen/register_codebtn_txt_size"
                         android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-                        android:layout_marginRight="@dimen/app_backbtn_marginleft"
-                        android:background="@drawable/field_activity_addfield_upload_sticker_btn_bg"/>
+                        android:text="@string/module_upload_pic_wireframe_size"/>
+                    <SeekBar
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/doodle_seekbar"
+                        android:max="20"
+                        android:progress="5" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/doodle_dot_add_ll">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/register_codebtn_txt_size"
+                            android:layout_marginLeft="@dimen/advertising_tffs_width"
+                            android:text="@string/module_upload_pic_ligature"
+                            android:gravity="center"
+                            android:layout_marginRight="@dimen/txt_margin"
+                            android:drawablePadding="@dimen/advertising_margintop"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:src="@drawable/ic_add_dian_thr_ten"
+                            android:id="@+id/doodle_dot_add_imgv"
+                            android:layout_marginRight="@dimen/app_backbtn_marginleft"/>
+                    </LinearLayout>
 
+                </LinearLayout>
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:id="@+id/doodle_color_group"
+                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                            android:layout_marginRight="@dimen/app_backbtn_marginleft">
+                            <RadioButton
+                                android:layout_width="@dimen/invoiceinfoentry_marginleft"
+                                android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                android:checked="false"
+                                android:button="@drawable/loginbtn_bg"
+                                android:id="@+id/doodle_color_red"
+                                android:background="@drawable/module_bg_doodle_text_red"/>
+                            <RadioButton
+                                android:layout_width="@dimen/invoiceinfoentry_marginleft"
+                                android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                android:checked="false"
+                                android:button="@null"
+                                android:id="@+id/doodle_color_purple"
+                                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                android:background="@drawable/module_bg_doodle_text_purple"/>
+                            <RadioButton
+                                android:layout_width="@dimen/invoiceinfoentry_marginleft"
+                                android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                android:checked="false"
+                                android:id="@+id/doodle_color_yellow"
+                                android:button="@null"
+                                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                android:background="@drawable/module_bg_doodle_text_yellow"/>
+                            <RadioButton
+                                android:layout_width="@dimen/invoiceinfoentry_marginleft"
+                                android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                android:checked="false"
+                                android:button="@null"
+                                android:id="@+id/doodle_color_green"
+                                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                android:background="@drawable/module_bg_doodle_text_green"/>
+                            <RadioButton
+                                android:layout_width="@dimen/invoiceinfoentry_marginleft"
+                                android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                android:checked="false"
+                                android:button="@null"
+                                android:id="@+id/doodle_color_blue"
+                                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                android:background="@drawable/module_bg_doodle_text_blue"/>
+                            <RadioButton
+                                android:layout_width="@dimen/invoiceinfoentry_marginleft"
+                                android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                android:checked="false"
+                                android:button="@null"
+                                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                android:id="@+id/doodle_color_white"
+                                android:background="@drawable/module_bg_doodle_text_white"/>
+                            <RadioButton
+                                android:layout_width="@dimen/invoiceinfoentry_marginleft"
+                                android:layout_height="@dimen/invoiceinfoentry_marginleft"
+                                android:checked="false"
+                                android:button="@null"
+                                android:id="@+id/doodle_color_black"
+                                android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                                android:background="@drawable/module_bg_doodle_text_black"/>
+                        </RadioGroup>
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/searchlist_item_evaluation_width"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:id="@+id/doodle_operating_type">
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:checked="false"
+                            android:button="@null"
+                            android:id="@+id/doodle_pic"
+                            android:drawableTop="@drawable/module_bg_doodle_type_bitmap"
+                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                            android:text="@string/module_addfield_upload_pic_add_red_flag"
+                            android:textColor="@drawable/module_bg_textcolor_white_gray666"
+                            android:textSize="@dimen/register_codebtn_txt_size"/>
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:checked="false"
+                            android:button="@null"
+                            android:id="@+id/doodle_dot"
+                            android:drawableTop="@drawable/module_bg_doodle_type_dot"
+                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                            android:text="@string/module_addfield_upload_pic_add_point"
+                            android:textColor="@drawable/module_bg_textcolor_white_gray666"                            android:textSize="@dimen/register_codebtn_txt_size"/>
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:checked="false"
+                            android:button="@null"
+                            android:id="@+id/doodle_text"
+                            android:drawableTop="@drawable/module_bg_doodle_type_text"
+                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                            android:text="@string/module_addfield_upload_pic_add_text"
+                            android:textColor="@drawable/module_bg_textcolor_white_gray666"
+                            android:textSize="@dimen/register_codebtn_txt_size"/>
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:checked="false"
+                            android:button="@null"
+                            android:id="@+id/doodle_delete_item"
+                            android:drawableTop="@drawable/module_bg_doodle_type_delete"
+                            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
+                            android:text="@string/module_addfield_upload_pic_delete_pic"
+                            android:textColor="@drawable/module_bg_textcolor_white_gray666"
+                            android:textSize="@dimen/register_codebtn_txt_size"/>
+                    </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/register_codebtn_txt_size"
+            android:drawablePadding="@dimen/advertising_margintop"
+            android:gravity="center_vertical"
+            android:id="@+id/doodle_dot_delete_imgv"
+            android:text="@string/invoiceinfo_delete_address_txt"
+            android:drawableRight="@drawable/ic_idelete_three_one"
+            android:layout_marginTop="@dimen/fieldinfo_xuanchuan_width"
+            android:layout_alignParentRight="true"
             android:visibility="gone"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="@dimen/app_backbtn_marginleft"
-            android:layout_marginBottom="@dimen/app_backbtn_marginleft"
-            android:id="@+id/sticker_show_tmp_imgv"
-            android:src="@drawable/ic_xiaohongqi"/>
+            android:layout_marginRight="@dimen/home_line_height"/>
     </RelativeLayout>
 </LinearLayout>

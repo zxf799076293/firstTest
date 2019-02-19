@@ -19,6 +19,7 @@ public class FieldAddfieldAttributesModel implements Serializable {
     private int attribute_id;
     private int all_inputs;//多选是否全部有输入框
     private String hint = "";//属性框的提示语
+    private String placeholder = "";//单选多选提示语
     private Integer max_length;
     private Integer min_length;
     private ArrayList<FieldAddfieldAttributesModel> attributes = new ArrayList<>();
@@ -143,6 +144,14 @@ public class FieldAddfieldAttributesModel implements Serializable {
 
     public void setHint(String hint) {
         this.hint = hint;
+    }
+
+    public String getPlaceholder() {
+        return placeholder;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        this.placeholder = placeholder;
     }
 
     public Integer getMax_length() {

@@ -49,7 +49,7 @@ public class Field_Field_ShelvesActivity extends FieldBaseMvpActivity {
                         return;
                     }
                     showProgressDialog();
-                    Field_FieldApi.editFieldStatusRefused(Field_Field_ShelvesActivity.this, MyAsyncHttpClient.MyAsyncHttpClient_version_three(), editFieldStatus_shelvesHandler, fieldId,
+                    Field_FieldApi.editFieldStatusRefused(Field_Field_ShelvesActivity.this, MyAsyncHttpClient.MyAsyncHttpClient3(), editFieldStatus_shelvesHandler, fieldId,
                             mfield_shelves_reason_edit.getText().toString(),strdate);
                 }
             }

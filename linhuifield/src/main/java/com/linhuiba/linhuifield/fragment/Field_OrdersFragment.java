@@ -170,7 +170,7 @@ public class Field_OrdersFragment extends FieldBaseMvpFragment implements SwipeR
     }
     private void initData() {
         mListPageSize[mCurrIndex] = 1;
-        Field_FieldApi.getfieldorderlistitemscount(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), orderlistitemscountHandler);
+        Field_FieldApi.getfieldorderlistitemscount(MyAsyncHttpClient.MyAsyncHttpClient2(), orderlistitemscountHandler);
     }
     private LinhuiAsyncHttpResponseHandler getfieldorderHandler = new LinhuiAsyncHttpResponseHandler() {
         @Override
@@ -598,7 +598,7 @@ public class Field_OrdersFragment extends FieldBaseMvpFragment implements SwipeR
                             startActivityForResult(orderrefused, 1);
                         } else if (type == 0) {
                             showProgressDialog();
-                            Field_FieldApi.fieldorderlistitemapproved(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), OrderapprovedHandler, mApprovedId);
+                            Field_FieldApi.fieldorderlistitemapproved(MyAsyncHttpClient.MyAsyncHttpClient2(), OrderapprovedHandler, mApprovedId);
                         }
                     } else if (i == R.id.btn_cancel) {
                         mOrderOperationDialog.dismiss();

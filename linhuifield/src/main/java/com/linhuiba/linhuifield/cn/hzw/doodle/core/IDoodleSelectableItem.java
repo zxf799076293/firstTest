@@ -30,5 +30,7 @@ public interface IDoodleSelectableItem extends IDoodleItem {
      * 判断点（x,y）是否在item内，用于判断是否点中item
      */
     public boolean contains(float x, float y);
+    public int getPosition();
 
+    public void setPosition(int position);
 }

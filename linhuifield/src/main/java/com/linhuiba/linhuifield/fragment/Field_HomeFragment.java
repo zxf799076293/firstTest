@@ -261,7 +261,7 @@ public class Field_HomeFragment extends FieldBaseMvpFragment implements Field_Ad
     }
 
     private void initData() {
-        Field_FieldApi.getfieldorderlistitemscount(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), orderlistitemscountHandler);
+        Field_FieldApi.getfieldorderlistitemscount(MyAsyncHttpClient.MyAsyncHttpClient2(), orderlistitemscountHandler);
     }
     private LinhuiAsyncHttpResponseHandler orderlistitemscountHandler = new LinhuiAsyncHttpResponseHandler() {
         @Override
@@ -272,7 +272,7 @@ public class Field_HomeFragment extends FieldBaseMvpFragment implements Field_Ad
                     if (jsonobject.getString("paid").toString().length() !=0) {
                         if (!(jsonobject.getString("paid").toString().equals("0"))  ) {
                             mainactivity.fieldMainBV[1].setBadgeNumber(Integer.parseInt(jsonobject.getString("paid").toString()));
-                            Field_FieldApi.getfieldorderlistitems(MyAsyncHttpClient.MyAsyncHttpClient2(),getfieldorderHandler,"paid",String.valueOf(1),String.valueOf(Integer.MAX_VALUE));
+                            Field_FieldApi.getfieldorderlistitems(MyAsyncHttpClient.MyAsyncHttpClient2(),getfieldorderHandler,"paid",String.valueOf(1),String.valueOf(20));
                         } else {
                             mfield_home_neworder_remind_layout.setVisibility(View.GONE);
                             mainactivity.fieldMainBV[1].hide(false);
@@ -563,7 +563,7 @@ public class Field_HomeFragment extends FieldBaseMvpFragment implements Field_Ad
                             startActivityForResult(orderrefused, 1);
                         } else if (type == 0) {
                             showProgressDialog();
-                            Field_FieldApi.fieldorderlistitemapproved(MyAsyncHttpClient.MyAsyncHttpClient_version_two(), OrderapprovedHandler, approvedid);
+                            Field_FieldApi.fieldorderlistitemapproved(MyAsyncHttpClient.MyAsyncHttpClient2(), OrderapprovedHandler, approvedid);
                         }
                     } else if (i == R.id.btn_cancel) {
                         mOrderOperationDialog.dismiss();

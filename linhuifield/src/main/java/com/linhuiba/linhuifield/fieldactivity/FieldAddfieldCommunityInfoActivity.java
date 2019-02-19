@@ -960,7 +960,7 @@ public class FieldAddfieldCommunityInfoActivity extends FieldBaseMvpActivity
         Constants.show_dialog(textEntryView,mDialog);
     }
     private void showAttributesDialog(final TextView textView, final ArrayList<FieldAddfieldAttributesModel> list, final int attribute_id,
-                                      final LinearLayout other_ll, final TextView other_tv, EditText other_et) {
+                                      final LinearLayout other_ll, final TextView other_tv, final EditText other_et) {
         LayoutInflater factory = LayoutInflater.from(this);
         final View textEntryView = factory.inflate(R.layout.field_activity_field_addfield_optionalinfo_dialog, null);
         TextView mbtn_cancel = (TextView) textEntryView.findViewById(R.id.btn_cancel);
@@ -1015,6 +1015,7 @@ public class FieldAddfieldCommunityInfoActivity extends FieldBaseMvpActivity
                 if (list.get(wheelviewSelectInt).getIs_input() == 1) {
                     other_ll.setVisibility(View.VISIBLE);
                     other_tv.setText(list.get(wheelviewSelectInt).getName());
+                    other_et.setHint(list.get(wheelviewSelectInt).getPlaceholder());
                 } else {
                     other_ll.setVisibility(View.GONE);
                 }
